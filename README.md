@@ -1,0 +1,2 @@
+# Master_degree
+Digitized historical publications (magazines, books, documents) abound in iconography (engravings, illustrations, photographs, diagrams). In view of this, a natural need arises to search for images that fulfill a given information need. The aim of this work is to develop a learning and testing set for the task of searching images in historical publications. The work will develop a prototype neural networks-based search engine. Images will be retrieved and recognized along with the surrounding text.

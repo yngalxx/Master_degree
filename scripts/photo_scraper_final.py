@@ -7,11 +7,9 @@ DIR_PATH = '/Users/alexdrozdz/Desktop/Studia/00. Seminarium magisterskie/'
 
 # getting photos in better resolution from urls finded in COCO formatted
 # files obtained from source repository (newspaper-navigator-master)
-with open(DIR_PATH + "Master_degree/additional_data/val_20_percent.json") as jsonFile:
+with open(DIR_PATH + "Master_degree/additional_data/trainval.json") as jsonFile:
     jsonObject = json.load(jsonFile)
     jsonFile.close()
-
-print(jsonObject['images'])
 
 for i in tqdm(range(len(jsonObject['images']))):
     output_path = DIR_PATH + 'scraped_photos_final/'
@@ -19,11 +17,9 @@ for i in tqdm(range(len(jsonObject['images']))):
 
     file_name = jsonObject['images'][i]['file_name']
 
-    print(jsonObject['images'][i]['url'])
-    # if file_name not in files:
-        # response = requests.get(jsonObject['images'][i]['url'])
-        # file = open(output_path + file_name, "wb")
-        # file.write(response.content)
-        # file.close()
-
-    break
+    if file_name not in files:
+        response = requests.get(jsonObject['images'][i]['url'])
+        file = open(output_path + file_name, "wb")
+        file.write(response.content)
+        file.close()
+        

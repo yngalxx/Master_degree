@@ -1,19 +1,21 @@
 import sys, datetime
 import torch
 import math
+from tqdm import tqdm
 
 
 def train_model(model, optimizer, train_dataloader, epochs, val_dataloader=None, lr_scheduler=None):
     start_time = datetime.datetime.now()
     print(f'Start time: {start_time} \n')
     # switch to gpu if available
-    device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+    print(f'Cuda available: {torch.cuda.is_available()} ({torch.cuda.get_device_name(torch.cuda.current_device())})')
+    device = torch.device(torch.cuda.current_device())
     # move model to the right device
     model.to(device)
     for epoch in range(epochs):
         model.train()
         train_loss = 0.0
-        for images, targets in train_dataloader:
+        for images, targets in tqdm(train_dataloader):
             images = list(image.to(device) for image in images)
             targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
             # clear the gradients
@@ -37,7 +39,7 @@ def train_model(model, optimizer, train_dataloader, epochs, val_dataloader=None,
         if val_dataloader:
             model.eval()
             val_loss = 0.0
-            for images, targets in val_dataloader:
+            for images, targets in tqdm(val_dataloader):
                 images = list(image.to(device) for image in images)
                 targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
                 loss_dict = model(images)

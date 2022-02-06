@@ -10,8 +10,8 @@ from train_model import train_model
 from functions import from_tsv_to_list, collate_fn
 
 # directories
-DIR_IMAGE = 'scraped_photos_final/'
-GONITO_DIR = 'gonito_files/'
+DIR_IMAGE = '/home/wmi/adrozdz/scraped_photos_final/'
+GONITO_DIR = '/home/wmi/adrozdz/Master_gonito/'
 
 # hyperparameters
 CHANNEL = 1
@@ -88,27 +88,27 @@ model = FasterRCNN(
     num_classes=NUM_CLASSES,
 )
 
-# module that generates the anchors for a set of feature maps
-anchor_generator = AnchorGenerator(
-    sizes=tuple([(16, 32, 64, 128, 256) for _ in range(5)]),
-    aspect_ratios=tuple([(0.75, 0.5, 1.25) for _ in range(5)])
-)
+# # module that generates the anchors for a set of feature maps
+# anchor_generator = AnchorGenerator(
+#     sizes=tuple([(16, 32, 64, 128, 256) for _ in range(5)]),
+#     aspect_ratios=tuple([(0.75, 0.5, 1.25) for _ in range(5)])
+# )
 
-# module that computes the objectness and regression deltas from the RPN
-rpn_head = RPNHead(256, anchor_generator.num_anchors_per_location()[0])
+# # module that computes the objectness and regression deltas from the RPN
+# rpn_head = RPNHead(256, anchor_generator.num_anchors_per_location()[0])
 
-# region proposal network
-model.rpn = RegionProposalNetwork(
-    anchor_generator=anchor_generator,
-    head=rpn_head,
-    fg_iou_thresh=0.7,
-    bg_iou_thresh=0.3,
-    batch_size_per_image=BATCH_SIZE,
-    positive_fraction=0.5,
-    pre_nms_top_n=dict(training=200, testing=100),
-    post_nms_top_n=dict(training=160, testing=80),
-    nms_thresh=0.7
-)
+# # region proposal network
+# model.rpn = RegionProposalNetwork(
+#     anchor_generator=anchor_generator,
+#     head=rpn_head,
+#     fg_iou_thresh=0.7,
+#     bg_iou_thresh=0.3,
+#     batch_size_per_image=BATCH_SIZE,
+#     positive_fraction=0.5,
+#     pre_nms_top_n=dict(training=200, testing=100),
+#     post_nms_top_n=dict(training=160, testing=80),
+#     nms_thresh=0.7
+# )
 
 # optimizer
 optimizer = optim.Adam(

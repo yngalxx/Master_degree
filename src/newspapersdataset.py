@@ -3,6 +3,8 @@ import os
 import pandas as pd
 import torch
 from torch.utils.data import Dataset
+import sys
+sys.path.append("/home/wmi/adrozdz/")
 from image_size import get_image_size  # source: https://github.com/scardine/image_size
 
 

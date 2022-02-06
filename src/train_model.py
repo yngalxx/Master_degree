@@ -8,16 +8,20 @@ def train_model(model, optimizer, train_dataloader, epochs, val_dataloader=None,
     start_time = datetime.datetime.now()
     print(f'Start time: {start_time} \n')
     # switch to gpu if available
-    print(f'Cuda available: {torch.cuda.is_available()} ({torch.cuda.get_device_name(torch.cuda.current_device())})')
-    device = torch.device(torch.cuda.current_device())
-    # move model to the right device
-    model.to(device)
+    cuda_statement = torch.cuda.is_available()
+    print(f'Cuda available: {torch.cuda.is_available()}')
+    if cuda_statement == True:
+        print(f'Current device: {torch.cuda.current_device()}')
+        device = torch.device(torch.cuda.current_device())
+        # move model to the righ
+        model.to(device)
     for epoch in range(epochs):
         model.train()
         train_loss = 0.0
         for images, targets in tqdm(train_dataloader):
-            images = list(image.to(device) for image in images)
-            targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
+            if cuda_statement == True:
+                images = list(image.to(device) for image in images)
+                targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
             # clear the gradients
             optimizer.zero_grad()
             # forward pass

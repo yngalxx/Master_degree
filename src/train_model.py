@@ -2,11 +2,13 @@ import sys, datetime
 import torch
 import math
 from tqdm import tqdm
+# from functions import iou_list
+# from sklearn.metrics import f1_score
 sys.path.append('/home/wmi/adrozdz/vision/references/detection/')
-from engine import train_one_epoch, evaluate # source: https://github.com/pytorch/vision
+from engine import train_one_epoch, evaluate # source repository: https://github.com/pytorch/vision/tree/main/references/detection from tutorial: https://pytorch.org/tutorials/intermediate/torchvision_tutorial.html
 
 
-def train_model(model, optimizer, train_dataloader, epochs, val_dataloader=None, lr_scheduler=None):
+def train_model(model, optimizer, train_dataloader, epochs, num_classes, val_dataloader=None, lr_scheduler=None, save_model=True):
     start_time = datetime.datetime.now()
     print(f'Start time: {start_time} \n')
     # switch to gpu if available
@@ -19,60 +21,64 @@ def train_model(model, optimizer, train_dataloader, epochs, val_dataloader=None,
         model.to(device)
     else:
         device = 'cpu'
+
     for epoch in range(epochs):
-
-        ### EXPERMINET: ###
+        # train for one epoch, printing every 10 iterations
         train_one_epoch(model, optimizer, train_dataloader, device, epoch, print_freq=10)
-        if lr_scheduler:
-            lr_scheduler.step()
-        if val_dataloader:
-            evaluate(model, val_dataloader, device=device)
-        ### END ###
-        
-        #model.train()
-        #train_loss = 0.0
-        #for images, targets in tqdm(train_dataloader):
-            #if cuda_statement == True:
-            #    images = list(image.to(device) for image in images)
-            #    targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
-            ## clear the gradients
-            #optimizer.zero_grad()
-            ## forward pass
-            #loss_dict = model(images, targets)
-            #losses = sum(loss for loss in loss_dict.values())
-            #loss_value = losses.item()
-            #if not math.isfinite(loss_value):
-            #    print(f"ERROR: Loss is {loss_value}, stopping training")
-            #    sys.exit(1)
-            ## calculate gradients
-            #losses.backward()
-            ## update weights
-            #optimizer.step()
-            ## calculate loss
-            #train_loss += loss_value
+        # update the learning rate
+        lr_scheduler.step()
+        # evaluate on the test dataset
+        evaluate(model, val_dataloader, device=device)
 
-        #train_print = f'{datetime.datetime.now()} - epoch {epoch + 1}: train_loss = {train_loss / len(train_dataloader)}'
+    # for epoch in range(epochs):        
+    #     model.train()
+    #     train_loss = 0.0
+    #     for images, targets in tqdm(train_dataloader):
+    #         if cuda_statement == True:
+    #            images = list(image.to(device) for image in images)
+    #            targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
+    #         # clear the gradients
+    #         optimizer.zero_grad()
+    #         # forward pass
+    #         loss_dict = model(images, targets)
+    #         losses = sum(loss for loss in loss_dict.values())
+    #         loss_value = losses.item()
+    #         if not math.isfinite(loss_value):
+    #            print(f"ERROR: Loss is {loss_value}, stopping training")
+    #            sys.exit(1)
+    #         # calculate gradients
+    #         losses.backward()
+    #         # update weights
+    #         optimizer.step()
+    #         # calculate loss
+    #         train_loss += loss_value
 
-        #if val_dataloader:
-            #model.eval()
-            #val_loss = 0.0
-            #with torch.no_grad():
-            #    for images, targets in tqdm(val_dataloader):
-            #        images = list(image.to(device) for image in images)
-            #        targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
-            #        loss_list = model(images)
-            #        loss = loss_criterion(outputs, labels)
-            #        if not math.isfinite(loss_value):
-            #            print(f"ERROR: Loss is {loss_value}, stopping training")
-            #            sys.exit(1)
-            #        val_loss += loss_value
+    #     if val_dataloader:
+    #         model.eval()
+    #         val_loss = 0.0
+    #         with torch.no_grad():
+    #            boxes_true, boxes_pred = [], []
+    #            lables_true, labels_pred = [], []
+    #            for images, targets in tqdm(val_dataloader):
+    #                 if cuda_statement == True:
+    #                     images = list(image.to(device) for image in images)
+    #                     targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
+    #                 output = model(images) # to zwraca dziwną liste pustych tensorów w dictcie, takie: [{'boxes': tensor([], device='cuda:0', size=(0, 4)), 'labels': tensor([], device='cuda:0', dtype=torch.int64), 'scores': tensor([], device='cuda:0')}, {'boxes': tensor([], device='cuda:0', size=(0, 4)), 'labels': tensor([], device='cuda:0', dtype=torch.int64), 'scores': tensor([], device='cuda:0')}, {'boxes': tensor([], device='cuda:0', size=(0, 4)), 'labels': tensor([], device='cuda:0', dtype=torch.int64), 'scores': tensor([], device='cuda:0')}, {'boxes': tensor([], device='cuda:0', size=(0, 4)), ...]
+    #                 print(output[0])
+    #                 print(targets)
+    #                 boxes_true.append(targets['boxes'].tolist()), boxes_pred.append(output['boxes'].tolist())
+    #                 lables_true.append(targets['labels'].tolist()), labels_pred.append(output['labels'].tolist())
+    #         mean_iou_list = iou_list(boxes_true, boxes_pred)
+    #         f1_per_class = f1_score(lables_true, labels_pred, average=None)
+    #         print(f'### {datetime.datetime.now()} ### [epoch {epoch + 1}]: train_time = {datetime.datetime.now()-start_time} | train_loss = {train_loss / len(train_dataloader)} | val_iou = {sum(mean_iou_list)/len(mean_iou_list)} | val_f1_per_class = {f1_per_class}')
+    #     else:
+    #         print(f'### {datetime.datetime.now()} ### [epoch {epoch + 1}]: train_time = {datetime.datetime.now()-start_time} | train_loss = {train_loss / len(train_dataloader)}')
 
-            #print(train_print + f' val_loss = {val_loss / len(val_dataloader)}')
-        #else:
-            #print(train_print)
+    #     if lr_scheduler:
+    #        lr_scheduler.step()
 
-        #if lr_scheduler:
-        #    lr_scheduler.step()
+    if save_model:
+        torch.save(model, '/home/wmi/adrozdz/Master_degree/models/model.pth')
 
     print(f'\nModel training completed, runtime: {datetime.datetime.now() - start_time}')
 

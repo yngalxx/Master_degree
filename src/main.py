@@ -8,6 +8,13 @@ from torchvision.models.detection import FasterRCNN
 from newspapersdataset import NewspapersDataset
 from train_model import train_model
 from functions import from_tsv_to_list, collate_fn
+import warnings
+
+# warnings
+def warn(*args, **kwargs):
+    pass
+
+warnings.warn = warn
 
 # directories
 DIR_IMAGE = '/home/wmi/adrozdz/scraped_photos_final/'
@@ -19,7 +26,7 @@ NUM_CLASSES = 8  # 7 classes, but there is also one for background
 LEARNING_RATE = 5e-3
 BATCH_SIZE = 32
 NUM_EPOCHS = 10
-RESCALE = 1 / 6  # if float, each image will be multiplied by it, if list [width, height] each image will be scaled
+RESCALE = [500, 750]  # if float, each image will be multiplied by it, if list [width, height] each image will be scaled
 # to that size (concerns both images + annotations)
 SHUFFLE = True
 

@@ -5,11 +5,14 @@ import torchvision
 from torchvision.models.detection.rpn import AnchorGenerator, RPNHead, RegionProposalNetwork
 from torch.utils.data import DataLoader
 from torchvision.models.detection import FasterRCNN
-from newspapersdataset import NewspapersDataset
 from train_model import train_model
 from functions import from_tsv_to_list, collate_fn
+# from train_model import NewspaperNeuralNet
+import pytorch_lightning as pl
+from pytorch_lightning.loggers import TensorBoardLogger
+from newspapersdataset import NewspapersDataset
 import warnings
-
+warnings.filterwarnings("ignore")
 
 # warnings
 def warn(*args, **kwargs):
@@ -17,23 +20,42 @@ def warn(*args, **kwargs):
 
 warnings.warn = warn
 
+# hyperparameters
+# parameters = {
+#     'channel': 1, # 3 <= RGB, 1 <= greyscale
+#     'num_classes': 8, # 7 classes, but there is also one for background
+#     'learning_rate': 1e-4,
+#     'batch_size': 16,
+#     'num_epochs': 5,
+#     'rescale': [450, 600], # if float, each image will be multiplied by it, if list [width, height] each image will be scaled to that size (concerns both images + annotations)
+#     'shuffle': True, 
+#     'weight_decay': 0, # regularization
+#     'step_size': 2, # lr scheduler step
+#     'gamma': 0.1, # lr step multiplier 
+#     'trainable_backbone_layers': 5, # 5 <= all, 0 <= any
+#     'num_workers': 4,
+#     'main_dir': '/home/wmi/adrozdz/Master_degree/',
+#     'image_dir': '/home/wmi/adrozdz/scraped_photos_final/',
+#     'annotations_dir': '/home/wmi/adrozdz/Master_gonito/'
+# }
+
 # directories
 MAIN_DIR = '/home/wmi/adrozdz/Master_degree/'
 DIR_IMAGE = '/home/wmi/adrozdz/scraped_photos_final/'
-GONITO_DIR = '/home/wmi/adrozdz/Master_gonito2/'
+GONITO_DIR = '/home/wmi/adrozdz/Master_gonito/'
 
 # hyperparameters
 CHANNEL = 1 # 3 <= RGB, 1 <= greyscale
 NUM_CLASSES = 8  # 7 classes, but there is also one for background
 LEARNING_RATE = 1e-4
 BATCH_SIZE = 16 
-NUM_EPOCHS = 2 
-RESCALE = [500, 750]  # if float, each image will be multiplied by it, if list [width, height] each image will be scaled
+NUM_EPOCHS = 5
+RESCALE = [375, 500]  # if float, each image will be multiplied by it, if list [width, height] each image will be scaled
 # to that size (concerns both images + annotations)
 SHUFFLE = True
-TRAINABLE_BACKBONE_LAYERS = 0 # 5 <= all, 0 <= any
-WEIGHT_DECAY = 5e-4 # regularization
-STEP_SIZE = 3 # lr scheduler step
+TRAINABLE_BACKBONE_LAYERS = 5 # 5 <= all, 0 <= any
+WEIGHT_DECAY = 0 # regularization
+STEP_SIZE = 2 # lr scheduler step
 GAMMA = 0.1 # lr step multiplier 
 NUM_WORKERS = 4
 
@@ -93,14 +115,14 @@ test_dataloader = DataLoader(
 # pre-trained model as a backbone
 resnet = torchvision.models.detection.fasterrcnn_resnet50_fpn(
     pretrained=True,
-    trainable_backbone_layers=TRAINABLE_BACKBONE_LAYERS  
+    trainable_backbone_layers=TRAINABLE_BACKBONE_LAYERS#parameters['trainable_backbone_layers']  
 )
 backbone = resnet.backbone
 
 # main model
 model = FasterRCNN(
     backbone,
-    num_classes=NUM_CLASSES,
+    num_classes=NUM_CLASSES#parameters['num_classes'],
 )
 
 # # module that generates the anchors for a set of feature maps
@@ -118,7 +140,7 @@ model = FasterRCNN(
 #     head=rpn_head,
 #     fg_iou_thresh=0.7,
 #     bg_iou_thresh=0.3,
-#     batch_size_per_image=BATCH_SIZE,
+#     batch_size_per_image=BATCH_SIZE,#parameters['batch_size'],
 #     positive_fraction=0.5,
 #     pre_nms_top_n=dict(training=200, testing=100),
 #     post_nms_top_n=dict(training=160, testing=80),
@@ -129,24 +151,38 @@ model = FasterRCNN(
 optimizer = optim.Adam(
     filter(lambda p: p.requires_grad, model.parameters()),
     lr=LEARNING_RATE,
-    # weight_decay=WEIGHT_DECAY
+    weight_decay=WEIGHT_DECAY
 )
 
-# # learning rate scheduler decreases the learning rate by 10x every 3 epochs
-# lr_scheduler = torch.optim.lr_scheduler.StepLR(
-#     optimizer,
-#     step_size=STEP_SIZE,
-#     gamma=GAMMA
-# )
+# learning rate scheduler decreases the learning rate by 10x every 3 epochs
+lr_scheduler = torch.optim.lr_scheduler.StepLR(
+    optimizer,
+    step_size=STEP_SIZE,
+    gamma=GAMMA
+)
 
 trained_model = train_model(
     model, 
     optimizer, 
     train_dataloader,
     NUM_EPOCHS, 
-    NUM_CLASSES,
     gpu = True,
-    save_path = MAIN_DIR + 'saved_models/model.pth',
+    save_path = MAIN_DIR,
     val_dataloader=val_dataloader, 
-    # lr_scheduler=lr_scheduler, 
+    test_dataloader=test_dataloader, 
+    lr_scheduler=None#lr_scheduler, 
 )
+
+# # model instance
+# nnn_model = NewspaperNeuralNet(model=model, parameters=parameters)
+
+# # loger
+# tb_logger = TensorBoardLogger(save_dir=parameters['main_dir']+'logs/')
+
+# trainer = pl.Trainer(
+#     logger=[tb_logger], 
+#     gpus=1, 
+#     auto_select_gpus=True
+# )
+
+# trainer.fit(nnn_model)

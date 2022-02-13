@@ -1,0 +1,87 @@
+Start time: 2022-02-13 22:37:02.090961 
+
+Cuda available: True
+Current device: 0
+
+
+### Training ###
+### Epoch: 1 ###
+100%|█████████████████████████████████████████████████████████████████████████████████████| 165/165 [03:03<00:00,  1.11s/it]
+### 2022-02-13 22:40:09.568631 ### [epoch 1]: train_time = 0:03:07.477683 | train_loss = 0.8231664527546275
+creating index...
+index created!
+Test:  [ 0/14]  eta: 0:00:49  model_time: 0.4078 (0.4078)  evaluator_time: 0.0884 (0.0884)  time: 3.5259  data: 3.0089  max mem: 19869
+Test:  [13/14]  eta: 0:00:03  model_time: 0.4023 (0.3863)  evaluator_time: 0.0812 (0.0809)  time: 3.2851  data: 2.8146  max mem: 19869
+Test: Total time: 0:00:45 (3.2853 s / it)
+Averaged stats: model_time: 0.4023 (0.3863)  evaluator_time: 0.0812 (0.0809)
+Accumulating evaluation results...
+DONE (t=0.10s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.264
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.372
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.319
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.326
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.266
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.219
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.161
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.386
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.418
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.347
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.505
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.325
+### Epoch: 2 ###
+100%|█████████████████████████████████████████████████████████████████████████████████████| 165/165 [03:04<00:00,  1.12s/it]
+### 2022-02-13 22:44:39.895385 ### [epoch 2]: train_time = 0:07:37.804437 | train_loss = 0.26239086786905924
+creating index...
+index created!
+Test:  [ 0/14]  eta: 0:00:46  model_time: 0.4064 (0.4064)  evaluator_time: 0.1083 (0.1083)  time: 3.3483  data: 2.8125  max mem: 19869
+Test:  [13/14]  eta: 0:00:03  model_time: 0.4010 (0.3864)  evaluator_time: 0.0727 (0.0727)  time: 3.2834  data: 2.8209  max mem: 19869
+Test: Total time: 0:00:45 (3.2835 s / it)
+Averaged stats: model_time: 0.4010 (0.3864)  evaluator_time: 0.0727 (0.0727)
+Accumulating evaluation results...
+DONE (t=0.08s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.321
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.426
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.382
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.308
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.274
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.325
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.261
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.446
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.475
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.329
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.445
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.452
+### Epoch: 3 ###
+100%|█████████████████████████████████████████████████████████████████████████████████████| 165/165 [03:04<00:00,  1.12s/it]
+### 2022-02-13 22:49:10.189977 ### [epoch 3]: train_time = 0:12:08.099029 | train_loss = 0.14614920498746814
+creating index...
+index created!
+Test:  [ 0/14]  eta: 0:00:46  model_time: 0.4038 (0.4038)  evaluator_time: 0.1228 (0.1228)  time: 3.3239  data: 2.7799  max mem: 19869
+Test:  [13/14]  eta: 0:00:03  model_time: 0.4008 (0.3858)  evaluator_time: 0.0687 (0.0736)  time: 3.2742  data: 2.8118  max mem: 19869
+Test: Total time: 0:00:45 (3.2743 s / it)
+Averaged stats: model_time: 0.4008 (0.3858)  evaluator_time: 0.0687 (0.0736)
+Accumulating evaluation results...
+DONE (t=0.09s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.388
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.495
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.452
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.355
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.305
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.388
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.277
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.492
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.525
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.473
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.503
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.520
+### Epoch: 4 ###
+100%|█████████████████████████████████████████████████████████████████████████████████████| 165/165 [03:04<00:00,  1.12s/it]
+### 2022-02-13 22:53:40.363677 ### [epoch 4]: train_time = 0:16:38.272730 | train_loss = 0.10796985066298283
+creating index...
+index created!
+Test:  [ 0/14]  eta: 0:00:46  model_time: 0.4044 (0.4044)  evaluator_time: 0.0671 (0.0671)  time: 3.2957  data: 2.8028  max mem: 19869
+Connection to s468642-gpu.vm.wmi.amu.edu.pl closed by remote host.
+Connection to s468642-gpu.vm.wmi.amu.edu.pl closed.

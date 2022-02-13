@@ -1,4 +1,5 @@
-import sys, datetime
+import sys
+import datetime
 import torch
 import math
 from tqdm import tqdm
@@ -7,14 +8,14 @@ from tqdm import tqdm
 sys.path.append('/home/wmi/adrozdz/vision/references/detection/')
 from engine import train_one_epoch, evaluate # source repository: https://github.com/pytorch/vision/tree/main/references/detection from tutorial: https://pytorch.org/tutorials/intermediate/torchvision_tutorial.html
 
-
-def train_model(model, optimizer, train_dataloader, epochs, num_classes, val_dataloader=None, lr_scheduler=None, save_model=True):
+def train_model(model, optimizer, train_dataloader, epochs, num_classes, gpu=True, save_path=False, val_dataloader=None, lr_scheduler=None):
     start_time = datetime.datetime.now()
     print(f'Start time: {start_time} \n')
     # switch to gpu if available
-    cuda_statement = torch.cuda.is_available()
+    if gpu:
+        cuda_statement = torch.cuda.is_available()
     print(f'Cuda available: {torch.cuda.is_available()}')
-    if cuda_statement == True:
+    if gpu == True & cuda_statement == True:
         print(f'Current device: {torch.cuda.current_device()}')
         device = torch.device(torch.cuda.current_device())
         # move model to the righ
@@ -26,7 +27,8 @@ def train_model(model, optimizer, train_dataloader, epochs, num_classes, val_dat
         # train for one epoch, printing every 10 iterations
         train_one_epoch(model, optimizer, train_dataloader, device, epoch, print_freq=10)
         # update the learning rate
-        lr_scheduler.step()
+        if lr_scheduler:
+            lr_scheduler.step()
         # evaluate on the test dataset
         evaluate(model, val_dataloader, device=device)
 
@@ -77,8 +79,8 @@ def train_model(model, optimizer, train_dataloader, epochs, num_classes, val_dat
     #     if lr_scheduler:
     #        lr_scheduler.step()
 
-    if save_model:
-        torch.save(model, '/home/wmi/adrozdz/Master_degree/models/model.pth')
+    if save_path:
+        torch.save(model, save_path)
 
     print(f'\nModel training completed, runtime: {datetime.datetime.now() - start_time}')
 

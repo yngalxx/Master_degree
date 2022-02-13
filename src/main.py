@@ -18,19 +18,20 @@ def warn(*args, **kwargs):
 warnings.warn = warn
 
 # directories
+MAIN_DIR = '/home/wmi/adrozdz/Master_degree/'
 DIR_IMAGE = '/home/wmi/adrozdz/scraped_photos_final/'
-GONITO_DIR = '/home/wmi/adrozdz/Master_gonito/'
+GONITO_DIR = '/home/wmi/adrozdz/Master_gonito2/'
 
 # hyperparameters
 CHANNEL = 1 # 3 <= RGB, 1 <= greyscale
 NUM_CLASSES = 8  # 7 classes, but there is also one for background
-LEARNING_RATE = 5e-3
+LEARNING_RATE = 1e-4
 BATCH_SIZE = 16 
-NUM_EPOCHS = 10 
+NUM_EPOCHS = 2 
 RESCALE = [500, 750]  # if float, each image will be multiplied by it, if list [width, height] each image will be scaled
 # to that size (concerns both images + annotations)
 SHUFFLE = True
-TRAINABLE_BACKBONE_LAYERS = 5 # 5 <= all, 0 <= any
+TRAINABLE_BACKBONE_LAYERS = 0 # 5 <= all, 0 <= any
 WEIGHT_DECAY = 5e-4 # regularization
 STEP_SIZE = 3 # lr scheduler step
 GAMMA = 0.1 # lr step multiplier 
@@ -128,15 +129,15 @@ model = FasterRCNN(
 optimizer = optim.Adam(
     filter(lambda p: p.requires_grad, model.parameters()),
     lr=LEARNING_RATE,
-    weight_decay=WEIGHT_DECAY
+    # weight_decay=WEIGHT_DECAY
 )
 
-# learning rate scheduler decreases the learning rate by 10x every 3 epochs
-lr_scheduler = torch.optim.lr_scheduler.StepLR(
-    optimizer,
-    step_size=STEP_SIZE,
-    gamma=GAMMA
-)
+# # learning rate scheduler decreases the learning rate by 10x every 3 epochs
+# lr_scheduler = torch.optim.lr_scheduler.StepLR(
+#     optimizer,
+#     step_size=STEP_SIZE,
+#     gamma=GAMMA
+# )
 
 trained_model = train_model(
     model, 
@@ -144,7 +145,8 @@ trained_model = train_model(
     train_dataloader,
     NUM_EPOCHS, 
     NUM_CLASSES,
+    gpu = True,
+    save_path = MAIN_DIR + 'saved_models/model.pth',
     val_dataloader=val_dataloader, 
-    lr_scheduler=lr_scheduler, 
-    save_model = True, 
+    # lr_scheduler=lr_scheduler, 
 )

@@ -1,5 +1,5 @@
 .DS_Store
 .ipynb_checkpoints
 .Rhistory
-saved_models/
+saved_models/model.pth
 venv/

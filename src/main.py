@@ -9,12 +9,9 @@ from torch.utils.data import DataLoader
 from torchvision.models.detection import FasterRCNN
 from newspapersdataset import NewspapersDataset
 from train_model import train_model
-from functions import from_tsv_to_list, collate_fn
-# from train_model import NewspaperNeuralNet
-import pytorch_lightning as pl
-from pytorch_lightning.loggers import TensorBoardLogger
+from functions import from_tsv_to_list
+from functions import collate_fn
 import warnings
-warnings.filterwarnings("ignore")
 
 # warnings
 def warn(*args, **kwargs):
@@ -156,17 +153,3 @@ trained_model = train_model(
     test_dataloader=test_dataloader, 
     lr_scheduler=lr_scheduler, 
 )
-
-# # model instance
-# nnn_model = NewspaperNeuralNet(model=model, parameters=parameters)
-
-# # loger
-# tb_logger = TensorBoardLogger(save_dir=parameters['main_dir']+'logs/')
-
-# trainer = pl.Trainer(
-#     logger=[tb_logger], 
-#     gpus=1, 
-#     auto_select_gpus=True
-# )
-
-# trainer.fit(nnn_model)

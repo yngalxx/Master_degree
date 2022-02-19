@@ -4,7 +4,8 @@ import pandas as pd
 import torch
 from torch.utils.data import Dataset
 import sys
-sys.path.append("/home/wmi/adrozdz/")
+import pathlib
+sys.path.append("/".join(str(pathlib.Path(__file__).parent.resolve()).split('/')[:-2]))
 from image_size import get_image_size  # source: https://github.com/scardine/image_size
 
 

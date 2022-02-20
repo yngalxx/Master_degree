@@ -26,7 +26,7 @@ class NewspapersDataset(Dataset):
             )
             expected_list_split = self.expected_list[i].split(' ')
             for ii in range(len(expected_list_split)):
-                expected_list_split_2 = expected_list_split[ii].split('/')
+                expected_list_split_2 = expected_list_split[ii].split(':')
                 bbox = expected_list_split_2[1].split(',')
                 if isinstance(self.scale, list):
                     new_img_width, new_img_height = self.scale[0], self.scale[1]
@@ -76,7 +76,7 @@ class NewspapersDataset(Dataset):
         labels = torch.as_tensor(labels, dtype=torch.int64)
         iscrowd = torch.zeros((boxes.shape[0],), dtype=torch.int64)
         area = (boxes[:, 3] - boxes[:, 1]) * (boxes[:, 2] - boxes[:, 0])
-        image_id = torch.tensor([index])
+        image_id = torch.tensor([int(img_name.split('.')[0])])
 
         # wrapping
         target = {

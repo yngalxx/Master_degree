@@ -8,7 +8,6 @@ import pathlib
 sys.path.append("/".join(str(pathlib.Path(__file__).parent.resolve()).split('/')[:-2]))
 from image_size import get_image_size  # source: https://github.com/scardine/image_size
 
-
 class NewspapersDataset(Dataset):
     def __init__(self, img_dir, in_list, expected_list, bbox_format='x0y0x1y1', scale=None, transforms=None):
         # selfs
@@ -76,7 +75,8 @@ class NewspapersDataset(Dataset):
         labels = torch.as_tensor(labels, dtype=torch.int64)
         iscrowd = torch.zeros((boxes.shape[0],), dtype=torch.int64)
         area = (boxes[:, 3] - boxes[:, 1]) * (boxes[:, 2] - boxes[:, 0])
-        image_id = torch.tensor([int(img_name.split('.')[0])])
+        index = torch.tensor([index])
+        image_name = torch.tensor([int(img_name.split('.')[0])])
 
         # wrapping
         target = {
@@ -84,7 +84,8 @@ class NewspapersDataset(Dataset):
             "labels": labels,
             "area": area,
             "iscrowd": iscrowd,
-            "image_id": image_id
+            "index": index,
+            "img_name": image_name
         }
 
         # data transformation

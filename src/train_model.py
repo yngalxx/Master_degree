@@ -85,12 +85,13 @@ def train_model(model, optimizer, train_dataloader, epochs, gpu=True, save_path=
             torch.set_num_threads(1)
             cpu_device = torch.device("cpu")
             with torch.no_grad():
-                image_id_list, predicted_box_list, true_box_list, true_label_list, predicted_label_list = [], [], [], [], []
+                index_list, img_name_list, predicted_box_list, true_box_list, true_label_list, predicted_label_list = [], [], [], [], [], []
                 for images, targets in tqdm(test_dataloader):
                     images = list(image.to(cpu_device) for image in images)
                     targets = [{k: v.to(cpu_device) for k, v in t.items()} for t in targets]
                     for target in list(targets):
-                        image_id_list.append(target['image_id'].item())
+                        index_list.append(target['index'].item())
+                        img_name_list.append(target['img_name'].item())
                         true_label_list.append([int(t.detach().numpy()) for t in target['labels']])
                         true_box_list.append([t.detach().numpy().tolist() for t in target['boxes']])
                     if cuda_statement == True:
@@ -102,7 +103,7 @@ def train_model(model, optimizer, train_dataloader, epochs, gpu=True, save_path=
                         predicted_label_list.append([int(o.detach().numpy()) for o in output['labels']])
                         predicted_box_list.append([o.detach().numpy().tolist() for o in output['boxes']])
                 output_df = pd.DataFrame()
-                output_df['id'] = image_id_list
+                output_df['id'] = img_name_list
                 output_df['true_label'] = true_label_list
                 output_df['true_box'] = true_box_list
                 output_df['predicted_label'] = predicted_label_list

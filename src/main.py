@@ -25,7 +25,7 @@ parameters = {
     'num_classes': 8, # 7 classes, but there is also one for background
     'learning_rate': 1e-4,
     'batch_size': 16,
-    'num_epochs': 10,
+    'num_epochs': 15,
     'rescale': [375, 500], # if float, each image will be multiplied by it, if list [width, height] each image will be scaled to that size (concerns both images + annotations)
     'shuffle': True, 
     'weight_decay': 0, # regularization
@@ -35,7 +35,8 @@ parameters = {
     'num_workers': 4,
     'main_dir': '/home/wmi/adrozdz/Master_degree/',
     'image_dir': '/home/wmi/adrozdz/scraped_photos_final/',
-    'annotations_dir': '/home/wmi/adrozdz/Master_gonito/'
+    'annotations_dir': '/home/wmi/adrozdz/Master_gonito/',
+    'gpu': True
 }
 
 # read data and create dataloaders
@@ -66,8 +67,8 @@ in_val = from_tsv_to_list(parameters['annotations_dir']+'dev-0/in.tsv')
 val_dataloader = DataLoader(
     NewspapersDataset(
         img_dir=parameters['image_dir'] ,
-        in_list=in_train,
-        expected_list=expected_train,
+        in_list=in_val,
+        expected_list=expected_val,
         scale=parameters['rescale'],
         transforms=data_transform
     ),
@@ -76,14 +77,15 @@ val_dataloader = DataLoader(
     collate_fn=collate_fn,
     num_workers = parameters['num_workers']
 )
+
 ## test
 expected_test = from_tsv_to_list(parameters['annotations_dir']+'test-A/expected.tsv')
 in_test = from_tsv_to_list(parameters['annotations_dir']+'test-A/in.tsv')
 test_dataloader = DataLoader(
     NewspapersDataset(
         img_dir=parameters['image_dir'],
-        in_list=in_train,
-        expected_list=expected_train,
+        in_list=in_test,
+        expected_list=expected_test,
         scale=parameters['rescale'],
         transforms=data_transform
     ),
@@ -147,8 +149,8 @@ trained_model = train_model(
     optimizer, 
     train_dataloader,
     parameters['num_epochs'], 
-    gpu = True,
-    save_path =  parameters['main_dir'],
+    gpu=parameters['gpu'],
+    save_path=parameters['main_dir'],
     val_dataloader=val_dataloader, 
     test_dataloader=test_dataloader, 
     lr_scheduler=lr_scheduler, 

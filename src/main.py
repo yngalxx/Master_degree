@@ -8,10 +8,13 @@ from torchvision.models.detection.rpn import RPNHead
 from torch.utils.data import DataLoader
 from torchvision.models.detection import FasterRCNN
 from newspapersdataset import NewspapersDataset
+from newspapersdataset import prepare_data_for_dataloader
 from train_model import train_model
 from functions import from_tsv_to_list
 from functions import collate_fn
+from functions import seed_worker
 import warnings
+import numpy as np
 
 # warnings
 def warn(*args, **kwargs):
@@ -25,9 +28,9 @@ parameters = {
     'num_classes': 8, # 7 classes, but there is also one for background
     'learning_rate': 1e-4,
     'batch_size': 16,
-    'num_epochs': 15,
+    'num_epochs': 10,
     'rescale': [375, 500], # if float, each image will be multiplied by it, if list [width, height] each image will be scaled to that size (concerns both images + annotations)
-    'shuffle': True, 
+    'shuffle': False, 
     'weight_decay': 0, # regularization
     'lr_step_size': 1, # lr scheduler step
     'lr_gamma': 0.9, # lr step multiplier 
@@ -48,51 +51,74 @@ data_transform = T.Compose([
 ## train
 expected_train = from_tsv_to_list(parameters['annotations_dir']+'train/expected.tsv')
 in_train = from_tsv_to_list(parameters['annotations_dir']+'train/in.tsv')
+train_paths = [parameters['image_dir']+path for path in in_train]
+data_train = prepare_data_for_dataloader(
+    img_dir=parameters['image_dir'],
+    in_list=in_train,
+    expected_list=expected_train,
+    bbox_format='x0y0x1y1',
+    scale=parameters['rescale'],
+    )
+dataset_train = NewspapersDataset(
+    df=data_train,
+    images_path=train_paths,
+    scale=parameters['rescale'],
+    transforms=data_transform,
+    )
 train_dataloader = DataLoader(
-    NewspapersDataset(
-        img_dir=parameters['image_dir'] ,
-        in_list=in_train,
-        expected_list=expected_train,
-        scale=parameters['rescale'],
-        transforms=data_transform
-    ),
+    dataset_train,
     batch_size=parameters['batch_size'],
     shuffle=parameters['shuffle'],
     collate_fn=collate_fn,
-    num_workers = parameters['num_workers']
+    num_workers=parameters['num_workers'],
 )
 ## val
 expected_val = from_tsv_to_list(parameters['annotations_dir']+'dev-0/expected.tsv')
 in_val = from_tsv_to_list(parameters['annotations_dir']+'dev-0/in.tsv')
+val_paths = [parameters['image_dir']+path for path in in_val]
+data_val = prepare_data_for_dataloader(
+    img_dir=parameters['image_dir'],
+    in_list=in_val,
+    expected_list=expected_val,
+    bbox_format='x0y0x1y1',
+    scale=parameters['rescale'],
+    )
+dataset_val = NewspapersDataset(
+    df=data_val,
+    images_path=val_paths,
+    scale=parameters['rescale'],
+    transforms=data_transform,
+    )
 val_dataloader = DataLoader(
-    NewspapersDataset(
-        img_dir=parameters['image_dir'] ,
-        in_list=in_val,
-        expected_list=expected_val,
-        scale=parameters['rescale'],
-        transforms=data_transform
-    ),
+    dataset_val,
     batch_size=parameters['batch_size'],
     shuffle=parameters['shuffle'],
     collate_fn=collate_fn,
-    num_workers = parameters['num_workers']
+    num_workers=parameters['num_workers'],
 )
-
 ## test
 expected_test = from_tsv_to_list(parameters['annotations_dir']+'test-A/expected.tsv')
 in_test = from_tsv_to_list(parameters['annotations_dir']+'test-A/in.tsv')
+test_paths = [parameters['image_dir']+path for path in in_test]
+data_test = prepare_data_for_dataloader(
+    img_dir=parameters['image_dir'],
+    in_list=in_test,
+    expected_list=expected_test,
+    bbox_format='x0y0x1y1',
+    scale=parameters['rescale'],
+    )
+dataset_test = NewspapersDataset(
+    df=data_test,
+    images_path=test_paths,
+    scale=parameters['rescale'],
+    transforms=data_transform,
+    )
 test_dataloader = DataLoader(
-    NewspapersDataset(
-        img_dir=parameters['image_dir'],
-        in_list=in_test,
-        expected_list=expected_test,
-        scale=parameters['rescale'],
-        transforms=data_transform
-    ),
+    dataset_test,
     batch_size=parameters['batch_size'],
     shuffle=parameters['shuffle'],
     collate_fn=collate_fn,
-    num_workers = parameters['num_workers']
+    num_workers=parameters['num_workers'],
 )
 
 # pre-trained model as a backbone

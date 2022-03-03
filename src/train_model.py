@@ -17,31 +17,25 @@ sys.path.append("/".join(str(pathlib.Path(__file__).parent.resolve()).split('/')
 from engine import evaluate # source repository: https://github.com/pytorch/vision/tree/main/references/detection from tutorial: https://pytorch.org/tutorials/intermediate/torchvision_tutorial.html
 
 # warnings
-def warn(*args, **kwargs):
-    pass
-
-warnings.warn = warn
+warnings.filterwarnings("ignore")
 
 
-def train_model(model, optimizer, train_dataloader, epochs, gpu=True, save_path=False, val_dataloader=None,  test_dataloader=None, lr_scheduler=None):
+def train_model(model, optimizer, train_dataloader, epochs, gpu=True, save_path=False, val_dataloader=None, lr_scheduler=None):
     start_time = datetime.datetime.now()
     print(f'Start time: {start_time} \n')
     # switch to gpu if available
-    if gpu:
-        cuda_statement = torch.cuda.is_available()
+    cuda_statement = torch.cuda.is_available()
     print(f'Cuda available: {torch.cuda.is_available()}')
-    if gpu == True & cuda_statement == True:
-        print(f'Current device: {torch.cuda.current_device()}\n')
+    if cuda_statement == True:
         device = torch.device(torch.cuda.current_device())
-    else:
+    if gpu==False:
         device = 'cpu'
-        print(f'Device: {device}')
+    print(f'Current device: {device}\n')
     # move model to the right device
     model.to(device)
-    
-    print('\n### Training ###')
+    print('###  Training  ###')
     for epoch in range(epochs):    
-        print(f'### Epoch: {epoch+1} ###')    
+        print(f'###  Epoch: {epoch+1}  ###')    
         model.train()
         train_loss = 0.0
         for images, targets in tqdm(train_dataloader):
@@ -71,6 +65,7 @@ def train_model(model, optimizer, train_dataloader, epochs, gpu=True, save_path=
             lr_scheduler.step()
         # evaluate on the validation dataset
         if val_dataloader:
+            print(f'### Evaluation ###') 
             evaluate(model, val_dataloader, device=device)
 
     print(f'\n### Model training completed, runtime: {datetime.datetime.now() - start_time} ###')
@@ -78,44 +73,6 @@ def train_model(model, optimizer, train_dataloader, epochs, gpu=True, save_path=
     if save_path:
         torch.save(model, save_path+'saved_models/model.pth')
 
-    if test_dataloader:
-        if save_path:
-            print('\n### Testing ###')
-            n_threads = torch.get_num_threads()
-            torch.set_num_threads(1)
-            cpu_device = torch.device("cpu")
-            with torch.no_grad():
-                image_id_list, img_name_list, predicted_box_list, true_box_list, true_label_list, predicted_label_list, old_size_list, new_size_list = [], [], [], [], [], [], [], []
-                for images, targets in tqdm(test_dataloader):
-                    images = list(image.to(cpu_device) for image in images)
-                    targets = [{k: v.to(cpu_device) for k, v in t.items()} for t in targets]
-                    for target in list(targets):
-                        image_id_list.append(target['image_id'].item())
-                        img_name_list.append([int(t.detach().numpy()) for t in target['image_name']])
-                        true_label_list.append([int(t.detach().numpy()) for t in target['labels']])
-                        true_box_list.append([t.detach().numpy().tolist() for t in target['boxes']])
-                        old_size_list.append([t.detach().numpy().tolist() for t in target['old_size']])
-                        new_size_list.append([t.detach().numpy().tolist() for t in target['new_size']])
-                    if cuda_statement == True:
-                        images = list(img.to(device) for img in images)
-                        torch.cuda.synchronize()
-                    outputs = model(images)
-                    outputs = [{k: v.to(cpu_device) for k, v in t.items()} for t in outputs]
-                    for output in outputs:
-                        predicted_label_list.append([int(o.detach().numpy()) for o in output['labels']])
-                        predicted_box_list.append([o.detach().numpy().tolist() for o in output['boxes']])
-                output_df = pd.DataFrame()
-                output_df['image_id'] = image_id_list
-                output_df['image_name'] = img_name_list
-                output_df['true_labels'] = true_label_list
-                output_df['true_boxes'] = true_box_list
-                output_df['predicted_labels'] = predicted_label_list
-                output_df['predicted_boxes'] = predicted_box_list
-                output_df = output_df.sort_values('image_name').reset_index(drop=True, inplace=False)
-                output_df.to_csv(save_path+'model_output/model_output.csv')
-        else:
-            print(f'\nERROR: Cannot process a test set without specifying the save_path parameter')
-
-    print(f'\n####### JOB FINISHED #######\n')
+    print(f'\n####### JOB FINISHED #######\n\n')
 
     return model

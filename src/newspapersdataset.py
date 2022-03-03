@@ -6,57 +6,73 @@ from torch.utils.data import Dataset
 import torchvision.transforms as tensor_transform
 import sys
 import pathlib
+import warnings
 sys.path.append("/".join(str(pathlib.Path(__file__).parent.resolve()).split('/')[:-2]))
 from image_size import get_image_size  # source: https://github.com/scardine/image_size
 
-def prepare_data_for_dataloader(img_dir, in_list, expected_list, bbox_format='x0y0x1y1', scale=None):
+# warnings
+warnings.filterwarnings("ignore")
+
+
+def prepare_data_for_dataloader(img_dir, in_list, expected_list=None, bbox_format='x0y0x1y1', scale=None, test=False):
     df = pd.DataFrame()
     for i in range(len(in_list)):
         img_width, img_height = get_image_size.get_image_size(
             img_dir + in_list[i]
         )
-        expected_list_split = expected_list[i].split(' ')
-        for ii in range(len(expected_list_split)):
-            expected_list_split_2 = expected_list_split[ii].split(':')
-            bbox = expected_list_split_2[1].split(',')
-            if isinstance(scale, list):
-                new_img_width, new_img_height = scale[0], scale[1]
-            elif isinstance(scale, int) or isinstance(scale, float):
-                new_img_width, new_img_height = img_width * scale, img_height * scale
-            else:
-                new_img_width, new_img_height = img_width, img_height
-            x0, y0 = int(bbox[0]), int(bbox[1])
-            x1, y1 = int(bbox[2]), int(bbox[3])
-            if bbox_format == 'x0y0wh':
-                x1 += x0,
-                y1 += y0
+        if isinstance(scale, list):
+            new_img_width, new_img_height = scale[0], scale[1]
+        elif isinstance(scale, int) or isinstance(scale, float):
+            new_img_width, new_img_height = img_width * scale, img_height * scale
+        else:
+            new_img_width, new_img_height = img_width, img_height
+        if test:
             temp_dict = {
                 'file_name': int(in_list[i].split('.')[0]),
-                'class': int(expected_list_split_2[0]),
-                'x0': int(x0 / (img_width / new_img_width)),
-                'y0': int(y0 / (img_height / new_img_height)),
-                'x1': int(x1 / (img_width / new_img_width)),
-                'y1': int(y1 / (img_height / new_img_height)),
                 'new_width': int(new_img_width),
                 'new_height': int(new_img_height),
-                'old_width': int(img_width),
-                'old_height': int(img_height)
             }
             df = df.append(temp_dict, ignore_index=True)
-
+        else:
+            expected_list_split = expected_list[i].split(' ')
+            for ii in range(len(expected_list_split)):
+                expected_list_split_2 = expected_list_split[ii].split(':')
+                bbox = expected_list_split_2[1].split(',')
+                x0, y0 = int(bbox[0]), int(bbox[1])
+                x1, y1 = int(bbox[2]), int(bbox[3])
+                if bbox_format == 'x0y0wh':
+                    x1 += x0,
+                    y1 += y0
+                temp_dict = {
+                    'file_name': int(in_list[i].split('.')[0]),
+                    'class': int(expected_list_split_2[0]),
+                    'x0': int(x0 / (img_width / new_img_width)),
+                    'y0': int(y0 / (img_height / new_img_height)),
+                    'x1': int(x1 / (img_width / new_img_width)),
+                    'y1': int(y1 / (img_height / new_img_height)),
+                    'new_width': int(new_img_width),
+                    'new_height': int(new_img_height),
+                }
+                df = df.append(temp_dict, ignore_index=True)
     return df
 
-def get_target(name, df):
+
+def get_target(name, df, test=False):
     rows = df[df["file_name"] == int(name[:-4])]
-    return rows['file_name'].values, rows["class"].values, rows[['x0', 'y0', 'x1', 'y1']].values, rows[['new_width', 'new_height']].values, rows[['old_width', 'old_height']].values
+    if test:
+        return rows['file_name'].values, rows[['new_width', 'new_height']].values
+    else:
+        return rows['file_name'].values, rows["class"].values, rows[['x0', 'y0', 'x1', 'y1']].values, rows[['new_width', 'new_height']].values
+
 
 class NewspapersDataset(Dataset):
-  def __init__(self, images_path, df, scale=None, transforms=None):
+  def __init__(self, images_path, df, scale=None, transforms=None, test=False):
     super(NewspapersDataset, self).__init__()
     self.df = df
     self.images_path = images_path
     self.scale = scale
     self.transforms = transforms
+    self.test = test
 
   def __len__(self):
     return len(self.images_path)
@@ -65,31 +81,33 @@ class NewspapersDataset(Dataset):
     img_path = self.images_path[idx]
     img = Image.open(img_path)
     
-    names, labels, boxes, new_sizes, old_sizes = get_target(img_path.split('/')[-1], self.df)
-    areas = (boxes[:, 3] - boxes[:, 1]) * (boxes[:, 2] - boxes[:, 0])
+    if not self.test:
+        names, labels, boxes, new_image_size = get_target(img_path.split('/')[-1], self.df, test=False)
+        areas = (boxes[:, 3] - boxes[:, 1]) * (boxes[:, 2] - boxes[:, 0])
+    else:
+        names, new_image_size = get_target(img_path.split('/')[-1], self.df, test=True)      
 
     if self.scale:
-        img = img.resize((int(new_sizes[0, 0]), int(new_sizes[0, 1])))
+        img = img.resize((int(new_image_size[0, 0]), int(new_image_size[0, 1])))
 
-    iscrowd = torch.zeros((boxes.shape[0],))
-    area = torch.as_tensor(areas, dtype=torch.float32)
     image_id = torch.tensor([idx])
     image_name = torch.as_tensor(names, dtype=torch.float32)
-    labels = torch.as_tensor(labels, dtype=torch.int64)
-    boxes = torch.as_tensor(boxes, dtype=torch.float32)
-    new_size = torch.as_tensor(new_sizes, dtype=torch.float32)
-    old_size = torch.as_tensor(old_sizes, dtype=torch.float32)
+    new_image_size = torch.as_tensor(new_image_size, dtype=torch.float32)
+    if not self.test:
+        iscrowd = torch.zeros((boxes.shape[0],))
+        area = torch.as_tensor(areas, dtype=torch.float32)
+        labels = torch.as_tensor(labels, dtype=torch.int64)
+        boxes = torch.as_tensor(boxes, dtype=torch.float32)
     
-    target = {
-        "image_name": image_name,
-        "labels": labels,
-        "boxes": boxes,
-        "new_size": new_size,
-        "old_size": old_size,
-        "area": area,
-        "iscrowd": iscrowd,
-        "image_id": image_id
-        }
+    target = {}
+    target['image_id'] = image_id
+    target['image_name'] = image_name
+    target['new_image_size'] = new_image_size
+    if not self.test:
+        target['labels'] = labels
+        target['boxes'] = boxes
+        target['area'] = area
+        target['iscrowd'] = iscrowd
 
     if self.transforms:
         img = self.transforms(img)

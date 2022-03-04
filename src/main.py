@@ -25,21 +25,21 @@ parameters = {
     'channel': 1, # 3 <= RGB, 1 <= greyscale
     'num_classes': 8, # 7 classes, but there is also one for background
     'learning_rate': 1e-4,
-    'batch_size': 8,
-    'num_epochs': 1,
-    'rescale': [70, 100], # if float, each image will be multiplied by it, if list [width, height] each image will be scaled to that size (concerns both images + annotations)
+    'batch_size': 16,
+    'num_epochs': 8,
+    'rescale': [375, 500], # if float, each image will be multiplied by it, if list [width, height] each image will be scaled to that size (concerns both images + annotations)
     'shuffle': False, 
     'weight_decay': 0, # regularization
     'lr_step_size': 1, # lr scheduler step
     'lr_gamma': 0.9, # lr step multiplier 
-    'trainable_backbone_layers': 0, # 5 <= all, 0 <= any
+    'trainable_backbone_layers': 5, # 5 <= all, 0 <= any
     'num_workers': 4,
     'main_dir': '/home/wmi/adrozdz/Master_degree/',
     'image_dir': '/home/wmi/adrozdz/scraped_photos_final/',
-    'annotations_dir': '/home/wmi/adrozdz/Master_gonito2/',
-    'gpu': False,
+    'annotations_dir': '/home/wmi/adrozdz/Master_gonito/',
+    'train': True,
     'test': True,
-    'train': False,
+    'gpu': True,
 }
 
 # read data and create dataloaders 
@@ -72,7 +72,7 @@ val_dataloader = DataLoader(
     batch_size=parameters['batch_size'],
     shuffle=parameters['shuffle'],
     collate_fn=collate_fn,
-    # num_workers=parameters['num_workers'],
+    num_workers=parameters['num_workers'],
     )
 
 if parameters['train']:
@@ -99,7 +99,7 @@ if parameters['train']:
         batch_size=parameters['batch_size'],
         shuffle=parameters['shuffle'],
         collate_fn=collate_fn,
-        # num_workers=parameters['num_workers'],
+        num_workers=parameters['num_workers'],
     )
 
     # pre-trained model as a backbone
@@ -115,27 +115,27 @@ if parameters['train']:
         num_classes=parameters['num_classes'],
     )
 
-    # # module that generates the anchors for a set of feature maps
-    # anchor_generator = AnchorGenerator(
-    #     sizes=tuple([(16, 32, 64, 128, 256) for _ in range(5)]),
-    #     aspect_ratios=tuple([(0.75, 0.5, 1.25) for _ in range(5)])
-    # )
+    # module that generates the anchors for a set of feature maps
+    anchor_generator = AnchorGenerator(
+        sizes=tuple([(16, 32, 64, 128, 256) for _ in range(5)]),
+        aspect_ratios=tuple([(0.75, 0.5, 1.25) for _ in range(5)])
+    )
 
-    # # module that computes the objectness and regression deltas from the RPN
-    # rpn_head = RPNHead(256, anchor_generator.num_anchors_per_location()[0])
+    # module that computes the objectness and regression deltas from the RPN
+    rpn_head = RPNHead(256, anchor_generator.num_anchors_per_location()[0])
 
-    # # region proposal network
-    # model.rpn = RegionProposalNetwork(
-    #     anchor_generator=anchor_generator,
-    #     head=rpn_head,
-    #     fg_iou_thresh=0.7,
-    #     bg_iou_thresh=0.3,
-    #     batch_size_per_image=parameters['batch_size'],
-    #     positive_fraction=0.5,
-    #     pre_nms_top_n=dict(training=200, testing=100),
-    #     post_nms_top_n=dict(training=160, testing=80),
-    #     nms_thresh=0.7
-    # )
+    # region proposal network
+    model.rpn = RegionProposalNetwork(
+        anchor_generator=anchor_generator,
+        head=rpn_head,
+        fg_iou_thresh=0.7,
+        bg_iou_thresh=0.3,
+        batch_size_per_image=parameters['batch_size'],
+        positive_fraction=0.5,
+        pre_nms_top_n=dict(training=200, testing=100),
+        post_nms_top_n=dict(training=160, testing=80),
+        nms_thresh=0.7
+    )
 
     # optimizer
     optimizer = optim.Adam(
@@ -186,7 +186,7 @@ if parameters['test']:
         batch_size=parameters['batch_size'],
         shuffle=parameters['shuffle'],
         collate_fn=collate_fn,
-        # num_workers=parameters['num_workers'],
+        num_workers=parameters['num_workers'],
     )
 
     # prediction on test set

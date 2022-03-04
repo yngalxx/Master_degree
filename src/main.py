@@ -39,6 +39,7 @@ parameters = {
     'annotations_dir': '/home/wmi/adrozdz/Master_gonito/',
     'train': True,
     'test': True,
+    'val': True,
     'gpu': True,
 }
 
@@ -49,31 +50,34 @@ data_transform = T.Compose([
     T.Normalize((0.5,), (0.5,)),
     ])
 
-expected_val = from_tsv_to_list(parameters['annotations_dir']+'dev-0/expected.tsv')
-in_val = from_tsv_to_list(parameters['annotations_dir']+'dev-0/in.tsv')
-val_paths = [parameters['image_dir']+path for path in in_val]
-data_val = prepare_data_for_dataloader(
-    img_dir=parameters['image_dir'],
-    in_list=in_val,
-    expected_list=expected_val,
-    bbox_format='x0y0x1y1',
-    scale=parameters['rescale'],
-    test=False,
-    )
-dataset_val = NewspapersDataset(
-    df=data_val,
-    images_path=val_paths,
-    scale=parameters['rescale'],
-    transforms=data_transform,
-    test=False,
-    )
-val_dataloader = DataLoader(
-    dataset_val,
-    batch_size=parameters['batch_size'],
-    shuffle=parameters['shuffle'],
-    collate_fn=collate_fn,
-    num_workers=parameters['num_workers'],
-    )
+if parameters['val']:
+    expected_val = from_tsv_to_list(parameters['annotations_dir']+'dev-0/expected.tsv')
+    in_val = from_tsv_to_list(parameters['annotations_dir']+'dev-0/in.tsv')
+    val_paths = [parameters['image_dir']+path for path in in_val]
+    data_val = prepare_data_for_dataloader(
+        img_dir=parameters['image_dir'],
+        in_list=in_val,
+        expected_list=expected_val,
+        bbox_format='x0y0x1y1',
+        scale=parameters['rescale'],
+        test=False,
+        )
+    dataset_val = NewspapersDataset(
+        df=data_val,
+        images_path=val_paths,
+        scale=parameters['rescale'],
+        transforms=data_transform,
+        test=False,
+        )
+    val_dataloader = DataLoader(
+        dataset_val,
+        batch_size=parameters['batch_size'],
+        shuffle=parameters['shuffle'],
+        collate_fn=collate_fn,
+        num_workers=parameters['num_workers'],
+        )
+else:
+    val_dataloader=None
 
 if parameters['train']:
     expected_train = from_tsv_to_list(parameters['annotations_dir']+'train/expected.tsv')
@@ -166,6 +170,7 @@ if parameters['train']:
 # prediction
 if parameters['test']:
     model = torch.load(parameters['main_dir']+'saved_models/model.pth')
+    
     in_test = from_tsv_to_list(parameters['annotations_dir']+'test-A/in.tsv')
     test_paths = [parameters['image_dir']+path for path in in_test]
     data_test = prepare_data_for_dataloader(
@@ -196,10 +201,19 @@ if parameters['test']:
         gpu=parameters['gpu'],
         save_path=parameters['main_dir']+'model_output/test_model_output.csv',
     )
+    # prediction on train set (to check under/overfitting)
+    if parameters['train']:
+        model_predict(
+            model=model, 
+            test_dataloader=train_dataloader,
+            gpu=parameters['gpu'],
+            save_path=parameters['main_dir']+'model_output/train_model_output.csv',
+        )
     # prediction on validation set
-    model_predict(
-        model=model, 
-        test_dataloader=val_dataloader,
-        gpu=parameters['gpu'],
-        save_path=parameters['main_dir']+'model_output/val_model_output.csv',
-    )
+    if parameters['val']:
+        model_predict(
+            model=model, 
+            test_dataloader=val_dataloader,
+            gpu=parameters['gpu'],
+            save_path=parameters['main_dir']+'model_output/val_model_output.csv',
+        )

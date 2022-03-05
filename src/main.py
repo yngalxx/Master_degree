@@ -24,9 +24,9 @@ warnings.filterwarnings("ignore")
 parameters = {
     'channel': 1, # 3 <= RGB, 1 <= greyscale
     'num_classes': 8, # 7 classes, but there is also one for background
-    'learning_rate': 1e-4,
+    'learning_rate': 5e-4,
     'batch_size': 16,
-    'num_epochs': 8,
+    'num_epochs': 10,
     'rescale': [375, 500], # if float, each image will be multiplied by it, if list [width, height] each image will be scaled to that size (concerns both images + annotations)
     'shuffle': False, 
     'weight_decay': 0, # regularization
@@ -195,6 +195,7 @@ if parameters['test']:
     )
 
     # prediction on test set
+    print('###  Evaluating test set  ###')
     model_predict(
         model=model, 
         test_dataloader=test_dataloader,
@@ -203,6 +204,7 @@ if parameters['test']:
     )
     # prediction on train set (to check under/overfitting)
     if parameters['train']:
+        print('###  Evaluating train set  ###')
         model_predict(
             model=model, 
             test_dataloader=train_dataloader,
@@ -211,6 +213,7 @@ if parameters['test']:
         )
     # prediction on validation set
     if parameters['val']:
+        print('###  Evaluating validation set  ###')
         model_predict(
             model=model, 
             test_dataloader=val_dataloader,

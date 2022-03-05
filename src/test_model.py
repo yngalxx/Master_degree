@@ -33,7 +33,7 @@ def model_predict(model, save_path, test_dataloader, gpu=True):
     print(f'Current device: {device}\n')
     # move model to the right device
     model.to(device)
-    print('###  Testing  ###')
+    print('###  Evaluaiting  ###')
     n_threads = torch.get_num_threads()
     torch.set_num_threads(1)
     cpu_device = torch.device("cpu")

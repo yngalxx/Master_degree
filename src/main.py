@@ -108,7 +108,6 @@ if parameters['train']:
         num_workers=parameters['num_workers'],
     )
 
-##########################################
     # pre-trained resnet50 model
     model = torchvision.models.detection.fasterrcnn_resnet50_fpn(
         pretrained=True,
@@ -121,42 +120,6 @@ if parameters['train']:
         in_features, 
         num_classes=parameters['num_classes']
         )
-##########################################
-
-    # # pre-trained model as a backbone
-    # resnet = torchvision.models.detection.fasterrcnn_resnet50_fpn(
-    #     pretrained=True,
-    #     trainable_backbone_layers=parameters['trainable_backbone_layers']  
-    # )
-    # backbone = resnet.backbone
-
-    # # main model
-    # model = FasterRCNN(
-    #     backbone,
-    #     num_classes=parameters['num_classes'],
-    # )
-
-    # # module that generates the anchors for a set of feature maps
-    # anchor_generator = AnchorGenerator(
-    #     sizes=tuple([(16, 32, 64, 128, 256) for _ in range(5)]),
-    #     aspect_ratios=tuple([(0.75, 0.5, 1.25) for _ in range(5)])
-    # )
-
-    # # module that computes the objectness and regression deltas from the RPN
-    # rpn_head = RPNHead(256, anchor_generator.num_anchors_per_location()[0])
-
-    # # region proposal network
-    # model.rpn = RegionProposalNetwork(
-    #     anchor_generator=anchor_generator,
-    #     head=rpn_head,
-    #     fg_iou_thresh=0.7,
-    #     bg_iou_thresh=0.3,
-    #     batch_size_per_image=parameters['batch_size'],
-    #     positive_fraction=0.5,
-    #     pre_nms_top_n=dict(training=200, testing=100),
-    #     post_nms_top_n=dict(training=160, testing=80),
-    #     nms_thresh=0.7
-    # )
 
     # optimizer
     optimizer = optim.Adam(

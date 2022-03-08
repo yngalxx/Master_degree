@@ -152,7 +152,6 @@ if parameters['train']:
 # prediction
 if parameters['test']:
     model = torch.load(parameters['main_dir']+'saved_models/model.pth')
-    
     in_test = from_tsv_to_list(parameters['annotations_dir']+'test-A/in.tsv')
     test_paths = [parameters['image_dir']+path for path in in_test]
     data_test = prepare_data_for_dataloader(

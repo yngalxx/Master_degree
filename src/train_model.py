@@ -28,6 +28,8 @@ def train_model(model, optimizer, train_dataloader, epochs, gpu=True, save_path=
     print(f'Cuda available: {torch.cuda.is_available()}')
     if cuda_statement == True:
         device = torch.device(torch.cuda.current_device())
+    else:
+        device = 'cpu'
     if gpu==False:
         device = 'cpu'
     print(f'Current device: {device}\n')

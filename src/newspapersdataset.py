@@ -45,7 +45,7 @@ def prepare_data_for_dataloader(img_dir, in_list, expected_list=None, bbox_forma
                     y1 += y0
                 temp_dict = {
                     'file_name': int(in_list[i].split('.')[0]),
-                    'class': int(expected_list_split_2[0]),
+                    'class': int(expected_list_split_2[0])+1,
                     'x0': int(x0 / (img_width / new_img_width)),
                     'y0': int(y0 / (img_height / new_img_height)),
                     'x1': int(x1 / (img_width / new_img_width)),

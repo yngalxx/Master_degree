@@ -4,17 +4,20 @@ import torch
 import random
 import json
 
+
 def from_tsv_to_list_helper(x):
     try:
         return x[0]
     except IndexError:
         return None
 
+
 def dump_json(path, dict_to_save):
     jsonString = json.dumps(dict_to_save, indent=4)
     jsonFile = open(path, "w")
     jsonFile.write(jsonString)
     jsonFile.close()
+
 
 def from_tsv_to_list(path, delimiter="\n", skip_empty_lines=True):
     tsv_file = open(path)

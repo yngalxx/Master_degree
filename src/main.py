@@ -36,9 +36,9 @@ parameters = {
     'lr_gamma': .4, # lr step multiplier 
     'trainable_backbone_layers': 5, # 5 <= all, 0 <= any
     'num_workers': 2,
-    'main_dir': '/home/wmi/adrozdz/Master_degree/',
-    'image_dir': '/home/wmi/adrozdz/scraped_photos_final/',
-    'annotations_dir': '/home/wmi/adrozdz/Master_gonito/',
+    'main_dir': '/Users/alexdrozdz/Desktop/Studia/00. Seminarium magisterskie/Master_degree/',
+    'image_dir': '/Users/alexdrozdz/Desktop/Studia/00. Seminarium magisterskie/scraped_photos_final/',
+    'annotations_dir': '/Users/alexdrozdz/Desktop/Studia/00. Seminarium magisterskie/news-navigator/',
     'train': True,
     'test': True,
     'val': True,

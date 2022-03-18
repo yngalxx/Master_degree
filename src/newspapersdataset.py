@@ -14,6 +14,24 @@ from image_size import get_image_size  # source: https://github.com/scardine/ima
 warnings.filterwarnings("ignore")
 
 
+def news_navigator_target_encoder(str_label):
+    if str_label == 'photograph':
+        num_label = 1
+    elif str_label == 'illustration':
+        num_label = 2
+    elif str_label == 'map':
+        num_label = 3
+    elif str_label == 'cartoon':
+        num_label = 4
+    elif str_label == 'editorial_cartoon':
+        num_label = 5
+    elif str_label == 'headline':
+        num_label = 6
+    elif str_label == 'advertisement':
+        num_label = 7
+    return num_label
+
+
 def prepare_data_for_dataloader(img_dir, in_list, expected_list=None, bbox_format='x0y0x1y1', scale=None, test=False):
     df = pd.DataFrame()
     for i in range(len(in_list)):
@@ -36,16 +54,18 @@ def prepare_data_for_dataloader(img_dir, in_list, expected_list=None, bbox_forma
         else:
             expected_list_split = expected_list[i].split(' ')
             for ii in range(len(expected_list_split)):
+                file_num_name = in_list[i].split('.')[0]
                 expected_list_split_2 = expected_list_split[ii].split(':')
                 bbox = expected_list_split_2[1].split(',')
+                label = news_navigator_target_encoder(expected_list_split_2[0])
                 x0, y0 = int(bbox[0]), int(bbox[1])
                 x1, y1 = int(bbox[2]), int(bbox[3])
                 if bbox_format == 'x0y0wh':
                     x1 += x0,
                     y1 += y0
                 temp_dict = {
-                    'file_name': int(in_list[i].split('.')[0]),
-                    'class': int(expected_list_split_2[0]),
+                    'file_name': int(file_num_name),
+                    'class': int(label),
                     'x0': int(x0 / (img_width / new_img_width)),
                     'y0': int(y0 / (img_height / new_img_height)),
                     'x1': int(x1 / (img_width / new_img_width)),

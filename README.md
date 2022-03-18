@@ -7,7 +7,7 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
 
 ### Instruction:
 
-1. Instal requirements 
+1. Install requirements 
 2. Run notebooks/data_preprocessing.ipynb to create model input directory 
 3. Run src/python.py to start training/testing (feel free to try various parameters values, all of them are stored in dictionary right behind imports)
 4. Run notebooks/create_out_file.ipynb to save the model output in exactly the same structure as in notebook data_preprocessing

@@ -14,3 +14,5 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
 <em>*1 Torch related packages might fail during installation from requirements, so if sth like this happen try: "pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html".</em> 
 
 <b>Important!</b> Remember to change paths in each file :) 
+
+Python version = 3.8.5

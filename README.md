@@ -5,12 +5,12 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
 
 ### Instruction:
 
-1. Install requirements <b>*1</b> 
+1. Install requirements <em>*1</em> 
 2. Run notebooks/data_preprocessing.ipynb to create model input directory 
 3. Run src/python.py to start training/testing (feel free to try various parameters values, all of them are stored in dictionary right behind imports)
 4. Run notebooks/create_out_file.ipynb to save the model output in exactly the same structure as in notebook data_preprocessing
 5. Run notebooks/data_visualization.ipynb to visualize model predictions 
 
-<b>*1</b> Torch related packages might fail during installation from requirements, so if sth like this happen try: "pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html".
+<em>*1 Torch related packages might fail during installation from requirements, so if sth like this happen try: "pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html".</em> 
 
 <b>Important!</b> Remember to change paths in each file :) 

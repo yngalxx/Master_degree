@@ -16,4 +16,4 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
 
 <em>*1 Torch related packages might fail during installation from requirements, so if sth like this happen try: "pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html".</em>
 
-![image]({https://camo.githubusercontent.com/d99233223270273f941cb82c3eda41f3f9f93503bee3a0eefc8e63b3631edc6c/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f507974686f6e2d332e382d73756363657373})
+<img src="{https://camo.githubusercontent.com/d99233223270273f941cb82c3eda41f3f9f93503bee3a0eefc8e63b3631edc6c/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f507974686f6e2d332e382d73756363657373}" />

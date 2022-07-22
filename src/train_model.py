@@ -1,6 +1,5 @@
 import datetime
 import math
-import pathlib
 import sys
 import warnings
 
@@ -8,11 +7,7 @@ import torch
 import torchvision
 from tqdm import tqdm
 
-sys.path.append(
-    "/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-2])
-    + "/vision/references/detection/"
-)
-from engine import (
+from ...vision.references.detection.engine import (
     evaluate,
 )  # source repository: https://github.com/pytorch/vision/tree/main/references/detection (small fix was needed) from tutorial: https://pytorch.org/tutorials/intermediate/torchvision_tutorial.html
 
@@ -29,7 +24,6 @@ def train_model(
     lr_scheduler: torch.optim.lr_scheduler.StepLR = None,
     gpu: bool = True,
 ) -> torchvision.models.detection.FasterRCNN:
-
     start_time = datetime.datetime.now()
     print(f"Start time: {start_time} \n")
     # switch to gpu if available
@@ -72,7 +66,9 @@ def train_model(
             train_loss += loss_value
 
         print(
-            f"### {datetime.datetime.now()} ### [epoch {epoch + 1}]: train_time = {datetime.datetime.now()-start_time} | train_loss = {train_loss / len(train_dataloader)}"
+            f"### {datetime.datetime.now()} ### [epoch {epoch + 1}]:"
+            f" train_time = {datetime.datetime.now()-start_time} | train_loss"
+            f" = {train_loss / len(train_dataloader)}"
         )
 
         # update the learning rate
@@ -84,7 +80,8 @@ def train_model(
             evaluate(pre_treined_model, val_dataloader, device=device)
 
     print(
-        f"\n### Model training completed, runtime: {datetime.datetime.now() - start_time} ###"
+        "\n### Model training completed, runtime:"
+        f" {datetime.datetime.now() - start_time} ###"
     )
 
     print(f"\n####### JOB FINISHED #######\n\n")

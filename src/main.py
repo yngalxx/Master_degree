@@ -44,7 +44,16 @@ from controller import controller
     "--rescale",
     default="1000/1000",
     type=str,
-    help='2 possible ways to rescale your images and also annotations. First one is by using following pattern "width/height" and then each image will be scaled to that size, thanks to it you will have every image in the same size (less computational complexity). The other way is to enter a float value (however you still have to put it in a string i.e. ".5" and value has to be bigger than 0 and smaller or equal than 1), then each image will be multiplied by this value. If you pass 1 as a value images and annotations will not be scaled.',
+    help=(
+        "2 possible ways to rescale your images and also annotations. First"
+        ' one is by using following pattern "width/height" and then each image'
+        " will be scaled to that size, thanks to it you will have every image"
+        " in the same size (less computational complexity). The other way is"
+        " to enter a float value (however you still have to put it in a string"
+        ' i.e. ".5" and value has to be bigger than 0 and smaller or equal'
+        " than 1), then each image will be multiplied by this value. If you"
+        " pass 1 as a value images and annotations will not be scaled."
+    ),
     show_default=True,
 )
 @click.option(
@@ -65,21 +74,30 @@ from controller import controller
     "--lr_scheduler",
     default=True,
     type=bool,
-    help="Learning rate scheduler: if value=True learning rate scheduler will be enabled, if value=False it will be disabled.",
+    help=(
+        "Learning rate scheduler: if value=True learning rate scheduler will"
+        " be enabled, if value=False it will be disabled."
+    ),
     show_default=True,
 )
 @click.option(
     "--lr_step_size",
     default=5,
     type=int,
-    help="Step size of learning rate scheduler: valid only if learning rate scheduler is enabled.",
+    help=(
+        "Step size of learning rate scheduler: valid only if learning rate"
+        " scheduler is enabled."
+    ),
     show_default=True,
 )
 @click.option(
     "--lr_gamma",
     default=0.4,
     type=float,
-    help="Valid only when learning rate scheduling is enabled, passed value determines the learning rate multiplier.",
+    help=(
+        "Valid only when learning rate scheduling is enabled, passed value "
+        "determines the learning rate multiplier."
+    ),
     show_default=True,
 )
 @click.option(
@@ -93,7 +111,11 @@ from controller import controller
     "--num_workers",
     default=2,
     type=int,
-    help="Setting the argument num_workers as a positive integer will turn on multi-process data loading with the specified number of loader worker processes.",
+    help=(
+        "Setting the argument num_workers as a positive integer will turn on"
+        " multi-process data loading with the specified number of loader"
+        " worker processes."
+    ),
     show_default=True,
 )
 @click.option(
@@ -163,7 +185,10 @@ from controller import controller
     "--bbox_format",
     default="x0y0x1y1",
     type=str,
-    help='Bounding boxes format. Other allowed format is "x0y0wh", where w - width and h - height.',
+    help=(
+        'Bounding boxes format. Other allowed format is "x0y0wh", where w -'
+        " width and h - height."
+    ),
     show_default=True,
 )
 def main(

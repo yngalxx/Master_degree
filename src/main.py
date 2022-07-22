@@ -1,203 +1,187 @@
-import torch
-import torch.optim as optim
-import torchvision.transforms as T
-import torchvision
-from torchvision.models.detection.rpn import AnchorGenerator
-from torchvision.models.detection.rpn import RegionProposalNetwork
-from torchvision.models.detection.rpn import RPNHead
-from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
-from torch.utils.data import DataLoader
-from torchvision.models.detection import FasterRCNN
-from newspapersdataset import NewspapersDataset
-from newspapersdataset import prepare_data_for_dataloader
-from train_model import train_model
-from test_model import model_predict
-from functions import from_tsv_to_list
-from functions import collate_fn
-from functions import seed_worker
-import warnings
-import numpy as np
+from controller import controller
+import pathlib
+import click
 
-# warnings
-warnings.filterwarnings("ignore")
+@click.command(context_settings=dict(help_option_names=['-h', '--help']))
+@click.option(
+    '--channel', 
+    default=1, type=int, 
+    help='Image channels: 3 <= RGB, 1 <= greyscale.', 
+    show_default=True
+)
+@click.option(
+    '--num_classes', 
+    default=8, type=int, 
+    help='Number of classes.', 
+    show_default=True
+)
+@click.option(
+    '--learning_rate', 
+    default=3e-4, type=float, 
+    help='Learning rate value.', 
+    show_default=True
+)
+@click.option(
+    '--batch_size', 
+    default=16, type=int, 
+    help='Number of batches.', 
+    show_default=True
+)
+@click.option(
+    '--num_epochs', 
+    default=20, type=int, 
+    help='Number of epochs.', 
+    show_default=True
+)
+@click.option(
+    '--rescale', 
+    default='1000/1000', type=str, 
+    help='2 possible ways to rescale your images and also annotations. First one is by using following \
+        pattern "width/height" and then each image will be scaled to that size, thanks to it you will \
+        have every image in the same size (less computational complexity). The other way is to enter a \
+        float value (however you still have to put it in a string i.e. ".5" and value has to be bigger \
+        than 0 and smaller or equal than 1), then each image will be multiplied by this value. If you \
+        pass 1 as a value images and annotations will not be scaled.',
+    show_default=True
+)
+@click.option(
+    '--shuffle', 
+    default=False, type=bool, 
+    help='Shuffle data.', 
+    show_default=True
+)
+@click.option(
+    '--weight_decay', 
+    default=0, type=float, 
+    help='Weight decay regularization value.', 
+    show_default=True
+)
+@click.option(
+    '--lr_scheduler', 
+    default=True, type=bool, 
+    help='Learning rate scheduler: if value=True learning rate scheduler will be enabled, if value=False \
+        it will be disabled.', 
+    show_default=True
+)
+@click.option(
+    '--lr_step_size', 
+    default=5, type=int, 
+    help='Step size of learning rate scheduler: valid only if learning rate scheduler is enabled.', 
+    show_default=True
+)
+@click.option(
+    '--lr_gamma', 
+    default=.4, type=float, 
+    help='Valid only when learning rate scheduling is enabled, passed value determines the learning \
+    rate multiplier.', 
+    show_default=True
+)
+@click.option(
+    '--trainable_backbone_layers', 
+    default=5, type=int, 
+    help='Number of trainable layers in pretrained ResNet-50 network.', 
+    show_default=True
+)
+@click.option(
+    '--num_workers', 
+    default=2, type=int, 
+    help='Setting the argument num_workers as a positive integer will turn on multi-process data \
+        loading with the specified number of loader worker processes.', 
+    show_default=True
+)
+@click.option(
+    '--main_dir', 
+    default=f'{"/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-1])}/', type=str, 
+    help='Working directory path.', 
+    show_default=True
+)
+@click.option(
+    '--image_dir', 
+    default=f'{"/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-2])}/scraped_photos/', type=str, 
+    help='Image directory path.', 
+    show_default=True
+)
+@click.option(
+    '--annotations_dir', 
+    default=f'{"/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-2])}/news-navigator/', type=str, 
+    help='Preprocessed annotations directory path.', 
+    show_default=True
+)
+@click.option(
+    '--train', 
+    default=True, type=bool, 
+    help='Train the model', 
+    show_default=True
+)
+@click.option(
+    '--predict', 
+    default=True, type=bool, 
+    help='Make prediction.', 
+    show_default=True
+)
+@click.option(
+    '--train_set', 
+    default=True, type=bool, 
+    help='Use training data set.',
+    show_default=True
+)
+@click.option(
+    '--test_set', 
+    default=True, type=bool, 
+    help='Use test data set.', 
+    show_default=True
+)
+@click.option(
+    '--val_set', 
+    default=True, type=bool, 
+    help='Use validation data set.', 
+    show_default=True
+)
+@click.option(
+    '--gpu', 
+    default=True, type=bool, 
+    help='Enable training on GPU.', 
+    show_default=True
+)
+@click.option(
+    '--bbox_format', 
+    default='x0y0x1y1', type=str, 
+    help='Bounding boxes format. Other allowed format is "x0y0wh", where w - width and h - height.', 
+    show_default=True
+)
 
-# hyperparameters and more
-parameters = {
-    'channel': 1, # 3 <= RGB, 1 <= greyscale
-    'num_classes': 8, # 7 classes, but there is also one for background
-    'learning_rate': 3e-4,
-    'batch_size': 16,
-    'num_epochs': 20,
-    'rescale': [1000, 1000], # if float, each image will be multiplied by it, if list [width, height] each image will be scaled to that size (concerns both images + annotations)
-    'shuffle': False, 
-    'weight_decay': 0, # regularization
-    'lr_scheduler': True, # lr scheduler
-    'lr_step_size': 5, # lr scheduler step
-    'lr_gamma': .4, # lr step multiplier 
-    'trainable_backbone_layers': 5, # 5 <= all, 0 <= any
-    'num_workers': 2,
-    'main_dir': '/Users/alexdrozdz/Desktop/Studia/00. Seminarium magisterskie/Master_degree/',
-    'image_dir': '/Users/alexdrozdz/Desktop/Studia/00. Seminarium magisterskie/scraped_photos_final/',
-    'annotations_dir': '/Users/alexdrozdz/Desktop/Studia/00. Seminarium magisterskie/news-navigator/',
-    'train': True,
-    'test': True,
-    'val': True,
-    'gpu': True,
-}
 
-# read data and create dataloaders 
-data_transform = T.Compose([
-    T.Grayscale(num_output_channels=parameters['channel']),
-    T.ToTensor(),
-    T.Normalize((0.5,), (0.5,)),
-    ])
-
-if parameters['val']:
-    expected_val = from_tsv_to_list(parameters['annotations_dir']+'dev-0/expected.tsv')
-    in_val = from_tsv_to_list(parameters['annotations_dir']+'dev-0/in.tsv')
-    val_paths = [parameters['image_dir']+path for path in in_val]
-    data_val = prepare_data_for_dataloader(
-        img_dir=parameters['image_dir'],
-        in_list=in_val,
-        expected_list=expected_val,
-        bbox_format='x0y0x1y1',
-        scale=parameters['rescale'],
-        test=False,
-        )
-    dataset_val = NewspapersDataset(
-        df=data_val,
-        images_path=val_paths,
-        scale=parameters['rescale'],
-        transforms=data_transform,
-        test=False,
-        )
-    val_dataloader = DataLoader(
-        dataset_val,
-        batch_size=parameters['batch_size'],
-        shuffle=parameters['shuffle'],
-        collate_fn=collate_fn,
-        num_workers=parameters['num_workers'],
-        )
-else:
-    val_dataloader=None
-
-if parameters['train']:
-    expected_train = from_tsv_to_list(parameters['annotations_dir']+'train/expected.tsv')
-    in_train = from_tsv_to_list(parameters['annotations_dir']+'train/in.tsv')
-    train_paths = [parameters['image_dir']+path for path in in_train]
-    data_train = prepare_data_for_dataloader(
-        img_dir=parameters['image_dir'],
-        in_list=in_train,
-        expected_list=expected_train,
-        bbox_format='x0y0x1y1',
-        scale=parameters['rescale'],
-        test=False,
-        )
-    dataset_train = NewspapersDataset(
-        df=data_train,
-        images_path=train_paths,
-        scale=parameters['rescale'],
-        transforms=data_transform,
-        test=False,
-        )
-    train_dataloader = DataLoader(
-        dataset_train,
-        batch_size=parameters['batch_size'],
-        shuffle=parameters['shuffle'],
-        collate_fn=collate_fn,
-        num_workers=parameters['num_workers'],
-    )
-
-    # pre-trained resnet50 model
-    model = torchvision.models.detection.fasterrcnn_resnet50_fpn(
-        pretrained=True,
-        trainable_backbone_layers=parameters['trainable_backbone_layers']
-    )
-
-    # replace the pre-trained head with a new one
-    in_features = model.roi_heads.box_predictor.cls_score.in_features
-    model.roi_heads.box_predictor = FastRCNNPredictor(
-        in_features, 
-        num_classes=parameters['num_classes']
-        )
-
-    # optimizer
-    optimizer = optim.Adam(
-        filter(lambda p: p.requires_grad, model.parameters()),
-        lr=parameters['learning_rate'],
-        weight_decay=parameters['weight_decay']
-    )
-    # learning rate scheduler decreases the learning rate by 'gamma' every 'step_size'
-    if parameters['lr_scheduler']:
-        lr_scheduler = torch.optim.lr_scheduler.StepLR(
-            optimizer,
-            step_size=parameters['lr_step_size'],
-            gamma=parameters['lr_gamma']
-        )
-    else:
-        lr_scheduler = None
-
-    # training
-    trained_model = train_model(
-        model=model, 
-        optimizer=optimizer, 
-        train_dataloader=train_dataloader,
-        epochs=parameters['num_epochs'], 
-        gpu=parameters['gpu'],
-        save_path=parameters['main_dir'],
-        val_dataloader=val_dataloader, 
+def main( 
+    channel, num_classes, learning_rate, batch_size, num_epochs, rescale, shuffle, weight_decay,
+    lr_scheduler, lr_step_size, lr_gamma, trainable_backbone_layers, num_workers, main_dir, 
+    image_dir, annotations_dir, train, predict, train_set, test_set, val_set, gpu, bbox_format
+):  
+    controller(
+        channel=channel, 
+        num_classes=num_classes, 
+        learning_rate=learning_rate, 
+        batch_size=batch_size, 
+        num_epochs=num_epochs, 
+        rescale=rescale, 
+        shuffle=shuffle, 
+        weight_decay=weight_decay,
         lr_scheduler=lr_scheduler, 
+        lr_step_size=lr_step_size, 
+        lr_gamma=lr_gamma,
+        trainable_backbone_layers=trainable_backbone_layers, 
+        num_workers=num_workers, 
+        main_dir=main_dir, 
+        image_dir=image_dir, 
+        annotations_dir=annotations_dir, 
+        train=train, 
+        predict=predict, 
+        train_set=train_set, 
+        test_set=test_set, 
+        val_set=val_set, 
+        gpu=gpu, 
+        bbox_format=bbox_format
     )
 
-# prediction
-if parameters['test']:
-    model = torch.load(parameters['main_dir']+'saved_models/model.pth')
-    in_test = from_tsv_to_list(parameters['annotations_dir']+'test-A/in.tsv')
-    test_paths = [parameters['image_dir']+path for path in in_test]
-    data_test = prepare_data_for_dataloader(
-        img_dir=parameters['image_dir'],
-        in_list=in_test,
-        scale=parameters['rescale'],
-        test=True,
-        )
-    dataset_test = NewspapersDataset(
-        df=data_test,
-        images_path=test_paths,
-        scale=parameters['rescale'],
-        transforms=data_transform,
-        test=True,
-        )
-    test_dataloader = DataLoader(
-        dataset_test,
-        batch_size=parameters['batch_size'],
-        shuffle=parameters['shuffle'],
-        collate_fn=collate_fn,
-        num_workers=parameters['num_workers'],
-    )
 
-    # prediction on test set
-    print('###  Evaluating test set  ###')
-    model_predict(
-        model=model, 
-        test_dataloader=test_dataloader,
-        gpu=parameters['gpu'],
-        save_path=parameters['main_dir']+'model_output/test_model_output.csv',
-    )
-    # prediction on train set (to check under/overfitting)
-    if parameters['train']:
-        print('###  Evaluating train set  ###')
-        model_predict(
-            model=model, 
-            test_dataloader=train_dataloader,
-            gpu=parameters['gpu'],
-            save_path=parameters['main_dir']+'model_output/train_model_output.csv',
-        )
-    # prediction on validation set
-    if parameters['val']:
-        print('###  Evaluating validation set  ###')
-        model_predict(
-            model=model, 
-            test_dataloader=val_dataloader,
-            gpu=parameters['gpu'],
-            save_path=parameters['main_dir']+'model_output/val_model_output.csv',
-        )
+if __name__ == '__main__':
+    main()

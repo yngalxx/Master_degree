@@ -1,25 +1,16 @@
 import csv
-import numpy as np
-import torch
-import random
+from typing import Dict, List, Tuple
 import json
 
-
-def from_tsv_to_list_helper(x):
-    try:
-        return x[0]
-    except IndexError:
-        return None
-
-
-def dump_json(path, dict_to_save):
+        
+def dump_json(path: str, dict_to_save: Dict) -> None:
     jsonString = json.dumps(dict_to_save, indent=4)
     jsonFile = open(path, "w")
     jsonFile.write(jsonString)
     jsonFile.close()
 
 
-def from_tsv_to_list(path, delimiter="\n", skip_empty_lines=True):
+def from_tsv_to_list(path: str, delimiter: str = "\n", skip_empty_lines: bool = True) -> List:
     tsv_file = open(path)
     read_tsv = csv.reader(tsv_file, delimiter=delimiter)
     expected = list(read_tsv)
@@ -36,23 +27,17 @@ def from_tsv_to_list(path, delimiter="\n", skip_empty_lines=True):
         return with_empty_lines
 
 
-def collate_fn(batch):
+def collate_fn(batch) -> Tuple:
     return tuple(zip(*batch))
 
 
-def seed_worker(worker_id):
-    worker_seed = torch.initial_seed() % 2**32
-    np.random.seed(worker_seed)
-    random.seed(worker_seed)
-
-
-def save_list_to_txt_file(path, output_list):
+def save_list_to_txt_file(path: str, output_list: List) -> None:
     with open(path, 'w') as f:
         for item in output_list:
             f.write("%s\n" % item)
 
 
-def save_list_to_tsv_file(path, output_list):
+def save_list_to_tsv_file(path: str, output_list: List) -> None:
     with open(path, 'w', newline='') as f_output: 
         tsv_output = csv.writer(f_output, delimiter='\n')
         tsv_output.writerow(output_list)

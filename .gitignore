@@ -1,5 +1,7 @@
 .DS_Store
 .ipynb_checkpoints
 .Rhistory
+.idea
+__pycache__
 saved_models/model.pth
 venv/

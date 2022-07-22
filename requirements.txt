@@ -42,6 +42,7 @@ pandas==1.4.1
 pathy==0.6.1
 Pillow==9.0.1
 pipreqs==0.4.11
+pre-commit==2.20.0
 preshed==3.0.6
 protobuf==3.19.4
 pyasn1==0.4.8

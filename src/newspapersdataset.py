@@ -1,12 +1,17 @@
 from PIL import Image
-import os
 import pandas as pd
+from typing import (
+    Callable,
+    List, 
+    Tuple, 
+    Union
+)
 import torch
-from torch.utils.data import Dataset
-import torchvision.transforms as tensor_transform
+import torchvision
 import sys
 import pathlib
 import warnings
+import numpy as np
 sys.path.append("/".join(str(pathlib.Path(__file__).parent.resolve()).split('/')[:-2]))
 from image_size import get_image_size  # source: https://github.com/scardine/image_size
 
@@ -14,7 +19,7 @@ from image_size import get_image_size  # source: https://github.com/scardine/ima
 warnings.filterwarnings("ignore")
 
 
-def news_navigator_target_encoder(str_label):
+def news_navigator_target_encoder(str_label: str) -> int:
     if str_label == 'photograph':
         num_label = 1
     elif str_label == 'illustration':
@@ -29,10 +34,19 @@ def news_navigator_target_encoder(str_label):
         num_label = 6
     elif str_label == 'advertisement':
         num_label = 7
+    else:
+        raise Exception(f"Unknown class - {str_label}")
     return num_label
 
 
-def prepare_data_for_dataloader(img_dir, in_list, expected_list=None, bbox_format='x0y0x1y1', scale=None, test=False):
+def prepare_data_for_dataloader(
+    img_dir: str, 
+    in_list: List[str], 
+    expected_list: List[str] = None, 
+    bbox_format: str ='x0y0x1y1', 
+    scale: Union[List[int], float] = 1.0, 
+    test: bool = False
+) -> pd.DataFrame:
     df = pd.DataFrame()
     for i in range(len(in_list)):
         img_width, img_height = get_image_size.get_image_size(
@@ -77,7 +91,7 @@ def prepare_data_for_dataloader(img_dir, in_list, expected_list=None, bbox_forma
     return df
 
 
-def get_target(name, df, test=False):
+def get_target(name: str, df: pd.DataFrame, test: bool = False) -> Tuple[np.ndarray]:
     rows = df[df["file_name"] == int(name[:-4])]
     if test:
         return rows['file_name'].values, rows[['new_width', 'new_height']].values
@@ -85,8 +99,15 @@ def get_target(name, df, test=False):
         return rows['file_name'].values, rows["class"].values, rows[['x0', 'y0', 'x1', 'y1']].values, rows[['new_width', 'new_height']].values
 
 
-class NewspapersDataset(Dataset):
-  def __init__(self, images_path, df, scale=None, transforms=None, test=False):
+class NewspapersDataset(torch.utils.data.Dataset):
+  def __init__(
+    self, 
+    images_path: str, 
+    df: pd.DataFrame, 
+    scale: Union[List[int], float] = 1.0, 
+    transforms: torchvision.transforms.Compose = None, 
+    test: bool = False
+    ):
     super(NewspapersDataset, self).__init__()
     self.df = df
     self.images_path = images_path

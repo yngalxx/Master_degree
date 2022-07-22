@@ -1,6 +1,6 @@
 # Master thesis: The task of image retrieval in historical publications
 
-<img src="https://img.shields.io/badge/Python%20version-3.8.5-2D77D5" /> <img src="https://img.shields.io/badge/Trained%20on-RTX-7ED52D" /> <img src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white" /> <img src="https://img.shields.io/badge/code%20style-black-black" />
+<img src="https://img.shields.io/badge/python%20version-3.8.5-2D77D5" /> <img src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white" /> <img src="https://img.shields.io/badge/code%20style-black-black" />
 
 Digitized historical publications (magazines, books, documents) abound in iconography (engravings, illustrations, photographs, diagrams). In view of this, a natural need arises to search for images that fulfill a given information need. The aim of this work is to create a training and testing set for the task of searching images in historical publications. The work will also develop a prototype neural networks-based search engine. Images will be retrieved and recognized along with the surrounding text.
 

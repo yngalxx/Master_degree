@@ -19,7 +19,8 @@ from tqdm import tqdm
 )
 def image_scraper(directory_path):
     """
-    simple scraper to retriev full-resolution images from urls finded in COCO formatted files with annotations obtained from source repository (newspaper-navigator-master)
+    simple scraper to retriev full-resolution images from urls finded in COCO
+    formatted files with annotations obtained from source repository (newspaper-navigator-master)
     """
     with open(directory_path + "/additional_data/trainval.json") as jsonFile:
         jsonObject = json.load(jsonFile)

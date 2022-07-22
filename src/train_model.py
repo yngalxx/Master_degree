@@ -1,5 +1,6 @@
 import datetime
 import math
+import pathlib
 import sys
 import warnings
 
@@ -7,7 +8,10 @@ import torch
 import torchvision
 from tqdm import tqdm
 
-from ...vision.references.detection.engine import (
+sys.path.append(
+    "/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-2])
+)
+from vision.references.detection.engine import (
     evaluate,
 )  # source repository: https://github.com/pytorch/vision/tree/main/references/detection (small fix was needed) from tutorial: https://pytorch.org/tutorials/intermediate/torchvision_tutorial.html
 

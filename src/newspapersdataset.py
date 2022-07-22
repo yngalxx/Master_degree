@@ -1,3 +1,5 @@
+import pathlib
+import sys
 import warnings
 from typing import List
 from typing import Tuple
@@ -9,7 +11,10 @@ import torch
 import torchvision
 from PIL import Image
 
-from ...image_size import (
+sys.path.append(
+    "/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-2])
+)
+from image_size import (
     get_image_size,
 )  # source: https://github.com/scardine/image_size
 

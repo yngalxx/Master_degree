@@ -1,3 +1,4 @@
+import os
 import warnings
 
 import torch
@@ -6,9 +7,9 @@ import torchvision
 import torchvision.transforms as T
 from functions import collate_fn
 from functions import from_tsv_to_list
+from make_prediction import model_predict
 from newspapersdataset import NewspapersDataset
 from newspapersdataset import prepare_data_for_dataloader
-from test_model import model_predict
 from torch.utils.data import DataLoader
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 from train_model import train_model
@@ -154,17 +155,37 @@ def controller(
                 val_dataloader=val_dataloader,
                 lr_scheduler=lr_scheduler,
             )
+            model_path = f"{main_dir}/saved_models/"
+            if not os.path.exists(model_path):
+                print(
+                    "Directory 'saved_models' doesn't exist, creating one ..."
+                )
+                os.makedirs(model_path)
             torch.save(trained_model, main_dir + "saved_models/model.pth")
 
     # prediction phase
     if predict:
         if torch.cuda.is_available():
-            model = torch.load(main_dir + "saved_models/model.pth")
+            try:
+                model = torch.load(main_dir + "saved_models/model.pth")
+            except:
+                raise Exception("No model found, code will be forced to quit")
         else:
-            model = torch.load(
-                main_dir + "saved_models/model.pth",
-                map_location=torch.device("cpu"),
-            )
+            try:
+                model = torch.load(
+                    main_dir + "saved_models/model.pth",
+                    map_location=torch.device("cpu"),
+                )
+            except:
+                raise Exception(
+                    "No model found, code will be forced to quit ..."
+                )
+
+        model_output_path = f"{main_dir}/model_output/"
+        if not os.path.exists(model_output_path):
+            print("Directory 'model_output' doesn't exist, creating one ...")
+            os.makedirs(model_output_path)
+
         if test_set:
             # create test data loader
             in_test = from_tsv_to_list(annotations_dir + "test-A/in.tsv")
@@ -197,7 +218,7 @@ def controller(
                 model=model,
                 dataloader=test_dataloader,
                 gpu=gpu,
-                save_path=main_dir + "model_output/test_model_output.csv",
+                save_path=f"{model_output_path}test_model_output.csv",
             )
 
         # prediction on train set (to check under/overfitting)
@@ -207,7 +228,7 @@ def controller(
                 model=model,
                 dataloader=train_dataloader,
                 gpu=gpu,
-                save_path=main_dir + "model_output/train_model_output.csv",
+                save_path=f"{model_output_path}train_model_output.csv",
             )
 
         # prediction on validation set
@@ -217,5 +238,5 @@ def controller(
                 model=model,
                 dataloader=val_dataloader,
                 gpu=gpu,
-                save_path=main_dir + "model_output/val_model_output.csv",
+                save_path=f"{model_output_path}val_model_output.csv",
             )

@@ -3,5 +3,7 @@
 .Rhistory
 .idea
 __pycache__
-saved_models/model.pth
+saved_models/
+model_output/
+scraped_photos/
 venv/

@@ -8,6 +8,7 @@ import torch
 import torchvision
 from tqdm import tqdm
 
+# TODO: replace this with my implementation
 sys.path.append(
     "/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-2])
 )

@@ -15,7 +15,7 @@ def model_predict(
     dataloader: torch.utils.data.DataLoader,
     save_path: str,
     gpu: bool = True,
-):
+) -> None:
     start_time = datetime.datetime.now()
     print(f"Start time: {start_time} \n")
     # switch to gpu if available
@@ -88,5 +88,3 @@ def model_predict(
         output_df.to_csv(save_path)
 
     print(f"\n####### JOB FINISHED #######\n\n")
-
-    return model

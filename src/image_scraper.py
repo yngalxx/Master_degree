@@ -1,4 +1,5 @@
 import json
+import logging
 import os
 import pathlib
 
@@ -14,27 +15,36 @@ from tqdm import tqdm
         str(pathlib.Path(__file__).parent.resolve()).split("/")[:-1]
     ),
     type=str,
-    help="Path to directory where this repository is stored",
+    help="Path to the level where this repository is stored",
     show_default=True,
 )
 def image_scraper(directory_path):
     """
-    simple scraper to retriev full-resolution images from urls finded in COCO
+    Simple scraper to retriev full-resolution images from urls finded in COCO
     formatted files with annotations obtained from source repository (newspaper-navigator-master)
     """
-    with open(directory_path + "/additional_data/trainval.json") as jsonFile:
+
+    # check whether the scraped_photos directory exists, and if not create it
+    final_dir = "scraped_photos/"
+    final_path = f"{directory_path}/{final_dir}"
+    if not os.path.exists(final_path):
+        print("Directory 'scraped_photos' doesn't exist, creating one ...")
+        os.makedirs(final_path)
+
+    with open(
+        directory_path + "/source_annotations/trainval.json"
+    ) as jsonFile:
         jsonObject = json.load(jsonFile)
         jsonFile.close()
 
     for i in tqdm(range(len(jsonObject["images"]))):
-        output_path = directory_path + "scraped_photos/"
-        path, dirs, files = next(os.walk(output_path))
+        path, dirs, files = next(os.walk(final_path))
 
         file_name = jsonObject["images"][i]["file_name"]
 
         if file_name not in files:
             response = requests.get(jsonObject["images"][i]["url"])
-            file = open(output_path + file_name, "wb")
+            file = open(final_path + file_name, "wb")
             file.write(response.content)
             file.close()
 

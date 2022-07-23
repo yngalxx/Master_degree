@@ -1,20 +1,13 @@
 import datetime
+import json
 import math
-import pathlib
 import sys
 import warnings
 
 import torch
 import torchvision
+from functions import calculate_map
 from tqdm import tqdm
-
-# TODO: replace this with my implementation
-sys.path.append(
-    "/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-2])
-)
-from vision.references.detection.engine import (
-    evaluate,
-)  # source repository: https://github.com/pytorch/vision/tree/main/references/detection (small fix was needed) from tutorial: https://pytorch.org/tutorials/intermediate/torchvision_tutorial.html
 
 # warnings
 warnings.filterwarnings("ignore")
@@ -30,16 +23,14 @@ def train_model(
     gpu: bool = True,
 ) -> torchvision.models.detection.FasterRCNN:
     start_time = datetime.datetime.now()
-    print(f"Start time: {start_time} \n")
+    print(f"Training start time: {start_time} \n")
     # switch to gpu if available
     cuda_statement = torch.cuda.is_available()
-    print(f"Cuda available: {torch.cuda.is_available()}")
-    if cuda_statement == True:
+    print(f"Cuda available: {cuda_statement}")
+    if cuda_statement and gpu:
         device = torch.device(torch.cuda.current_device())
     else:
-        device = "cpu"
-    if gpu == False:
-        device = "cpu"
+        device = torch.device("cpu")
     print(f"Current device: {device}\n")
     # move model to the right device
     pre_treined_model.to(device)
@@ -81,8 +72,13 @@ def train_model(
             lr_scheduler.step()
         # evaluate on the validation dataset
         if val_dataloader:
-            print(f"### Evaluation ###")
-            evaluate(pre_treined_model, val_dataloader, device=device)
+            print("### Evaluation ###")
+            eval_metrics = calculate_map(
+                dataloader=val_dataloader,
+                model=pre_treined_model,
+                device=device,
+            )
+            print(json.dumps(eval_metrics, indent=4))
 
     print(
         "\n### Model training completed, runtime:"

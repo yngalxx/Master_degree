@@ -16,15 +16,13 @@ def model_predict(
     save_path: str,
     gpu: bool = True,
 ) -> None:
-    start_time = datetime.datetime.now()
-    print(f"Start time: {start_time} \n")
     # switch to gpu if available
     cuda_statement = torch.cuda.is_available()
     print(f"Cuda available: {torch.cuda.is_available()}")
-    if cuda_statement == True:
+    if cuda_statement and gpu:
         device = torch.device(torch.cuda.current_device())
-    if gpu == False:
-        device = "cpu"
+    else:
+        device = torch.device("cpu")
     print(f"Current device: {device}\n")
     # move model to the right device
     model.to(device)
@@ -87,4 +85,4 @@ def model_predict(
         )
         output_df.to_csv(save_path)
 
-    print(f"\n####### JOB FINISHED #######\n\n")
+    print(f"\n####### JOB FINISHED #######\n")

@@ -33,8 +33,6 @@ def controller(
     trainable_backbone_layers: int,
     num_workers: int,
     main_dir: str,
-    image_dir: str,
-    annotations_dir: str,
     train: bool,
     predict: bool,
     train_set: bool,
@@ -43,6 +41,10 @@ def controller(
     gpu: bool,
     bbox_format: str,
 ) -> None:
+    scraped_photos_dir = main_dir + "scraped_photos/"
+    annotations_dir = main_dir + "preprocessed_annotations/"
+    print("")
+
     try:
         rescale = float(rescale)
     except:
@@ -60,11 +62,12 @@ def controller(
 
     if val_set:
         # create validation data loader
+        print("Creating validation set ...")
         expected_val = from_tsv_to_list(annotations_dir + "dev-0/expected.tsv")
         in_val = from_tsv_to_list(annotations_dir + "dev-0/in.tsv")
-        val_paths = [image_dir + path for path in in_val]
+        val_paths = [scraped_photos_dir + path for path in in_val]
         data_val = prepare_data_for_dataloader(
-            img_dir=image_dir,
+            img_dir=scraped_photos_dir,
             in_list=in_val,
             expected_list=expected_val,
             bbox_format=bbox_format,
@@ -90,13 +93,14 @@ def controller(
 
     if train_set:
         # create train data loader
+        print("Creating train set ...")
         expected_train = from_tsv_to_list(
             annotations_dir + "train/expected.tsv"
         )
         in_train = from_tsv_to_list(annotations_dir + "train/in.tsv")
-        train_paths = [image_dir + path for path in in_train]
+        train_paths = [scraped_photos_dir + path for path in in_train]
         data_train = prepare_data_for_dataloader(
-            img_dir=image_dir,
+            img_dir=scraped_photos_dir,
             in_list=in_train,
             expected_list=expected_train,
             bbox_format=bbox_format,
@@ -155,7 +159,7 @@ def controller(
                 val_dataloader=val_dataloader,
                 lr_scheduler=lr_scheduler,
             )
-            model_path = f"{main_dir}/saved_models/"
+            model_path = main_dir + "saved_models/"
             if not os.path.exists(model_path):
                 print(
                     "Directory 'saved_models' doesn't exist, creating one ..."
@@ -168,6 +172,7 @@ def controller(
         if torch.cuda.is_available():
             try:
                 model = torch.load(main_dir + "saved_models/model.pth")
+                print("Model loaded correctly")
             except:
                 raise Exception("No model found, code will be forced to quit")
         else:
@@ -176,22 +181,24 @@ def controller(
                     main_dir + "saved_models/model.pth",
                     map_location=torch.device("cpu"),
                 )
+                print("Model loaded correctly")
             except:
                 raise Exception(
                     "No model found, code will be forced to quit ..."
                 )
 
-        model_output_path = f"{main_dir}/model_output/"
+        model_output_path = main_dir + "model_output/"
         if not os.path.exists(model_output_path):
             print("Directory 'model_output' doesn't exist, creating one ...")
             os.makedirs(model_output_path)
 
         if test_set:
             # create test data loader
+            print("Creating test set ...")
             in_test = from_tsv_to_list(annotations_dir + "test-A/in.tsv")
-            test_paths = [image_dir + path for path in in_test]
+            test_paths = [scraped_photos_dir + path for path in in_test]
             data_test = prepare_data_for_dataloader(
-                img_dir=image_dir,
+                img_dir=scraped_photos_dir,
                 in_list=in_test,
                 expected_list=None,
                 bbox_format=bbox_format,
@@ -213,7 +220,7 @@ def controller(
                 num_workers=num_workers,
             )
             # prediction on test set
-            print("###  Evaluating test set  ###")
+            print("\n###  Evaluating test set  ###\n")
             model_predict(
                 model=model,
                 dataloader=test_dataloader,
@@ -223,7 +230,7 @@ def controller(
 
         # prediction on train set (to check under/overfitting)
         if train_set:
-            print("###  Evaluating train set  ###")
+            print("\n###  Evaluating train set  ###\n")
             model_predict(
                 model=model,
                 dataloader=train_dataloader,
@@ -233,7 +240,7 @@ def controller(
 
         # prediction on validation set
         if val_set:
-            print("###  Evaluating validation set  ###")
+            print("\n###  Evaluating validation set  ###\n")
             model_predict(
                 model=model,
                 dataloader=val_dataloader,

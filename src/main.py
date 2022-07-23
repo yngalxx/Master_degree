@@ -126,20 +126,6 @@ from controller import controller
     show_default=True,
 )
 @click.option(
-    "--image_dir",
-    default=f'{"/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-2])}/scraped_photos/',
-    type=str,
-    help="Image directory path.",
-    show_default=True,
-)
-@click.option(
-    "--annotations_dir",
-    default=f'{"/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-2])}/news-navigator/',
-    type=str,
-    help="Preprocessed annotations directory path.",
-    show_default=True,
-)
-@click.option(
     "--train",
     default=True,
     type=bool,
@@ -206,8 +192,6 @@ def main(
     trainable_backbone_layers,
     num_workers,
     main_dir,
-    image_dir,
-    annotations_dir,
     train,
     predict,
     train_set,
@@ -231,8 +215,6 @@ def main(
         trainable_backbone_layers=trainable_backbone_layers,
         num_workers=num_workers,
         main_dir=main_dir,
-        image_dir=image_dir,
-        annotations_dir=annotations_dir,
         train=train,
         predict=predict,
         train_set=train_set,

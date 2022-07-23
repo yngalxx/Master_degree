@@ -9,7 +9,7 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
 ### Instruction:
 
 0. Clone this repository
-1. Install requirements <em>\*1</em>
+1. Install requirements<em>\*1</em> and also clone one additional repository from here: https://github.com/scardine/image_size (put in the same directory as my repository)
 2. Run "python src/scraper_runner.py" to obtain full-resolution photos from the Newspaper Navigator project
 3. Run data processing notebook ("notebooks/data_preprocessing.ipynb") to create model input data from source annotations files (origin: https://github.com/LibraryOfCongress/newspaper-navigator/tree/master/beyond_words_data)
 4. Run "python src/main.py" in command line to start training, make prediction or both (feel free to try various parameters values, run "python src/main.py --help" te see parameters description)

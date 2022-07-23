@@ -1,91 +1,33 @@
 import csv
 import json
-import random
 from typing import Dict
 from typing import List
 from typing import Tuple
 from typing import Union
 
-import matplotlib
-import matplotlib.cbook as cbook
-import matplotlib.pyplot as plt
 import numpy as np
 import torch
 import torchvision
 from mean_average_precision import MetricBuilder
+from tqdm import tqdm
 
 
-def show_random_img_with_all_annotations(
-    in_list: List,
-    expected_list: List,
-    path_to_photos: str,
-    matplotlib_colours_dict: Dict,
-    confidence_level: float = 0.2,
-    pages: int = 5,
-) -> None:
-    prev = []
-    for i in range(pages):
-        random_img = random.randint(0, len(in_list))
-        if random_img in prev:
-            i -= 1
-        prev.append(random_img)
-        file_name = in_list[random_img]
-        print(file_name)
-
-        with cbook.get_sample_data(path_to_photos + file_name) as image_file:
-            image = plt.imread(image_file)
-
-        fig, ax = plt.subplots(figsize=(15, 10))
-        ax.imshow(image, cmap="gray")
-
-        if expected_list[random_img] != "":
-            annotations = expected_list[random_img].split(" ")
-            for i in range(len(annotations)):
-                annotation = annotations[i].split(":")
-                score = annotation[2]
-                if confidence_level > float(score):
-                    continue
-                bbox = annotation[1].split(",")
-                x0, y0 = int(bbox[0]), int(bbox[1])
-                x1, y1 = int(bbox[2]), int(bbox[3])
-                width, height = x1 - x0, y1 - y0
-                cat_name = f"{annotation[0]} {round(float(score)*100,2)}%"
-                rect = matplotlib.patches.Rectangle(
-                    (x0, y0),
-                    width,
-                    height,
-                    linewidth=1,
-                    edgecolor=matplotlib_colours_dict[annotation[0]],
-                    facecolor="none",
-                )
-                ax.add_patch(rect)
-                ax.text(
-                    x0,
-                    y0,
-                    cat_name,
-                    fontsize=8,
-                    backgroundcolor="black",
-                    color=matplotlib_colours_dict[annotation[0]],
-                )
-
-        plt.show()
-
-
-def calculate_map(
+def predict_eval_set(
     dataloader: torch.utils.data.DataLoader,
     model: torchvision.models.detection.FasterRCNN,
     device: Union[torch.device, None],
-) -> Dict:
+) -> Tuple[List[Dict]]:
     """
-    Calculate AP for each clas and mean AP from torch dataloader using pytorch model
+    Make prediction on dataloader and return tuple with two lists containing output dictionaries
     """
+    # settings
     cuda_statement = torch.cuda.is_available()
     cpu_device = torch.device("cpu")
     torch.set_num_threads(1)
     # predict
     with torch.no_grad():
         f_out, f_tar = [], []
-        for images, targets in dataloader:
+        for images, targets in tqdm(dataloader):
             if cuda_statement:
                 images = list(img.to(device) for img in images)
                 torch.cuda.synchronize()
@@ -101,44 +43,74 @@ def calculate_map(
             ]
             f_out.append(outputs)
 
-    # prepare model outcome
+    # flatten list
     f_out_flat = [x for xs in f_out for x in xs]
     f_tar_flat = [x for xs in f_tar for x in xs]
 
-    pred_list, gt_list = [], []
-    for i in range(len(f_out_flat)):
+    return f_out_flat, f_tar_flat
+
+
+def prepare_data_for_ap(
+    output_list: List[Dict],
+    target_list: List[Dict],
+) -> Tuple[List[np.ndarray]]:
+    """
+    Prepare data into a format adequate for AP calculation
+    """
+    prepared_pred_list, ground_truth_list = [], []
+    for i in range(len(output_list)):
         # prediction
         temp_pred = []
-        for ii_pred in range(len(f_out_flat[i]["boxes"].detach().numpy())):
+        for ii_pred in range(len(output_list[i]["boxes"].detach().numpy())):
             obj_pred = [
                 int(el)
-                for el in f_out_flat[i]["boxes"].detach().numpy()[ii_pred]
+                for el in output_list[i]["boxes"].detach().numpy()[ii_pred]
             ]
             obj_pred.append(
-                f_out_flat[i]["labels"].detach().numpy()[ii_pred] - 1
+                output_list[i]["labels"].detach().numpy()[ii_pred] - 1
             )
-            obj_pred.append(f_out_flat[i]["scores"].detach().numpy()[ii_pred])
+            obj_pred.append(output_list[i]["scores"].detach().numpy()[ii_pred])
             temp_pred.append(obj_pred)
-        pred_list.append(np.array(temp_pred))
+        prepared_pred_list.append(np.array(temp_pred))
         # ground truth
         temp_gt = []
-        for ii_gt in range(len(f_tar_flat[i]["boxes"].detach().numpy())):
+        for ii_gt in range(len(target_list[i]["boxes"].detach().numpy())):
             obj_gt = [
                 int(el)
-                for el in f_tar_flat[i]["boxes"].detach().numpy()[ii_gt]
+                for el in target_list[i]["boxes"].detach().numpy()[ii_gt]
             ]
-            obj_gt.append(f_tar_flat[i]["labels"].detach().numpy()[ii_gt] - 1)
+            obj_gt.append(target_list[i]["labels"].detach().numpy()[ii_gt] - 1)
             obj_gt = obj_gt + [0, 0]
             temp_gt.append(np.array(obj_gt))
-        gt_list.append(np.array(temp_gt))
+        ground_truth_list.append(np.array(temp_gt))
+
+    return prepared_pred_list, ground_truth_list
+
+
+def calculate_map(
+    prepared_pred_list: List,
+    prepared_ground_truth_list: List,
+    confidence_level: Union[float, None] = None,
+) -> Dict:
+    """
+    Calculate AP for each clas and mean AP based on preprocessed model results
+    """
+    # remove prediction if score < confidence level we want to achieve
+    if confidence_level:
+        for i in range(len(prepared_pred_list)):
+            for ii in range(len(prepared_pred_list[i])):
+                if prepared_pred_list[i][ii][5] < confidence_level:
+                    prepared_pred_list[i] = np.delete(
+                        prepared_pred_list[i], ii
+                    )
 
     # calculate metric
     metric_fn = MetricBuilder.build_evaluation_metric(
         "map_2d", async_mode=True, num_classes=7
     )
 
-    for i in range(len(pred_list)):
-        metric_fn.add(pred_list[i], gt_list[i])
+    for i in range(len(prepared_pred_list)):
+        metric_fn.add(prepared_pred_list[i], prepared_ground_truth_list[i])
 
     metric = metric_fn.value(
         iou_thresholds=np.arange(0.5, 1.0, 0.05),

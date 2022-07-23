@@ -7,6 +7,8 @@ import warnings
 import torch
 import torchvision
 from functions import calculate_map
+from functions import predict_eval_set
+from functions import prepare_data_for_ap
 from tqdm import tqdm
 
 # warnings
@@ -73,11 +75,13 @@ def train_model(
         # evaluate on the validation dataset
         if val_dataloader:
             print("### Evaluation ###")
-            eval_metrics = calculate_map(
+            out, targ = predict_eval_set(
                 dataloader=val_dataloader,
                 model=pre_treined_model,
                 device=device,
             )
+            prep_pred, prepr_gt = prepare_data_for_ap(out, targ)
+            eval_metrics = calculate_map(prep_pred, prepr_gt)
             print(json.dumps(eval_metrics, indent=4))
 
     print(

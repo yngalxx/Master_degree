@@ -22,7 +22,7 @@ jobs:
       run: |
         black $(git ls-files '*.py') --line-length 79 --preview
     - name: Pycln
-    - run: |
+      run: |
         pwd
         ls
     #   run: |

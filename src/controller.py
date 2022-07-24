@@ -168,9 +168,14 @@ def controller(
     if predict:
         if torch.cuda.is_available() and gpu:
             try:
-                model = torch.load(f"{main_dir}saved_models/model.pth", map_location=torch.device(torch.cuda.current_device()))
+                model = torch.load(
+                    f"{main_dir}saved_models/model.pth",
+                    map_location=torch.device(torch.cuda.current_device())
+                )
             except:
-                raise Exception("No model found, code will be forced to quit")
+                raise Exception(
+                    "No model found, code will be forced to quit"
+                )
         else:
             try:
                 model = torch.load(f"{main_dir}saved_models/model.pth", map_location=torch.device("cpu"))

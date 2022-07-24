@@ -2,9 +2,9 @@ import os
 import warnings
 
 import torch
-import torch.optim as optim
 import torchvision
 import torchvision.transforms as T
+from torch import optim
 from torch.utils.data import DataLoader
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
@@ -178,7 +178,10 @@ def controller(
                 )
         else:
             try:
-                model = torch.load(f"{main_dir}saved_models/model.pth", map_location=torch.device("cpu"))
+                model = torch.load(
+                    f"{main_dir}saved_models/model.pth",
+                    map_location=torch.device("cpu")
+                )
             except:
                 raise Exception(
                     "No model found, code will be forced to quit ..."

@@ -17,4 +17,4 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
 6. Run notebook calculating average precision metric ("notebooks/metric_cal.ipynb") to calculate AP for each class and mAP value
 7. Run data visualization notebook ("notebooks/data_visualization.ipynb") to visualize model predictions
 
-<em>*1 Pytorch related packages are not included in requirements.txt, use following command to install them: "pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html" or if you are using Mac with M1 chip "conda install pytorch torchvision torchaudio -c pytorch-nightly", otherwise training on cpu will take eternity, so I do not recommend it.</em>
+<em>*1 Pytorch related packages are not included in requirements.txt, use following command to install them: "pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html".</em>

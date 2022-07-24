@@ -19,17 +19,15 @@ def predict_eval_set(
     """
     # settings
     cuda_statement = torch.cuda.is_available()
-    m1_statement = torch.backends.mps.is_available() and torch.backends.mps.is_built()
     cpu_device = torch.device("cpu")
     torch.set_num_threads(1)
     # predict
     with torch.no_grad():
         f_out, f_tar = [], []
         for images, targets in tqdm(dataloader):
-            if cuda_statement or m1_statement:
+            if cuda_statement:
                 images = [img.to(device) for img in images]
-                if cuda_statement:
-                    torch.cuda.synchronize()
+                torch.cuda.synchronize()
             else:
                 images = [img.to(cpu_device) for img in images]
             targets = [
@@ -56,7 +54,7 @@ def prepare_data_for_ap(
     """
     Prepare data into a format adequate for AP calculation
     """
-    prepared_pred_list, ground_truth_list = [], []
+    prep_pred_list, grnd_truth_list = [], []
     for i in range(len(output_list)):
         # prediction
         temp_pred = []
@@ -66,11 +64,11 @@ def prepare_data_for_ap(
                 for el in output_list[i]["boxes"].detach().numpy()[ii_pred]
             ]
             obj_pred.append(
-                output_list[i]["labels"].detach().numpy()[ii_pred] - 1
+                int(output_list[i]["labels"].detach().numpy()[ii_pred] - 1)
             )
-            obj_pred.append(output_list[i]["scores"].detach().numpy()[ii_pred])
+            obj_pred.append(float(output_list[i]["scores"].detach().numpy()[ii_pred]))
             temp_pred.append(obj_pred)
-        prepared_pred_list.append(np.array(temp_pred))
+        prep_pred_list.append(np.array(temp_pred))
         # ground truth
         temp_gt = []
         for ii_gt in range(len(target_list[i]["boxes"].detach().numpy())):
@@ -78,33 +76,32 @@ def prepare_data_for_ap(
                 int(el)
                 for el in target_list[i]["boxes"].detach().numpy()[ii_gt]
             ]
-            obj_gt.append(target_list[i]["labels"].detach().numpy()[ii_gt] - 1)
-            obj_gt += [0, 0]
-            temp_gt.append(np.array(obj_gt))
-        ground_truth_list.append(np.array(temp_gt))
+            obj_gt += [
+                int(target_list[i]["labels"].detach().numpy()[ii_gt]-1), 0, 0
+            ]
+            temp_gt.append(obj_gt)
+        grnd_truth_list.append(np.array(temp_gt))
 
-    return prepared_pred_list, ground_truth_list
+    return prep_pred_list, grnd_truth_list
 
 
 def calculate_map(
-    prepared_pred_list: List,
-    prepared_ground_truth_list: List,
-    confidence_level: Union[float, None] = None,
+    prepared_pred_list: List[np.array],
+    prepared_ground_truth_list: List[np.array],
+    confidence_level: Union[float, None] = None
 ) -> Dict:
     """
     Calculate AP for each clas and mean AP based on preprocessed model results
     """
-
-    # remove prediction if score < confidence level we want to achieve
     if confidence_level:
-        for i in range(len(prepared_pred_list)):
-            for ii in range(len(prepared_pred_list[i])):
-                if prepared_pred_list[i][ii][5] < confidence_level:
-                    prepared_pred_list[i] = np.delete(
-                        prepared_pred_list[i], ii
-                    )
+        back_prepared_pred_list = prepared_pred_list.copy()
+        prepared_pred_list = [
+            np.array([
+                elem_ii for elem_ii in elem_i
+                if elem_ii[5]>confidence_level
+            ]) for elem_i in back_prepared_pred_list
+        ]
 
-    # calculate metric
     metric_fn = MetricBuilder.build_evaluation_metric(
         "map_2d", async_mode=True, num_classes=7
     )

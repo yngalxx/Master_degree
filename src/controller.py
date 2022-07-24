@@ -8,7 +8,7 @@ import torchvision.transforms as T
 from torch.utils.data import DataLoader
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
-from functions import collate_fn, from_tsv_to_list
+from functions_catalogue import collate_fn, from_tsv_to_list
 from make_prediction import model_predict
 from newspapersdataset import NewspapersDataset, prepare_data_for_dataloader
 from train_model import train_model
@@ -39,7 +39,6 @@ def controller(
     val_set: bool,
     gpu: bool,
     bbox_format: str,
-    m1: bool,
 ) -> None:
     scraped_photos_dir = f"{main_dir}scraped_photos/"
     annotations_dir = f"{main_dir}preprocessed_annotations/"
@@ -154,7 +153,6 @@ def controller(
                 train_dataloader=train_dataloader,
                 epochs=num_epochs,
                 gpu=gpu,
-                m1=m1,
                 val_dataloader=val_dataloader,
                 lr_scheduler=lr_scheduler,
             )
@@ -171,11 +169,6 @@ def controller(
         if torch.cuda.is_available() and gpu:
             try:
                 model = torch.load(f"{main_dir}saved_models/model.pth", map_location=torch.device(torch.cuda.current_device()))
-            except:
-                raise Exception("No model found, code will be forced to quit")
-        elif torch.backends.mps.is_available() and torch.backends.mps.is_built() and m1:
-            try:
-                model = torch.load(f"{main_dir}saved_models/model.pth", map_location=torch.device("mps"))
             except:
                 raise Exception("No model found, code will be forced to quit")
         else:
@@ -225,7 +218,6 @@ def controller(
                 model=model,
                 dataloader=test_dataloader,
                 gpu=gpu,
-                m1=m1,
                 save_path=f"{model_output_path}test_model_output.csv",
             )
 
@@ -236,7 +228,6 @@ def controller(
                 model=model,
                 dataloader=train_dataloader,
                 gpu=gpu,
-                m1=m1,
                 save_path=f"{model_output_path}train_model_output.csv",
             )
 
@@ -247,6 +238,5 @@ def controller(
                 model=model,
                 dataloader=val_dataloader,
                 gpu=gpu,
-                m1=m1,
                 save_path=f"{model_output_path}val_model_output.csv",
             )

@@ -8,7 +8,11 @@ import torch
 import torchvision
 from tqdm import tqdm
 
-from functions import calculate_map, predict_eval_set, prepare_data_for_ap
+from functions_catalogue import (
+    calculate_map,
+    predict_eval_set,
+    prepare_data_for_ap,
+)
 
 # warnings
 warnings.filterwarnings("ignore")
@@ -22,20 +26,14 @@ def train_model(
     val_dataloader: torch.utils.data.DataLoader = None,
     lr_scheduler: torch.optim.lr_scheduler.StepLR = None,
     gpu: bool = True,
-    m1: bool = False,
 ) -> torchvision.models.detection.FasterRCNN:
     start_time = datetime.datetime.now()
     print(f"Training start time: {start_time} \n")
     # switch to gpu if available
     cuda_statement = torch.cuda.is_available()
-    # or m1 chip
-    m1_statement = torch.backends.mps.is_available() and torch.backends.mps.is_built()
     print(f"Cuda available: {cuda_statement}")
-    print(f"M1 chip available: {m1_statement}")
     if cuda_statement and gpu:
         device = torch.device(torch.cuda.current_device())
-    elif m1_statement and m1:
-        device = torch.device("mps")
     else:
         device = torch.device("cpu")
     print(f"Current device: {device}\n")
@@ -47,7 +45,7 @@ def train_model(
         pre_treined_model.train()
         train_loss = 0.0
         for images, targets in tqdm(train_dataloader):
-            if (cuda_statement and gpu) or (m1_statement and m1):
+            if cuda_statement and gpu:
                 images = [image.to(device) for image in images]
                 targets = [
                     {k: v.to(device) for k, v in t.items()} for t in targets

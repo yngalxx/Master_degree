@@ -1,9 +1,7 @@
 import pathlib
 import sys
 import warnings
-from typing import List
-from typing import Tuple
-from typing import Union
+from typing import List, Tuple, Union
 
 import numpy as np
 import pandas as pd
@@ -14,9 +12,9 @@ from PIL import Image
 sys.path.append(
     "/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-2])
 )
-from image_size import (
+from image_size import (  # source: https://github.com/scardine/image_size
     get_image_size,
-)  # source: https://github.com/scardine/image_size
+)
 
 # warnings
 warnings.filterwarnings("ignore")
@@ -165,7 +163,7 @@ class NewspapersDataset(torch.utils.data.Dataset):
         target = {
             "image_id": image_id,
             "image_name": image_name,
-            new_image_size: new_image_size,
+            "new_image_size": new_image_size,
         }
         if not self.test:
             target["labels"] = labels

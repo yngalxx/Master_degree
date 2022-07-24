@@ -158,9 +158,7 @@ def controller(
             )
             model_path = f"{main_dir}saved_models/"
             if not os.path.exists(model_path):
-                print(
-                    "Directory 'saved_models' doesn't exist, creating one ..."
-                )
+                print("Directory 'saved_models' doesn't exist, creating one ...")
                 os.makedirs(model_path)
             torch.save(trained_model, f"{main_dir}saved_models/model.pth")
 
@@ -170,22 +168,18 @@ def controller(
             try:
                 model = torch.load(
                     f"{main_dir}saved_models/model.pth",
-                    map_location=torch.device(torch.cuda.current_device())
+                    map_location=torch.device(torch.cuda.current_device()),
                 )
             except:
-                raise Exception(
-                    "No model found, code will be forced to quit"
-                )
+                raise Exception("No model found, code will be forced to quit")
         else:
             try:
                 model = torch.load(
                     f"{main_dir}saved_models/model.pth",
-                    map_location=torch.device("cpu")
+                    map_location=torch.device("cpu"),
                 )
             except:
-                raise Exception(
-                    "No model found, code will be forced to quit ..."
-                )
+                raise Exception("No model found, code will be forced to quit ...")
         print("Model loaded correctly")
 
         model_output_path = f"{main_dir}model_output/"

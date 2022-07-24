@@ -43,24 +43,17 @@ def model_predict(
                 torch.cuda.synchronize()
             else:
                 images = [img.to(cpu_device) for img in images]
-            targets = [
-                {k: v.to(cpu_device) for k, v in t.items()} for t in targets
-            ]
+            targets = [{k: v.to(cpu_device) for k, v in t.items()} for t in targets]
             for target in list(targets):
                 image_id_list.append(target["image_id"].item())
                 img_name_list.append(
                     int([t.detach().numpy() for t in target["image_name"]][0])
                 )
                 new_size_list.append(
-                    [
-                        t.detach().numpy().tolist()
-                        for t in target["new_image_size"]
-                    ]
+                    [t.detach().numpy().tolist() for t in target["new_image_size"]]
                 )
             outputs = model(images)
-            outputs = [
-                {k: v.to(cpu_device) for k, v in t.items()} for t in outputs
-            ]
+            outputs = [{k: v.to(cpu_device) for k, v in t.items()} for t in outputs]
             for output in outputs:
                 predicted_label_list.append(
                     [int(o.detach().numpy()) for o in output["labels"]]

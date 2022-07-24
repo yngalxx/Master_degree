@@ -30,14 +30,10 @@ def predict_eval_set(
                 torch.cuda.synchronize()
             else:
                 images = [img.to(cpu_device) for img in images]
-            targets = [
-                {k: v.to(cpu_device) for k, v in t.items()} for t in targets
-            ]
+            targets = [{k: v.to(cpu_device) for k, v in t.items()} for t in targets]
             f_tar.append(targets)
             outputs = model(images)
-            outputs = [
-                {k: v.to(cpu_device) for k, v in t.items()} for t in outputs
-            ]
+            outputs = [{k: v.to(cpu_device) for k, v in t.items()} for t in outputs]
             f_out.append(outputs)
 
     # flatten list
@@ -60,25 +56,17 @@ def prepare_data_for_ap(
         temp_pred = []
         for ii_pred in range(len(output_list[i]["boxes"].detach().numpy())):
             obj_pred = [
-                int(el)
-                for el in output_list[i]["boxes"].detach().numpy()[ii_pred]
+                int(el) for el in output_list[i]["boxes"].detach().numpy()[ii_pred]
             ]
-            obj_pred.append(
-                int(output_list[i]["labels"].detach().numpy()[ii_pred] - 1)
-            )
+            obj_pred.append(int(output_list[i]["labels"].detach().numpy()[ii_pred] - 1))
             obj_pred.append(float(output_list[i]["scores"].detach().numpy()[ii_pred]))
             temp_pred.append(obj_pred)
         prep_pred_list.append(np.array(temp_pred))
         # ground truth
         temp_gt = []
         for ii_gt in range(len(target_list[i]["boxes"].detach().numpy())):
-            obj_gt = [
-                int(el)
-                for el in target_list[i]["boxes"].detach().numpy()[ii_gt]
-            ]
-            obj_gt += [
-                int(target_list[i]["labels"].detach().numpy()[ii_gt]-1), 0, 0
-            ]
+            obj_gt = [int(el) for el in target_list[i]["boxes"].detach().numpy()[ii_gt]]
+            obj_gt += [int(target_list[i]["labels"].detach().numpy()[ii_gt] - 1), 0, 0]
             temp_gt.append(obj_gt)
         grnd_truth_list.append(np.array(temp_gt))
 
@@ -88,7 +76,7 @@ def prepare_data_for_ap(
 def calculate_map(
     prepared_pred_list: List[np.array],
     prepared_ground_truth_list: List[np.array],
-    confidence_level: Union[float, None] = None
+    confidence_level: Union[float, None] = None,
 ) -> Dict:
     """
     Calculate AP for each clas and mean AP based on preprocessed model results
@@ -96,10 +84,8 @@ def calculate_map(
     if confidence_level:
         back_prepared_pred_list = prepared_pred_list.copy()
         prepared_pred_list = [
-            np.array([
-                elem_ii for elem_ii in elem_i
-                if elem_ii[5]>confidence_level
-            ]) for elem_i in back_prepared_pred_list
+            np.array([elem_ii for elem_ii in elem_i if elem_ii[5] > confidence_level])
+            for elem_i in back_prepared_pred_list
         ]
 
     metric_fn = MetricBuilder.build_evaluation_metric(
@@ -115,7 +101,7 @@ def calculate_map(
         mpolicy="soft",
     )
 
-    return ({
+    return {
         "photograph": metric[0.5][0]["ap"],
         "illustration": metric[0.5][1]["ap"],
         "map": metric[0.5][2]["ap"],
@@ -123,8 +109,8 @@ def calculate_map(
         "editorial_cartoon": metric[0.5][4]["ap"],
         "headline": metric[0.5][5]["ap"],
         "advertisement": metric[0.5][6]["ap"],
-        "mAP": metric["mAP"]
-        })
+        "mAP": metric["mAP"],
+    }
 
 
 def dump_json(path: str, dict_to_save: Dict) -> None:

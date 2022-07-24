@@ -47,9 +47,7 @@ def train_model(
         for images, targets in tqdm(train_dataloader):
             if cuda_statement and gpu:
                 images = [image.to(device) for image in images]
-                targets = [
-                    {k: v.to(device) for k, v in t.items()} for t in targets
-                ]
+                targets = [{k: v.to(device) for k, v in t.items()} for t in targets]
             # clear the gradients
             optimizer.zero_grad()
             # forward pass

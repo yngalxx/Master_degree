@@ -9,9 +9,7 @@ import torch
 import torchvision
 from PIL import Image
 
-sys.path.append(
-    "/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-2])
-)
+sys.path.append("/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-2]))
 from image_size import (  # source: https://github.com/scardine/image_size
     get_image_size,
 )
@@ -50,9 +48,7 @@ def prepare_data_for_dataloader(
 ) -> pd.DataFrame:
     df = pd.DataFrame()
     for i in range(len(in_list)):
-        img_width, img_height = get_image_size.get_image_size(
-            img_dir + in_list[i]
-        )
+        img_width, img_height = get_image_size.get_image_size(img_dir + in_list[i])
         if isinstance(scale, list):
             new_img_width, new_img_height = scale[0], scale[1]
         elif isinstance(scale, (int, float)):
@@ -95,9 +91,7 @@ def prepare_data_for_dataloader(
     return df
 
 
-def get_target(
-    name: str, df: pd.DataFrame, test: bool = False
-) -> Tuple[np.ndarray]:
+def get_target(name: str, df: pd.DataFrame, test: bool = False) -> Tuple[np.ndarray]:
     rows = df[df["file_name"] == int(name[:-4])]
     if test:
         return (
@@ -147,9 +141,7 @@ class NewspapersDataset(torch.utils.data.Dataset):
             )
 
         if self.scale:
-            img = img.resize(
-                (int(new_image_size[0, 0]), int(new_image_size[0, 1]))
-            )
+            img = img.resize((int(new_image_size[0, 0]), int(new_image_size[0, 1])))
 
         image_id = torch.tensor([idx])
         image_name = torch.as_tensor(names, dtype=torch.float32)

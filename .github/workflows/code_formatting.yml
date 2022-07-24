@@ -20,7 +20,7 @@ jobs:
         pip install black==22.6.0 pycln==2.0.4 isort==5.10.1
     - name: Black
       run: |
-        black $(git ls-files '*.(py|ipynb)') --line-length 79 --preview
+        black $(git ls-files '*.py') --line-length 79 --preview
     - name: Pycln
       run: |
         pycln --all

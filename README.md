@@ -1,7 +1,9 @@
 # Master thesis: The task of image retrieval in historical publications
 
-<img src="https://img.shields.io/badge/python%20version-3.8.5-2D77D5" /> <img src="https://imgshields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white" /> <img src="https://img.shields.io/badge/code%20style-black-black" /> <img src="https://img.shields.io/badge/
-import%20format-pycln%20%7C%20isort-9cf" /> <a href="https://codeclimate.com/github/yngalxxMaster_degree/maintainability"> <img src="https://api.codeclimate.com/v1/badges/32d0d5c35ad32b251d6cmaintainability" /></a>
+<p>
+    <img src="https://img.shields.io/badge/python%20version-3.8.5-2D77D5" /> <img src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white" /> <img src="https://img.shields.io/badge/code%20style-black-black" /> <img src="https://img.shields.io/badge/
+    import%20format-pycln%20%7C%20isort-9cf" /> <a href="https://codeclimate.com/github/yngalxx/Master_degree/maintainability"> <img src="https://api.codeclimate.com/v1/badges/32d0d5c35ad32b251d6c/maintainability" /></a>
+</p>
 
 Digitized historical publications (magazines, books, documents) abound in iconography (engravings, illustrations, photographs, diagrams). In view of this, a natural need arises to search for images that fulfill a given information need. The aim of this work is to create a training and testing set for the task of searching images in historical publications. The work will also develop a prototype neural networks-based search engine. Images will be retrieved and recognized along with the surrounding text.
 

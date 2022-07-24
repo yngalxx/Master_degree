@@ -23,13 +23,10 @@ jobs:
         black $(git ls-files '*.py') --line-length 79 --preview
     - name: Pycln
       run: |
-        pwd
-        ls
-    #   run: |
-    #     pycln . --all
-    # - name: Isort
-    #   run: |
-    #     isort . 
+        pycln . --all
+    - name: Isort
+      run: |
+        isort . 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v3
       with:

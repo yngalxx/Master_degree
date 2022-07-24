@@ -1,3 +1,6 @@
+from image_size import (  # source: https://github.com/scardine/image_size
+    get_image_size,
+)
 import pathlib
 import sys
 import warnings
@@ -11,9 +14,6 @@ from PIL import Image
 
 sys.path.append(
     "/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-2])
-)
-from image_size import (  # source: https://github.com/scardine/image_size
-    get_image_size,
 )
 
 # warnings

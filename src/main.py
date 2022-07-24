@@ -119,13 +119,12 @@ from controller import controller
     ),
     show_default=True,
 )
-@click.option(
-    "--main_dir",
-    default=f'{"/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-1])}/',
-    type=str,
-    help="Working directory path.",
-    show_default=True,
-)
+@click.option("--main_dir",
+              default=f'{"/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-1])}/',
+              type=str,
+              help="Working directory path.",
+              show_default=True,
+              )
 @click.option(
     "--train",
     default=True,

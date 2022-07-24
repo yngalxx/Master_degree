@@ -46,7 +46,7 @@ def controller(
 
     try:
         rescale = float(rescale)
-    except:
+    except BaseException:
         rescale = rescale.split("/")
         rescale = [int(rescale[0]), int(rescale[1])]
 
@@ -93,7 +93,8 @@ def controller(
     if train_set:
         # create train data loader
         print("Creating train dataloader ...")
-        expected_train = from_tsv_to_list(f"{annotations_dir}train/expected.tsv")
+        expected_train = from_tsv_to_list(
+            f"{annotations_dir}train/expected.tsv")
         in_train = from_tsv_to_list(f"{annotations_dir}train/in.tsv")
         train_paths = [scraped_photos_dir + path for path in in_train]
         data_train = prepare_data_for_dataloader(
@@ -138,7 +139,8 @@ def controller(
                 lr=learning_rate,
                 weight_decay=weight_decay,
             )
-            # learning rate scheduler decreases the learning rate by 'gamma' every 'step_size'
+            # learning rate scheduler decreases the learning rate by 'gamma'
+            # every 'step_size'
             if lr_scheduler:
                 lr_scheduler = torch.optim.lr_scheduler.StepLR(
                     optimizer, step_size=lr_step_size, gamma=lr_gamma
@@ -172,7 +174,7 @@ def controller(
                     f"{main_dir}saved_models/model.pth",
                     map_location=torch.device(torch.cuda.current_device())
                 )
-            except:
+            except BaseException:
                 raise Exception(
                     "No model found, code will be forced to quit"
                 )
@@ -182,7 +184,7 @@ def controller(
                     f"{main_dir}saved_models/model.pth",
                     map_location=torch.device("cpu")
                 )
-            except:
+            except BaseException:
                 raise Exception(
                     "No model found, code will be forced to quit ..."
                 )

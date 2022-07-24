@@ -66,7 +66,9 @@ def prepare_data_for_ap(
             obj_pred.append(
                 int(output_list[i]["labels"].detach().numpy()[ii_pred] - 1)
             )
-            obj_pred.append(float(output_list[i]["scores"].detach().numpy()[ii_pred]))
+            obj_pred.append(
+                float(
+                    output_list[i]["scores"].detach().numpy()[ii_pred]))
             temp_pred.append(obj_pred)
         prep_pred_list.append(np.array(temp_pred))
         # ground truth
@@ -77,7 +79,7 @@ def prepare_data_for_ap(
                 for el in target_list[i]["boxes"].detach().numpy()[ii_gt]
             ]
             obj_gt += [
-                int(target_list[i]["labels"].detach().numpy()[ii_gt]-1), 0, 0
+                int(target_list[i]["labels"].detach().numpy()[ii_gt] - 1), 0, 0
             ]
             temp_gt.append(obj_gt)
         grnd_truth_list.append(np.array(temp_gt))
@@ -98,7 +100,7 @@ def calculate_map(
         prepared_pred_list = [
             np.array([
                 elem_ii for elem_ii in elem_i
-                if elem_ii[5]>confidence_level
+                if elem_ii[5] > confidence_level
             ]) for elem_i in back_prepared_pred_list
         ]
 
@@ -124,7 +126,7 @@ def calculate_map(
         "headline": metric[0.5][5]["ap"],
         "advertisement": metric[0.5][6]["ap"],
         "mAP": metric["mAP"]
-        })
+    })
 
 
 def dump_json(path: str, dict_to_save: Dict) -> None:

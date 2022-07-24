@@ -12,9 +12,8 @@ from PIL import Image
 sys.path.append(
     "/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-2])
 )
-from image_size import (  # source: https://github.com/scardine/image_size
-    get_image_size,
-)
+from image_size import \
+    get_image_size  # source: https://github.com/scardine/image_size
 
 # warnings
 warnings.filterwarnings("ignore")

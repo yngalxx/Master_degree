@@ -1,0 +1,39 @@
+name: Automated code formatting 
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8.5"]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install black=22.6.0 pycln=2.0.4 isort=5.10.1
+    - name: Black
+      run: |
+        black $(git ls-files '*.(py|ipynb)') --line_length 79 --preview
+    - name: Pycln
+      run: |
+        pycln --all
+    - name: Isort
+      run: |
+        isort . 
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        commit-message: Format fix actions
+        title: Format fix actions
+        body: This is an auto-generated PR with fix actions.
+        labels: black, pycln, automated pr
+        branch: automated_code_formatting
+
+

@@ -10,7 +10,9 @@ from tqdm import tqdm
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.option(
     "--directory_path",
-    default="/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-1]),
+    default="/".join(
+        str(pathlib.Path(__file__).parent.resolve()).split("/")[:-1]
+    ),
     type=str,
     help="Path to the level where this repository is stored",
     show_default=True,
@@ -28,7 +30,9 @@ def image_scraper(directory_path):
         print("Directory 'scraped_photos' doesn't exist, creating one ...")
         os.makedirs(final_path)
 
-    with open(f"{directory_path}/source_annotations/trainval.json") as jsonFile:
+    with open(
+        f"{directory_path}/source_annotations/trainval.json"
+    ) as jsonFile:
         jsonObject = json.load(jsonFile)
         jsonFile.close()
 

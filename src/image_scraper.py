@@ -1,5 +1,4 @@
 import json
-import logging
 import os
 import pathlib
 
@@ -31,22 +30,19 @@ def image_scraper(directory_path):
         print("Directory 'scraped_photos' doesn't exist, creating one ...")
         os.makedirs(final_path)
 
-    with open(
-        directory_path + "/source_annotations/trainval.json"
-    ) as jsonFile:
+    with open(f"{directory_path}/source_annotations/trainval.json") as jsonFile:
         jsonObject = json.load(jsonFile)
         jsonFile.close()
 
     for i in tqdm(range(len(jsonObject["images"]))):
-        path, dirs, files = next(os.walk(final_path))
+        _, _, files = next(os.walk(final_path))
 
         file_name = jsonObject["images"][i]["file_name"]
 
         if file_name not in files:
             response = requests.get(jsonObject["images"][i]["url"])
-            file = open(final_path + file_name, "wb")
-            file.write(response.content)
-            file.close()
+            with open(final_path + file_name, "wb") as file:
+                file.write(response.content)
 
 
 if __name__ == "__main__":

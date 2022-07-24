@@ -1,9 +1,6 @@
 import csv
 import json
-from typing import Dict
-from typing import List
-from typing import Tuple
-from typing import Union
+from typing import Dict, List, Tuple, Union
 
 import numpy as np
 import torch
@@ -22,17 +19,19 @@ def predict_eval_set(
     """
     # settings
     cuda_statement = torch.cuda.is_available()
+    m1_statement = torch.backends.mps.is_available() and torch.backends.mps.is_built()
     cpu_device = torch.device("cpu")
     torch.set_num_threads(1)
     # predict
     with torch.no_grad():
         f_out, f_tar = [], []
         for images, targets in tqdm(dataloader):
-            if cuda_statement:
-                images = list(img.to(device) for img in images)
-                torch.cuda.synchronize()
+            if cuda_statement or m1_statement:
+                images = [img.to(device) for img in images]
+                if cuda_statement:
+                    torch.cuda.synchronize()
             else:
-                images = list(img.to(cpu_device) for img in images)
+                images = [img.to(cpu_device) for img in images]
             targets = [
                 {k: v.to(cpu_device) for k, v in t.items()} for t in targets
             ]
@@ -80,7 +79,7 @@ def prepare_data_for_ap(
                 for el in target_list[i]["boxes"].detach().numpy()[ii_gt]
             ]
             obj_gt.append(target_list[i]["labels"].detach().numpy()[ii_gt] - 1)
-            obj_gt = obj_gt + [0, 0]
+            obj_gt += [0, 0]
             temp_gt.append(np.array(obj_gt))
         ground_truth_list.append(np.array(temp_gt))
 
@@ -95,6 +94,7 @@ def calculate_map(
     """
     Calculate AP for each clas and mean AP based on preprocessed model results
     """
+
     # remove prediction if score < confidence level we want to achieve
     if confidence_level:
         for i in range(len(prepared_pred_list)):
@@ -118,8 +118,7 @@ def calculate_map(
         mpolicy="soft",
     )
 
-    # final results
-    ap_dict = {
+    return ({
         "photograph": metric[0.5][0]["ap"],
         "illustration": metric[0.5][1]["ap"],
         "map": metric[0.5][2]["ap"],
@@ -127,17 +126,14 @@ def calculate_map(
         "editorial_cartoon": metric[0.5][4]["ap"],
         "headline": metric[0.5][5]["ap"],
         "advertisement": metric[0.5][6]["ap"],
-        "mAP": metric["mAP"],
-    }
-
-    return ap_dict
+        "mAP": metric["mAP"]
+        })
 
 
 def dump_json(path: str, dict_to_save: Dict) -> None:
     jsonString = json.dumps(dict_to_save, indent=4)
-    jsonFile = open(path, "w")
-    jsonFile.write(jsonString)
-    jsonFile.close()
+    with open(path, "w") as jsonFile:
+        jsonFile.write(jsonString)
 
 
 def from_tsv_to_list(
@@ -148,15 +144,13 @@ def from_tsv_to_list(
     expected = list(read_tsv)
     if skip_empty_lines:
         return [item for sublist in expected for item in sublist]
-    else:
-        with_empty_lines = []
-        for sublist in expected:
-            if len(sublist) == 0:
-                with_empty_lines.append("")
-            else:
-                for item in sublist:
-                    with_empty_lines.append(item)
-        return with_empty_lines
+    with_empty_lines = []
+    for sublist in expected:
+        if len(sublist) == 0:
+            with_empty_lines.append("")
+        else:
+            with_empty_lines.extend(iter(sublist))
+    return with_empty_lines
 
 
 def collate_fn(batch) -> Tuple:

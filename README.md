@@ -8,7 +8,7 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
 
 ### Instruction:
 
-0. Clone this repository
+0. Clone the repository
 1. Install requirements<em>\*1</em> and also clone one additional repository from here: https://github.com/scardine/image_size (put in the same directory as my repository)
 2. Run "python src/scraper_runner.py" to obtain full-resolution photos from the Newspaper Navigator project
 3. Run data processing notebook ("notebooks/data_preprocessing.ipynb") to create model input data from source annotations files (origin: https://github.com/LibraryOfCongress/newspaper-navigator/tree/master/beyond_words_data)
@@ -17,4 +17,4 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
 6. Run notebook calculating average precision metric ("notebooks/metric_cal.ipynb") to calculate AP for each class and mAP value
 7. Run data visualization notebook ("notebooks/data_visualization.ipynb") to visualize model predictions
 
-<em>\*1 Torch related packages might fail during installation from requirements, so if sth like this happen try: "pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html".</em>
+<em>*1 Pytorch related packages are not included in requirements.txt, use following command to install them: "pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html" or if you are using Mac with M1 chip "conda install pytorch torchvision torchaudio -c pytorch-nightly", otherwise training on cpu will take eternity, so I do not recommend it.</em>

@@ -1,4 +1,3 @@
-import datetime
 import warnings
 
 import pandas as pd
@@ -15,12 +14,17 @@ def model_predict(
     dataloader: torch.utils.data.DataLoader,
     save_path: str,
     gpu: bool = True,
+    m1: bool = False,
 ) -> None:
     # switch to gpu if available
     cuda_statement = torch.cuda.is_available()
-    print(f"Cuda available: {torch.cuda.is_available()}")
+    m1_statement = torch.backends.mps.is_available() and torch.backends.mps.is_built()
+    print(f"Cuda available: {cuda_statement}")
+    print(f"M1 chip available: {m1_statement}")
     if cuda_statement and gpu:
         device = torch.device(torch.cuda.current_device())
+    elif m1_statement and m1:
+        device = torch.device("mps")
     else:
         device = torch.device("cpu")
     print(f"Current device: {device}\n")
@@ -39,11 +43,12 @@ def model_predict(
             new_size_list,
         ) = ([], [], [], [], [], [])
         for images, targets in tqdm(dataloader):
-            if cuda_statement == True:
-                images = list(img.to(device) for img in images)
-                torch.cuda.synchronize()
+            if (cuda_statement and gpu) or (m1_statement and m1):
+                images = [img.to(device) for img in images]
+                if cuda_statement and gpu:
+                    torch.cuda.synchronize()
             else:
-                images = list(img.to(cpu_device) for img in images)
+                images = [img.to(cpu_device) for img in images]
             targets = [
                 {k: v.to(cpu_device) for k, v in t.items()} for t in targets
             ]

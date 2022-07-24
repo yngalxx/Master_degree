@@ -1,6 +1,7 @@
 import pathlib
 
 import click
+
 from controller import controller
 
 
@@ -177,6 +178,13 @@ from controller import controller
     ),
     show_default=True,
 )
+@click.option(
+    "--m1",
+    default=False,
+    type=bool,
+    help="Enable training on Mac M1 chip.",
+    show_default=True,
+)
 def main(
     channel,
     num_classes,
@@ -199,6 +207,7 @@ def main(
     val_set,
     gpu,
     bbox_format,
+    m1,
 ):
     controller(
         channel=channel,
@@ -222,6 +231,7 @@ def main(
         val_set=val_set,
         gpu=gpu,
         bbox_format=bbox_format,
+        m1=m1,
     )
 
 

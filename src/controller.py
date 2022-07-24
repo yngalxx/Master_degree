@@ -46,7 +46,7 @@ def controller(
 
     try:
         rescale = float(rescale)
-    except:
+    except BaseException:
         rescale = rescale.split("/")
         rescale = [int(rescale[0]), int(rescale[1])]
 

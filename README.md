@@ -10,13 +10,16 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
 
 ### Instruction:
 
-0. Clone the repository
-1. Install requirements<em>\*1</em> and also clone one additional repository from here: https://github.com/scardine/image_size (put in the same directory as my repository)
-2. Run "python src/scraper_runner.py" to obtain full-resolution photos from the Newspaper Navigator project
-3. Run data processing notebook ("notebooks/data_preprocessing.ipynb") to create model input data from source annotations files (origin: https://github.com/LibraryOfCongress/newspaper-navigator/tree/master/beyond_words_data)
-4. Run "python src/main.py" in command line to start training, make prediction or both (feel free to try various parameters values, run "python src/main.py --help" te see parameters description)
-5. Run notebook creating output file basing on model output dataframe ("notebooks/create_out_file.ipynb") to save the model output in exactly the same structure as in notebook "data_preprocessing.ipynb"
-6. Run notebook calculating average precision metric ("notebooks/metric_cal.ipynb") to calculate AP for each class and mAP value
-7. Run data visualization notebook ("notebooks/data_visualization.ipynb") to visualize model predictions
+0. Before use:   
+    - clone the repository,
+    - install requirements<em>\*1</em>,
+    - clone additional 'image_size' repository from here: https://github.com/scardine/image_size and put in the same directory,
+    - install Tesseract OCR using homebrew.
+1. Run "python src/scraper_runner.py" to obtain full-resolution photos from the Newspaper Navigator project.
+2. Run data processing notebook ("notebooks/data_preprocessing.ipynb") to create model input data from source annotations files (origin: https://github.com/LibraryOfCongress/newspaper-navigator/tree/master/beyond_words_data).
+3. Run "python src/main.py" in command line to start training, make prediction or both (feel free to try various parameters values, run "python src/main.py --help" te see parameters description).
+4. Run notebook creating output file basing on model output dataframe ("notebooks/create_out_file.ipynb") to save the model output in exactly the same structure as in notebook "data_preprocessing.ipynb".
+5. Run notebook calculating average precision metric ("notebooks/metric_cal.ipynb") to calculate AP for each class and mAP value.
+6. Run data visualization notebook ("notebooks/data_visualization.ipynb") to visualize model predictions.
 
 <em>*1 Pytorch related packages are not included in requirements.txt, use following command to install them: "pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html".</em>

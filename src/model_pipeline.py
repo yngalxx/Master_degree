@@ -1,6 +1,7 @@
+import logging
 import os
 import warnings
-import logging
+
 import torch
 import torchvision
 import torchvision.transforms as T
@@ -8,11 +9,10 @@ from torch import optim
 from torch.utils.data import DataLoader
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
-from functions_catalogue import collate_fn, from_tsv_to_list, dump_json
 from evaluate_model import evaluate_model
+from functions_catalogue import collate_fn, dump_json, from_tsv_to_list
 from newspapersdataset import NewspapersDataset, prepare_data_for_dataloader
 from train_model import train_model
-
 
 # warnings
 warnings.filterwarnings("ignore")
@@ -61,7 +61,7 @@ def model_pipeline(
 
     if val_set:
         # create validation dataloader
-        logging.info('Creating validation dataloader')
+        logging.info("Creating validation dataloader")
         expected_val = from_tsv_to_list(f"{annotations_dir}dev-0/expected.tsv")
         in_val = from_tsv_to_list(f"{annotations_dir}dev-0/in.tsv")
         val_paths = [scraped_photos_dir + path for path in in_val]
@@ -92,7 +92,7 @@ def model_pipeline(
 
     if train_set:
         # create train data loader
-        logging.info('Creating train dataloader')
+        logging.info("Creating train dataloader")
         expected_train = from_tsv_to_list(
             f"{annotations_dir}train/expected.tsv"
         )
@@ -124,18 +124,20 @@ def model_pipeline(
         if train:
             model_path = f"{main_dir}model_config/"
             if not os.path.exists(model_path):
-                logging.info('Directory "model_config" doesn\'t exist, creating one')
+                logging.info(
+                    'Directory "model_config" doesn\'t exist, creating one'
+                )
                 os.makedirs(model_path)
-            
+
             # save rescale, bbox_format and channel arguments in config file for future predictions
             model_config = {
-                'rescale': rescale,
-                'bbox_format': bbox_format,
-                'channel': channel,
-                'num_classes': num_classes,
-                'trainable_backbone_layers': trainable_backbone_layers
+                "rescale": rescale,
+                "bbox_format": bbox_format,
+                "channel": channel,
+                "num_classes": num_classes,
+                "trainable_backbone_layers": trainable_backbone_layers,
             }
-            dump_json(f'{model_path}model_config.json', model_config)
+            dump_json(f"{model_path}model_config.json", model_config)
 
             # pre-trained resnet50 model
             model = torchvision.models.detection.fasterrcnn_resnet50_fpn(
@@ -164,7 +166,7 @@ def model_pipeline(
                 lr_scheduler = None
 
             # train and save model
-            logging.info('Model training - started!')
+            logging.info("Model training - started!")
             trained_model = train_model(
                 pre_treined_model=model,
                 optimizer=optimizer,
@@ -180,29 +182,38 @@ def model_pipeline(
     # evalutaion phase
     if evalutaion:
         # initialize model
-        model = torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=True, trainable_backbone_layers=trainable_backbone_layers)
+        model = torchvision.models.detection.fasterrcnn_resnet50_fpn(
+            pretrained=True,
+            trainable_backbone_layers=trainable_backbone_layers,
+        )
         in_features = model.roi_heads.box_predictor.cls_score.in_features
         model.roi_heads.box_predictor = FastRCNNPredictor(
             in_features, num_classes=num_classes
         )
         # load model state dict
         if torch.cuda.is_available() and gpu:
-            map_location=torch.device(torch.cuda.current_device())
+            map_location = torch.device(torch.cuda.current_device())
         else:
-            map_location=torch.device("cpu")
-        
+            map_location = torch.device("cpu")
+
         try:
-            model.load_state_dict(torch.load(f"{main_dir}model_config/model.pth", map_location=map_location), strict=True)
+            model.load_state_dict(
+                torch.load(
+                    f"{main_dir}model_config/model.pth",
+                    map_location=map_location,
+                ),
+                strict=True,
+            )
         except:
             logging.exception("No model found, code will be forced to quit")
             raise Exception()
 
         model.eval()
-        logging.info(f'Model loaded correctly')
+        logging.info(f"Model loaded correctly")
 
         if test_set:
             # create test data loader
-            logging.info('Creating test dataloader')
+            logging.info("Creating test dataloader")
             in_test = from_tsv_to_list(f"{annotations_dir}test-A/in.tsv")
             test_paths = [scraped_photos_dir + path for path in in_test]
             data_test = prepare_data_for_dataloader(
@@ -228,7 +239,7 @@ def model_pipeline(
                 num_workers=num_workers,
             )
             # evaluation on test set
-            logging.info('Test set evaluation - started!')
+            logging.info("Test set evaluation - started!")
             evaluate_model(
                 model=model,
                 dataloader=test_dataloader,
@@ -240,7 +251,7 @@ def model_pipeline(
 
         # evaluation on train set (to check under/overfitting)
         if train_set:
-            logging.info('Train set evaluation - started!')
+            logging.info("Train set evaluation - started!")
             evaluate_model(
                 model=model,
                 dataloader=train_dataloader,
@@ -252,7 +263,7 @@ def model_pipeline(
 
         # evaluation on validation set
         if val_set:
-            logging.info('Validation set evaluation - started!')
+            logging.info("Validation set evaluation - started!")
             evaluate_model(
                 model=model,
                 dataloader=val_dataloader,

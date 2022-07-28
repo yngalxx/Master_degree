@@ -8,6 +8,7 @@ import pandas as pd
 import torch
 import torchvision
 from PIL import Image
+
 from functions_catalogue import target_encoder
 
 sys.path.append(

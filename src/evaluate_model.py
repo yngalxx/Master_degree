@@ -1,12 +1,16 @@
-from contextlib import redirect_stdout
+import logging
+import time
 import warnings
+from contextlib import redirect_stdout
+
 import pandas as pd
 import torch
 import torchvision
 from tqdm import tqdm
-import time
-import logging
-from functions_catalogue import parse_model_outcome, save_list_to_tsv_file, prepare_data_for_ap, calculate_map, from_tsv_to_list
+
+from functions_catalogue import (calculate_map, from_tsv_to_list,
+                                 parse_model_outcome, prepare_data_for_ap,
+                                 save_list_to_tsv_file)
 
 # warnings
 warnings.filterwarnings("ignore")
@@ -23,21 +27,27 @@ def evaluate_model(
     evaluation_start_time = time.time()
     # switch to gpu if available
     cuda_statement = torch.cuda.is_available()
-    logging.info(f'Cuda available: {cuda_statement}')
+    logging.info(f"Cuda available: {cuda_statement}")
     if cuda_statement and gpu:
         device = torch.device(torch.cuda.current_device())
     else:
         device = torch.device("cpu")
-    logging.info(f'Current device: {device}')
+    logging.info(f"Current device: {device}")
     # move model to the right device
     model.to(device)
     cpu_device = torch.device("cpu")
     # evaluation
     with torch.no_grad():
-        img_names_list, predicted_bboxes_list, predicted_labels_list, scores_list, new_sizes_list = [], [], [], [], []
+        (
+            img_names_list,
+            predicted_bboxes_list,
+            predicted_labels_list,
+            scores_list,
+            new_sizes_list,
+        ) = ([], [], [], [], [])
         if test:
             model_output, ground_truth = [], []
-        for images, targets in tqdm(dataloader, desc='Evaluation'):
+        for images, targets in tqdm(dataloader, desc="Evaluation"):
             if cuda_statement and gpu:
                 images = [img.to(device) for img in images]
                 torch.cuda.synchronize()
@@ -74,25 +84,46 @@ def evaluate_model(
                 )
 
         # save outputs
-        logging.info('Saving model output')
-        new_in_list = [f'{img}.jpg' for img in img_names_list]
-        out_list = parse_model_outcome(new_in_list, f'{main_dir}scraped_photos/', new_sizes_list, predicted_labels_list, scores_list, predicted_bboxes_list)
+        logging.info("Saving model output")
+        new_in_list = [f"{img}.jpg" for img in img_names_list]
+        out_list = parse_model_outcome(
+            new_in_list,
+            f"{main_dir}scraped_photos/",
+            new_sizes_list,
+            predicted_labels_list,
+            scores_list,
+            predicted_bboxes_list,
+        )
 
-        save_list_to_tsv_file(f'{main_dir}data/{save_path}/out.tsv', out_list)
-        save_list_to_tsv_file(f'{main_dir}data/{save_path}/in.tsv', new_in_list)
+        save_list_to_tsv_file(f"{main_dir}data/{save_path}/out.tsv", out_list)
+        save_list_to_tsv_file(
+            f"{main_dir}data/{save_path}/in.tsv", new_in_list
+        )
 
         # mAP metric calculations
         if test:
-            logging.info('Calculating mAP metric')
-            out = from_tsv_to_list(f'{main_dir}data/{save_path}/out.tsv')
+            logging.info("Calculating mAP metric")
+            out = from_tsv_to_list(f"{main_dir}data/{save_path}/out.tsv")
             try:
-                expected = from_tsv_to_list(f'{main_dir}data/{save_path}/expected.tsv')
+                expected = from_tsv_to_list(
+                    f"{main_dir}data/{save_path}/expected.tsv"
+                )
             except:
-                logging.exception("File 'expected.tsv' not found, value of metric cannot be calculated.")
+                logging.exception(
+                    "File 'expected.tsv' not found, value of metric cannot be"
+                    " calculated."
+                )
                 raise Exception()
             model_output, ground_truth = prepare_data_for_ap(out, expected)
-            map_df = pd.DataFrame.from_dict(calculate_map(model_output, ground_truth), orient="index", columns=["AP"])
+            map_df = pd.DataFrame.from_dict(
+                calculate_map(model_output, ground_truth),
+                orient="index",
+                columns=["AP"],
+            )
             with redirect_stdout(logging):
-                print(f'Metric results:\n{map_df.to_string()}')
+                print(f"Metric results:\n{map_df.to_string()}")
 
-        logging.info(f"Model evaluation completed, runtime: {round(time.time()-evaluation_start_time,2)} sec.")
+        logging.info(
+            "Model evaluation completed, runtime:"
+            f" {round(time.time()-evaluation_start_time,2)} sec."
+        )

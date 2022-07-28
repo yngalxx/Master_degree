@@ -12,17 +12,17 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
 
 0. Before use:   
     - clone the repository,
-    - install requirements<em>\*1</em>,
+    - install requirements,
     - clone additional 'image_size' repository from here: https://github.com/scardine/image_size and put in the same directory,
     - install Tesseract OCR using homebrew.
 1. Run "python src/scraper_runner.py" to obtain high-resolution images from the Newspaper Navigator project.
-2. Run "python src/input_runner.py"<em>\*2</em> to create model input data from source annotations files .
-3. Run "python src/model_runner.py"<em>\*2</em> in command line to start training, evaluation or both (feel free to try various argument values).
+2. Run "python src/input_runner.py" to create model input data from source annotations files .
+3. Run "python src/model_runner.py" in command line to start training, evaluation or both (feel free to try various argument values).
 4. Run notebook calculating average precision metric ("notebooks/metric_cal.ipynb") to calculate AP for each class and mAP value.
 5. Run data visualization notebook ("notebooks/data_visualization.ipynb") to visualize model predictions.
-6. Run 'python src/predict_runner.py'<em>\*2</em> if you want to make prediction on your own newspaper image.
+6. Run 'python src/predict_runner.py' if you want to make prediction on your own newspaper image.
 
-<em>*1 Pytorch related packages are not included in requirements.txt, use the following commands to install them: "pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html" if you intend to use the GPU, or "pip3 install torch==1.10.2 torchvision==0.11.3" if you intend to use the CPU (not recommended for training).</em>
-<em>*2</em> Each script with 'runner' in its name is a command line application. Run it with argument '--help' to see the description of the other arguments.
-
-**IMPORTANT:** Valid paths are generated automatically, but you can provide specific ones using click arguments on the command line for each runner.
+**IMPORTANT:**
+- Pytorch related packages are not included in requirements.txt, use the following commands to install them: "pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 torchaudio==0.10.2+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html" if you intend to use the GPU, or "pip3 install torch==1.10.2 torchvision==0.11.3" if you intend to use the CPU (not recommended for training).</em>
+- Each script with 'runner' in its name is a command line application. Run it with argument '--help' to see the description of the other arguments.
+- Valid paths are generated automatically, but you can provide specific ones using click arguments in the command line for each runner.

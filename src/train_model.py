@@ -9,8 +9,7 @@ import torch
 import torchvision
 from tqdm import tqdm
 import pandas as pd
-from functions_catalogue import (calculate_map, predict_eval_set,
-                                 prepare_data_for_ap)
+from functions_catalogue import calculate_map, predict_eval_set, prepare_data_for_ap
 
 # warnings
 warnings.filterwarnings("ignore")

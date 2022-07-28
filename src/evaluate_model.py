@@ -1,15 +1,12 @@
 from contextlib import redirect_stdout
 import warnings
-import numpy as np
 import pandas as pd
 import torch
 import torchvision
-from typing import Union
 from tqdm import tqdm
 import time
 import logging
 from functions_catalogue import parse_model_outcome, save_list_to_tsv_file, prepare_data_for_ap, calculate_map, from_tsv_to_list
-from image_size import get_image_size # source: https://github.com/scardine/image_size
 
 # warnings
 warnings.filterwarnings("ignore")

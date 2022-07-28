@@ -1,6 +1,6 @@
 import os
 import warnings
-
+import logging
 import torch
 import torchvision
 import torchvision.transforms as T
@@ -8,16 +8,17 @@ from torch import optim
 from torch.utils.data import DataLoader
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
-from functions_catalogue import collate_fn, from_tsv_to_list
-from make_prediction import model_predict
+from functions_catalogue import collate_fn, from_tsv_to_list, dump_json
+from evaluate_model import evaluate_model
 from newspapersdataset import NewspapersDataset, prepare_data_for_dataloader
 from train_model import train_model
+
 
 # warnings
 warnings.filterwarnings("ignore")
 
 
-def controller(
+def model_pipeline(
     channel: int,
     num_classes: int,
     learning_rate: float,
@@ -33,7 +34,7 @@ def controller(
     num_workers: int,
     main_dir: str,
     train: bool,
-    predict: bool,
+    evalutaion: bool,
     train_set: bool,
     test_set: bool,
     val_set: bool,
@@ -41,8 +42,7 @@ def controller(
     bbox_format: str,
 ) -> None:
     scraped_photos_dir = f"{main_dir}scraped_photos/"
-    annotations_dir = f"{main_dir}preprocessed_annotations/"
-    print("")
+    annotations_dir = f"{main_dir}data/"
 
     try:
         rescale = float(rescale)
@@ -61,7 +61,7 @@ def controller(
 
     if val_set:
         # create validation dataloader
-        print("Creating validation dataloader ...")
+        logging.info('Creating validation dataloader')
         expected_val = from_tsv_to_list(f"{annotations_dir}dev-0/expected.tsv")
         in_val = from_tsv_to_list(f"{annotations_dir}dev-0/in.tsv")
         val_paths = [scraped_photos_dir + path for path in in_val]
@@ -92,7 +92,7 @@ def controller(
 
     if train_set:
         # create train data loader
-        print("Creating train dataloader ...")
+        logging.info('Creating train dataloader')
         expected_train = from_tsv_to_list(
             f"{annotations_dir}train/expected.tsv"
         )
@@ -122,6 +122,21 @@ def controller(
         )
         # train phase
         if train:
+            model_path = f"{main_dir}model_config/"
+            if not os.path.exists(model_path):
+                logging.info('Directory "model_config" doesn\'t exist, creating one')
+                os.makedirs(model_path)
+            
+            # save rescale, bbox_format and channel arguments in config file for future predictions
+            model_config = {
+                'rescale': rescale,
+                'bbox_format': bbox_format,
+                'channel': channel,
+                'num_classes': num_classes,
+                'trainable_backbone_layers': trainable_backbone_layers
+            }
+            dump_json(f'{model_path}model_config.json', model_config)
+
             # pre-trained resnet50 model
             model = torchvision.models.detection.fasterrcnn_resnet50_fpn(
                 pretrained=True,
@@ -149,6 +164,7 @@ def controller(
                 lr_scheduler = None
 
             # train and save model
+            logging.info('Model training - started!')
             trained_model = train_model(
                 pre_treined_model=model,
                 optimizer=optimizer,
@@ -158,44 +174,35 @@ def controller(
                 val_dataloader=val_dataloader,
                 lr_scheduler=lr_scheduler,
             )
-            model_path = f"{main_dir}saved_models/"
-            if not os.path.exists(model_path):
-                print(
-                    "Directory 'saved_models' doesn't exist, creating one ..."
-                )
-                os.makedirs(model_path)
-            torch.save(trained_model, f"{main_dir}saved_models/model.pth")
+            torch.save(trained_model.state_dict(), f"{model_path}model.pth")
+            logging.info('Model weights saved in "model_config" directory')
 
-    # prediction phase
-    if predict:
+    # evalutaion phase
+    if evalutaion:
+        # initialize model
+        model = torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=True, trainable_backbone_layers=trainable_backbone_layers)
+        in_features = model.roi_heads.box_predictor.cls_score.in_features
+        model.roi_heads.box_predictor = FastRCNNPredictor(
+            in_features, num_classes=num_classes
+        )
+        # load model state dict
         if torch.cuda.is_available() and gpu:
-            try:
-                model = torch.load(
-                    f"{main_dir}saved_models/model.pth",
-                    map_location=torch.device(torch.cuda.current_device()),
-                )
-            except:
-                raise Exception("No model found, code will be forced to quit")
+            map_location=torch.device(torch.cuda.current_device())
         else:
-            try:
-                model = torch.load(
-                    f"{main_dir}saved_models/model.pth",
-                    map_location=torch.device("cpu"),
-                )
-            except:
-                raise Exception(
-                    "No model found, code will be forced to quit ..."
-                )
-        print("Model loaded correctly")
+            map_location=torch.device("cpu")
+        
+        try:
+            model.load_state_dict(torch.load(f"{main_dir}model_config/model.pth", map_location=map_location), strict=True)
+        except:
+            logging.exception("No model found, code will be forced to quit")
+            raise Exception()
 
-        model_output_path = f"{main_dir}model_output/"
-        if not os.path.exists(model_output_path):
-            print("Directory 'model_output' doesn't exist, creating one ...")
-            os.makedirs(model_output_path)
+        model.eval()
+        logging.info(f'Model loaded correctly')
 
         if test_set:
             # create test data loader
-            print("Creating test dataloader ...")
+            logging.info('Creating test dataloader')
             in_test = from_tsv_to_list(f"{annotations_dir}test-A/in.tsv")
             test_paths = [scraped_photos_dir + path for path in in_test]
             data_test = prepare_data_for_dataloader(
@@ -220,31 +227,37 @@ def controller(
                 collate_fn=collate_fn,
                 num_workers=num_workers,
             )
-            # prediction on test set
-            print("\n###  Evaluating test set  ###\n")
-            model_predict(
+            # evaluation on test set
+            logging.info('Test set evaluation - started!')
+            evaluate_model(
                 model=model,
                 dataloader=test_dataloader,
                 gpu=gpu,
-                save_path=f"{model_output_path}test_model_output.csv",
+                main_dir=main_dir,
+                save_path="test-A",
+                test=False,
             )
 
-        # prediction on train set (to check under/overfitting)
+        # evaluation on train set (to check under/overfitting)
         if train_set:
-            print("\n###  Evaluating train set  ###\n")
-            model_predict(
+            logging.info('Train set evaluation - started!')
+            evaluate_model(
                 model=model,
                 dataloader=train_dataloader,
                 gpu=gpu,
-                save_path=f"{model_output_path}train_model_output.csv",
+                main_dir=main_dir,
+                save_path="train",
+                test=True,
             )
 
-        # prediction on validation set
+        # evaluation on validation set
         if val_set:
-            print("\n###  Evaluating validation set  ###\n")
-            model_predict(
+            logging.info('Validation set evaluation - started!')
+            evaluate_model(
                 model=model,
                 dataloader=val_dataloader,
                 gpu=gpu,
-                save_path=f"{model_output_path}val_model_output.csv",
+                main_dir=main_dir,
+                save_path="dev-0",
+                test=True,
             )

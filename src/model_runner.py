@@ -1,9 +1,10 @@
 import pathlib
 
 import click
+import logging
 
-from controller import controller
-
+from model_pipeline import model_pipeline
+from logs import Log
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.option(
@@ -134,10 +135,10 @@ from controller import controller
     show_default=True,
 )
 @click.option(
-    "--predict",
+    "--evalutaion",
     default=True,
     type=bool,
-    help="Make prediction.",
+    help="Evaluation enabled",
     show_default=True,
 )
 @click.option(
@@ -178,7 +179,7 @@ from controller import controller
     ),
     show_default=True,
 )
-def main(
+def model_runner(
     channel,
     num_classes,
     learning_rate,
@@ -194,14 +195,19 @@ def main(
     num_workers,
     main_dir,
     train,
-    predict,
+    evalutaion,
     train_set,
     test_set,
     val_set,
     gpu,
     bbox_format,
 ):
-    controller(
+    # initialize logger
+    logger = Log('model_runner')
+    logger.log_start()
+    logging.write = lambda msg: logging.info(msg) if msg != "\n" else None
+
+    model_pipeline(
         channel=channel,
         num_classes=num_classes,
         learning_rate=learning_rate,
@@ -217,7 +223,7 @@ def main(
         num_workers=num_workers,
         main_dir=main_dir,
         train=train,
-        predict=predict,
+        evalutaion=evalutaion,
         train_set=train_set,
         test_set=test_set,
         val_set=val_set,
@@ -225,6 +231,9 @@ def main(
         bbox_format=bbox_format,
     )
 
+    # end logger
+    logger.log_end()
+
 
 if __name__ == "__main__":
-    main()
+    model_runner()

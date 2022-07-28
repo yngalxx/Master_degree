@@ -1,0 +1,248 @@
+2022-07-27 18:18:25,239 - INFO - INPUT_RUNNER - STARTED!
+2022-07-27 18:18:25,498 - INFO - Rescaling annotations
+2022-07-27 18:19:09,278 - INFO - Preparing final input files
+2022-07-27 18:19:52,539 - INFO - Class statistics for train set
+headline             20528
+advertisement         9910
+photograph            3135
+cartoon                858
+illustration           786
+editorial_cartoon      212
+map                    170
+SUM                  35599
+2022-07-27 18:19:52,542 - INFO - Class statistics for validation set
+headline             1651
+advertisement         813
+photograph            240
+cartoon                81
+illustration           56
+editorial_cartoon      27
+map                    11
+SUM                  2879
+2022-07-27 18:19:52,548 - INFO - Class statistics for test set
+headline             5689
+advertisement        2858
+photograph            879
+cartoon               211
+illustration          206
+editorial_cartoon      54
+map                    34
+SUM                  9931
+
+############################
+
+2022-07-27 18:28:57,745 - INFO - INPUT_RUNNER - STARTED!
+2022-07-27 18:28:57,974 - INFO - Rescaling annotations
+2022-07-27 18:29:38,950 - INFO - Preparing final input files
+2022-07-27 18:30:21,998 - INFO - Class statistics for train set
+headline             20528
+advertisement         9910
+photograph            3135
+cartoon                858
+illustration           786
+editorial_cartoon      212
+map                    170
+SUM                  35599
+2022-07-27 18:30:22,001 - INFO - Class statistics for validation set
+headline             1651
+advertisement         813
+photograph            240
+cartoon                81
+illustration           56
+editorial_cartoon      27
+map                    11
+SUM                  2879
+2022-07-27 18:30:22,007 - INFO - Class statistics for test set
+headline             5689
+advertisement        2858
+photograph            879
+cartoon               211
+illustration          206
+editorial_cartoon      54
+map                    34
+SUM                  9931
+2022-07-27 18:30:22,045 - INFO - INPUT_RUNNER - DONE! 
+EXECUTION TIME: 84.3 sec.
+
+####### JOB FINISHED #######
+
+############################
+
+2022-07-27 18:31:37,489 - INFO - INPUT_RUNNER - STARTED!
+2022-07-27 18:31:37,715 - INFO - Rescaling annotations
+2022-07-27 18:32:22,375 - INFO - Preparing final input files
+2022-07-27 18:33:05,704 - INFO - Class statistics for train set
+headline             20528
+advertisement         9910
+photograph            3135
+cartoon                858
+illustration           786
+editorial_cartoon      212
+map                    170
+SUM                  35599
+2022-07-27 18:33:05,707 - INFO - Class statistics for validation set
+headline             1651
+advertisement         813
+photograph            240
+cartoon                81
+illustration           56
+editorial_cartoon      27
+map                    11
+SUM                  2879
+2022-07-27 18:33:05,713 - INFO - Class statistics for test set
+headline             5689
+advertisement        2858
+photograph            879
+cartoon               211
+illustration          206
+editorial_cartoon      54
+map                    34
+SUM                  9931
+2022-07-27 18:33:05,751 - INFO - INPUT_RUNNER - DONE! EXECUTION TIME: 88.26 sec.
+
+############################
+
+2022-07-27 18:35:46,156 - INFO - INPUT_RUNNER - STARTED!
+2022-07-27 18:35:46,392 - INFO - Rescaling annotations
+2022-07-27 18:36:29,492 - INFO - Preparing final input files
+2022-07-27 18:37:12,527 - INFO - Class statistics for train set
+headline             20528
+advertisement         9910
+photograph            3135
+cartoon                858
+illustration           786
+editorial_cartoon      212
+map                    170
+SUM                  35599
+2022-07-27 18:37:12,530 - INFO - Class statistics for validation set
+headline             1651
+advertisement         813
+photograph            240
+cartoon                81
+illustration           56
+editorial_cartoon      27
+map                    11
+SUM                  2879
+2022-07-27 18:37:12,537 - INFO - Class statistics for test set
+headline             5689
+advertisement        2858
+photograph            879
+cartoon               211
+illustration          206
+editorial_cartoon      54
+map                    34
+SUM                  9931
+2022-07-27 18:37:12,576 - INFO - INPUT_RUNNER - COMPLETED! DURATION: 86.42 sec.
+
+############################
+
+2022-07-27 19:03:10,727 - INFO - INPUT_RUNNER - STARTED!
+2022-07-27 19:03:10,966 - INFO - Rescaling annotations
+
+############################
+
+2022-07-27 19:05:47,757 - INFO - INPUT_RUNNER - STARTED!
+2022-07-27 19:05:47,976 - INFO - Rescaling source annotations to match with high resolution scraped images
+2022-07-27 19:07:20,411 - INFO - Number of images in train set = 2630
+2022-07-27 19:07:20,411 - INFO - Number of annotations in train set = 2630
+2022-07-27 19:07:20,431 - INFO - Labels statistics for train set
+headline             20528
+advertisement         9910
+photograph            3135
+cartoon                858
+illustration           786
+editorial_cartoon      212
+map                    170
+2022-07-27 19:07:20,431 - INFO - Number of images in validation set = 215
+2022-07-27 19:07:20,431 - INFO - Number of annotations in validation set = 215
+2022-07-27 19:07:20,433 - INFO - Labels statistics for validation set
+headline             1651
+advertisement         813
+photograph            240
+cartoon                81
+illustration           56
+editorial_cartoon      27
+map                    11
+2022-07-27 19:07:20,433 - INFO - Number of images in test set = 712
+2022-07-27 19:07:20,434 - INFO - Number of annotations in test set = 712
+2022-07-27 19:07:20,440 - INFO - Labels statistics for test set
+headline             5689
+advertisement        2858
+photograph            879
+cartoon               211
+illustration          206
+editorial_cartoon      54
+map                    34
+2022-07-27 19:07:20,487 - INFO - INPUT_RUNNER - COMPLETED! DURATION: 92.73 sec.
+
+############################
+
+2022-07-27 19:14:07,237 - INFO - INPUT_RUNNER - STARTED!
+2022-07-27 19:14:07,478 - INFO - Rescaling source annotations to match with high resolution scraped images
+2022-07-27 19:15:40,793 - INFO - Number of images in train set = 2630
+2022-07-27 19:15:40,793 - INFO - Labels statistics for train set
+headline             20528
+advertisement         9910
+photograph            3135
+cartoon                858
+illustration           786
+editorial_cartoon      212
+map                    170
+2022-07-27 19:15:40,793 - INFO - Number of annotations in train set = 35599
+2022-07-27 19:15:40,796 - INFO - Number of images in validation set = 215
+2022-07-27 19:15:40,796 - INFO - Labels statistics for validation set
+headline             1651
+advertisement         813
+photograph            240
+cartoon                81
+illustration           56
+editorial_cartoon      27
+map                    11
+2022-07-27 19:15:40,796 - INFO - Number of annotations in validation set = 2879
+2022-07-27 19:15:40,802 - INFO - Number of images in test set = 712
+2022-07-27 19:15:40,802 - INFO - Labels statistics for test set
+headline             5689
+advertisement        2858
+photograph            879
+cartoon               211
+illustration          206
+editorial_cartoon      54
+map                    34
+2022-07-27 19:15:40,802 - INFO - Number of annotations in test set = 9931
+2022-07-27 19:15:40,837 - INFO - INPUT_RUNNER - COMPLETED! DURATION: 93.6 sec.
+
+############################
+
+2022-07-27 19:17:16,462 - INFO - INPUT_RUNNER - STARTED!
+2022-07-27 19:17:16,723 - INFO - Rescaling source annotations to match scraped high-resolution images
+2022-07-27 19:18:42,319 - INFO - Number of images in train set = 2630
+2022-07-27 19:18:42,319 - INFO - Number of annotations in train set = 35599
+2022-07-27 19:18:42,319 - INFO - Labels statistics for train set
+headline             20528
+advertisement         9910
+photograph            3135
+cartoon                858
+illustration           786
+editorial_cartoon      212
+map                    170
+2022-07-27 19:18:42,321 - INFO - Number of images in validation set = 215
+2022-07-27 19:18:42,321 - INFO - Number of annotations in validation set = 2879
+2022-07-27 19:18:42,321 - INFO - Labels statistics for validation set
+headline             1651
+advertisement         813
+photograph            240
+cartoon                81
+illustration           56
+editorial_cartoon      27
+map                    11
+2022-07-27 19:18:42,327 - INFO - Number of images in test set = 712
+2022-07-27 19:18:42,327 - INFO - Number of annotations in test set = 9931
+2022-07-27 19:18:42,327 - INFO - Labels statistics for test set
+headline             5689
+advertisement        2858
+photograph            879
+cartoon               211
+illustration          206
+editorial_cartoon      54
+map                    34
+2022-07-27 19:18:42,385 - INFO - INPUT_RUNNER - COMPLETED! DURATION: 85.92 sec.

@@ -1,0 +1,736 @@
+2022-07-27 22:30:58,309 - INFO - MODEL_RUNNER - STARTED!
+
+############################
+
+2022-07-27 22:32:20,556 - INFO - MODEL_RUNNER - STARTED!
+
+############################
+
+2022-07-27 22:42:43,321 - INFO - MODEL_RUNNER - STARTED!
+
+############################
+
+2022-07-27 22:45:36,995 - INFO - MODEL_RUNNER - STARTED!
+
+############################
+
+2022-07-27 22:47:32,265 - INFO - MODEL_RUNNER - STARTED!
+
+############################
+
+2022-07-27 23:01:06,273 - INFO - MODEL_RUNNER - STARTED!
+2022-07-27 23:01:06,273 - INFO - Creating validation dataloader
+2022-07-27 23:01:09,473 - INFO - Model loaded correctly
+2022-07-27 23:01:09,473 - INFO - Validation set evaluation - started!
+2022-07-27 23:01:09,474 - INFO - Cuda available: {cuda_statement}
+2022-07-27 23:01:09,474 - INFO - Current device: {device}
+
+2022-07-27 23:22:17,951 - INFO - Calculating mAP metric
+2022-07-27 23:22:27,945 - INFO - Metric results:
+                         AP
+photograph         0.766254
+illustration       0.317631
+map                0.658158
+cartoon            0.677152
+editorial_cartoon  0.382264
+headline           0.900025
+advertisement      0.814515
+mAP                0.523161
+
+############################
+
+2022-07-27 23:26:00,293 - INFO - MODEL_RUNNER - STARTED!
+2022-07-27 23:26:00,294 - INFO - Creating validation dataloader
+2022-07-27 23:26:03,359 - INFO - Model loaded correctly
+2022-07-27 23:26:03,359 - INFO - Validation set evaluation - started!
+2022-07-27 23:26:03,359 - INFO - Cuda available: False
+2022-07-27 23:26:03,359 - INFO - Current device: cpu
+2022-07-27 23:46:13,480 - INFO - Calculating mAP metric
+2022-07-27 23:46:23,405 - INFO - Metric results:
+                         AP
+photograph         0.766254
+illustration       0.317631
+map                0.658158
+cartoon            0.677152
+editorial_cartoon  0.382264
+headline           0.900025
+advertisement      0.814515
+mAP                0.523161
+
+############################
+
+2022-07-28 00:04:32,422 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 00:04:32,422 - INFO - Creating validation dataloader
+2022-07-28 00:04:35,746 - INFO - Model loaded correctly
+2022-07-28 00:04:35,746 - INFO - Validation set evaluation - started!
+2022-07-28 00:04:35,746 - INFO - Cuda available: False
+2022-07-28 00:04:35,746 - INFO - Current device: cpu
+2022-07-28 00:24:46,306 - INFO - Calculating mAP metric
+2022-07-28 00:24:55,349 - INFO - Metric results:
+                         AP
+photograph         0.766254
+illustration       0.317631
+map                0.658158
+cartoon            0.677152
+editorial_cartoon  0.382264
+headline           0.900025
+advertisement      0.814515
+mAP                0.523161
+
+############################
+
+2022-07-28 00:32:53,812 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 00:32:53,812 - INFO - Creating validation dataloader
+2022-07-28 00:32:56,759 - INFO - Model loaded correctly
+2022-07-28 00:32:56,759 - INFO - Validation set evaluation - started!
+2022-07-28 00:32:56,759 - INFO - Cuda available: False
+2022-07-28 00:32:56,759 - INFO - Current device: cpu
+2022-07-28 00:53:05,713 - INFO - Calculating mAP metric
+2022-07-28 00:53:15,084 - INFO - {'photograph': 0.76625425, 'illustration': 0.31763086, 'map': 0.65815836, 'cartoon': 0.67715204, 'editorial_cartoon': 0.3822639, 'headline': 0.9000255, 'advertisement': 0.81451476, 'mAP': 0.5231611}
+2022-07-28 00:53:23,710 - INFO -                          AP
+photograph         0.766254
+illustration       0.317631
+map                0.658158
+cartoon            0.677152
+editorial_cartoon  0.382264
+headline           0.900025
+advertisement      0.814515
+mAP                0.523161
+2022-07-28 00:53:23,712 - INFO - Metric results:
+                         AP
+photograph         0.766254
+illustration       0.317631
+map                0.658158
+cartoon            0.677152
+editorial_cartoon  0.382264
+headline           0.900025
+advertisement      0.814515
+mAP                0.523161
+
+############################
+
+2022-07-28 01:31:53,312 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 01:31:53,312 - INFO - Creating validation dataloader
+2022-07-28 01:31:54,152 - INFO - Model loaded correctly
+2022-07-28 01:31:54,153 - INFO - Validation set evaluation - started!
+2022-07-28 01:31:54,153 - INFO - Cuda available: False
+2022-07-28 01:31:54,153 - INFO - Current device: cpu
+2022-07-28 01:37:02,588 - INFO - Calculating mAP metric
+
+############################
+
+2022-07-28 01:48:52,646 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 01:48:52,647 - INFO - Creating validation dataloader
+2022-07-28 01:48:53,438 - INFO - Model loaded correctly
+2022-07-28 01:48:53,439 - INFO - Validation set evaluation - started!
+2022-07-28 01:48:53,439 - INFO - Cuda available: False
+2022-07-28 01:48:53,439 - INFO - Current device: cpu
+2022-07-28 01:54:11,240 - INFO - Calculating mAP metric
+
+############################
+
+2022-07-28 02:01:48,800 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 02:01:48,800 - INFO - Creating validation dataloader
+2022-07-28 02:01:49,542 - INFO - Model loaded correctly
+2022-07-28 02:01:49,542 - INFO - Validation set evaluation - started!
+2022-07-28 02:01:49,542 - INFO - Cuda available: False
+2022-07-28 02:01:49,542 - INFO - Current device: cpu
+
+############################
+
+2022-07-28 02:12:11,961 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 02:12:11,961 - INFO - Creating validation dataloader
+2022-07-28 02:12:12,526 - INFO - Creating train dataloader
+2022-07-28 02:12:55,104 - INFO - Model training - started!
+2022-07-28 02:12:55,104 - INFO - Cuda available: {cuda_statement}
+2022-07-28 02:12:55,105 - INFO - Current device: {device}
+
+2022-07-28 02:22:15,797 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 02:22:15,798 - INFO - Creating validation dataloader
+2022-07-28 02:22:16,457 - INFO - Model loaded correctly
+2022-07-28 02:22:16,458 - INFO - Validation set evaluation - started!
+2022-07-28 02:22:16,458 - INFO - Cuda available: False
+2022-07-28 02:22:16,458 - INFO - Current device: cpu
+2022-07-28 02:27:10,807 - INFO - Calculating mAP metric
+2022-07-28 02:27:16,493 - INFO - Metric results:
+                         AP
+photograph         0.852674
+illustration       0.219244
+map                0.573097
+cartoon            0.722589
+editorial_cartoon  0.403190
+headline           0.931261
+advertisement      0.771842
+mean               0.527827
+2022-07-28 02:27:16,493 - INFO - Saving model output
+
+############################
+
+2022-07-28 03:34:46,807 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 03:34:46,808 - INFO - Creating validation dataloader
+2022-07-28 03:34:47,498 - INFO - Model loaded correctly
+2022-07-28 03:34:47,498 - INFO - Validation set evaluation - started!
+2022-07-28 03:34:47,498 - INFO - Cuda available: False
+2022-07-28 03:34:47,499 - INFO - Current device: cpu
+2022-07-28 03:40:06,607 - INFO - Calculating mAP metric
+2022-07-28 03:40:12,842 - INFO - Metric results:
+                         AP
+photograph         0.852674
+illustration       0.219244
+map                0.573097
+cartoon            0.722589
+editorial_cartoon  0.403190
+headline           0.931261
+advertisement      0.771842
+mean               0.527827
+2022-07-28 03:40:12,843 - INFO - Saving model output
+2022-07-28 03:40:12,874 - INFO - Model evaluation completed, runtime: 325.3754839897156 sec.
+2022-07-28 03:40:12,895 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 326.09 sec.
+
+############################
+
+2022-07-28 03:44:15,463 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 03:44:15,463 - INFO - Creating validation dataloader
+
+############################
+
+2022-07-28 03:45:02,752 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 03:45:02,754 - INFO - Creating validation dataloader
+
+############################
+
+2022-07-28 03:45:35,406 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 03:45:35,407 - INFO - Creating validation dataloader
+
+############################
+
+2022-07-28 03:47:20,965 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 03:47:20,966 - INFO - Creating validation dataloader
+
+############################
+
+2022-07-28 03:47:44,495 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 03:47:44,496 - INFO - Creating validation dataloader
+
+############################
+
+2022-07-28 03:49:15,969 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 03:49:15,970 - INFO - Creating validation dataloader
+
+############################
+
+2022-07-28 03:51:49,550 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 03:51:49,552 - INFO - Creating validation dataloader
+2022-07-28 03:51:54,145 - INFO - Model loaded correctly
+2022-07-28 03:51:54,146 - INFO - Validation set evaluation - started!
+2022-07-28 03:51:54,147 - INFO - Cuda available: False
+2022-07-28 03:51:54,147 - INFO - Current device: cpu
+
+############################
+
+2022-07-28 03:54:10,838 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 03:54:10,839 - INFO - Creating validation dataloader
+2022-07-28 03:54:14,608 - INFO - Model loaded correctly
+2022-07-28 03:54:14,608 - INFO - Validation set evaluation - started!
+2022-07-28 03:54:14,609 - INFO - Cuda available: False
+2022-07-28 03:54:14,609 - INFO - Current device: cpu
+
+############################
+
+2022-07-28 03:58:34,544 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 03:58:34,544 - INFO - Creating validation dataloader
+2022-07-28 03:58:38,347 - INFO - Model loaded correctly
+2022-07-28 03:58:38,347 - INFO - Validation set evaluation - started!
+2022-07-28 03:58:38,347 - INFO - Cuda available: False
+2022-07-28 03:58:38,348 - INFO - Current device: cpu
+
+############################
+
+2022-07-28 03:59:09,975 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 03:59:09,976 - INFO - Creating validation dataloader
+2022-07-28 03:59:15,217 - INFO - Model loaded correctly
+2022-07-28 03:59:15,217 - INFO - Validation set evaluation - started!
+2022-07-28 03:59:15,217 - INFO - Cuda available: False
+2022-07-28 03:59:15,217 - INFO - Current device: cpu
+
+############################
+
+2022-07-28 03:59:49,570 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 03:59:49,571 - INFO - Creating validation dataloader
+
+############################
+
+2022-07-28 03:59:56,232 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 03:59:56,234 - INFO - Creating validation dataloader
+2022-07-28 04:00:01,139 - INFO - Model loaded correctly
+2022-07-28 04:00:01,139 - INFO - Validation set evaluation - started!
+2022-07-28 04:00:01,139 - INFO - Cuda available: False
+2022-07-28 04:00:01,139 - INFO - Current device: cpu
+
+############################
+
+2022-07-28 04:01:29,470 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 04:01:29,471 - INFO - Creating validation dataloader
+2022-07-28 04:01:33,895 - INFO - Model loaded correctly
+2022-07-28 04:01:33,895 - INFO - Validation set evaluation - started!
+2022-07-28 04:01:33,896 - INFO - Cuda available: False
+2022-07-28 04:01:33,896 - INFO - Current device: cpu
+
+############################
+
+2022-07-28 04:04:01,325 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 04:04:01,326 - INFO - Creating validation dataloader
+2022-07-28 04:04:05,776 - INFO - Model loaded correctly
+2022-07-28 04:04:05,776 - INFO - Validation set evaluation - started!
+2022-07-28 04:04:05,776 - INFO - Cuda available: False
+2022-07-28 04:04:05,777 - INFO - Current device: cpu
+2022-07-28 04:23:32,363 - INFO - Calculating mAP metric
+2022-07-28 04:23:44,448 - INFO - Metric results:
+                         AP
+photograph         0.768025
+illustration       0.324870
+map                0.642742
+cartoon            0.672654
+editorial_cartoon  0.379979
+headline           0.900159
+advertisement      0.815138
+mean               0.520984
+2022-07-28 04:23:44,448 - INFO - Saving model output
+2022-07-28 04:23:44,606 - INFO - Model evaluation completed, runtime: 1178.83 sec.
+2022-07-28 04:23:44,643 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 1183.32 sec.
+
+############################
+
+2022-07-28 04:37:07,451 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 04:37:07,451 - INFO - Creating validation dataloader
+
+############################
+
+2022-07-28 04:38:32,650 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 04:38:32,652 - INFO - Creating validation dataloader
+2022-07-28 04:38:37,016 - INFO - Model loaded correctly
+2022-07-28 04:38:37,016 - INFO - Validation set evaluation - started!
+2022-07-28 04:38:37,016 - INFO - Cuda available: False
+2022-07-28 04:38:37,017 - INFO - Current device: cpu
+
+############################
+
+2022-07-28 04:39:38,629 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 04:39:38,630 - INFO - Creating validation dataloader
+
+############################
+
+2022-07-28 04:40:54,947 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 04:40:54,947 - INFO - Creating validation dataloader
+
+############################
+
+2022-07-28 04:42:08,753 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 04:42:08,753 - INFO - Creating validation dataloader
+
+############################
+
+2022-07-28 04:44:25,327 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 04:44:25,328 - INFO - Creating validation dataloader
+2022-07-28 04:44:29,816 - INFO - Model loaded correctly
+2022-07-28 04:44:29,816 - INFO - Validation set evaluation - started!
+2022-07-28 04:44:29,816 - INFO - Cuda available: False
+2022-07-28 04:44:29,816 - INFO - Current device: cpu
+
+############################
+
+2022-07-28 04:44:52,662 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 04:44:52,663 - INFO - Creating validation dataloader
+2022-07-28 04:44:57,209 - INFO - Model loaded correctly
+2022-07-28 04:44:57,209 - INFO - Validation set evaluation - started!
+2022-07-28 04:44:57,209 - INFO - Cuda available: False
+2022-07-28 04:44:57,209 - INFO - Current device: cpu
+
+############################
+
+2022-07-28 04:45:32,091 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 04:45:32,092 - INFO - Creating validation dataloader
+2022-07-28 04:45:35,267 - INFO - Model loaded correctly
+2022-07-28 04:45:35,267 - INFO - Validation set evaluation - started!
+2022-07-28 04:45:35,267 - INFO - Cuda available: False
+2022-07-28 04:45:35,267 - INFO - Current device: cpu
+2022-07-28 05:03:43,475 - INFO - Calculating mAP metric
+2022-07-28 05:03:54,071 - INFO - Metric results:
+                         AP
+photograph         0.768025
+illustration       0.324870
+map                0.642742
+cartoon            0.672654
+editorial_cartoon  0.379979
+headline           0.900159
+advertisement      0.815138
+mean               0.520984
+2022-07-28 05:03:54,071 - INFO - Saving model output
+2022-07-28 05:03:54,205 - INFO - Model evaluation completed, runtime: 1098.94 sec.
+2022-07-28 05:03:54,230 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 1102.14 sec.
+
+############################
+
+2022-07-28 09:59:37,021 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 09:59:37,021 - INFO - Creating validation dataloader
+2022-07-28 09:59:40,321 - INFO - Model loaded correctly
+2022-07-28 09:59:40,321 - INFO - Validation set evaluation - started!
+2022-07-28 09:59:40,321 - INFO - Cuda available: False
+2022-07-28 09:59:40,321 - INFO - Current device: cpu
+2022-07-28 10:18:38,201 - INFO - Calculating mAP metric
+2022-07-28 10:18:49,151 - INFO - Metric results:
+                         AP
+photograph         0.766254
+illustration       0.317631
+map                0.658158
+cartoon            0.677152
+editorial_cartoon  0.382264
+headline           0.900025
+advertisement      0.814515
+mean               0.523161
+2022-07-28 10:18:49,151 - INFO - Saving model output
+2022-07-28 10:18:49,280 - INFO - Model evaluation completed, runtime: 1148.96 sec.
+2022-07-28 10:18:49,309 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 1152.29 sec.
+
+############################
+
+2022-07-28 12:21:04,857 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 12:21:04,858 - INFO - Creating validation dataloader
+2022-07-28 12:21:08,576 - INFO - Model loaded correctly
+2022-07-28 12:21:08,576 - INFO - Validation set evaluation - started!
+2022-07-28 12:21:08,576 - INFO - Cuda available: False
+2022-07-28 12:21:08,576 - INFO - Current device: cpu
+2022-07-28 12:41:20,754 - INFO - Calculating mAP metric
+
+############################
+
+2022-07-28 13:02:28,860 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 13:02:28,861 - INFO - Creating validation dataloader
+2022-07-28 13:02:29,877 - INFO - Model loaded correctly
+2022-07-28 13:02:29,878 - INFO - Validation set evaluation - started!
+2022-07-28 13:02:29,878 - INFO - Cuda available: False
+2022-07-28 13:02:29,878 - INFO - Current device: cpu
+2022-07-28 13:03:31,488 - INFO - Calculating mAP metric
+
+############################
+
+2022-07-28 13:04:32,636 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 13:04:32,637 - INFO - Creating validation dataloader
+2022-07-28 13:04:33,550 - INFO - Model loaded correctly
+2022-07-28 13:04:33,550 - INFO - Validation set evaluation - started!
+2022-07-28 13:04:33,551 - INFO - Cuda available: False
+2022-07-28 13:04:33,551 - INFO - Current device: cpu
+2022-07-28 13:05:33,313 - INFO - Calculating mAP metric
+
+############################
+
+2022-07-28 13:07:57,221 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 13:07:57,221 - INFO - Creating validation dataloader
+2022-07-28 13:07:58,098 - INFO - Model loaded correctly
+2022-07-28 13:07:58,098 - INFO - Validation set evaluation - started!
+2022-07-28 13:07:58,098 - INFO - Cuda available: False
+2022-07-28 13:07:58,098 - INFO - Current device: cpu
+2022-07-28 13:08:58,397 - INFO - Calculating mAP metric
+
+############################
+
+2022-07-28 13:12:17,939 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 13:12:17,940 - INFO - Creating validation dataloader
+2022-07-28 13:12:18,836 - INFO - Model loaded correctly
+2022-07-28 13:12:18,836 - INFO - Validation set evaluation - started!
+2022-07-28 13:12:18,836 - INFO - Cuda available: False
+2022-07-28 13:12:18,836 - INFO - Current device: cpu
+2022-07-28 13:13:18,345 - INFO - Calculating mAP metric
+
+############################
+
+2022-07-28 13:16:21,122 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 13:16:21,123 - INFO - Creating validation dataloader
+2022-07-28 13:16:22,021 - INFO - Model loaded correctly
+2022-07-28 13:16:22,021 - INFO - Validation set evaluation - started!
+2022-07-28 13:16:22,022 - INFO - Cuda available: False
+2022-07-28 13:16:22,022 - INFO - Current device: cpu
+2022-07-28 13:17:22,119 - INFO - Calculating mAP metric
+
+############################
+
+2022-07-28 13:18:31,710 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 13:18:31,711 - INFO - Creating validation dataloader
+2022-07-28 13:18:32,596 - INFO - Model loaded correctly
+2022-07-28 13:18:32,596 - INFO - Validation set evaluation - started!
+2022-07-28 13:18:32,596 - INFO - Cuda available: False
+2022-07-28 13:18:32,596 - INFO - Current device: cpu
+2022-07-28 13:19:32,998 - INFO - Calculating mAP metric
+
+############################
+
+2022-07-28 13:21:47,952 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 13:21:47,954 - INFO - Creating validation dataloader
+2022-07-28 13:21:48,794 - INFO - Model loaded correctly
+2022-07-28 13:21:48,794 - INFO - Validation set evaluation - started!
+2022-07-28 13:21:48,795 - INFO - Cuda available: False
+2022-07-28 13:21:48,795 - INFO - Current device: cpu
+2022-07-28 13:22:48,123 - INFO - Calculating mAP metric
+
+############################
+
+2022-07-28 13:23:50,634 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 13:23:50,635 - INFO - Creating validation dataloader
+2022-07-28 13:23:51,499 - INFO - Model loaded correctly
+2022-07-28 13:23:51,499 - INFO - Validation set evaluation - started!
+2022-07-28 13:23:51,499 - INFO - Cuda available: False
+2022-07-28 13:23:51,499 - INFO - Current device: cpu
+2022-07-28 13:24:50,843 - INFO - Calculating mAP metric
+
+############################
+
+2022-07-28 13:32:51,987 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 13:32:51,987 - INFO - Creating validation dataloader
+2022-07-28 13:32:52,786 - INFO - Model loaded correctly
+2022-07-28 13:32:52,787 - INFO - Validation set evaluation - started!
+2022-07-28 13:32:52,787 - INFO - Cuda available: False
+2022-07-28 13:32:52,787 - INFO - Current device: cpu
+2022-07-28 13:33:10,200 - INFO - Calculating mAP metric
+
+############################
+
+2022-07-28 13:33:50,123 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 13:33:50,124 - INFO - Creating validation dataloader
+2022-07-28 13:33:51,321 - INFO - Model loaded correctly
+2022-07-28 13:33:51,321 - INFO - Validation set evaluation - started!
+2022-07-28 13:33:51,324 - INFO - Cuda available: False
+2022-07-28 13:33:51,324 - INFO - Current device: cpu
+
+############################
+
+2022-07-28 13:34:04,566 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 13:34:04,567 - INFO - Creating validation dataloader
+2022-07-28 13:34:05,376 - INFO - Model loaded correctly
+2022-07-28 13:34:05,376 - INFO - Validation set evaluation - started!
+2022-07-28 13:34:05,376 - INFO - Cuda available: False
+2022-07-28 13:34:05,376 - INFO - Current device: cpu
+2022-07-28 13:34:23,503 - INFO - Calculating mAP metric
+
+############################
+
+2022-07-28 13:35:07,587 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 13:35:07,588 - INFO - Creating validation dataloader
+2022-07-28 13:35:08,384 - INFO - Model loaded correctly
+2022-07-28 13:35:08,384 - INFO - Validation set evaluation - started!
+2022-07-28 13:35:08,384 - INFO - Cuda available: False
+2022-07-28 13:35:08,384 - INFO - Current device: cpu
+2022-07-28 13:35:25,479 - INFO - Calculating mAP metric
+
+############################
+
+2022-07-28 13:35:40,906 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 13:35:40,907 - INFO - Creating validation dataloader
+2022-07-28 13:35:41,718 - INFO - Model loaded correctly
+2022-07-28 13:35:41,718 - INFO - Validation set evaluation - started!
+2022-07-28 13:35:41,718 - INFO - Cuda available: False
+2022-07-28 13:35:41,718 - INFO - Current device: cpu
+2022-07-28 13:35:59,838 - INFO - Calculating mAP metric
+
+############################
+
+2022-07-28 13:36:46,156 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 13:36:46,157 - INFO - Creating validation dataloader
+2022-07-28 13:36:46,972 - INFO - Model loaded correctly
+2022-07-28 13:36:46,973 - INFO - Validation set evaluation - started!
+2022-07-28 13:36:46,973 - INFO - Cuda available: False
+2022-07-28 13:36:46,973 - INFO - Current device: cpu
+2022-07-28 13:37:05,183 - INFO - Calculating mAP metric
+2022-07-28 13:37:08,983 - INFO - Metric results:
+                    AP
+photograph         0.0
+illustration       0.0
+map                0.0
+cartoon            0.0
+editorial_cartoon  0.0
+headline           0.0
+advertisement      0.0
+mean               0.0
+2022-07-28 13:37:08,984 - INFO - Saving model output
+2022-07-28 13:37:08,985 - INFO - Model evaluation completed, runtime: 22.01 sec.
+2022-07-28 13:37:09,004 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 22.85 sec.
+
+############################
+
+2022-07-28 13:38:43,151 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 13:38:43,152 - INFO - Creating validation dataloader
+2022-07-28 13:38:44,204 - INFO - Model loaded correctly
+2022-07-28 13:38:44,204 - INFO - Validation set evaluation - started!
+2022-07-28 13:38:44,204 - INFO - Cuda available: False
+2022-07-28 13:38:44,204 - INFO - Current device: cpu
+2022-07-28 13:40:41,483 - INFO - Calculating mAP metric
+2022-07-28 13:40:45,205 - INFO - Metric results:
+                    AP
+photograph         0.0
+illustration       0.0
+map                0.0
+cartoon            0.0
+editorial_cartoon  0.0
+headline           0.0
+advertisement      0.0
+mean               0.0
+2022-07-28 13:40:45,205 - INFO - Saving model output
+2022-07-28 13:40:45,213 - INFO - Model evaluation completed, runtime: 121.01 sec.
+2022-07-28 13:40:45,233 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 122.08 sec.
+
+############################
+
+2022-07-28 13:43:10,703 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 13:43:10,704 - INFO - Creating validation dataloader
+2022-07-28 13:43:11,768 - INFO - Model loaded correctly
+2022-07-28 13:43:11,768 - INFO - Validation set evaluation - started!
+2022-07-28 13:43:11,768 - INFO - Cuda available: False
+2022-07-28 13:43:11,768 - INFO - Current device: cpu
+2022-07-28 13:45:10,991 - INFO - Calculating mAP metric
+2022-07-28 13:45:15,004 - INFO - Metric results:
+                    AP
+photograph         0.0
+illustration       0.0
+map                0.0
+cartoon            0.0
+editorial_cartoon  0.0
+headline           0.0
+advertisement      0.0
+mean               0.0
+2022-07-28 13:45:15,004 - INFO - Saving model output
+2022-07-28 13:45:15,012 - INFO - Model evaluation completed, runtime: 123.24 sec.
+2022-07-28 13:45:15,031 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 124.33 sec.
+
+############################
+
+2022-07-28 13:50:50,392 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 13:50:50,394 - INFO - Creating validation dataloader
+2022-07-28 13:50:51,441 - INFO - Model loaded correctly
+2022-07-28 13:50:51,442 - INFO - Validation set evaluation - started!
+2022-07-28 13:50:51,442 - INFO - Cuda available: False
+2022-07-28 13:50:51,442 - INFO - Current device: cpu
+2022-07-28 13:52:59,122 - INFO - Calculating mAP metric
+
+############################
+
+2022-07-28 13:56:19,608 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 13:56:19,609 - INFO - Creating validation dataloader
+2022-07-28 13:56:20,733 - INFO - Model loaded correctly
+2022-07-28 13:56:20,733 - INFO - Validation set evaluation - started!
+2022-07-28 13:56:20,733 - INFO - Cuda available: False
+2022-07-28 13:56:20,734 - INFO - Current device: cpu
+2022-07-28 13:58:18,621 - INFO - Calculating mAP metric
+2022-07-28 13:58:22,380 - INFO - Metric results:
+                    AP
+photograph         0.0
+illustration       0.0
+map                0.0
+cartoon            0.0
+editorial_cartoon  0.0
+headline           0.0
+advertisement      0.0
+mean               0.0
+2022-07-28 13:58:22,381 - INFO - Saving model output
+2022-07-28 13:58:22,389 - INFO - Model evaluation completed, runtime: 121.66 sec.
+2022-07-28 13:58:22,410 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 122.8 sec.
+
+############################
+
+2022-07-28 14:03:56,665 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 14:03:56,666 - INFO - Creating validation dataloader
+2022-07-28 14:03:57,925 - INFO - Model loaded correctly
+2022-07-28 14:03:57,925 - INFO - Validation set evaluation - started!
+2022-07-28 14:03:57,926 - INFO - Cuda available: False
+2022-07-28 14:03:57,926 - INFO - Current device: cpu
+2022-07-28 14:05:57,029 - INFO - Calculating mAP metric
+
+############################
+
+2022-07-28 14:07:21,769 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 14:07:21,769 - INFO - Creating validation dataloader
+2022-07-28 14:07:22,804 - INFO - Model loaded correctly
+2022-07-28 14:07:22,804 - INFO - Validation set evaluation - started!
+2022-07-28 14:07:22,805 - INFO - Cuda available: False
+2022-07-28 14:07:22,805 - INFO - Current device: cpu
+2022-07-28 14:09:20,928 - INFO - Calculating mAP metric
+2022-07-28 14:09:25,147 - INFO - Metric results:
+                         AP
+photograph         0.888305
+illustration       0.567327
+map                0.752475
+cartoon            1.000000
+editorial_cartoon  0.422442
+headline           0.960594
+advertisement      0.827266
+mean               0.652111
+2022-07-28 14:09:25,148 - INFO - Saving model output
+2022-07-28 14:09:25,155 - INFO - Model evaluation completed, runtime: 122.35 sec.
+2022-07-28 14:09:25,173 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 123.4 sec.
+
+############################
+
+2022-07-28 14:14:23,968 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 14:14:23,968 - INFO - Creating validation dataloader
+2022-07-28 14:14:25,076 - INFO - Model loaded correctly
+2022-07-28 14:14:25,076 - INFO - Validation set evaluation - started!
+2022-07-28 14:14:25,077 - INFO - Cuda available: False
+2022-07-28 14:14:25,077 - INFO - Current device: cpu
+2022-07-28 14:16:34,463 - INFO - Calculating mAP metric
+2022-07-28 14:16:39,194 - INFO - Metric results:
+                       AP
+photograph         0.8883
+illustration       0.5673
+map                0.7525
+cartoon            1.0000
+editorial_cartoon  0.4224
+headline           0.9606
+advertisement      0.8273
+mean               0.6521
+2022-07-28 14:16:39,194 - INFO - Saving model output
+2022-07-28 14:16:39,202 - INFO - Model evaluation completed, runtime: 134.13 sec.
+2022-07-28 14:16:39,226 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 135.26 sec.
+
+############################
+
+2022-07-28 14:32:52,899 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 14:32:52,899 - INFO - Creating validation dataloader
+2022-07-28 14:32:54,048 - INFO - Model loaded correctly
+2022-07-28 14:32:54,049 - INFO - Validation set evaluation - started!
+2022-07-28 14:32:54,049 - INFO - Cuda available: False
+2022-07-28 14:32:54,049 - INFO - Current device: cpu
+2022-07-28 14:34:51,284 - INFO - Calculating mAP metric
+2022-07-28 14:34:55,493 - INFO - Metric results:
+                       AP
+photograph         0.8883
+illustration       0.5673
+map                0.7525
+cartoon            1.0000
+editorial_cartoon  0.4224
+headline           0.9606
+advertisement      0.8273
+mean               0.6521
+2022-07-28 14:34:55,493 - INFO - Saving model output
+2022-07-28 14:34:55,500 - INFO - Model evaluation completed, runtime: 121.45 sec.
+2022-07-28 14:34:55,520 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 122.62 sec.
+
+############################
+
+2022-07-28 14:52:47,233 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 14:52:47,233 - INFO - Creating validation dataloader
+2022-07-28 14:52:48,326 - INFO - Model loaded correctly
+2022-07-28 14:52:48,327 - INFO - Validation set evaluation - started!
+2022-07-28 14:52:48,327 - INFO - Cuda available: False
+2022-07-28 14:52:48,327 - INFO - Current device: cpu
+2022-07-28 14:54:52,797 - INFO - Saving model output
+2022-07-28 14:54:52,808 - INFO - Calculating mAP metric
+2022-07-28 14:54:57,835 - INFO - Metric results:
+                       AP
+photograph         0.8883
+illustration       0.5673
+map                0.7525
+cartoon            1.0000
+editorial_cartoon  0.4224
+headline           0.9606
+advertisement      0.8273
+mean               0.6498
+2022-07-28 14:54:57,835 - INFO - Model evaluation completed, runtime: 129.51 sec.
+2022-07-28 14:54:57,860 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 130.63 sec.

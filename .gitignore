@@ -4,8 +4,6 @@
 .idea
 .vscode
 __pycache__
-saved_models/
-model_output/
 scraped_photos/
-preprocessed_annotations/
+model_config/model.pth
 venv/

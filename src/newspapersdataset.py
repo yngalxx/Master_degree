@@ -8,6 +8,7 @@ import pandas as pd
 import torch
 import torchvision
 from PIL import Image
+from functions_catalogue import target_encoder
 
 sys.path.append(
     "/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-2])
@@ -17,26 +18,6 @@ from image_size import \
 
 # warnings
 warnings.filterwarnings("ignore")
-
-
-def news_navigator_target_encoder(str_label: str) -> int:
-    if str_label == "photograph":
-        num_label = 1
-    elif str_label == "illustration":
-        num_label = 2
-    elif str_label == "map":
-        num_label = 3
-    elif str_label == "cartoon":
-        num_label = 4
-    elif str_label == "editorial_cartoon":
-        num_label = 5
-    elif str_label == "headline":
-        num_label = 6
-    elif str_label == "advertisement":
-        num_label = 7
-    else:
-        raise Exception(f"Unknown class - {str_label}")
-    return num_label
 
 
 def prepare_data_for_dataloader(
@@ -74,7 +55,7 @@ def prepare_data_for_dataloader(
                 file_num_name = in_list[i].split(".")[0]
                 expected_list_split_2 = expected_list_split[ii].split(":")
                 bbox = expected_list_split_2[1].split(",")
-                label = news_navigator_target_encoder(expected_list_split_2[0])
+                label = target_encoder(expected_list_split_2[0], reverse=False)
                 x0, y0 = int(bbox[0]), int(bbox[1])
                 x1, y1 = int(bbox[2]), int(bbox[3])
                 if bbox_format == "x0y0wh":

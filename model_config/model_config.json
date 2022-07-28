@@ -1,0 +1,8 @@
+{
+    "rescale": [
+        1000,
+        1000
+    ],
+    "bbox_format": "x0y0x1y1",
+    "channel": 1
+}

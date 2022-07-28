@@ -1,13 +1,14 @@
-import datetime
+from contextlib import redirect_stdout
+import time
 import json
 import math
 import sys
 import warnings
-
+import logging
 import torch
 import torchvision
 from tqdm import tqdm
-
+import pandas as pd
 from functions_catalogue import (calculate_map, predict_eval_set,
                                  prepare_data_for_ap)
 
@@ -24,21 +25,19 @@ def train_model(
     lr_scheduler: torch.optim.lr_scheduler.StepLR = None,
     gpu: bool = True,
 ) -> torchvision.models.detection.FasterRCNN:
-    start_time = datetime.datetime.now()
-    print(f"Training start time: {start_time} \n")
+    training_start_time = time.time()
     # switch to gpu if available
     cuda_statement = torch.cuda.is_available()
-    print(f"Cuda available: {cuda_statement}")
+    logging.info(f"Cuda available: {cuda_statement}")
     if cuda_statement and gpu:
         device = torch.device(torch.cuda.current_device())
     else:
         device = torch.device("cpu")
-    print(f"Current device: {device}\n")
+    logging.info(f"Current device: {device}\n")
     # move model to the right device
     pre_treined_model.to(device)
-    print("###  Training  ###")
-    for epoch in range(epochs):
-        print(f"###  Epoch: {epoch+1}  ###")
+    for epoch in tqdm(range(epochs), desc='Training'):
+        epoch_start_time = time.time()
         pre_treined_model.train()
         train_loss = 0.0
         for images, targets in tqdm(train_dataloader):
@@ -54,7 +53,7 @@ def train_model(
             losses = sum(loss_dict.values())
             loss_value = losses.item()
             if not math.isfinite(loss_value):
-                print(f"\nERROR: Loss is {loss_value}, stopping training")
+                logging.error(f"Loss is {loss_value}, stopping training", exc_info=True)
                 sys.exit(1)
             # calculate gradients
             losses.backward()
@@ -63,18 +62,15 @@ def train_model(
             # calculate loss
             train_loss += loss_value
 
-        print(
-            f"### {datetime.datetime.now()} ### [epoch {epoch + 1}]:"
-            f" train_time = {datetime.datetime.now()-start_time} | train_loss"
-            f" = {train_loss / len(train_dataloader)}"
-        )
+        logging.info(f"[epoch {epoch + 1}] Epoch train time: {round(time.time()-epoch_start_time,2)} sec. | train loss = {train_loss / len(train_dataloader)}")
 
         # update the learning rate
         if lr_scheduler:
             lr_scheduler.step()
+
         # evaluate on the validation dataset
         if val_dataloader:
-            print("### Evaluation ###")
+            logging.info('Calculating mAP metric on validation set')
             out, targ = predict_eval_set(
                 dataloader=val_dataloader,
                 model=pre_treined_model,
@@ -82,13 +78,10 @@ def train_model(
             )
             prep_pred, prepr_gt = prepare_data_for_ap(out, targ)
             eval_metrics = calculate_map(prep_pred, prepr_gt)
-            print(json.dumps(eval_metrics, indent=4))
+            with redirect_stdout(logging):
+                print(json.dumps(eval_metrics, indent=4))
+                print(f'Metric results:\n{pd.DataFrame.from_dict(eval_metrics, orient="index", columns=["AP"]).to_string()}')
 
-    print(
-        "\n### Model training completed, runtime:"
-        f" {datetime.datetime.now() - start_time} ###"
-    )
-
-    print(f"\n####### JOB FINISHED #######\n\n")
+    logging.info(f"Model training completed, runtime: {round(time.time()-training_start_time,2)} sec.")
 
     return pre_treined_model

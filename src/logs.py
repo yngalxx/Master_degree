@@ -1,8 +1,8 @@
 import contextlib
 import logging
 import os
-import pathlib
 import time
+import pathlib
 from logging.handlers import WatchedFileHandler
 
 
@@ -13,12 +13,12 @@ class Log:
         self.start_time = time.time()
         if not os.path.exists(self.log_path):
             os.makedirs(self.log_path)
-        log_file = f"{self.log_path}{self.script_name.lower()}.log"
+        log_file = f'{self.log_path}{self.script_name.lower()}.log'
         self.log_file = log_file
-        handler = WatchedFileHandler(os.environ.get("LOGFILE", log_file))
-        formatter = logging.Formatter(
-            "%(asctime)s - %(levelname)s - %(message)s"
+        handler = WatchedFileHandler(
+            os.environ.get("LOGFILE", log_file)
         )
+        formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
         handler.setFormatter(formatter)
         self.handler = handler
         log = logging.getLogger()
@@ -36,9 +36,7 @@ class Log:
                 lines = f.read().splitlines()
                 last_line = lines[-1]
 
-            if (last_line != "") and (
-                os.stat(self.log_file).st_size == 0
-            ) == False:
+            if (last_line != ("")) and (os.stat(self.log_file).st_size == 0) == False:
                 with open(self.log_file, "a") as file:
                     file.write(f"\n############################\n\n")
 
@@ -46,10 +44,8 @@ class Log:
 
     def log_end(self):
         # time
-        end_time = round(time.time() - self.start_time, 2)
-        logging.info(
-            f"{self.script_name.upper()} - COMPLETED! RUNTIME: {end_time} sec."
-        )
+        end_time = round(time.time()-self.start_time, 2)
+        logging.info(f'{self.script_name.upper()} - COMPLETED! RUNTIME: {end_time} sec.')
 
         self.log.removeHandler(self.handler_to_console)
         self.log.removeHandler(self.handler)

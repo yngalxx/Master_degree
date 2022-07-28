@@ -1,15 +1,18 @@
-from contextlib import redirect_stdout
-import time
 import json
+import logging
 import math
 import sys
+import time
 import warnings
-import logging
+from contextlib import redirect_stdout
+
+import pandas as pd
 import torch
 import torchvision
 from tqdm import tqdm
-import pandas as pd
-from functions_catalogue import calculate_map, predict_eval_set, prepare_data_for_ap
+
+from functions_catalogue import (calculate_map, predict_eval_set,
+                                 prepare_data_for_ap)
 
 # warnings
 warnings.filterwarnings("ignore")
@@ -35,7 +38,7 @@ def train_model(
     logging.info(f"Current device: {device}\n")
     # move model to the right device
     pre_treined_model.to(device)
-    for epoch in tqdm(range(epochs), desc='Training'):
+    for epoch in tqdm(range(epochs), desc="Training"):
         epoch_start_time = time.time()
         pre_treined_model.train()
         train_loss = 0.0
@@ -52,7 +55,9 @@ def train_model(
             losses = sum(loss_dict.values())
             loss_value = losses.item()
             if not math.isfinite(loss_value):
-                logging.error(f"Loss is {loss_value}, stopping training", exc_info=True)
+                logging.error(
+                    f"Loss is {loss_value}, stopping training", exc_info=True
+                )
                 sys.exit(1)
             # calculate gradients
             losses.backward()
@@ -61,7 +66,11 @@ def train_model(
             # calculate loss
             train_loss += loss_value
 
-        logging.info(f"[epoch {epoch + 1}] Epoch train time: {round(time.time()-epoch_start_time,2)} sec. | train loss = {train_loss / len(train_dataloader)}")
+        logging.info(
+            f"[epoch {epoch + 1}] Epoch train time:"
+            f" {round(time.time()-epoch_start_time,2)} sec. | train loss ="
+            f" {train_loss / len(train_dataloader)}"
+        )
 
         # update the learning rate
         if lr_scheduler:
@@ -69,7 +78,7 @@ def train_model(
 
         # evaluate on the validation dataset
         if val_dataloader:
-            logging.info('Calculating mAP metric on validation set')
+            logging.info("Calculating mAP metric on validation set")
             out, targ = predict_eval_set(
                 dataloader=val_dataloader,
                 model=pre_treined_model,
@@ -79,8 +88,14 @@ def train_model(
             eval_metrics = calculate_map(prep_pred, prepr_gt)
             with redirect_stdout(logging):
                 print(json.dumps(eval_metrics, indent=4))
-                print(f'Metric results:\n{pd.DataFrame.from_dict(eval_metrics, orient="index", columns=["AP"]).to_string()}')
+                print(
+                    "Metric"
+                    f' results:\n{pd.DataFrame.from_dict(eval_metrics, orient="index", columns=["AP"]).to_string()}'
+                )
 
-    logging.info(f"Model training completed, runtime: {round(time.time()-training_start_time,2)} sec.")
+    logging.info(
+        "Model training completed, runtime:"
+        f" {round(time.time()-training_start_time,2)} sec."
+    )
 
     return pre_treined_model

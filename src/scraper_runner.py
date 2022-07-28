@@ -1,11 +1,14 @@
 import json
+import logging
 import os
 import pathlib
-import logging
+
 import click
 import requests
 from tqdm import tqdm
+
 from logs import Log
+
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.option(
@@ -23,7 +26,7 @@ def image_scraper(main_dir):
     formatted files with annotations obtained from source repository (newspaper-navigator-master)
     """
     # initialize logger
-    logger = Log('scraper_runner')
+    logger = Log("scraper_runner")
     logger.log_start()
 
     # check whether the scraped_photos directory exists, and if not create it
@@ -33,15 +36,13 @@ def image_scraper(main_dir):
         logging.info('Directory "scraped_photos" doesn\'t exist, creating one')
         os.makedirs(final_path)
 
-    with open(
-        f"{main_dir}/source_annotations/trainval.json"
-    ) as jsonFile:
+    with open(f"{main_dir}/source_annotations/trainval.json") as jsonFile:
         jsonObject = json.load(jsonFile)
         jsonFile.close()
 
     images_num = len(jsonObject["images"])
-    logging.info(f'Collecting {images_num} images')
-    for i in tqdm(range(images_num), desc='Scraping'):
+    logging.info(f"Collecting {images_num} images")
+    for i in tqdm(range(images_num), desc="Scraping"):
         _, _, files = next(os.walk(final_path))
 
         file_name = jsonObject["images"][i]["file_name"]

@@ -1,10 +1,11 @@
+import logging
 import pathlib
 
 import click
-import logging
 
-from model_pipeline import model_pipeline
 from logs import Log
+from model_pipeline import model_pipeline
+
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.option(
@@ -203,7 +204,7 @@ def model_runner(
     bbox_format,
 ):
     # initialize logger
-    logger = Log('model_runner')
+    logger = Log("model_runner")
     logger.log_start()
     logging.write = lambda msg: logging.info(msg) if msg != "\n" else None
 

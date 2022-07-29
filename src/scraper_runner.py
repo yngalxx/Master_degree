@@ -1,11 +1,13 @@
 import json
-import os
 import logging
+import os
+
 import click
 import requests
 from tqdm import tqdm
-from logs import Log
+
 from constants import General_args
+from logs import Log
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -16,7 +18,6 @@ from constants import General_args
     help="Path to the level where this repository is stored.",
     show_default=True,
 )
-
 def image_scraper(main_dir):
     """
     Simple scraper to retriev full-resolution images from urls finded in COCO
@@ -26,7 +27,7 @@ def image_scraper(main_dir):
     assert os.path.exists(main_dir) == True
 
     # initialize logger
-    logger = Log('scraper_runner')
+    logger = Log("scraper_runner")
     logger.log_start()
 
     # check whether the scraped_photos directory exists, and if not create it
@@ -36,15 +37,13 @@ def image_scraper(main_dir):
         logging.info('Directory "scraped_photos" doesn\'t exist, creating one')
         os.makedirs(final_path)
 
-    with open(
-        f"{main_dir}/source_annotations/trainval.json"
-    ) as jsonFile:
+    with open(f"{main_dir}/source_annotations/trainval.json") as jsonFile:
         jsonObject = json.load(jsonFile)
         jsonFile.close()
 
     images_num = len(jsonObject["images"])
-    logging.info(f'Collecting {images_num} images')
-    for i in tqdm(range(images_num), desc='Scraping'):
+    logging.info(f"Collecting {images_num} images")
+    for i in tqdm(range(images_num), desc="Scraping"):
         _, _, files = next(os.walk(final_path))
 
         file_name = jsonObject["images"][i]["file_name"]

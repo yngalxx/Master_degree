@@ -1,10 +1,11 @@
-import pathlib
-import os
-import click
 import logging
-from model_pipeline import model_pipeline
+import os
+
+import click
+
+from constants import Data_args, General_args, Model_args, Output_args
 from logs import Log
-from constants import Model_args, General_args, Output_args, Data_args
+from model_pipeline import model_pipeline
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -114,7 +115,10 @@ from constants import Model_args, General_args, Output_args, Data_args
     "--pretrained",
     default=Model_args.PRETRAINED,
     type=bool,
-    help="Start training using pretrained ResNet-50 instead of training from scratch",
+    help=(
+        "Start training using pretrained ResNet-50 instead of training from"
+        " scratch"
+    ),
     show_default=True,
 )
 @click.option(
@@ -153,7 +157,12 @@ from constants import Model_args, General_args, Output_args, Data_args
     "--val_set",
     default=General_args.VAL_SET,
     type=bool,
-    help="Use validation data set. If value is equal to False, the evaluation during training will not be available, nor model will be saved afterwards. if you want to save it anyway use the '--force_save_model' flag.",
+    help=(
+        "Use validation data set. If value is equal to False, the evaluation"
+        " during training will not be available, nor model will be saved"
+        " afterwards. if you want to save it anyway use the"
+        " '--force_save_model' flag."
+    ),
     show_default=True,
 )
 @click.option(
@@ -192,7 +201,6 @@ from constants import Model_args, General_args, Output_args, Data_args
     help="Model evaluation enabled",
     required=True,
 )
-
 def model_runner(
     channel,
     num_classes,
@@ -222,21 +230,31 @@ def model_runner(
     assert os.path.exists(main_dir) == True
 
     # initialize logger
-    logger = Log('model_runner')
+    logger = Log("model_runner")
     logger.log_start()
 
     if not train:
-        logging.warning('Argument "train" not passed, this phase will be skipped')
-    
+        logging.warning(
+            'Argument "train" not passed, this phase will be skipped'
+        )
+
     if not evaluate:
-        logging.warning('Argument "evaluate" not passed, this phase will be skipped')
+        logging.warning(
+            'Argument "evaluate" not passed, this phase will be skipped'
+        )
 
     if not train and not evaluate:
-        logging.error('Both arguments "train" and "evaluate" not passed, code will be forced to quit!')
+        logging.error(
+            'Both arguments "train" and "evaluate" not passed, code will be'
+            " forced to quit!"
+        )
         raise ValueError()
 
     if not train_set and not val_set and not test_set:
-        logging.error('None of the arguments: "train_set", "val_set" and "test_set" passed, code will be forced to quit!')
+        logging.error(
+            'None of the arguments: "train_set", "val_set" and "test_set"'
+            " passed, code will be forced to quit!"
+        )
         raise ValueError()
 
     model_pipeline(

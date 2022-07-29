@@ -1,16 +1,17 @@
 import json
 import os
+
+import click
 import torch
 import torchvision
-import click
-from torch.utils.data import DataLoader
 import torchvision.transforms as T
 from torch.utils.data import DataLoader
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
-import torchvision.transforms as T
-from newspapersdataset import prepare_data_for_dataloader, NewspapersDataset
-from functions_catalogue import collate_fn, predict_one_img, show_random_img_with_all_annotations
+
 from constants import Output_args
+from functions_catalogue import (collate_fn, predict_one_img,
+                                 show_random_img_with_all_annotations)
+from newspapersdataset import NewspapersDataset, prepare_data_for_dataloader
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -18,7 +19,7 @@ from constants import Output_args
     "--path_to_image",
     type=str,
     help="Path to the image on which you want to make prediciton.",
-    required=True
+    required=True,
 )
 @click.option(
     "--model_config_path",
@@ -34,11 +35,10 @@ from constants import Output_args
     help="Minimum confidence level for model predictions to show up.",
     show_default=True,
 )
-
 def predict(path_to_image, model_config_path, min_conf_level):
     # check provided path
     assert os.path.exists(path_to_image) == True
-    
+
     # extract path and file name
     image_path_split = path_to_image.split("/")
     image_dir = f'{"/".join(image_path_split[:-1])}/'
@@ -46,19 +46,21 @@ def predict(path_to_image, model_config_path, min_conf_level):
 
     # read model config file
     try:
-        path = 'model_config.json'
-        config = json.load(open(f'{model_config_path}/{path}'))
+        path = "model_config.json"
+        config = json.load(open(f"{model_config_path}/{path}"))
     except:
-        raise FileNotFoundError(f"File '{path}' not found, code will be forced to quit")
+        raise FileNotFoundError(
+            f"File '{path}' not found, code will be forced to quit"
+        )
 
-    if isinstance(config['rescale'], float):
-        rescale = config['rescale']
+    if isinstance(config["rescale"], float):
+        rescale = config["rescale"]
     else:
-        rescale = [config['rescale'][0], config['rescale'][1]]
+        rescale = [config["rescale"][0], config["rescale"][1]]
 
     data_transform = T.Compose(
         [
-            T.Grayscale(num_output_channels=config['channel']),
+            T.Grayscale(num_output_channels=config["channel"]),
             T.ToTensor(),
             T.Normalize((0.5,), (0.5,)),
         ]
@@ -68,7 +70,7 @@ def predict(path_to_image, model_config_path, min_conf_level):
     data = prepare_data_for_dataloader(
         img_dir=image_dir,
         in_list=[image_name],
-        bbox_format=config['bbox_format'],
+        bbox_format=config["bbox_format"],
         scale=rescale,
         test=True,
     )
@@ -87,25 +89,34 @@ def predict(path_to_image, model_config_path, min_conf_level):
         num_workers=2,
     )
     model = torchvision.models.detection.fasterrcnn_resnet50_fpn(
-        pretrained=config['pretrained'],
-        trainable_backbone_layers=config['trainable_backbone_layers']
+        pretrained=config["pretrained"],
+        trainable_backbone_layers=config["trainable_backbone_layers"],
     )
     in_features = model.roi_heads.box_predictor.cls_score.in_features
     model.roi_heads.box_predictor = FastRCNNPredictor(
-        in_features, num_classes=config['num_classes']
+        in_features, num_classes=config["num_classes"]
     )
     try:
-        model.load_state_dict(torch.load(f"{model_config_path}/model.pth", map_location=torch.device("cpu")), strict=True)
+        model.load_state_dict(
+            torch.load(
+                f"{model_config_path}/model.pth",
+                map_location=torch.device("cpu"),
+            ),
+            strict=True,
+        )
     except:
-        raise FileNotFoundError(f"No model found in '{config_dir_name}' directory, code will be forced to quit")
+        raise FileNotFoundError(
+            f"No model found in '{config_dir_name}' directory, code will be"
+            " forced to quit"
+        )
 
     model.eval()
-    
+
     pred = predict_one_img(
         model=model,
         dataloader=dataloader,
         image_name=image_name,
-        path_to_image=image_dir
+        path_to_image=image_dir,
     )
 
     show_random_img_with_all_annotations(
@@ -114,17 +125,17 @@ def predict(path_to_image, model_config_path, min_conf_level):
         path_to_photos=image_dir,
         confidence_level=min_conf_level,
         matplotlib_colours_dict={
-            'photograph': 'lime',
-            'illustration': 'orangered', 
-            'map': 'yellow', 
-            'cartoon': 'deepskyblue', 
-            'headline': 'cyan', 
-            'advertisement': 'deeppink'
+            "photograph": "lime",
+            "illustration": "orangered",
+            "map": "yellow",
+            "cartoon": "deepskyblue",
+            "headline": "cyan",
+            "advertisement": "deeppink",
         },
         jupyter=False,
-        pages = 1,
+        pages=1,
     )
-    
+
 
 if __name__ == "__main__":
     predict()

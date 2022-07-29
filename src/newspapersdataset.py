@@ -1,11 +1,13 @@
 import warnings
 from typing import List, Tuple, Union
+
 import numpy as np
 import pandas as pd
 import torch
 import torchvision
 from PIL import Image
-from functions_catalogue import target_encoder, get_image_size
+
+from functions_catalogue import get_image_size, target_encoder
 
 # warnings
 warnings.filterwarnings("ignore")

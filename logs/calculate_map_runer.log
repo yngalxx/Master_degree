@@ -1,0 +1,172 @@
+2022-07-29 10:07:43,914 - INFO - CALCULATE_MAP_RUNER - STARTED!
+
+############################
+
+2022-07-29 10:08:31,477 - INFO - CALCULATE_MAP_RUNER - STARTED!
+2022-07-29 10:08:31,477 - INFO - Processing file: "train/out.tsv"
+2022-07-29 10:08:31,532 - ERROR - Error while processing train files: prepare_data_for_ap() got an unexpected keyword argument 'from_file'
+2022-07-29 10:08:31,532 - INFO - Processing file: "dev-0/out.tsv"
+2022-07-29 10:08:39,029 - INFO - Metric results:
+                   AP
+photograph     0.7143
+illustration   0.3318
+map            0.0458
+cartoon        0.4958
+headline       0.9288
+advertisement  0.8242
+mean           0.4158
+2022-07-29 10:08:39,030 - INFO - Processing file: "test-A/out.tsv"
+
+############################
+
+2022-07-29 10:09:40,980 - INFO - CALCULATE_MAP_RUNER - STARTED!
+2022-07-29 10:09:40,981 - INFO - Processing file: "train/out.tsv"
+
+############################
+
+2022-07-29 10:10:18,233 - INFO - CALCULATE_MAP_RUNER - STARTED!
+2022-07-29 10:10:18,233 - INFO - Processing file: "train/out.tsv"
+2022-07-29 10:11:51,531 - INFO - Metric results:
+                   AP
+photograph     0.7979
+illustration   0.4932
+map            0.3391
+cartoon        0.6846
+headline       0.9583
+advertisement  0.9367
+mean           0.5504
+2022-07-29 10:11:51,531 - INFO - Processing file: "dev-0/out.tsv"
+2022-07-29 10:11:59,121 - INFO - Metric results:
+                   AP
+photograph     0.7143
+illustration   0.3318
+map            0.0458
+cartoon        0.4958
+headline       0.9288
+advertisement  0.8242
+mean           0.4158
+2022-07-29 10:11:59,121 - INFO - Processing file: "test-A/out.tsv"
+2022-07-29 10:12:47,793 - INFO - Metric results:
+                   AP
+photograph     0.5314
+illustration   0.1209
+map            0.0605
+cartoon        0.2130
+headline       0.9087
+advertisement  0.7875
+mean           0.3039
+2022-07-29 10:12:47,793 - INFO - CALCULATE_MAP_RUNER - COMPLETED! RUNTIME: 149.56 sec.
+
+############################
+
+2022-07-29 10:15:21,172 - INFO - CALCULATE_MAP_RUNER - STARTED!
+2022-07-29 10:15:21,172 - INFO - Processing file: "train/out.tsv"
+
+############################
+
+2022-07-29 10:44:33,727 - INFO - CALCULATE_MAP_RUNER - STARTED!
+2022-07-29 10:44:33,727 - WARNING - Argument "train_set" not passed, calculating metric for this set will be skipped
+2022-07-29 10:44:33,727 - WARNING - Argument "val_set" not passed, calculating metric for this set will be skipped
+2022-07-29 10:44:33,727 - WARNING - Argument "test_set" not passed, calculating metric for this set will be skipped
+2022-07-29 10:44:33,727 - ERROR - None of the arguments "train_set", "val_set" and "test_set" not passed, aborted!
+
+############################
+
+2022-07-29 10:45:43,556 - INFO - CALCULATE_MAP_RUNER - STARTED!
+2022-07-29 10:45:43,556 - WARNING - Argument "train_set" not passed, calculating metric for this set will be skipped
+2022-07-29 10:45:43,556 - WARNING - Argument "val_set" not passed, calculating metric for this set will be skipped
+2022-07-29 10:45:43,556 - WARNING - Argument "test_set" not passed, calculating metric for this set will be skipped
+2022-07-29 10:45:43,556 - ERROR - None of the arguments: "train_set", "val_set" and "test_set" passed, aborted!
+
+############################
+
+2022-07-29 10:45:58,918 - INFO - CALCULATE_MAP_RUNER - STARTED!
+2022-07-29 10:45:58,918 - WARNING - Argument "train_set" not passed, calculating metric for this set will be skipped
+2022-07-29 10:45:58,918 - INFO - Processing file: "dev-0/out.tsv"
+2022-07-29 10:46:06,487 - INFO - Metric results:
+                   AP
+photograph     0.7143
+illustration   0.3318
+map            0.0458
+cartoon        0.4958
+headline       0.9288
+advertisement  0.8242
+mean           0.4158
+2022-07-29 10:46:06,488 - WARNING - Argument "test_set" not passed, calculating metric for this set will be skipped
+2022-07-29 10:46:06,488 - INFO - CALCULATE_MAP_RUNER - COMPLETED! RUNTIME: 7.57 sec.
+
+############################
+
+2022-07-29 11:03:31,642 - INFO - CALCULATE_MAP_RUNER - STARTED!
+2022-07-29 11:03:31,642 - WARNING - Argument "train_set" not passed, calculating metric for this set will be skipped
+2022-07-29 11:03:31,642 - INFO - Processing file: "dev-0/out.tsv"
+
+############################
+
+2022-07-30 00:56:05,635 - INFO - CALCULATE_MAP_RUNER - STARTED!
+2022-07-30 00:56:05,636 - INFO - Processing file: "train/out.tsv"
+2022-07-30 00:57:22,977 - INFO - Metric results:
+                   AP
+photograph     0.9682
+illustration   0.9777
+map            0.9881
+cartoon        0.9701
+headline       0.9850
+advertisement  0.9898
+mean           0.9057
+2022-07-30 00:57:22,977 - INFO - Processing file: "dev-0/out.tsv"
+2022-07-30 00:57:35,151 - INFO - Metric results:
+                   AP
+photograph     0.7372
+illustration   0.3049
+map            0.5358
+cartoon        0.6715
+headline       0.9009
+advertisement  0.8249
+mean           0.5433
+2022-07-30 00:57:35,151 - INFO - Processing file: "test-A/out.tsv"
+2022-07-30 00:57:59,100 - INFO - Metric results:
+                   AP
+photograph     0.7297
+illustration   0.4107
+map            0.6765
+cartoon        0.6975
+headline       0.8889
+advertisement  0.8566
+mean           0.5663
+2022-07-30 00:57:59,100 - INFO - CALCULATE_MAP_RUNER - COMPLETED! RUNTIME: 113.47 sec.
+
+############################
+
+2022-07-30 01:04:00,956 - INFO - CALCULATE_MAP_RUNER - STARTED!
+2022-07-30 01:04:00,957 - INFO - Processing file: "train/out.tsv"
+2022-07-30 01:05:17,086 - INFO - Metric results:
+                   AP
+photograph     0.9682
+illustration   0.9777
+map            0.9881
+cartoon        0.9701
+headline       0.9850
+advertisement  0.9898
+mean           0.9057
+2022-07-30 01:05:17,087 - INFO - Processing file: "dev-0/out.tsv"
+2022-07-30 01:05:27,006 - INFO - Metric results:
+                   AP
+photograph     0.7372
+illustration   0.3049
+map            0.5358
+cartoon        0.6715
+headline       0.9009
+advertisement  0.8249
+mean           0.5433
+2022-07-30 01:05:27,007 - INFO - Processing file: "test-A/out.tsv"
+2022-07-30 01:05:51,651 - INFO - Metric results:
+                   AP
+photograph     0.7297
+illustration   0.4107
+map            0.6765
+cartoon        0.6975
+headline       0.8889
+advertisement  0.8566
+mean           0.5663
+2022-07-30 01:05:51,652 - INFO - CALCULATE_MAP_RUNER - COMPLETED! RUNTIME: 110.7 sec.

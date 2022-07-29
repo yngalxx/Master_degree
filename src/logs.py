@@ -36,11 +36,11 @@ class Log:
                 lines = f.read().splitlines()
                 last_line = lines[-1]
 
-            if (last_line != ("")) and (os.stat(self.log_file).st_size == 0) == False:
+            if last_line != ("") and os.stat(self.log_file).st_size != 0:
                 with open(self.log_file, "a") as file:
                     file.write(f"\n############################\n\n")
 
-        logging.info(self.script_name.upper() + " - STARTED!")
+        logging.info(f"{self.script_name.upper()} - STARTED!")
 
     def log_end(self):
         # time

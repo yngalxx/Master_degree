@@ -1,27 +1,30 @@
 import json
 import os
-import pathlib
 import logging
 import click
 import requests
 from tqdm import tqdm
 from logs import Log
+from constants import General_args
+
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.option(
     "--main_dir",
-    default="/".join(
-        str(pathlib.Path(__file__).parent.resolve()).split("/")[:-1]
-    ),
+    default=General_args.MAIN_DIR,
     type=str,
-    help="Path to the level where this repository is stored",
+    help="Path to the level where this repository is stored.",
     show_default=True,
 )
+
 def image_scraper(main_dir):
     """
     Simple scraper to retriev full-resolution images from urls finded in COCO
     formatted files with annotations obtained from source repository (newspaper-navigator-master)
     """
+    # check provided path
+    assert os.path.exists(main_dir) == True
+
     # initialize logger
     logger = Log('scraper_runner')
     logger.log_start()

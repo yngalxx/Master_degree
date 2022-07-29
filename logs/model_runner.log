@@ -734,3 +734,2732 @@ advertisement      0.8273
 mean               0.6498
 2022-07-28 14:54:57,835 - INFO - Model evaluation completed, runtime: 129.51 sec.
 2022-07-28 14:54:57,860 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 130.63 sec.
+
+############################
+
+2022-07-28 14:50:26,618 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 14:50:26,618 - INFO - Creating validation dataloader
+2022-07-28 14:50:28,024 - INFO - Creating train dataloader
+2022-07-28 14:50:50,105 - INFO - Model training - started!
+2022-07-28 14:50:50,269 - INFO - Cuda available: True
+2022-07-28 14:50:50,276 - INFO - Current device: cuda:0
+
+2022-07-28 14:51:34,272 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 14:51:34,273 - INFO - Creating validation dataloader
+2022-07-28 14:51:35,751 - INFO - Creating train dataloader
+2022-07-28 14:51:58,662 - INFO - Model training - started!
+2022-07-28 14:51:58,811 - INFO - Cuda available: True
+2022-07-28 14:51:58,812 - INFO - Current device: cuda:0
+
+############################
+
+2022-07-28 14:53:58,746 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 14:53:58,746 - INFO - Creating validation dataloader
+2022-07-28 14:54:00,156 - INFO - Creating train dataloader
+2022-07-28 14:54:22,081 - INFO - Model training - started!
+2022-07-28 14:54:22,252 - INFO - Cuda available: True
+2022-07-28 14:54:22,253 - INFO - Current device: cuda:0
+2022-07-28 14:59:15,313 - INFO - [epoch 1] Epoch train time: 289.42 sec. | train loss = 0.8095708279898672
+2022-07-28 14:59:15,314 - INFO - Calculating mAP metric on validation set
+
+############################
+
+2022-07-28 15:01:32,705 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 15:01:32,705 - INFO - Creating validation dataloader
+2022-07-28 15:01:34,276 - INFO - Creating train dataloader
+2022-07-28 15:01:58,834 - INFO - Model training - started!
+2022-07-28 15:01:58,991 - INFO - Cuda available: True
+2022-07-28 15:01:58,991 - INFO - Current device: cuda:0
+
+############################
+
+2022-07-28 15:03:46,969 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 15:03:46,969 - INFO - Creating validation dataloader
+2022-07-28 15:03:57,204 - INFO - Creating train dataloader
+2022-07-28 15:04:21,161 - INFO - Model training - started!
+2022-07-28 15:04:21,323 - INFO - Cuda available: True
+2022-07-28 15:04:21,324 - INFO - Current device: cuda:0
+2022-07-28 15:09:15,031 - INFO - [epoch 1] Epoch train time: 290.01 sec. | train loss = 0.8397760329824505
+2022-07-28 15:09:15,032 - INFO - Calculating mAP metric on validation set
+
+############################
+
+2022-07-28 15:15:34,418 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 15:15:34,418 - INFO - Creating validation dataloader
+2022-07-28 15:15:38,640 - INFO - Creating train dataloader
+
+############################
+
+2022-07-28 15:16:15,803 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 15:16:15,803 - INFO - Creating validation dataloader
+2022-07-28 15:16:17,288 - INFO - Creating train dataloader
+2022-07-28 15:16:41,575 - INFO - Model training - started!
+2022-07-28 15:16:41,750 - INFO - Cuda available: True
+2022-07-28 15:16:41,751 - INFO - Current device: cuda:0
+2022-07-28 15:21:34,752 - INFO - [Epoch 1] Epoch train time: 289.39 sec. | train loss = 0.8360873845490542
+2022-07-28 15:21:34,752 - INFO - Calculating mAP metric on validation set
+
+############################
+
+2022-07-28 15:24:11,453 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 15:24:11,454 - INFO - Creating validation dataloader
+2022-07-28 15:24:12,953 - INFO - Creating train dataloader
+2022-07-28 15:24:37,378 - INFO - Model training - started!
+2022-07-28 15:24:37,572 - INFO - Cuda available: True
+2022-07-28 15:24:37,573 - INFO - Current device: cuda:0
+
+############################
+
+2022-07-28 15:25:16,810 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 15:25:16,810 - INFO - Creating validation dataloader
+2022-07-28 15:25:18,239 - INFO - Creating train dataloader
+2022-07-28 15:25:40,639 - INFO - Model training - started!
+2022-07-28 15:25:40,820 - INFO - Cuda available: True
+2022-07-28 15:25:40,821 - INFO - Current device: cuda:0
+
+############################
+
+2022-07-28 15:27:26,319 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 15:27:26,319 - INFO - Creating validation dataloader
+2022-07-28 15:27:27,941 - INFO - Creating train dataloader
+2022-07-28 15:27:52,247 - INFO - Model training - started!
+2022-07-28 15:27:52,419 - INFO - Cuda available: True
+2022-07-28 15:27:52,420 - INFO - Current device: cuda:0
+
+############################
+
+2022-07-28 15:29:34,812 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 15:29:34,813 - INFO - Creating validation dataloader
+2022-07-28 15:29:36,234 - INFO - Creating train dataloader
+2022-07-28 15:29:57,885 - INFO - Model training - started!
+2022-07-28 15:29:58,063 - INFO - Cuda available: True
+2022-07-28 15:29:58,063 - INFO - Current device: cuda:0
+2022-07-28 15:34:54,017 - INFO - [Epoch 1] Epoch train time: 292.28 sec. | train loss = 0.8454908109072483
+2022-07-28 15:34:54,018 - INFO - Evaluating validation set
+
+############################
+
+2022-07-28 18:13:20,979 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 18:13:20,979 - INFO - Creating validation dataloader
+2022-07-28 18:13:22,612 - INFO - Creating train dataloader
+2022-07-28 18:13:47,683 - INFO - Model training - started!
+2022-07-28 18:13:47,853 - INFO - Cuda available: True
+2022-07-28 18:13:47,857 - INFO - Current device: cuda:0
+2022-07-28 18:18:47,419 - INFO - [Epoch 1] Epoch train time: 292.45 sec. | train loss = 0.8328171544002764
+2022-07-28 18:18:47,420 - INFO - Evaluating validation set
+2022-07-28 18:19:13,572 - INFO - Calculating mAP metric on validation set
+
+############################
+
+2022-07-28 18:30:06,301 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 18:30:06,301 - INFO - Creating validation dataloader
+2022-07-28 18:30:07,778 - INFO - Creating train dataloader
+2022-07-28 18:30:32,309 - INFO - Model training - started!
+2022-07-28 18:30:32,484 - INFO - Cuda available: True
+2022-07-28 18:30:32,485 - INFO - Current device: cuda:0
+2022-07-28 18:35:27,620 - INFO - [Epoch 1] Epoch train time: 291.47 sec. | train loss = 0.8111116407495557
+2022-07-28 18:35:27,621 - INFO - Evaluating validation set
+2022-07-28 18:35:53,297 - INFO - Calculating mAP metric on validation set
+2022-07-28 18:36:08,582 - INFO - Metric results:
+                   AP
+photograph     0.5706
+illustration   0.1348
+map            0.0537
+cartoon        0.1942
+headline       0.9092
+advertisement  0.7077
+mean           0.2906
+2022-07-28 18:41:12,133 - INFO - [Epoch 2] Epoch train time: 303.55 sec. | train loss = 0.5036832879890095
+2022-07-28 18:41:12,135 - INFO - Evaluating validation set
+2022-07-28 18:41:47,394 - INFO - Calculating mAP metric on validation set
+2022-07-28 18:41:58,888 - INFO - Metric results:
+                   AP
+photograph     0.6352
+illustration   0.1688
+map            0.0533
+cartoon        0.4389
+headline       0.9251
+advertisement  0.7988
+mean           0.3663
+2022-07-28 18:46:53,339 - INFO - [Epoch 3] Epoch train time: 294.45 sec. | train loss = 0.4347552035794114
+2022-07-28 18:46:53,340 - INFO - Evaluating validation set
+2022-07-28 18:47:18,847 - INFO - Calculating mAP metric on validation set
+2022-07-28 18:47:29,999 - INFO - Metric results:
+                   AP
+photograph     0.6254
+illustration   0.2128
+map            0.0511
+cartoon        0.4684
+headline       0.9342
+advertisement  0.8104
+mean           0.3729
+2022-07-28 18:52:23,978 - INFO - [Epoch 4] Epoch train time: 293.98 sec. | train loss = 0.3986950206937212
+2022-07-28 18:52:23,981 - INFO - Evaluating validation set
+2022-07-28 18:52:49,341 - INFO - Calculating mAP metric on validation set
+2022-07-28 18:52:59,012 - INFO - Metric results:
+                   AP
+photograph     0.6636
+illustration   0.2829
+map            0.0784
+cartoon        0.6174
+headline       0.9367
+advertisement  0.8338
+mean           0.4174
+2022-07-28 18:57:53,776 - INFO - [Epoch 5] Epoch train time: 294.76 sec. | train loss = 0.36485638708779305
+2022-07-28 18:57:53,779 - INFO - Evaluating validation set
+2022-07-28 18:58:19,140 - INFO - Calculating mAP metric on validation set
+2022-07-28 18:58:28,136 - INFO - Metric results:
+                   AP
+photograph     0.7202
+illustration   0.2429
+map            0.0866
+cartoon        0.4395
+headline       0.9297
+advertisement  0.8247
+mean           0.4050
+2022-07-28 19:03:23,068 - INFO - [Epoch 6] Epoch train time: 294.93 sec. | train loss = 0.30867377691196674
+2022-07-28 19:03:23,071 - INFO - Evaluating validation set
+2022-07-28 19:03:48,474 - INFO - Calculating mAP metric on validation set
+2022-07-28 19:03:55,696 - INFO - Metric results:
+                   AP
+photograph     0.7630
+illustration   0.3875
+map            0.0715
+cartoon        0.6564
+headline       0.9379
+advertisement  0.8413
+mean           0.4731
+2022-07-28 19:08:50,979 - INFO - [Epoch 7] Epoch train time: 295.28 sec. | train loss = 0.280436248941855
+2022-07-28 19:08:50,982 - INFO - Evaluating validation set
+2022-07-28 19:09:16,386 - INFO - Calculating mAP metric on validation set
+2022-07-28 19:09:23,182 - INFO - Metric results:
+                   AP
+photograph     0.7602
+illustration   0.3889
+map            0.0857
+cartoon        0.6135
+headline       0.9357
+advertisement  0.8539
+mean           0.4640
+2022-07-28 19:14:18,242 - INFO - [Epoch 8] Epoch train time: 295.06 sec. | train loss = 0.2599013059428244
+2022-07-28 19:14:18,245 - INFO - Evaluating validation set
+2022-07-28 19:14:43,742 - INFO - Calculating mAP metric on validation set
+2022-07-28 19:14:49,851 - INFO - Metric results:
+                   AP
+photograph     0.7450
+illustration   0.4186
+map            0.1059
+cartoon        0.5647
+headline       0.9352
+advertisement  0.8332
+mean           0.4633
+2022-07-28 19:19:44,895 - INFO - [Epoch 9] Epoch train time: 295.04 sec. | train loss = 0.24466175175074376
+2022-07-28 19:19:44,897 - INFO - Evaluating validation set
+2022-07-28 19:20:10,250 - INFO - Calculating mAP metric on validation set
+2022-07-28 19:20:16,198 - INFO - Metric results:
+                   AP
+photograph     0.7065
+illustration   0.3249
+map            0.0836
+cartoon        0.4507
+headline       0.9279
+advertisement  0.7952
+mean           0.4243
+2022-07-28 19:25:11,337 - INFO - [Epoch 10] Epoch train time: 295.14 sec. | train loss = 0.23544513036807377
+2022-07-28 19:25:11,340 - INFO - Evaluating validation set
+2022-07-28 19:25:36,766 - INFO - Calculating mAP metric on validation set
+2022-07-28 19:25:42,716 - INFO - Metric results:
+                   AP
+photograph     0.6659
+illustration   0.2383
+map            0.2126
+cartoon        0.5587
+headline       0.9268
+advertisement  0.8312
+mean           0.4333
+2022-07-28 19:30:37,927 - INFO - [Epoch 11] Epoch train time: 295.21 sec. | train loss = 0.2212439727602583
+2022-07-28 19:30:37,930 - INFO - Evaluating validation set
+2022-07-28 19:31:03,409 - INFO - Calculating mAP metric on validation set
+2022-07-28 19:31:08,564 - INFO - Metric results:
+                   AP
+photograph     0.7715
+illustration   0.4075
+map            0.6633
+cartoon        0.6804
+headline       0.9336
+advertisement  0.8396
+mean           0.5700
+2022-07-28 19:36:03,928 - INFO - [Epoch 12] Epoch train time: 295.36 sec. | train loss = 0.20121471520626183
+2022-07-28 19:36:03,930 - INFO - Evaluating validation set
+2022-07-28 19:36:29,444 - INFO - Calculating mAP metric on validation set
+2022-07-28 19:36:34,314 - INFO - Metric results:
+                   AP
+photograph     0.7906
+illustration   0.4125
+map            0.6485
+cartoon        0.6989
+headline       0.9319
+advertisement  0.8232
+mean           0.5809
+2022-07-28 19:41:29,883 - INFO - [Epoch 13] Epoch train time: 295.57 sec. | train loss = 0.18795758029728224
+2022-07-28 19:41:29,886 - INFO - Evaluating validation set
+2022-07-28 19:41:55,263 - INFO - Calculating mAP metric on validation set
+2022-07-28 19:41:59,949 - INFO - Metric results:
+                   AP
+photograph     0.7758
+illustration   0.3965
+map            0.7472
+cartoon        0.7139
+headline       0.9319
+advertisement  0.8311
+mean           0.5940
+2022-07-28 19:46:55,709 - INFO - [Epoch 14] Epoch train time: 295.76 sec. | train loss = 0.17672533334204646
+2022-07-28 19:46:55,712 - INFO - Evaluating validation set
+2022-07-28 19:47:21,146 - INFO - Calculating mAP metric on validation set
+2022-07-28 19:47:25,956 - INFO - Metric results:
+                   AP
+photograph     0.7695
+illustration   0.4072
+map            0.7784
+cartoon        0.7177
+headline       0.9216
+advertisement  0.8224
+mean           0.5947
+2022-07-28 19:52:21,344 - INFO - [Epoch 15] Epoch train time: 295.39 sec. | train loss = 0.17009345977143808
+2022-07-28 19:52:21,347 - INFO - Evaluating validation set
+2022-07-28 19:52:46,986 - INFO - Calculating mAP metric on validation set
+2022-07-28 19:52:51,699 - INFO - Metric results:
+                   AP
+photograph     0.7809
+illustration   0.3682
+map            0.8065
+cartoon        0.7055
+headline       0.9289
+advertisement  0.8148
+mean           0.5872
+2022-07-28 19:57:56,500 - INFO - [Epoch 16] Epoch train time: 304.8 sec. | train loss = 0.16493299892454436
+2022-07-28 19:57:56,503 - INFO - Evaluating validation set
+2022-07-28 19:58:22,200 - INFO - Calculating mAP metric on validation set
+2022-07-28 19:58:26,766 - INFO - Metric results:
+                   AP
+photograph     0.7836
+illustration   0.3372
+map            0.7678
+cartoon        0.7661
+headline       0.9203
+advertisement  0.8164
+mean           0.5999
+2022-07-28 20:03:40,132 - INFO - [Epoch 17] Epoch train time: 313.37 sec. | train loss = 0.15585074932737783
+2022-07-28 20:03:40,135 - INFO - Evaluating validation set
+2022-07-28 20:04:05,517 - INFO - Calculating mAP metric on validation set
+2022-07-28 20:04:10,039 - INFO - Metric results:
+                   AP
+photograph     0.7916
+illustration   0.3465
+map            0.6749
+cartoon        0.7469
+headline       0.9119
+advertisement  0.8151
+mean           0.5840
+2022-07-28 20:09:14,534 - INFO - [Epoch 18] Epoch train time: 304.5 sec. | train loss = 0.14918250583789566
+2022-07-28 20:09:14,537 - INFO - Evaluating validation set
+2022-07-28 20:09:40,074 - INFO - Calculating mAP metric on validation set
+2022-07-28 20:09:44,508 - INFO - Metric results:
+                   AP
+photograph     0.7864
+illustration   0.3508
+map            0.6840
+cartoon        0.7313
+headline       0.9100
+advertisement  0.8027
+mean           0.5801
+2022-07-28 20:14:39,915 - INFO - [Epoch 19] Epoch train time: 295.41 sec. | train loss = 0.14305847124619916
+2022-07-28 20:14:39,917 - INFO - Evaluating validation set
+2022-07-28 20:15:05,238 - INFO - Calculating mAP metric on validation set
+2022-07-28 20:15:09,550 - INFO - Metric results:
+                   AP
+photograph     0.7809
+illustration   0.3422
+map            0.6990
+cartoon        0.7205
+headline       0.9101
+advertisement  0.8022
+mean           0.5781
+2022-07-28 20:20:04,723 - INFO - [Epoch 20] Epoch train time: 295.17 sec. | train loss = 0.13793049942363392
+2022-07-28 20:20:04,726 - INFO - Evaluating validation set
+2022-07-28 20:20:30,177 - INFO - Calculating mAP metric on validation set
+2022-07-28 20:20:34,416 - INFO - Metric results:
+                   AP
+photograph     0.7861
+illustration   0.3226
+map            0.7288
+cartoon        0.7071
+headline       0.9094
+advertisement  0.7963
+mean           0.5809
+2022-07-28 20:20:34,416 - INFO - Model training completed, runtime: 6602.11 sec.
+2022-07-28 20:20:34,585 - INFO - Model saved in model_config/model.pth directory
+2022-07-28 20:20:35,210 - INFO - Model loaded correctly
+2022-07-28 20:20:35,210 - INFO - Creating test dataloader
+2022-07-28 20:20:36,478 - INFO - Test set evaluation - started!
+2022-07-28 20:20:36,479 - INFO - Cuda available: True
+2022-07-28 20:20:36,479 - INFO - Current device: cuda:0
+
+############################
+
+2022-07-28 21:33:56,821 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 21:33:56,821 - INFO - Creating validation dataloader
+2022-07-28 21:33:58,425 - INFO - Creating train dataloader
+
+############################
+
+2022-07-28 21:34:19,644 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 21:34:19,644 - INFO - Creating validation dataloader
+2022-07-28 21:34:21,047 - INFO - Creating train dataloader
+2022-07-28 21:34:43,211 - INFO - Model training phase - started!
+
+############################
+
+2022-07-28 21:35:34,714 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 21:35:34,714 - INFO - Creating validation dataloader
+2022-07-28 21:35:36,105 - INFO - Creating train dataloader
+2022-07-28 21:35:57,234 - INFO - Model training phase - started!
+2022-07-28 21:35:57,832 - INFO - Cuda available: True
+2022-07-28 21:35:57,867 - INFO - Current device: cuda:0
+2022-07-28 21:41:37,072 - INFO - [Epoch 1] Epoch train time: 331.94 sec. | train loss = 0.8269
+2022-07-28 21:41:37,073 - INFO - Evaluating validation set
+2022-07-28 21:42:05,230 - INFO - Calculating mAP metric on validation set
+2022-07-28 21:42:19,449 - INFO - Metric results:
+                   AP
+photograph     0.5365
+illustration   0.1267
+map            0.0279
+cartoon        0.2296
+headline       0.9132
+advertisement  0.7454
+mean           0.3027
+2022-07-28 21:42:19,449 - INFO - Model training completed, runtime: 381.8 sec.
+2022-07-28 21:42:19,458 - INFO - Overriding the previous model due to better performance of the new one or the "--force_save_model" flag used.
+2022-07-28 21:42:19,459 - INFO - Model config json saved in model_config/ directory
+2022-07-28 21:42:19,619 - INFO - Model saved in model_config/ directory
+2022-07-28 21:42:19,623 - INFO - Model evaluation resuls saved in model_config/ directory
+2022-07-28 21:42:19,623 - INFO - Model evaluation phase - started!
+2022-07-28 21:42:20,247 - INFO - Model loaded correctly
+2022-07-28 21:42:20,247 - INFO - Creating test dataloader
+2022-07-28 21:42:21,562 - INFO - Test set evaluation - started!
+2022-07-28 21:42:21,563 - INFO - Cuda available: True
+2022-07-28 21:42:21,563 - INFO - Current device: cuda:0
+
+############################
+
+2022-07-28 21:49:51,578 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 21:49:51,578 - INFO - Creating validation dataloader
+2022-07-28 21:49:53,041 - INFO - Creating train dataloader
+2022-07-28 21:50:15,945 - INFO - Model training phase - started!
+2022-07-28 21:50:16,839 - INFO - Cuda available: True
+2022-07-28 21:50:16,840 - INFO - Current device: cuda:0
+2022-07-28 21:55:43,544 - INFO - [Epoch 1] Epoch train time: 323.0 sec. | train loss = 0.8276
+2022-07-28 21:55:43,545 - INFO - Evaluating validation set
+2022-07-28 21:56:11,780 - INFO - Calculating mAP metric on validation set
+2022-07-28 21:56:26,333 - INFO - Metric results:
+                   AP
+photograph     0.4994
+illustration   0.1282
+map            0.0319
+cartoon        0.2289
+headline       0.9085
+advertisement  0.7210
+mean           0.2879
+2022-07-28 21:56:26,333 - INFO - Model training completed, runtime: 369.68 sec.
+
+############################
+
+2022-07-28 21:59:30,338 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 21:59:30,338 - INFO - Creating validation dataloader
+2022-07-28 21:59:31,757 - INFO - Creating train dataloader
+2022-07-28 21:59:55,590 - INFO - Model training phase - started!
+2022-07-28 21:59:56,341 - INFO - Cuda available: True
+2022-07-28 21:59:56,342 - INFO - Current device: cuda:0
+2022-07-28 22:05:32,078 - INFO - [Epoch 1] Epoch train time: 332.09 sec. | train loss = 0.8145
+2022-07-28 22:05:32,079 - INFO - Evaluating validation set
+2022-07-28 22:06:00,465 - INFO - Calculating mAP metric on validation set
+2022-07-28 22:06:15,147 - INFO - Metric results:
+                   AP
+photograph     0.5776
+illustration   0.1503
+map            0.0600
+cartoon        0.3834
+headline       0.9090
+advertisement  0.7223
+mean           0.3289
+2022-07-28 22:06:15,147 - INFO - Model training completed, runtime: 379.01 sec.
+
+############################
+
+2022-07-28 22:07:03,175 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 22:07:03,176 - INFO - Creating validation dataloader
+2022-07-28 22:07:04,623 - INFO - Creating train dataloader
+2022-07-28 22:07:28,839 - INFO - Model training phase - started!
+2022-07-28 22:07:29,591 - INFO - Cuda available: True
+2022-07-28 22:07:29,592 - INFO - Current device: cuda:0
+2022-07-28 22:12:54,932 - INFO - [Epoch 1] Epoch train time: 321.6 sec. | train loss = 0.8433
+2022-07-28 22:12:54,933 - INFO - Evaluating validation set
+2022-07-28 22:13:23,427 - INFO - Calculating mAP metric on validation set
+2022-07-28 22:13:37,958 - INFO - Metric results:
+                   AP
+photograph     0.5327
+illustration   0.0922
+map            0.0296
+cartoon        0.1591
+headline       0.9140
+advertisement  0.7280
+mean           0.2804
+2022-07-28 22:13:37,959 - INFO - Model training completed, runtime: 368.55 sec.
+
+############################
+
+2022-07-28 22:22:15,804 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 22:22:15,804 - INFO - Creating validation dataloader
+2022-07-28 22:22:17,269 - INFO - Creating train dataloader
+2022-07-28 22:22:41,172 - INFO - Model training phase - started!
+2022-07-28 22:22:41,946 - INFO - Cuda available: True
+2022-07-28 22:22:41,947 - INFO - Current device: cuda:0
+2022-07-28 22:28:07,472 - INFO - [Epoch 1] Epoch train time: 321.83 sec. | train loss = 0.8223
+2022-07-28 22:28:07,473 - INFO - Evaluating validation set
+2022-07-28 22:28:35,606 - INFO - Calculating mAP metric on validation set
+2022-07-28 22:28:51,814 - INFO - Metric results:
+                   AP
+photograph     0.5539
+illustration   0.0848
+map            0.0294
+cartoon        0.2823
+headline       0.9136
+advertisement  0.7090
+mean           0.2877
+2022-07-28 22:28:51,814 - INFO - Model training completed, runtime: 370.07 sec.
+2022-07-28 22:28:51,827 - INFO - Model not saved because lack of validation data set or worse performance than previous one
+2022-07-28 22:28:51,827 - INFO - Model evaluation phase - started!
+2022-07-28 22:28:52,618 - INFO - Model loaded correctly
+2022-07-28 22:28:52,618 - INFO - Creating test dataloader
+2022-07-28 22:28:53,643 - INFO - Test set evaluation - started!
+2022-07-28 22:28:53,643 - INFO - Cuda available: True
+2022-07-28 22:28:53,643 - INFO - Current device: cuda:0
+2022-07-28 22:30:21,949 - INFO - Saving model output
+2022-07-28 22:30:22,808 - INFO - Model evaluation completed, runtime: 89.17 sec.
+2022-07-28 22:30:22,814 - INFO - Train set evaluation - started!
+2022-07-28 22:30:22,814 - INFO - Cuda available: True
+2022-07-28 22:30:22,814 - INFO - Current device: cuda:0
+2022-07-28 22:35:46,342 - INFO - Saving model output
+2022-07-28 22:35:50,223 - INFO - Calculating mAP metric
+2022-07-28 22:38:54,102 - INFO - Metric results:
+                   AP
+photograph     0.5827
+illustration   0.1235
+map            0.0429
+cartoon        0.2921
+headline       0.9145
+advertisement  0.8007
+mean           0.3126
+2022-07-28 22:38:54,102 - INFO - Model evaluation completed, runtime: 511.29 sec.
+2022-07-28 22:38:54,135 - INFO - Validation set evaluation - started!
+2022-07-28 22:38:54,135 - INFO - Cuda available: True
+2022-07-28 22:38:54,136 - INFO - Current device: cuda:0
+2022-07-28 22:39:21,536 - INFO - Saving model output
+2022-07-28 22:39:21,725 - INFO - Calculating mAP metric
+2022-07-28 22:39:36,045 - INFO - Metric results:
+                   AP
+photograph     0.5365
+illustration   0.1238
+map            0.0279
+cartoon        0.2296
+headline       0.9131
+advertisement  0.7439
+mean           0.3005
+2022-07-28 22:39:36,045 - INFO - Model evaluation completed, runtime: 41.91 sec.
+2022-07-28 22:39:36,052 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 1040.25 sec.
+
+############################
+
+2022-07-28 22:43:34,308 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 22:43:34,308 - INFO - Creating validation dataloader
+2022-07-28 22:43:35,722 - INFO - Creating train dataloader
+2022-07-28 22:43:59,110 - INFO - Model training phase - started!
+2022-07-28 22:43:59,826 - INFO - Cuda available: True
+2022-07-28 22:43:59,827 - INFO - Current device: cuda:0
+2022-07-28 22:49:25,546 - INFO - [Epoch 1] Epoch train time: 322.06 sec. | train loss = 0.8256
+2022-07-28 22:49:25,547 - INFO - Evaluating validation set
+2022-07-28 22:49:53,831 - INFO - Calculating mAP metric on validation set
+2022-07-28 22:50:08,000 - INFO - Metric results:
+                   AP
+photograph     0.6007
+illustration   0.1238
+map            0.0523
+cartoon        0.2742
+headline       0.9099
+advertisement  0.7330
+mean           0.3168
+2022-07-28 22:50:08,001 - INFO - Model training completed, runtime: 368.33 sec.
+2022-07-28 22:50:08,014 - INFO - Overriding previous model due to better performance of the new one or "--force_save_model" flag used.
+2022-07-28 22:50:08,014 - INFO - Model config json saved in "model_config/" directory
+2022-07-28 22:50:08,169 - INFO - Model saved in "model_config/" directory
+2022-07-28 22:50:08,171 - INFO - Model evaluation results saved in "model_config/" directory
+2022-07-28 22:50:08,171 - INFO - Model evaluation phase - started!
+2022-07-28 22:50:08,789 - INFO - Model loaded correctly
+2022-07-28 22:50:08,789 - INFO - Creating test dataloader
+2022-07-28 22:50:09,808 - INFO - Test set evaluation - started!
+2022-07-28 22:50:09,809 - INFO - Cuda available: True
+2022-07-28 22:50:09,809 - INFO - Current device: cuda:0
+
+############################
+
+2022-07-28 22:50:28,154 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 22:50:28,154 - INFO - Creating validation dataloader
+2022-07-28 22:50:29,678 - INFO - Creating train dataloader
+
+############################
+
+2022-07-28 22:50:43,245 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 22:50:43,245 - INFO - Creating validation dataloader
+2022-07-28 22:50:44,672 - INFO - Creating train dataloader
+2022-07-28 22:51:08,587 - INFO - Model training phase - started!
+2022-07-28 22:51:09,193 - INFO - Cuda available: True
+2022-07-28 22:51:09,194 - INFO - Current device: cuda:0
+2022-07-28 22:56:35,577 - INFO - [Epoch 1] Epoch train time: 322.66 sec. | train loss = 0.836
+2022-07-28 22:56:35,578 - INFO - Evaluating validation set
+2022-07-28 22:57:04,109 - INFO - Calculating mAP metric on validation set
+2022-07-28 22:57:19,101 - INFO - Metric results:
+                   AP
+photograph     0.5070
+illustration   0.1247
+map            0.0823
+cartoon        0.2715
+headline       0.9103
+advertisement  0.7216
+mean           0.3075
+2022-07-28 22:57:19,101 - INFO - Model training completed, runtime: 370.1 sec.
+2022-07-28 22:57:19,110 - INFO - Overriding previous model due to better performance of the new one or "--force_save_model" flag used.
+2022-07-28 22:57:19,111 - INFO - Model config json saved in "model_config/" directory
+2022-07-28 22:57:19,260 - INFO - Model saved in "model_config/" directory
+2022-07-28 22:57:19,264 - INFO - Model evaluation results saved in "model_config/" directory
+2022-07-28 22:57:19,264 - INFO - Model evaluation phase - started!
+2022-07-28 22:57:19,875 - INFO - Model loaded correctly
+2022-07-28 22:57:19,875 - INFO - Creating test dataloader
+2022-07-28 22:57:21,081 - INFO - Test set evaluation - started!
+2022-07-28 22:57:21,082 - INFO - Cuda available: True
+2022-07-28 22:57:21,082 - INFO - Current device: cuda:0
+
+############################
+
+2022-07-28 22:57:46,205 - INFO - MODEL_RUNNER - STARTED!
+2022-07-28 22:57:46,205 - INFO - Creating validation dataloader
+2022-07-28 22:57:47,754 - INFO - Creating train dataloader
+2022-07-28 22:58:11,811 - INFO - Model training phase - started!
+2022-07-28 22:58:12,478 - INFO - Cuda available: True
+2022-07-28 22:58:12,479 - INFO - Current device: cuda:0
+2022-07-28 23:03:40,259 - INFO - [Epoch 1] Epoch train time: 324.07 sec. | train loss = 0.8276
+2022-07-28 23:03:40,260 - INFO - Evaluating validation set
+2022-07-28 23:04:08,550 - INFO - Calculating mAP metric on validation set
+2022-07-28 23:04:24,195 - INFO - Metric results:
+                   AP
+photograph     0.5573
+illustration   0.1261
+map            0.0327
+cartoon        0.1721
+headline       0.9084
+advertisement  0.6953
+mean           0.2856
+2022-07-28 23:09:49,806 - INFO - [Epoch 2] Epoch train time: 325.61 sec. | train loss = 0.5137
+2022-07-28 23:09:49,809 - INFO - Evaluating validation set
+2022-07-28 23:10:17,727 - INFO - Calculating mAP metric on validation set
+2022-07-28 23:10:29,319 - INFO - Metric results:
+                   AP
+photograph     0.6815
+illustration   0.1485
+map            0.0278
+cartoon        0.3690
+headline       0.9263
+advertisement  0.7692
+mean           0.3515
+2022-07-28 23:15:57,518 - INFO - [Epoch 3] Epoch train time: 328.2 sec. | train loss = 0.4356
+2022-07-28 23:15:57,520 - INFO - Evaluating validation set
+2022-07-28 23:16:27,202 - INFO - Calculating mAP metric on validation set
+2022-07-28 23:16:38,887 - INFO - Metric results:
+                   AP
+photograph     0.6874
+illustration   0.1734
+map            0.1415
+cartoon        0.4266
+headline       0.9301
+advertisement  0.8127
+mean           0.3872
+2022-07-28 23:22:27,483 - INFO - [Epoch 4] Epoch train time: 348.6 sec. | train loss = 0.4009
+2022-07-28 23:22:27,484 - INFO - Evaluating validation set
+2022-07-28 23:22:57,344 - INFO - Calculating mAP metric on validation set
+2022-07-28 23:23:07,291 - INFO - Metric results:
+                   AP
+photograph     0.7119
+illustration   0.2692
+map            0.0483
+cartoon        0.5698
+headline       0.9322
+advertisement  0.8256
+mean           0.4171
+2022-07-28 23:28:52,728 - INFO - [Epoch 5] Epoch train time: 345.44 sec. | train loss = 0.3672
+2022-07-28 23:28:52,729 - INFO - Evaluating validation set
+2022-07-28 23:29:22,234 - INFO - Calculating mAP metric on validation set
+2022-07-28 23:29:31,745 - INFO - Metric results:
+                   AP
+photograph     0.7114
+illustration   0.2570
+map            0.0532
+cartoon        0.5704
+headline       0.9344
+advertisement  0.8475
+mean           0.4221
+2022-07-28 23:35:17,659 - INFO - [Epoch 6] Epoch train time: 345.91 sec. | train loss = 0.311
+2022-07-28 23:35:17,661 - INFO - Evaluating validation set
+2022-07-28 23:35:47,091 - INFO - Calculating mAP metric on validation set
+2022-07-28 23:35:54,144 - INFO - Metric results:
+                   AP
+photograph     0.7657
+illustration   0.4005
+map            0.1004
+cartoon        0.6480
+headline       0.9341
+advertisement  0.8615
+mean           0.4819
+2022-07-28 23:41:38,358 - INFO - [Epoch 7] Epoch train time: 344.21 sec. | train loss = 0.2767
+2022-07-28 23:41:38,361 - INFO - Evaluating validation set
+2022-07-28 23:42:06,473 - INFO - Calculating mAP metric on validation set
+2022-07-28 23:42:12,902 - INFO - Metric results:
+                   AP
+photograph     0.7757
+illustration   0.3879
+map            0.1346
+cartoon        0.6700
+headline       0.9360
+advertisement  0.8574
+mean           0.4931
+2022-07-28 23:47:40,435 - INFO - [Epoch 8] Epoch train time: 327.53 sec. | train loss = 0.2558
+2022-07-28 23:47:40,437 - INFO - Evaluating validation set
+2022-07-28 23:48:08,705 - INFO - Calculating mAP metric on validation set
+2022-07-28 23:48:14,703 - INFO - Metric results:
+                   AP
+photograph     0.7543
+illustration   0.3862
+map            0.1081
+cartoon        0.6184
+headline       0.9288
+advertisement  0.8576
+mean           0.4782
+2022-07-28 23:53:43,642 - INFO - [Epoch 9] Epoch train time: 328.94 sec. | train loss = 0.2423
+2022-07-28 23:53:43,645 - INFO - Evaluating validation set
+2022-07-28 23:54:11,888 - INFO - Calculating mAP metric on validation set
+2022-07-28 23:54:17,691 - INFO - Metric results:
+                   AP
+photograph     0.7536
+illustration   0.3441
+map            0.1046
+cartoon        0.5970
+headline       0.9339
+advertisement  0.8540
+mean           0.4633
+2022-07-28 23:59:53,411 - INFO - [Epoch 10] Epoch train time: 335.72 sec. | train loss = 0.2333
+2022-07-28 23:59:53,414 - INFO - Evaluating validation set
+2022-07-29 00:00:21,493 - INFO - Calculating mAP metric on validation set
+2022-07-29 00:00:27,361 - INFO - Metric results:
+                   AP
+photograph     0.7442
+illustration   0.3896
+map            0.2023
+cartoon        0.6015
+headline       0.9182
+advertisement  0.8498
+mean           0.4781
+2022-07-29 00:05:54,604 - INFO - [Epoch 11] Epoch train time: 327.24 sec. | train loss = 0.2197
+2022-07-29 00:05:54,607 - INFO - Evaluating validation set
+2022-07-29 00:06:22,585 - INFO - Calculating mAP metric on validation set
+2022-07-29 00:06:28,106 - INFO - Metric results:
+                   AP
+photograph     0.7712
+illustration   0.3344
+map            0.2802
+cartoon        0.6015
+headline       0.9336
+advertisement  0.8051
+mean           0.4953
+2022-07-29 00:11:54,745 - INFO - [Epoch 12] Epoch train time: 326.64 sec. | train loss = 0.1999
+2022-07-29 00:11:54,748 - INFO - Evaluating validation set
+2022-07-29 00:12:22,873 - INFO - Calculating mAP metric on validation set
+2022-07-29 00:12:28,128 - INFO - Metric results:
+                   AP
+photograph     0.7819
+illustration   0.3455
+map            0.3202
+cartoon        0.5991
+headline       0.9320
+advertisement  0.7991
+mean           0.5043
+2022-07-29 00:17:54,599 - INFO - [Epoch 13] Epoch train time: 326.47 sec. | train loss = 0.1872
+2022-07-29 00:17:54,602 - INFO - Evaluating validation set
+2022-07-29 00:18:22,636 - INFO - Calculating mAP metric on validation set
+2022-07-29 00:18:27,662 - INFO - Metric results:
+                   AP
+photograph     0.7813
+illustration   0.3242
+map            0.5197
+cartoon        0.6465
+headline       0.9239
+advertisement  0.8062
+mean           0.5361
+2022-07-29 00:23:54,155 - INFO - [Epoch 14] Epoch train time: 326.49 sec. | train loss = 0.1782
+2022-07-29 00:23:54,158 - INFO - Evaluating validation set
+2022-07-29 00:24:22,044 - INFO - Calculating mAP metric on validation set
+2022-07-29 00:24:26,883 - INFO - Metric results:
+                   AP
+photograph     0.7793
+illustration   0.3103
+map            0.5668
+cartoon        0.6594
+headline       0.9230
+advertisement  0.8158
+mean           0.5379
+2022-07-29 00:29:52,324 - INFO - [Epoch 15] Epoch train time: 325.44 sec. | train loss = 0.1699
+2022-07-29 00:29:52,327 - INFO - Evaluating validation set
+2022-07-29 00:30:20,249 - INFO - Calculating mAP metric on validation set
+2022-07-29 00:30:24,914 - INFO - Metric results:
+                   AP
+photograph     0.7696
+illustration   0.2903
+map            0.5398
+cartoon        0.6320
+headline       0.9216
+advertisement  0.8123
+mean           0.5255
+2022-07-29 00:35:50,223 - INFO - [Epoch 16] Epoch train time: 325.31 sec. | train loss = 0.1666
+2022-07-29 00:35:50,226 - INFO - Evaluating validation set
+2022-07-29 00:36:18,223 - INFO - Calculating mAP metric on validation set
+2022-07-29 00:36:22,824 - INFO - Metric results:
+                   AP
+photograph     0.7890
+illustration   0.3290
+map            0.6649
+cartoon        0.6925
+headline       0.9206
+advertisement  0.8104
+mean           0.5729
+2022-07-29 00:41:48,586 - INFO - [Epoch 17] Epoch train time: 325.76 sec. | train loss = 0.1563
+2022-07-29 00:41:48,589 - INFO - Evaluating validation set
+2022-07-29 00:42:16,648 - INFO - Calculating mAP metric on validation set
+2022-07-29 00:42:21,265 - INFO - Metric results:
+                   AP
+photograph     0.7786
+illustration   0.3092
+map            0.6915
+cartoon        0.6773
+headline       0.9122
+advertisement  0.8249
+mean           0.5698
+2022-07-29 00:47:46,255 - INFO - [Epoch 18] Epoch train time: 324.99 sec. | train loss = 0.1493
+2022-07-29 00:47:46,258 - INFO - Evaluating validation set
+2022-07-29 00:48:14,293 - INFO - Calculating mAP metric on validation set
+2022-07-29 00:48:18,733 - INFO - Metric results:
+                   AP
+photograph     0.7681
+illustration   0.3162
+map            0.7025
+cartoon        0.6697
+headline       0.9110
+advertisement  0.8229
+mean           0.5750
+2022-07-29 00:53:43,794 - INFO - [Epoch 19] Epoch train time: 325.06 sec. | train loss = 0.143
+2022-07-29 00:53:43,797 - INFO - Evaluating validation set
+2022-07-29 00:54:11,729 - INFO - Calculating mAP metric on validation set
+2022-07-29 00:54:16,177 - INFO - Metric results:
+                   AP
+photograph     0.7729
+illustration   0.3037
+map            0.6990
+cartoon        0.6661
+headline       0.9033
+advertisement  0.8139
+mean           0.5656
+2022-07-29 00:59:42,591 - INFO - [Epoch 20] Epoch train time: 326.41 sec. | train loss = 0.1372
+2022-07-29 00:59:42,594 - INFO - Evaluating validation set
+2022-07-29 01:00:10,583 - INFO - Calculating mAP metric on validation set
+2022-07-29 01:00:15,027 - INFO - Metric results:
+                   AP
+photograph     0.7729
+illustration   0.2923
+map            0.6977
+cartoon        0.6554
+headline       0.9097
+advertisement  0.8140
+mean           0.5672
+2022-07-29 01:00:15,027 - INFO - Model training completed, runtime: 7322.76 sec.
+2022-07-29 01:00:15,039 - INFO - Overriding previous model due to better performance of the new one or "--force_save_model" flag used.
+2022-07-29 01:00:15,039 - INFO - Model config json saved in "model_config/" directory
+2022-07-29 01:00:15,190 - INFO - Model saved in "model_config/" directory
+2022-07-29 01:00:15,193 - INFO - Model evaluation results saved in "model_config/" directory
+2022-07-29 01:00:15,193 - INFO - Model evaluation phase - started!
+2022-07-29 01:00:15,827 - INFO - Model loaded correctly
+2022-07-29 01:00:15,827 - INFO - Creating test dataloader
+2022-07-29 01:00:16,864 - INFO - Test set evaluation - started!
+2022-07-29 01:00:16,864 - INFO - Cuda available: True
+2022-07-29 01:00:16,864 - INFO - Current device: cuda:0
+2022-07-29 01:01:45,782 - INFO - Saving model output
+2022-07-29 01:01:46,349 - INFO - Calculating mAP metric
+2022-07-29 01:02:00,350 - INFO - Metric results:
+                   AP
+photograph     0.7668
+illustration   0.4220
+map            0.7135
+cartoon        0.7134
+headline       0.9108
+advertisement  0.8530
+mean           0.5854
+2022-07-29 01:02:00,351 - INFO - Model evaluation completed, runtime: 103.49 sec.
+2022-07-29 01:02:00,354 - INFO - Train set evaluation - started!
+2022-07-29 01:02:00,354 - INFO - Cuda available: True
+2022-07-29 01:02:00,354 - INFO - Current device: cuda:0
+2022-07-29 01:07:23,560 - INFO - Saving model output
+2022-07-29 01:07:26,195 - INFO - Calculating mAP metric
+2022-07-29 01:08:14,708 - INFO - Metric results:
+                   AP
+photograph     0.9558
+illustration   0.9552
+map            0.9771
+cartoon        0.9646
+headline       0.9809
+advertisement  0.9888
+mean           0.8764
+2022-07-29 01:08:14,708 - INFO - Model evaluation completed, runtime: 374.35 sec.
+2022-07-29 01:08:14,721 - INFO - Validation set evaluation - started!
+2022-07-29 01:08:14,722 - INFO - Cuda available: True
+2022-07-29 01:08:14,722 - INFO - Current device: cuda:0
+2022-07-29 01:08:42,375 - INFO - Saving model output
+2022-07-29 01:08:42,457 - INFO - Calculating mAP metric
+2022-07-29 01:08:46,877 - INFO - Metric results:
+                   AP
+photograph     0.7729
+illustration   0.2923
+map            0.6977
+cartoon        0.6554
+headline       0.9096
+advertisement  0.8136
+mean           0.5645
+2022-07-29 01:08:46,877 - INFO - Model evaluation completed, runtime: 32.16 sec.
+2022-07-29 01:08:46,882 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 7860.68 sec.
+
+############################
+
+2022-07-29 03:58:07,912 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 03:58:07,912 - INFO - Creating validation dataloader
+2022-07-29 03:58:09,544 - INFO - Creating train dataloader
+2022-07-29 03:58:33,358 - INFO - Model training phase - started!
+2022-07-29 03:58:34,194 - INFO - Cuda available: True
+2022-07-29 03:58:34,197 - INFO - Current device: cuda:0
+2022-07-29 04:03:32,172 - INFO - [Epoch 1] Epoch train time: 290.82 sec. | train loss = 1.3318
+2022-07-29 04:03:32,173 - INFO - Evaluating validation set
+2022-07-29 04:03:57,885 - INFO - Calculating mAP metric on validation set
+2022-07-29 04:04:16,816 - INFO - Metric results:
+                   AP
+photograph     0.2013
+illustration   0.0211
+map            0.0027
+cartoon        0.0355
+headline       0.4695
+advertisement  0.1512
+mean           0.0536
+2022-07-29 04:09:10,994 - INFO - [Epoch 2] Epoch train time: 294.18 sec. | train loss = 0.9385
+2022-07-29 04:09:10,997 - INFO - Evaluating validation set
+2022-07-29 04:09:36,607 - INFO - Calculating mAP metric on validation set
+2022-07-29 04:09:53,990 - INFO - Metric results:
+                   AP
+photograph     0.5627
+illustration   0.1377
+map            0.0191
+cartoon        0.1702
+headline       0.8604
+advertisement  0.6235
+mean           0.2338
+2022-07-29 04:14:48,480 - INFO - [Epoch 3] Epoch train time: 294.49 sec. | train loss = 0.718
+2022-07-29 04:14:48,483 - INFO - Evaluating validation set
+2022-07-29 04:15:13,982 - INFO - Calculating mAP metric on validation set
+2022-07-29 04:15:29,787 - INFO - Metric results:
+                   AP
+photograph     0.6393
+illustration   0.2126
+map            0.1213
+cartoon        0.1953
+headline       0.8903
+advertisement  0.7052
+mean           0.2937
+2022-07-29 04:20:24,314 - INFO - [Epoch 4] Epoch train time: 294.53 sec. | train loss = 0.6118
+2022-07-29 04:20:24,316 - INFO - Evaluating validation set
+2022-07-29 04:20:49,645 - INFO - Calculating mAP metric on validation set
+2022-07-29 04:21:04,049 - INFO - Metric results:
+                   AP
+photograph     0.6421
+illustration   0.2184
+map            0.0748
+cartoon        0.3185
+headline       0.9151
+advertisement  0.7650
+mean           0.3390
+2022-07-29 04:25:58,697 - INFO - [Epoch 5] Epoch train time: 294.65 sec. | train loss = 0.5463
+2022-07-29 04:25:58,700 - INFO - Evaluating validation set
+2022-07-29 04:26:24,150 - INFO - Calculating mAP metric on validation set
+2022-07-29 04:26:38,310 - INFO - Metric results:
+                   AP
+photograph     0.6408
+illustration   0.1981
+map            0.0312
+cartoon        0.3959
+headline       0.9185
+advertisement  0.7795
+mean           0.3427
+2022-07-29 04:31:33,550 - INFO - [Epoch 6] Epoch train time: 295.24 sec. | train loss = 0.4559
+2022-07-29 04:31:33,552 - INFO - Evaluating validation set
+2022-07-29 04:31:59,104 - INFO - Calculating mAP metric on validation set
+2022-07-29 04:32:10,827 - INFO - Metric results:
+                   AP
+photograph     0.6715
+illustration   0.2325
+map            0.0540
+cartoon        0.5285
+headline       0.9287
+advertisement  0.8030
+mean           0.3874
+2022-07-29 04:37:05,608 - INFO - [Epoch 7] Epoch train time: 294.78 sec. | train loss = 0.4213
+2022-07-29 04:37:05,610 - INFO - Evaluating validation set
+2022-07-29 04:37:31,175 - INFO - Calculating mAP metric on validation set
+2022-07-29 04:37:42,594 - INFO - Metric results:
+                   AP
+photograph     0.6834
+illustration   0.2525
+map            0.0587
+cartoon        0.5294
+headline       0.9300
+advertisement  0.8096
+mean           0.3978
+2022-07-29 04:42:36,975 - INFO - [Epoch 8] Epoch train time: 294.38 sec. | train loss = 0.398
+2022-07-29 04:42:36,978 - INFO - Evaluating validation set
+2022-07-29 04:43:02,446 - INFO - Calculating mAP metric on validation set
+2022-07-29 04:43:12,975 - INFO - Metric results:
+                   AP
+photograph     0.6863
+illustration   0.2365
+map            0.0452
+cartoon        0.5877
+headline       0.9307
+advertisement  0.8215
+mean           0.4063
+2022-07-29 04:48:07,536 - INFO - [Epoch 9] Epoch train time: 294.56 sec. | train loss = 0.3797
+2022-07-29 04:48:07,538 - INFO - Evaluating validation set
+2022-07-29 04:48:32,945 - INFO - Calculating mAP metric on validation set
+2022-07-29 04:48:42,807 - INFO - Metric results:
+                   AP
+photograph     0.7088
+illustration   0.2122
+map            0.0434
+cartoon        0.5090
+headline       0.9313
+advertisement  0.8245
+mean           0.4037
+2022-07-29 04:53:37,961 - INFO - [Epoch 10] Epoch train time: 295.15 sec. | train loss = 0.3633
+2022-07-29 04:53:37,964 - INFO - Evaluating validation set
+2022-07-29 04:54:03,489 - INFO - Calculating mAP metric on validation set
+2022-07-29 04:54:13,110 - INFO - Metric results:
+                   AP
+photograph     0.7017
+illustration   0.2324
+map            0.0426
+cartoon        0.5137
+headline       0.9325
+advertisement  0.8254
+mean           0.4035
+2022-07-29 04:59:12,557 - INFO - [Epoch 11] Epoch train time: 299.45 sec. | train loss = 0.3346
+2022-07-29 04:59:12,559 - INFO - Evaluating validation set
+2022-07-29 04:59:38,001 - INFO - Calculating mAP metric on validation set
+2022-07-29 04:59:46,597 - INFO - Metric results:
+                   AP
+photograph     0.7122
+illustration   0.3041
+map            0.0452
+cartoon        0.5145
+headline       0.9378
+advertisement  0.8322
+mean           0.4240
+2022-07-29 05:04:40,462 - INFO - [Epoch 12] Epoch train time: 293.86 sec. | train loss = 0.3147
+2022-07-29 05:04:40,463 - INFO - Evaluating validation set
+2022-07-29 05:05:05,794 - INFO - Calculating mAP metric on validation set
+2022-07-29 05:05:14,246 - INFO - Metric results:
+                   AP
+photograph     0.7170
+illustration   0.3139
+map            0.0390
+cartoon        0.5125
+headline       0.9295
+advertisement  0.8339
+mean           0.4163
+2022-07-29 05:10:08,969 - INFO - [Epoch 13] Epoch train time: 294.72 sec. | train loss = 0.2996
+2022-07-29 05:10:08,970 - INFO - Evaluating validation set
+2022-07-29 05:10:34,207 - INFO - Calculating mAP metric on validation set
+2022-07-29 05:10:42,591 - INFO - Metric results:
+                   AP
+photograph     0.7087
+illustration   0.3019
+map            0.0487
+cartoon        0.5238
+headline       0.9304
+advertisement  0.8335
+mean           0.4198
+2022-07-29 05:15:37,672 - INFO - [Epoch 14] Epoch train time: 295.08 sec. | train loss = 0.2879
+2022-07-29 05:15:37,674 - INFO - Evaluating validation set
+2022-07-29 05:16:03,009 - INFO - Calculating mAP metric on validation set
+2022-07-29 05:16:10,797 - INFO - Metric results:
+                   AP
+photograph     0.7184
+illustration   0.3240
+map            0.0424
+cartoon        0.4942
+headline       0.9312
+advertisement  0.8328
+mean           0.4204
+2022-07-29 05:21:06,695 - INFO - [Epoch 15] Epoch train time: 295.9 sec. | train loss = 0.2792
+2022-07-29 05:21:06,697 - INFO - Evaluating validation set
+2022-07-29 05:21:32,112 - INFO - Calculating mAP metric on validation set
+2022-07-29 05:21:39,917 - INFO - Metric results:
+                   AP
+photograph     0.7143
+illustration   0.3318
+map            0.0458
+cartoon        0.4958
+headline       0.9288
+advertisement  0.8242
+mean           0.4181
+2022-07-29 05:21:39,917 - INFO - Model training completed, runtime: 4985.94 sec.
+2022-07-29 05:21:39,929 - INFO - Overriding previous model due to better performance of the new one or "--force_save_model" flag used.
+2022-07-29 05:21:39,929 - INFO - Model config json saved in "model_config/" directory
+2022-07-29 05:21:40,095 - INFO - Model saved in "model_config/" directory
+2022-07-29 05:21:40,111 - INFO - Model evaluation results saved in "model_config/" directory
+2022-07-29 05:21:40,112 - INFO - Model evaluation phase - started!
+2022-07-29 05:21:40,753 - INFO - Model loaded correctly
+2022-07-29 05:21:40,753 - INFO - Creating test dataloader
+2022-07-29 05:21:41,777 - INFO - Test set evaluation - started!
+2022-07-29 05:21:41,777 - INFO - Cuda available: True
+2022-07-29 05:21:41,778 - INFO - Current device: cuda:0
+2022-07-29 05:23:02,103 - INFO - Saving model output
+2022-07-29 05:23:02,764 - INFO - Calculating mAP metric
+2022-07-29 05:23:28,360 - INFO - Metric results:
+                   AP
+photograph     0.7293
+illustration   0.3899
+map            0.1885
+cartoon        0.4504
+headline       0.9295
+advertisement  0.8777
+mean           0.4457
+2022-07-29 05:23:28,361 - INFO - Model evaluation completed, runtime: 106.58 sec.
+2022-07-29 05:23:28,366 - INFO - Train set evaluation - started!
+2022-07-29 05:23:28,366 - INFO - Cuda available: True
+2022-07-29 05:23:28,366 - INFO - Current device: cuda:0
+2022-07-29 05:28:20,370 - INFO - Saving model output
+2022-07-29 05:28:23,464 - INFO - Calculating mAP metric
+2022-07-29 05:29:58,018 - INFO - Metric results:
+                   AP
+photograph     0.7979
+illustration   0.4932
+map            0.3391
+cartoon        0.6846
+headline       0.9583
+advertisement  0.9367
+mean           0.5504
+2022-07-29 05:29:58,018 - INFO - Model evaluation completed, runtime: 389.65 sec.
+2022-07-29 05:29:58,039 - INFO - Validation set evaluation - started!
+2022-07-29 05:29:58,039 - INFO - Cuda available: True
+2022-07-29 05:29:58,039 - INFO - Current device: cuda:0
+2022-07-29 05:30:23,251 - INFO - Saving model output
+2022-07-29 05:30:23,357 - INFO - Calculating mAP metric
+2022-07-29 05:30:31,169 - INFO - Metric results:
+                   AP
+photograph     0.7143
+illustration   0.3318
+map            0.0458
+cartoon        0.4958
+headline       0.9288
+advertisement  0.8242
+mean           0.4158
+2022-07-29 05:30:31,170 - INFO - Model evaluation completed, runtime: 33.13 sec.
+2022-07-29 05:30:31,175 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 5543.26 sec.
+
+############################
+
+2022-07-29 08:42:32,909 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 08:42:32,910 - INFO - Creating validation dataloader
+2022-07-29 08:42:34,557 - INFO - Creating train dataloader
+2022-07-29 08:42:58,062 - INFO - Model training phase - started!
+2022-07-29 08:42:58,836 - INFO - Cuda available: True
+2022-07-29 08:42:58,839 - INFO - Current device: cuda:0
+
+############################
+
+2022-07-29 08:46:52,135 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 08:46:52,135 - INFO - Creating validation dataloader
+2022-07-29 08:46:53,798 - INFO - Creating train dataloader
+2022-07-29 08:47:17,634 - INFO - Model training phase - started!
+2022-07-29 08:47:18,376 - INFO - Cuda available: True
+2022-07-29 08:47:18,377 - INFO - Current device: cuda:0
+2022-07-29 08:52:11,204 - INFO - [Epoch 1] Epoch train time: 289.1 sec. | train loss = 0.8279
+2022-07-29 08:52:11,205 - INFO - Evaluating validation set
+2022-07-29 08:52:36,895 - INFO - Calculating mAP metric on validation set
+2022-07-29 08:52:52,235 - INFO - Metric results:
+                   AP
+photograph     0.5078
+illustration   0.1499
+map            0.0499
+cartoon        0.1905
+headline       0.9094
+advertisement  0.7322
+mean           0.2966
+2022-07-29 08:52:52,235 - INFO - Model training completed, runtime: 334.04 sec.
+2022-07-29 08:52:52,246 - INFO - Overriding previous model due to better performance of the new one or "--force_save_model" flag used.
+2022-07-29 08:52:52,246 - INFO - Model config json saved in "model_config/" directory
+2022-07-29 08:52:52,410 - INFO - Model saved in "model_config/" directory
+2022-07-29 08:52:52,416 - INFO - Model evaluation results saved in "model_config/" directory
+2022-07-29 08:52:52,416 - INFO - Model evaluation phase - started!
+2022-07-29 08:52:53,035 - INFO - Model loaded correctly
+2022-07-29 08:52:53,035 - INFO - Creating test dataloader
+2022-07-29 08:52:54,055 - INFO - Test set evaluation - started!
+2022-07-29 08:52:54,055 - INFO - Cuda available: True
+2022-07-29 08:52:54,055 - INFO - Current device: cuda:0
+2022-07-29 08:54:13,955 - INFO - Saving model output
+2022-07-29 08:54:14,714 - INFO - Calculating mAP metric
+2022-07-29 08:55:04,254 - INFO - Metric results:
+                   AP
+photograph     0.5314
+illustration   0.1209
+map            0.0605
+cartoon        0.2130
+headline       0.9087
+advertisement  0.7875
+mean           0.3039
+2022-07-29 08:55:04,254 - INFO - Model evaluation completed, runtime: 130.2 sec.
+2022-07-29 08:55:04,263 - INFO - Train set evaluation - started!
+2022-07-29 08:55:04,263 - INFO - Cuda available: True
+2022-07-29 08:55:04,263 - INFO - Current device: cuda:0
+
+############################
+
+2022-07-29 08:56:49,443 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 08:56:49,444 - INFO - Creating validation dataloader
+2022-07-29 08:56:51,087 - INFO - Creating train dataloader
+2022-07-29 08:57:15,394 - INFO - Model training phase - started!
+2022-07-29 08:57:16,149 - INFO - Cuda available: True
+2022-07-29 08:57:16,150 - INFO - Current device: cuda:0
+2022-07-29 09:02:13,801 - INFO - [Epoch 1] Epoch train time: 293.91 sec. | train loss = 0.8091
+2022-07-29 09:02:13,802 - INFO - Evaluating validation set
+2022-07-29 09:02:39,748 - INFO - Calculating mAP metric on validation set
+2022-07-29 09:02:54,151 - INFO - Metric results:
+                   AP
+photograph     0.6078
+illustration   0.1249
+map            0.0656
+cartoon        0.3491
+headline       0.9047
+advertisement  0.7283
+mean           0.3259
+2022-07-29 09:02:54,151 - INFO - Model training completed, runtime: 338.18 sec.
+2022-07-29 09:02:54,174 - INFO - Overriding previous model due to better performance of the new one or "--force_save_model" flag used.
+2022-07-29 09:02:54,174 - INFO - Model config json saved in "model_config/" directory
+2022-07-29 09:02:54,323 - INFO - Model saved in "model_config/" directory
+2022-07-29 09:02:54,325 - INFO - Model evaluation results saved in "model_config/" directory
+2022-07-29 09:02:54,325 - INFO - Model evaluation phase - started!
+2022-07-29 09:02:54,947 - INFO - Model loaded correctly
+2022-07-29 09:02:54,947 - INFO - Creating test dataloader
+2022-07-29 09:02:55,979 - INFO - Test set evaluation - started!
+2022-07-29 09:02:55,979 - INFO - Cuda available: True
+2022-07-29 09:02:55,979 - INFO - Current device: cuda:0
+
+############################
+
+2022-07-29 09:04:32,995 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 09:04:32,996 - INFO - Creating validation dataloader
+2022-07-29 09:04:34,638 - INFO - Creating train dataloader
+2022-07-29 09:04:58,871 - INFO - Model training phase - started!
+2022-07-29 09:04:59,609 - INFO - Cuda available: True
+2022-07-29 09:04:59,609 - INFO - Current device: cuda:0
+2022-07-29 09:09:57,617 - INFO - [Epoch 1] Epoch train time: 294.26 sec. | train loss = 2.5357
+2022-07-29 09:09:57,618 - INFO - Evaluating validation set
+2022-07-29 09:10:23,629 - INFO - Calculating mAP metric on validation set
+2022-07-29 09:10:42,775 - INFO - Metric results:
+                   AP
+photograph     0.0005
+illustration   0.0015
+map            0.0000
+cartoon        0.0028
+headline       0.1002
+advertisement  0.0006
+mean           0.0044
+2022-07-29 09:10:42,775 - INFO - Model training completed, runtime: 343.35 sec.
+2022-07-29 09:10:42,786 - INFO - Model not saved because lack of validation set or worse model performance than previous one
+2022-07-29 09:10:42,786 - INFO - Model evaluation phase - started!
+2022-07-29 09:10:43,565 - INFO - Model loaded correctly
+2022-07-29 09:10:43,565 - INFO - Creating test dataloader
+2022-07-29 09:10:44,592 - INFO - Test set evaluation - started!
+2022-07-29 09:10:44,592 - INFO - Cuda available: True
+2022-07-29 09:10:44,592 - INFO - Current device: cuda:0
+2022-07-29 09:12:04,911 - INFO - Model evaluation completed, runtime: 80.32 sec.
+2022-07-29 09:12:04,930 - INFO - Train set evaluation - started!
+2022-07-29 09:12:04,931 - INFO - Cuda available: True
+2022-07-29 09:12:04,931 - INFO - Current device: cuda:0
+2022-07-29 09:16:57,730 - INFO - Model evaluation completed, runtime: 292.8 sec.
+2022-07-29 09:16:57,859 - INFO - Validation set evaluation - started!
+2022-07-29 09:16:57,866 - INFO - Cuda available: True
+2022-07-29 09:16:57,866 - INFO - Current device: cuda:0
+2022-07-29 09:17:23,179 - INFO - Model evaluation completed, runtime: 25.31 sec.
+2022-07-29 09:17:23,193 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 770.2 sec.
+
+############################
+
+2022-07-29 09:32:02,215 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 09:32:02,215 - INFO - Creating validation dataloader
+2022-07-29 09:32:03,678 - INFO - Creating train dataloader
+2022-07-29 09:32:27,697 - INFO - Model training phase - started!
+2022-07-29 09:32:28,421 - INFO - Cuda available: True
+2022-07-29 09:32:28,422 - INFO - Current device: cuda:0
+2022-07-29 09:37:23,155 - INFO - [Epoch 1] Epoch train time: 291.06 sec. | train loss = 5.5226
+2022-07-29 09:37:23,156 - INFO - Evaluating validation set
+2022-07-29 09:37:48,989 - INFO - Calculating mAP metric on validation set
+2022-07-29 09:38:07,978 - INFO - Metric results:
+                   AP
+photograph     0.0008
+illustration   0.0000
+map            0.0000
+cartoon        0.0000
+headline       0.0002
+advertisement  0.0001
+mean           0.0000
+2022-07-29 09:38:07,978 - INFO - Model training completed, runtime: 339.71 sec.
+
+############################
+
+2022-07-29 10:51:20,221 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 10:51:20,224 - INFO - Creating validation dataloader
+2022-07-29 10:51:21,628 - INFO - Creating train dataloader
+2022-07-29 10:51:43,513 - INFO - Model training phase - started!
+2022-07-29 10:51:50,575 - INFO - Cuda available: True
+2022-07-29 10:51:50,581 - INFO - Current device: cuda:0
+2022-07-29 10:57:03,738 - INFO - [Epoch 1] Epoch train time: 299.73 sec. | train loss = 5.4542
+2022-07-29 10:57:03,739 - INFO - Evaluating validation set
+2022-07-29 10:57:29,526 - INFO - Calculating mAP metric on validation set
+2022-07-29 10:57:47,700 - INFO - Metric results:
+                   AP
+photograph     0.0000
+illustration   0.0001
+map            0.0000
+cartoon        0.0000
+headline       0.0000
+advertisement  0.0000
+mean           0.0000
+2022-07-29 10:57:47,700 - INFO - Model training completed, runtime: 357.45 sec.
+
+############################
+
+2022-07-29 11:03:43,903 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 11:03:43,903 - INFO - Creating validation dataloader
+2022-07-29 11:03:45,500 - INFO - Creating train dataloader
+2022-07-29 11:04:09,661 - INFO - Model training phase - started!
+2022-07-29 11:04:10,398 - INFO - Cuda available: True
+2022-07-29 11:04:10,401 - INFO - Current device: cuda:0
+2022-07-29 11:09:05,964 - INFO - [Epoch 1] Epoch train time: 288.49 sec. | train loss = 4.7383
+2022-07-29 11:09:05,965 - INFO - Evaluating validation set
+2022-07-29 11:09:31,584 - INFO - Calculating mAP metric on validation set
+2022-07-29 11:09:49,536 - INFO - Metric results:
+                AP
+photograph     0.0
+illustration   0.0
+map            0.0
+cartoon        0.0
+headline       0.0
+advertisement  0.0
+mean           0.0
+2022-07-29 11:09:49,536 - INFO - Model training completed, runtime: 339.27 sec.
+
+############################
+
+2022-07-29 11:10:07,313 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 11:10:07,313 - INFO - Creating validation dataloader
+2022-07-29 11:10:08,771 - INFO - Creating train dataloader
+2022-07-29 11:10:33,043 - INFO - Model training phase - started!
+2022-07-29 11:10:33,775 - INFO - Cuda available: True
+2022-07-29 11:10:33,776 - INFO - Current device: cuda:0
+2022-07-29 11:15:30,321 - INFO - [Epoch 1] Epoch train time: 292.83 sec. | train loss = 4.8334
+2022-07-29 11:15:30,322 - INFO - Evaluating validation set
+2022-07-29 11:15:56,090 - INFO - Calculating mAP metric on validation set
+2022-07-29 11:16:14,954 - INFO - Metric results:
+                   AP
+photograph     0.0002
+illustration   0.0000
+map            0.0000
+cartoon        0.0000
+headline       0.0000
+advertisement  0.0000
+mean           0.0000
+2022-07-29 11:16:14,954 - INFO - Model training completed, runtime: 341.33 sec.
+
+############################
+
+2022-07-29 11:25:19,721 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 11:25:19,722 - INFO - Creating validation dataloader
+2022-07-29 11:25:21,210 - INFO - Creating train dataloader
+2022-07-29 11:25:45,003 - INFO - Model training phase - started!
+2022-07-29 11:25:45,738 - INFO - Cuda available: True
+2022-07-29 11:25:45,739 - INFO - Current device: cuda:0
+2022-07-29 11:30:38,862 - INFO - [Epoch 1] Epoch train time: 289.48 sec. | train loss = 5.4075
+2022-07-29 11:30:38,863 - INFO - Evaluating validation set
+2022-07-29 11:31:04,720 - INFO - Calculating mAP metric on validation set
+2022-07-29 11:31:22,877 - INFO - Metric results:
+                   AP
+photograph     0.0000
+illustration   0.0000
+map            0.0001
+cartoon        0.0001
+headline       0.0000
+advertisement  0.0000
+mean           0.0000
+2022-07-29 11:31:22,877 - INFO - Model training completed, runtime: 337.31 sec.
+
+############################
+
+2022-07-29 11:57:31,184 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 11:57:31,184 - INFO - Creating validation dataloader
+2022-07-29 11:57:32,735 - INFO - Creating train dataloader
+2022-07-29 11:57:56,404 - INFO - Model training phase - started!
+2022-07-29 11:57:57,082 - INFO - Cuda available: True
+2022-07-29 11:57:57,083 - INFO - Current device: cuda:0
+2022-07-29 12:02:49,468 - INFO - [Epoch 1] Epoch train time: 288.8 sec. | train loss = 5.5213
+2022-07-29 12:02:49,469 - INFO - Evaluating validation set
+2022-07-29 12:03:14,964 - INFO - Calculating mAP metric on validation set
+2022-07-29 12:03:33,923 - INFO - Metric results:
+                   AP
+photograph     0.0003
+illustration   0.0000
+map            0.0000
+cartoon        0.0000
+headline       0.0000
+advertisement  0.0000
+mean           0.0000
+2022-07-29 12:03:33,923 - INFO - Model training completed, runtime: 336.97 sec.
+2022-07-29 12:03:33,939 - INFO - Model not saved because lack of validation set or worse model performance than previous one (to force model to be saved use "--force_save_model" flag)
+2022-07-29 12:03:33,940 - INFO - Model evaluation phase is skipped due to its worse performance on validation set than previous one
+2022-07-29 12:03:33,941 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 362.76 sec.
+
+############################
+
+2022-07-29 12:06:50,211 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 12:06:50,211 - INFO - Creating validation dataloader
+2022-07-29 12:06:51,658 - INFO - Creating train dataloader
+
+############################
+
+2022-07-29 12:07:05,160 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 12:07:05,160 - INFO - Creating validation dataloader
+2022-07-29 12:07:06,581 - INFO - Creating train dataloader
+2022-07-29 12:07:30,006 - INFO - Model training phase - started!
+2022-07-29 12:07:30,675 - INFO - Cuda available: True
+2022-07-29 12:07:30,676 - INFO - Current device: cuda:0
+2022-07-29 12:12:24,857 - INFO - [Epoch 1] Epoch train time: 290.52 sec. | train loss = 7660214227441662.0
+2022-07-29 12:12:24,858 - INFO - Evaluating validation set
+2022-07-29 12:12:50,361 - INFO - Calculating mAP metric on validation set
+2022-07-29 12:12:50,633 - INFO - Metric results:
+                AP
+photograph     0.0
+illustration   0.0
+map            0.0
+cartoon        0.0
+headline       0.0
+advertisement  0.0
+mean           0.0
+2022-07-29 12:12:50,633 - INFO - Model training completed, runtime: 320.07 sec.
+2022-07-29 12:12:50,643 - INFO - Model not saved because lack of validation set or worse model performance than previous one (to force model to be saved use "--force_save_model" flag)
+2022-07-29 12:12:50,643 - INFO - Model evaluation phase is skipped because it was not saved after training
+2022-07-29 12:12:50,645 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 345.49 sec.
+
+############################
+
+2022-07-29 12:18:24,417 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 12:18:24,418 - INFO - Creating validation dataloader
+2022-07-29 12:18:25,869 - INFO - Creating train dataloader
+2022-07-29 12:18:49,761 - INFO - Model training phase - started!
+2022-07-29 12:18:50,409 - INFO - Cuda available: True
+2022-07-29 12:18:50,410 - INFO - Current device: cuda:0
+
+############################
+
+2022-07-29 12:20:10,856 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 12:20:10,856 - INFO - Creating validation dataloader
+2022-07-29 12:20:12,413 - INFO - Creating train dataloader
+2022-07-29 12:20:36,046 - INFO - Model training phase - started!
+2022-07-29 12:20:36,716 - INFO - Cuda available: True
+2022-07-29 12:20:36,717 - INFO - Current device: cuda:0
+2022-07-29 12:25:32,187 - INFO - [Epoch 1] Epoch train time: 291.84 sec. | train loss = 1.3992
+2022-07-29 12:25:32,188 - INFO - Evaluating validation set
+2022-07-29 12:25:57,812 - INFO - Calculating mAP metric on validation set
+2022-07-29 12:26:16,612 - INFO - Metric results:
+                   AP
+photograph     0.5286
+illustration   0.0242
+map            0.0054
+cartoon        0.2322
+headline       0.8287
+advertisement  0.5274
+mean           0.2006
+2022-07-29 12:26:16,613 - INFO - Model training completed, runtime: 340.01 sec.
+2022-07-29 12:26:16,624 - INFO - Overriding previous model due to better performance of the new one or "--force_save_model" flag used.
+2022-07-29 12:26:16,624 - INFO - Model config json saved in "model_config/" directory
+2022-07-29 12:26:16,803 - INFO - Model saved in "model_config/" directory
+2022-07-29 12:26:16,810 - INFO - Model evaluation results saved in "model_config/" directory
+2022-07-29 12:26:16,811 - INFO - Model evaluation phase - started!
+2022-07-29 12:26:17,665 - INFO - Model loaded correctly
+2022-07-29 12:26:17,665 - INFO - Creating test dataloader
+2022-07-29 12:26:18,732 - INFO - Test set evaluation - started!
+2022-07-29 12:26:18,732 - INFO - Cuda available: True
+2022-07-29 12:26:18,732 - INFO - Current device: cuda:0
+2022-07-29 12:27:38,937 - INFO - Saving model output
+2022-07-29 12:27:39,928 - INFO - Calculating mAP metric
+2022-07-29 12:28:43,630 - INFO - Metric results:
+                   AP
+photograph     0.5477
+illustration   0.0223
+map            0.0229
+cartoon        0.1866
+headline       0.8206
+advertisement  0.5930
+mean           0.2085
+2022-07-29 12:28:43,631 - INFO - Model evaluation completed, runtime: 144.9 sec.
+2022-07-29 12:28:43,659 - INFO - Train set evaluation - started!
+2022-07-29 12:28:43,659 - INFO - Cuda available: True
+2022-07-29 12:28:43,659 - INFO - Current device: cuda:0
+2022-07-29 12:33:35,902 - INFO - Saving model output
+2022-07-29 12:33:40,530 - INFO - Calculating mAP metric
+2022-07-29 12:37:51,296 - INFO - Metric results:
+                   AP
+photograph     0.5628
+illustration   0.0226
+map            0.0394
+cartoon        0.2238
+headline       0.8275
+advertisement  0.5849
+mean           0.2101
+2022-07-29 12:37:51,301 - INFO - Model evaluation completed, runtime: 547.64 sec.
+2022-07-29 12:37:51,454 - INFO - Validation set evaluation - started!
+2022-07-29 12:37:51,455 - INFO - Cuda available: True
+2022-07-29 12:37:51,455 - INFO - Current device: cuda:0
+2022-07-29 12:38:16,699 - INFO - Saving model output
+2022-07-29 12:38:16,920 - INFO - Calculating mAP metric
+2022-07-29 12:38:35,442 - INFO - Metric results:
+                   AP
+photograph     0.5183
+illustration   0.0242
+map            0.0054
+cartoon        0.2339
+headline       0.8289
+advertisement  0.5288
+mean           0.1995
+2022-07-29 12:38:35,443 - INFO - Model evaluation completed, runtime: 43.99 sec.
+2022-07-29 12:38:35,459 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 1104.6 sec.
+
+############################
+
+2022-07-29 12:50:33,516 - INFO - MODEL_RUNNER - STARTED!
+
+############################
+
+2022-07-29 12:50:54,245 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 12:50:54,245 - INFO - Creating validation dataloader
+2022-07-29 12:50:55,846 - INFO - Creating train dataloader
+2022-07-29 12:51:19,667 - INFO - Model training phase - started!
+2022-07-29 12:51:20,372 - INFO - Cuda available: True
+2022-07-29 12:51:20,373 - INFO - Current device: cuda:0
+2022-07-29 12:56:16,142 - INFO - [Epoch 1] Epoch train time: 292.14 sec. | train loss = 1.4179
+2022-07-29 12:56:16,143 - INFO - Evaluating validation set
+2022-07-29 12:56:41,738 - INFO - Calculating mAP metric on validation set
+2022-07-29 12:57:01,383 - INFO - Metric results:
+                   AP
+photograph     0.2699
+illustration   0.0079
+map            0.0399
+cartoon        0.0343
+headline       0.6616
+advertisement  0.1427
+mean           0.0782
+2022-07-29 13:01:55,189 - INFO - [Epoch 2] Epoch train time: 293.81 sec. | train loss = 0.9614
+2022-07-29 13:01:55,192 - INFO - Evaluating validation set
+2022-07-29 13:02:20,644 - INFO - Calculating mAP metric on validation set
+2022-07-29 13:02:37,884 - INFO - Metric results:
+                   AP
+photograph     0.5495
+illustration   0.2358
+map            0.0485
+cartoon        0.1530
+headline       0.8657
+advertisement  0.6414
+mean           0.2549
+2022-07-29 13:07:32,207 - INFO - [Epoch 3] Epoch train time: 294.32 sec. | train loss = 0.7108
+2022-07-29 13:07:32,210 - INFO - Evaluating validation set
+2022-07-29 13:07:57,618 - INFO - Calculating mAP metric on validation set
+2022-07-29 13:08:12,957 - INFO - Metric results:
+                   AP
+photograph     0.6322
+illustration   0.2327
+map            0.0629
+cartoon        0.2969
+headline       0.9094
+advertisement  0.6770
+mean           0.3091
+2022-07-29 13:13:07,036 - INFO - [Epoch 4] Epoch train time: 294.08 sec. | train loss = 0.6051
+2022-07-29 13:13:07,039 - INFO - Evaluating validation set
+2022-07-29 13:13:32,459 - INFO - Calculating mAP metric on validation set
+2022-07-29 13:13:47,565 - INFO - Metric results:
+                   AP
+photograph     0.6340
+illustration   0.2433
+map            0.0469
+cartoon        0.3322
+headline       0.9137
+advertisement  0.7322
+mean           0.3366
+2022-07-29 13:18:41,447 - INFO - [Epoch 5] Epoch train time: 293.88 sec. | train loss = 0.5425
+2022-07-29 13:18:41,450 - INFO - Evaluating validation set
+2022-07-29 13:19:06,827 - INFO - Calculating mAP metric on validation set
+2022-07-29 13:19:20,738 - INFO - Metric results:
+                   AP
+photograph     0.6342
+illustration   0.2554
+map            0.0550
+cartoon        0.3777
+headline       0.9289
+advertisement  0.7477
+mean           0.3506
+2022-07-29 13:24:18,100 - INFO - [Epoch 6] Epoch train time: 297.36 sec. | train loss = 0.4583
+2022-07-29 13:24:18,103 - INFO - Evaluating validation set
+2022-07-29 13:24:43,451 - INFO - Calculating mAP metric on validation set
+2022-07-29 13:24:56,349 - INFO - Metric results:
+                   AP
+photograph     0.6925
+illustration   0.3093
+map            0.0441
+cartoon        0.4132
+headline       0.9248
+advertisement  0.7856
+mean           0.3789
+2022-07-29 13:29:50,587 - INFO - [Epoch 7] Epoch train time: 294.24 sec. | train loss = 0.4242
+2022-07-29 13:29:50,590 - INFO - Evaluating validation set
+2022-07-29 13:30:16,111 - INFO - Calculating mAP metric on validation set
+2022-07-29 13:30:28,639 - INFO - Metric results:
+                   AP
+photograph     0.6975
+illustration   0.2602
+map            0.0591
+cartoon        0.4530
+headline       0.9310
+advertisement  0.8040
+mean           0.3943
+2022-07-29 13:35:24,965 - INFO - [Epoch 8] Epoch train time: 296.33 sec. | train loss = 0.398
+2022-07-29 13:35:24,966 - INFO - Evaluating validation set
+2022-07-29 13:35:50,428 - INFO - Calculating mAP metric on validation set
+2022-07-29 13:36:01,385 - INFO - Metric results:
+                   AP
+photograph     0.7075
+illustration   0.2499
+map            0.0460
+cartoon        0.4194
+headline       0.9320
+advertisement  0.8166
+mean           0.3897
+2022-07-29 13:40:56,141 - INFO - [Epoch 9] Epoch train time: 294.76 sec. | train loss = 0.3774
+2022-07-29 13:40:56,144 - INFO - Evaluating validation set
+2022-07-29 13:41:21,559 - INFO - Calculating mAP metric on validation set
+2022-07-29 13:41:31,893 - INFO - Metric results:
+                   AP
+photograph     0.7087
+illustration   0.2774
+map            0.0629
+cartoon        0.4381
+headline       0.9348
+advertisement  0.8204
+mean           0.3970
+2022-07-29 13:46:26,742 - INFO - [Epoch 10] Epoch train time: 294.85 sec. | train loss = 0.3662
+2022-07-29 13:46:26,743 - INFO - Evaluating validation set
+2022-07-29 13:46:52,334 - INFO - Calculating mAP metric on validation set
+2022-07-29 13:47:02,749 - INFO - Metric results:
+                   AP
+photograph     0.7310
+illustration   0.2373
+map            0.0465
+cartoon        0.4683
+headline       0.9354
+advertisement  0.8214
+mean           0.4043
+2022-07-29 13:51:56,328 - INFO - [Epoch 11] Epoch train time: 293.58 sec. | train loss = 0.3374
+2022-07-29 13:51:56,329 - INFO - Evaluating validation set
+2022-07-29 13:52:21,753 - INFO - Calculating mAP metric on validation set
+2022-07-29 13:52:30,143 - INFO - Metric results:
+                   AP
+photograph     0.7367
+illustration   0.3080
+map            0.0597
+cartoon        0.4627
+headline       0.9387
+advertisement  0.8347
+mean           0.4205
+
+############################
+
+2022-07-29 13:56:36,530 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 13:56:36,530 - INFO - Creating validation dataloader
+2022-07-29 13:56:38,167 - INFO - Creating train dataloader
+2022-07-29 13:57:02,084 - INFO - Model training phase - started!
+2022-07-29 13:57:02,834 - INFO - Cuda available: True
+2022-07-29 13:57:02,835 - INFO - Current device: cuda:0
+2022-07-29 14:01:58,272 - INFO - [Epoch 1] Epoch train time: 291.73 sec. | train loss = 3.4338727701978372e+16
+2022-07-29 14:01:58,273 - INFO - Evaluating validation set
+2022-07-29 14:02:23,730 - INFO - Calculating mAP metric on validation set
+2022-07-29 14:02:24,032 - INFO - Metric results:
+                AP
+photograph     0.0
+illustration   0.0
+map            0.0
+cartoon        0.0
+headline       0.0
+advertisement  0.0
+mean           0.0
+2022-07-29 14:07:17,480 - INFO - [Epoch 2] Epoch train time: 293.45 sec. | train loss = 216887949.1493
+2022-07-29 14:07:17,481 - INFO - Evaluating validation set
+2022-07-29 14:07:42,655 - INFO - Calculating mAP metric on validation set
+2022-07-29 14:07:42,940 - INFO - Metric results:
+                AP
+photograph     0.0
+illustration   0.0
+map            0.0
+cartoon        0.0
+headline       0.0
+advertisement  0.0
+mean           0.0
+
+############################
+
+2022-07-29 14:08:26,929 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 14:08:26,929 - INFO - Creating validation dataloader
+2022-07-29 14:08:28,423 - INFO - Creating train dataloader
+2022-07-29 14:08:52,362 - INFO - Model training phase - started!
+2022-07-29 14:08:53,061 - INFO - Cuda available: True
+2022-07-29 14:08:53,062 - INFO - Current device: cuda:0
+2022-07-29 14:13:49,599 - INFO - [Epoch 1] Epoch train time: 292.82 sec. | train loss = 1.4151
+2022-07-29 14:13:49,600 - INFO - Evaluating validation set
+2022-07-29 14:14:15,669 - INFO - Calculating mAP metric on validation set
+2022-07-29 14:14:34,031 - INFO - Metric results:
+                   AP
+photograph     0.1161
+illustration   0.0022
+map            0.0090
+cartoon        0.0372
+headline       0.4997
+advertisement  0.0646
+mean           0.0403
+2022-07-29 14:19:34,432 - INFO - [Epoch 2] Epoch train time: 300.4 sec. | train loss = 0.9631
+2022-07-29 14:19:34,434 - INFO - Evaluating validation set
+2022-07-29 14:20:00,297 - INFO - Calculating mAP metric on validation set
+2022-07-29 14:20:17,877 - INFO - Metric results:
+                   AP
+photograph     0.5160
+illustration   0.1153
+map            0.0207
+cartoon        0.1201
+headline       0.8773
+advertisement  0.5612
+mean           0.2112
+2022-07-29 14:25:18,548 - INFO - [Epoch 3] Epoch train time: 300.67 sec. | train loss = 0.7264
+2022-07-29 14:25:18,551 - INFO - Evaluating validation set
+2022-07-29 14:25:44,461 - INFO - Calculating mAP metric on validation set
+2022-07-29 14:26:00,896 - INFO - Metric results:
+                   AP
+photograph     0.5787
+illustration   0.1685
+map            0.0239
+cartoon        0.2278
+headline       0.9082
+advertisement  0.6766
+mean           0.2779
+2022-07-29 14:30:58,716 - INFO - [Epoch 4] Epoch train time: 297.82 sec. | train loss = 0.6032
+2022-07-29 14:30:58,719 - INFO - Evaluating validation set
+2022-07-29 14:31:24,539 - INFO - Calculating mAP metric on validation set
+2022-07-29 14:31:38,949 - INFO - Metric results:
+                   AP
+photograph     0.5998
+illustration   0.2024
+map            0.0564
+cartoon        0.2712
+headline       0.9128
+advertisement  0.7388
+mean           0.3157
+2022-07-29 14:36:40,259 - INFO - [Epoch 5] Epoch train time: 301.31 sec. | train loss = 0.5364
+2022-07-29 14:36:40,262 - INFO - Evaluating validation set
+2022-07-29 14:37:06,125 - INFO - Calculating mAP metric on validation set
+2022-07-29 14:37:20,313 - INFO - Metric results:
+                   AP
+photograph     0.6226
+illustration   0.1950
+map            0.0886
+cartoon        0.3786
+headline       0.9236
+advertisement  0.7789
+mean           0.3462
+2022-07-29 14:42:17,389 - INFO - [Epoch 6] Epoch train time: 297.08 sec. | train loss = 0.4976
+2022-07-29 14:42:17,392 - INFO - Evaluating validation set
+2022-07-29 14:42:43,320 - INFO - Calculating mAP metric on validation set
+2022-07-29 14:42:58,261 - INFO - Metric results:
+                   AP
+photograph     0.6376
+illustration   0.2473
+map            0.0429
+cartoon        0.4303
+headline       0.9328
+advertisement  0.7834
+mean           0.3469
+2022-07-29 14:47:55,819 - INFO - [Epoch 7] Epoch train time: 297.56 sec. | train loss = 0.4546
+2022-07-29 14:47:55,821 - INFO - Evaluating validation set
+2022-07-29 14:48:21,547 - INFO - Calculating mAP metric on validation set
+2022-07-29 14:48:35,063 - INFO - Metric results:
+                   AP
+photograph     0.6378
+illustration   0.2214
+map            0.0386
+cartoon        0.3396
+headline       0.9314
+advertisement  0.7946
+mean           0.3476
+2022-07-29 14:53:36,131 - INFO - [Epoch 8] Epoch train time: 301.07 sec. | train loss = 0.4272
+2022-07-29 14:53:36,132 - INFO - Evaluating validation set
+2022-07-29 14:54:01,905 - INFO - Calculating mAP metric on validation set
+2022-07-29 14:54:13,590 - INFO - Metric results:
+                   AP
+photograph     0.6923
+illustration   0.2322
+map            0.0449
+cartoon        0.3817
+headline       0.9317
+advertisement  0.8085
+mean           0.3684
+2022-07-29 14:59:10,940 - INFO - [Epoch 9] Epoch train time: 297.35 sec. | train loss = 0.4054
+2022-07-29 14:59:10,941 - INFO - Evaluating validation set
+2022-07-29 14:59:36,734 - INFO - Calculating mAP metric on validation set
+2022-07-29 14:59:47,862 - INFO - Metric results:
+                   AP
+photograph     0.6865
+illustration   0.2537
+map            0.0830
+cartoon        0.4450
+headline       0.9309
+advertisement  0.8034
+mean           0.3866
+2022-07-29 15:04:43,768 - INFO - [Epoch 10] Epoch train time: 295.91 sec. | train loss = 0.3838
+2022-07-29 15:04:43,770 - INFO - Evaluating validation set
+2022-07-29 15:05:09,479 - INFO - Calculating mAP metric on validation set
+2022-07-29 15:05:19,586 - INFO - Metric results:
+                   AP
+photograph     0.6820
+illustration   0.2453
+map            0.0777
+cartoon        0.5100
+headline       0.9327
+advertisement  0.8102
+mean           0.4010
+2022-07-29 15:10:16,767 - INFO - [Epoch 11] Epoch train time: 297.18 sec. | train loss = 0.3668
+2022-07-29 15:10:16,768 - INFO - Evaluating validation set
+2022-07-29 15:10:42,597 - INFO - Calculating mAP metric on validation set
+2022-07-29 15:10:51,594 - INFO - Metric results:
+                   AP
+photograph     0.6962
+illustration   0.2740
+map            0.0525
+cartoon        0.4699
+headline       0.9347
+advertisement  0.8346
+mean           0.4096
+2022-07-29 15:15:47,817 - INFO - [Epoch 12] Epoch train time: 296.22 sec. | train loss = 0.3524
+2022-07-29 15:15:47,818 - INFO - Evaluating validation set
+2022-07-29 15:16:13,759 - INFO - Calculating mAP metric on validation set
+2022-07-29 15:16:22,640 - INFO - Metric results:
+                   AP
+photograph     0.6886
+illustration   0.2663
+map            0.0762
+cartoon        0.5297
+headline       0.9334
+advertisement  0.8511
+mean           0.4127
+2022-07-29 15:21:19,282 - INFO - [Epoch 13] Epoch train time: 296.64 sec. | train loss = 0.3379
+2022-07-29 15:21:19,283 - INFO - Evaluating validation set
+2022-07-29 15:21:45,084 - INFO - Calculating mAP metric on validation set
+2022-07-29 15:21:55,039 - INFO - Metric results:
+                   AP
+photograph     0.7069
+illustration   0.2630
+map            0.0651
+cartoon        0.4895
+headline       0.9343
+advertisement  0.8382
+mean           0.4106
+2022-07-29 15:26:51,302 - INFO - [Epoch 14] Epoch train time: 296.26 sec. | train loss = 0.3232
+2022-07-29 15:26:51,303 - INFO - Evaluating validation set
+2022-07-29 15:27:17,182 - INFO - Calculating mAP metric on validation set
+2022-07-29 15:27:26,024 - INFO - Metric results:
+                   AP
+photograph     0.7031
+illustration   0.2538
+map            0.0538
+cartoon        0.3752
+headline       0.9294
+advertisement  0.8308
+mean           0.3935
+2022-07-29 15:32:22,677 - INFO - [Epoch 15] Epoch train time: 296.65 sec. | train loss = 0.3238
+2022-07-29 15:32:22,680 - INFO - Evaluating validation set
+2022-07-29 15:32:48,436 - INFO - Calculating mAP metric on validation set
+2022-07-29 15:32:56,781 - INFO - Metric results:
+                   AP
+photograph     0.6461
+illustration   0.2790
+map            0.0695
+cartoon        0.4279
+headline       0.9327
+advertisement  0.8358
+mean           0.3964
+2022-07-29 15:37:58,159 - INFO - [Epoch 16] Epoch train time: 301.38 sec. | train loss = 0.3046
+2022-07-29 15:37:58,161 - INFO - Evaluating validation set
+2022-07-29 15:38:24,064 - INFO - Calculating mAP metric on validation set
+2022-07-29 15:38:31,808 - INFO - Metric results:
+                   AP
+photograph     0.7115
+illustration   0.3362
+map            0.0734
+cartoon        0.4545
+headline       0.9251
+advertisement  0.8288
+mean           0.4189
+2022-07-29 15:43:33,398 - INFO - [Epoch 17] Epoch train time: 301.59 sec. | train loss = 0.2848
+2022-07-29 15:43:33,401 - INFO - Evaluating validation set
+2022-07-29 15:43:59,257 - INFO - Calculating mAP metric on validation set
+2022-07-29 15:44:06,783 - INFO - Metric results:
+                   AP
+photograph     0.7017
+illustration   0.3629
+map            0.0917
+cartoon        0.5153
+headline       0.9316
+advertisement  0.8315
+mean           0.4287
+2022-07-29 15:49:04,517 - INFO - [Epoch 18] Epoch train time: 297.73 sec. | train loss = 0.2722
+2022-07-29 15:49:04,520 - INFO - Evaluating validation set
+2022-07-29 15:49:30,437 - INFO - Calculating mAP metric on validation set
+2022-07-29 15:49:37,710 - INFO - Metric results:
+                   AP
+photograph     0.6545
+illustration   0.3566
+map            0.0832
+cartoon        0.4599
+headline       0.9283
+advertisement  0.8268
+mean           0.4133
+2022-07-29 15:54:35,565 - INFO - [Epoch 19] Epoch train time: 297.85 sec. | train loss = 0.2603
+2022-07-29 15:54:35,568 - INFO - Evaluating validation set
+2022-07-29 15:55:01,296 - INFO - Calculating mAP metric on validation set
+2022-07-29 15:55:09,000 - INFO - Metric results:
+                   AP
+photograph     0.6518
+illustration   0.3410
+map            0.0811
+cartoon        0.4605
+headline       0.9208
+advertisement  0.8119
+mean           0.4066
+2022-07-29 16:00:11,328 - INFO - [Epoch 20] Epoch train time: 302.33 sec. | train loss = 0.2486
+2022-07-29 16:00:11,331 - INFO - Evaluating validation set
+2022-07-29 16:00:37,161 - INFO - Calculating mAP metric on validation set
+2022-07-29 16:00:43,451 - INFO - Metric results:
+                   AP
+photograph     0.6916
+illustration   0.3415
+map            0.1087
+cartoon        0.4589
+headline       0.9259
+advertisement  0.8265
+mean           0.4184
+2022-07-29 16:05:45,054 - INFO - [Epoch 21] Epoch train time: 301.6 sec. | train loss = 0.2384
+2022-07-29 16:05:45,057 - INFO - Evaluating validation set
+2022-07-29 16:06:10,904 - INFO - Calculating mAP metric on validation set
+2022-07-29 16:06:16,800 - INFO - Metric results:
+                   AP
+photograph     0.6824
+illustration   0.3021
+map            0.1137
+cartoon        0.4249
+headline       0.9248
+advertisement  0.8124
+mean           0.4110
+
+############################
+
+2022-07-29 16:08:24,630 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 16:08:24,630 - INFO - Creating validation dataloader
+2022-07-29 16:08:24,630 - ERROR - File 'dev-0/expected.tsv' not found, code will be forced to quit
+Traceback (most recent call last):
+  File "/home/wmi/adrozdz/Master_degree/src/model_pipeline.py", line 72, in model_pipeline
+    expected_val = from_tsv_to_list(f"{annotations_dir}{path}")
+  File "/home/wmi/adrozdz/Master_degree/src/functions_catalogue.py", line 470, in from_tsv_to_list
+    tsv_file = open(path)
+FileNotFoundError: [Errno 2] No such file or directory: '/home/wmi/adrozdz/Master_degreedata/dev-0/expected.tsv'
+
+############################
+
+2022-07-29 16:12:24,385 - INFO - MODEL_RUNNER - STARTED!
+
+############################
+
+2022-07-29 16:22:08,654 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 16:22:08,654 - INFO - Creating validation dataloader
+2022-07-29 16:22:10,240 - INFO - Creating train dataloader
+2022-07-29 16:22:33,888 - INFO - Model training phase - started!
+2022-07-29 16:22:34,580 - INFO - Cuda available: True
+2022-07-29 16:22:34,580 - INFO - Current device: cuda:0
+2022-07-29 16:27:29,292 - INFO - [Epoch 1] Epoch train time: 291.02 sec. | train loss = 1.3781
+2022-07-29 16:27:29,293 - INFO - Evaluating validation set
+2022-07-29 16:27:54,934 - INFO - Calculating mAP metric on validation set
+
+############################
+
+2022-07-29 16:29:10,277 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 16:29:10,277 - INFO - Creating validation dataloader
+2022-07-29 16:29:11,754 - INFO - Creating train dataloader
+2022-07-29 16:29:35,720 - INFO - Model training phase - started!
+2022-07-29 16:29:36,369 - INFO - Cuda available: True
+2022-07-29 16:29:36,370 - INFO - Current device: cuda:0
+
+############################
+
+2022-07-29 16:30:49,280 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 16:30:49,280 - INFO - Creating validation dataloader
+2022-07-29 16:30:50,713 - INFO - Creating train dataloader
+2022-07-29 16:31:12,256 - INFO - Model training phase - started!
+2022-07-29 16:31:12,804 - INFO - Cuda available: True
+2022-07-29 16:31:12,805 - INFO - Current device: cuda:0
+
+############################
+
+2022-07-29 16:31:55,988 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 16:31:55,988 - INFO - Creating validation dataloader
+2022-07-29 16:31:57,409 - INFO - Creating train dataloader
+2022-07-29 16:32:18,851 - INFO - Model training phase - started!
+2022-07-29 16:32:19,401 - INFO - Cuda available: True
+2022-07-29 16:32:19,402 - INFO - Current device: cuda:0
+
+############################
+
+2022-07-29 16:34:26,956 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 16:34:26,956 - INFO - Creating validation dataloader
+2022-07-29 16:34:28,373 - INFO - Creating train dataloader
+2022-07-29 16:34:49,824 - INFO - Model training phase - started!
+2022-07-29 16:34:50,355 - INFO - Cuda available: True
+2022-07-29 16:34:50,355 - INFO - Current device: cuda:0
+
+############################
+
+2022-07-29 16:37:29,128 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 16:37:29,129 - INFO - Creating validation dataloader
+2022-07-29 16:37:30,530 - INFO - Creating train dataloader
+2022-07-29 16:37:51,834 - INFO - Model training phase - started!
+2022-07-29 16:37:52,370 - INFO - Cuda available: True
+2022-07-29 16:37:52,371 - INFO - Current device: cuda:0
+
+############################
+
+2022-07-29 16:38:14,635 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 16:38:14,635 - INFO - Creating validation dataloader
+2022-07-29 16:38:16,052 - INFO - Creating train dataloader
+
+############################
+
+2022-07-29 16:45:22,187 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 16:45:22,187 - INFO - Creating validation dataloader
+2022-07-29 16:45:23,595 - INFO - Creating train dataloader
+
+############################
+
+2022-07-29 16:46:15,035 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 16:46:15,035 - INFO - Creating validation dataloader
+2022-07-29 16:46:16,473 - INFO - Creating train dataloader
+2022-07-29 16:46:37,939 - INFO - Model training phase - started!
+2022-07-29 16:46:38,487 - INFO - Cuda available: True
+2022-07-29 16:46:38,488 - INFO - Current device: cuda:0
+
+############################
+
+2022-07-29 17:41:47,567 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 17:41:47,568 - INFO - Creating validation dataloader
+2022-07-29 17:41:49,178 - INFO - Creating train dataloader
+2022-07-29 17:42:13,145 - INFO - Model training phase - started!
+2022-07-29 17:42:13,896 - INFO - Cuda available: True
+2022-07-29 17:42:13,899 - INFO - Current device: cuda:0
+
+############################
+
+2022-07-29 17:45:46,230 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 17:45:46,230 - INFO - Creating validation dataloader
+2022-07-29 17:45:47,795 - INFO - Creating train dataloader
+2022-07-29 17:46:11,011 - INFO - Model training phase - started!
+2022-07-29 17:46:11,760 - INFO - Cuda available: True
+2022-07-29 17:46:11,761 - INFO - Current device: cuda:0
+2022-07-29 17:51:06,934 - INFO - [Epoch 1] Epoch train time: 291.49 sec. | train loss = 1.3735
+2022-07-29 17:51:06,935 - INFO - Evaluating validation set
+2022-07-29 17:51:32,623 - INFO - Calculating mAP metric on validation set
+2022-07-29 17:51:51,761 - INFO - Metric results:
+                   AP
+photograph     0.0787
+illustration   0.0005
+map            0.0016
+cartoon        0.0187
+headline       0.5733
+advertisement  0.1281
+mean           0.0570
+
+############################
+
+2022-07-29 17:54:55,816 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 17:54:55,817 - INFO - Creating validation dataloader
+2022-07-29 17:54:57,458 - INFO - Creating train dataloader
+2022-07-29 17:55:21,603 - INFO - Model training phase - started!
+2022-07-29 17:55:22,305 - INFO - Cuda available: True
+2022-07-29 17:55:22,306 - INFO - Current device: cuda:0
+2022-07-29 18:00:20,485 - INFO - [Epoch 1] Epoch train time: 294.42 sec. | train loss = 1.0778
+2022-07-29 18:00:20,486 - INFO - Evaluating validation set
+2022-07-29 18:00:46,344 - INFO - Calculating mAP metric on validation set
+2022-07-29 18:01:02,266 - INFO - Metric results:
+                   AP
+photograph     0.5064
+illustration   0.1654
+map            0.0139
+cartoon        0.1210
+headline       0.8863
+advertisement  0.6452
+mean           0.2511
+2022-07-29 18:05:57,409 - INFO - [Epoch 2] Epoch train time: 295.14 sec. | train loss = 0.5823
+2022-07-29 18:05:57,412 - INFO - Evaluating validation set
+2022-07-29 18:06:22,974 - INFO - Calculating mAP metric on validation set
+2022-07-29 18:06:36,128 - INFO - Metric results:
+                   AP
+photograph     0.5768
+illustration   0.2010
+map            0.0311
+cartoon        0.3551
+headline       0.9229
+advertisement  0.7411
+mean           0.3206
+2022-07-29 18:11:31,261 - INFO - [Epoch 3] Epoch train time: 295.13 sec. | train loss = 0.4871
+2022-07-29 18:11:31,262 - INFO - Evaluating validation set
+2022-07-29 18:11:56,770 - INFO - Calculating mAP metric on validation set
+2022-07-29 18:12:10,017 - INFO - Metric results:
+                   AP
+photograph     0.6303
+illustration   0.1918
+map            0.0628
+cartoon        0.4361
+headline       0.9317
+advertisement  0.8019
+mean           0.3671
+2022-07-29 18:17:05,261 - INFO - [Epoch 4] Epoch train time: 295.24 sec. | train loss = 0.4377
+2022-07-29 18:17:05,264 - INFO - Evaluating validation set
+2022-07-29 18:17:30,764 - INFO - Calculating mAP metric on validation set
+2022-07-29 18:17:42,064 - INFO - Metric results:
+                   AP
+photograph     0.6413
+illustration   0.2522
+map            0.0590
+cartoon        0.3705
+headline       0.9327
+advertisement  0.8297
+mean           0.3699
+2022-07-29 18:22:37,426 - INFO - [Epoch 5] Epoch train time: 295.36 sec. | train loss = 0.3988
+2022-07-29 18:22:37,429 - INFO - Evaluating validation set
+2022-07-29 18:23:03,035 - INFO - Calculating mAP metric on validation set
+2022-07-29 18:23:12,790 - INFO - Metric results:
+                   AP
+photograph     0.6679
+illustration   0.2383
+map            0.0521
+cartoon        0.4562
+headline       0.9365
+advertisement  0.8270
+mean           0.3931
+2022-07-29 18:28:07,712 - INFO - [Epoch 6] Epoch train time: 294.92 sec. | train loss = 0.3703
+2022-07-29 18:28:07,713 - INFO - Evaluating validation set
+2022-07-29 18:28:33,208 - INFO - Calculating mAP metric on validation set
+2022-07-29 18:28:42,707 - INFO - Metric results:
+                   AP
+photograph     0.7102
+illustration   0.2483
+map            0.0535
+cartoon        0.5077
+headline       0.9375
+advertisement  0.8339
+mean           0.4075
+2022-07-29 18:33:37,971 - INFO - [Epoch 7] Epoch train time: 295.26 sec. | train loss = 0.3507
+2022-07-29 18:33:37,974 - INFO - Evaluating validation set
+2022-07-29 18:34:03,436 - INFO - Calculating mAP metric on validation set
+2022-07-29 18:34:12,302 - INFO - Metric results:
+                   AP
+photograph     0.7016
+illustration   0.3353
+map            0.1101
+cartoon        0.5473
+headline       0.9382
+advertisement  0.8320
+mean           0.4293
+2022-07-29 18:39:07,981 - INFO - [Epoch 8] Epoch train time: 295.68 sec. | train loss = 0.3286
+2022-07-29 18:39:07,984 - INFO - Evaluating validation set
+2022-07-29 18:39:33,392 - INFO - Calculating mAP metric on validation set
+2022-07-29 18:39:41,382 - INFO - Metric results:
+                   AP
+photograph     0.7399
+illustration   0.3340
+map            0.0824
+cartoon        0.6300
+headline       0.9272
+advertisement  0.8401
+mean           0.4465
+2022-07-29 18:44:36,182 - INFO - [Epoch 9] Epoch train time: 294.8 sec. | train loss = 0.3166
+2022-07-29 18:44:36,183 - INFO - Evaluating validation set
+2022-07-29 18:45:01,680 - INFO - Calculating mAP metric on validation set
+2022-07-29 18:45:09,874 - INFO - Metric results:
+                   AP
+photograph     0.7311
+illustration   0.1896
+map            0.1254
+cartoon        0.5402
+headline       0.9337
+advertisement  0.8266
+mean           0.4247
+2022-07-29 18:50:05,435 - INFO - [Epoch 10] Epoch train time: 295.56 sec. | train loss = 0.3066
+2022-07-29 18:50:05,438 - INFO - Evaluating validation set
+2022-07-29 18:50:31,034 - INFO - Calculating mAP metric on validation set
+2022-07-29 18:50:39,666 - INFO - Metric results:
+                   AP
+photograph     0.7172
+illustration   0.2634
+map            0.1242
+cartoon        0.6419
+headline       0.9347
+advertisement  0.8439
+mean           0.4463
+2022-07-29 18:55:34,842 - INFO - [Epoch 11] Epoch train time: 295.18 sec. | train loss = 0.2938
+2022-07-29 18:55:34,843 - INFO - Evaluating validation set
+2022-07-29 18:56:00,311 - INFO - Calculating mAP metric on validation set
+2022-07-29 18:56:07,303 - INFO - Metric results:
+                   AP
+photograph     0.7031
+illustration   0.3260
+map            0.1310
+cartoon        0.6392
+headline       0.9316
+advertisement  0.8400
+mean           0.4540
+2022-07-29 19:01:03,191 - INFO - [Epoch 12] Epoch train time: 295.89 sec. | train loss = 0.2721
+2022-07-29 19:01:03,192 - INFO - Evaluating validation set
+2022-07-29 19:01:28,621 - INFO - Calculating mAP metric on validation set
+2022-07-29 19:01:34,837 - INFO - Metric results:
+                   AP
+photograph     0.7348
+illustration   0.3997
+map            0.1825
+cartoon        0.6608
+headline       0.9241
+advertisement  0.8513
+mean           0.4855
+2022-07-29 19:06:29,804 - INFO - [Epoch 13] Epoch train time: 294.97 sec. | train loss = 0.2602
+2022-07-29 19:06:29,807 - INFO - Evaluating validation set
+2022-07-29 19:06:55,325 - INFO - Calculating mAP metric on validation set
+2022-07-29 19:07:02,078 - INFO - Metric results:
+                   AP
+photograph     0.6690
+illustration   0.3395
+map            0.0950
+cartoon        0.4106
+headline       0.9263
+advertisement  0.7799
+mean           0.4059
+2022-07-29 19:11:58,008 - INFO - [Epoch 14] Epoch train time: 295.93 sec. | train loss = 0.2507
+2022-07-29 19:11:58,011 - INFO - Evaluating validation set
+2022-07-29 19:12:23,547 - INFO - Calculating mAP metric on validation set
+2022-07-29 19:12:30,171 - INFO - Metric results:
+                   AP
+photograph     0.6408
+illustration   0.3214
+map            0.1514
+cartoon        0.4416
+headline       0.9323
+advertisement  0.7853
+mean           0.4089
+2022-07-29 19:17:26,219 - INFO - [Epoch 15] Epoch train time: 296.05 sec. | train loss = 0.2372
+2022-07-29 19:17:26,221 - INFO - Evaluating validation set
+2022-07-29 19:17:51,781 - INFO - Calculating mAP metric on validation set
+2022-07-29 19:17:57,855 - INFO - Metric results:
+                   AP
+photograph     0.6666
+illustration   0.3207
+map            0.1976
+cartoon        0.4778
+headline       0.9281
+advertisement  0.8000
+mean           0.4296
+
+############################
+
+2022-07-29 19:22:35,694 - INFO - MODEL_RUNNER - STARTED!
+2022-07-29 19:22:35,694 - INFO - Creating validation dataloader
+2022-07-29 19:22:37,324 - INFO - Creating train dataloader
+2022-07-29 19:23:01,239 - INFO - Model training phase - started!
+2022-07-29 19:23:01,970 - INFO - Cuda available: True
+2022-07-29 19:23:01,971 - INFO - Current device: cuda:0
+2022-07-29 19:27:58,377 - INFO - [Epoch 1] Epoch train time: 292.71 sec. | train loss = 1.0815
+2022-07-29 19:27:58,378 - INFO - Evaluating validation set
+2022-07-29 19:28:24,285 - INFO - Calculating mAP metric on validation set
+2022-07-29 19:28:40,124 - INFO - Metric results:
+                   AP
+photograph     0.5589
+illustration   0.1525
+map            0.0226
+cartoon        0.2102
+headline       0.8862
+advertisement  0.5917
+mean           0.2495
+2022-07-29 19:33:34,781 - INFO - [Epoch 2] Epoch train time: 294.66 sec. | train loss = 0.5892
+2022-07-29 19:33:34,784 - INFO - Evaluating validation set
+2022-07-29 19:34:00,210 - INFO - Calculating mAP metric on validation set
+2022-07-29 19:34:13,053 - INFO - Metric results:
+                   AP
+photograph     0.6119
+illustration   0.1354
+map            0.0295
+cartoon        0.3964
+headline       0.9191
+advertisement  0.7629
+mean           0.3293
+2022-07-29 19:39:07,678 - INFO - [Epoch 3] Epoch train time: 294.62 sec. | train loss = 0.4929
+2022-07-29 19:39:07,680 - INFO - Evaluating validation set
+2022-07-29 19:39:33,092 - INFO - Calculating mAP metric on validation set
+2022-07-29 19:39:47,453 - INFO - Metric results:
+                   AP
+photograph     0.6393
+illustration   0.1656
+map            0.0380
+cartoon        0.3449
+headline       0.9264
+advertisement  0.7936
+mean           0.3502
+2022-07-29 19:44:41,775 - INFO - [Epoch 4] Epoch train time: 294.32 sec. | train loss = 0.4403
+2022-07-29 19:44:41,776 - INFO - Evaluating validation set
+2022-07-29 19:45:07,222 - INFO - Calculating mAP metric on validation set
+2022-07-29 19:45:19,795 - INFO - Metric results:
+                   AP
+photograph     0.6493
+illustration   0.1748
+map            0.0347
+cartoon        0.3991
+headline       0.9357
+advertisement  0.7984
+mean           0.3611
+2022-07-29 19:50:14,690 - INFO - [Epoch 5] Epoch train time: 294.89 sec. | train loss = 0.4104
+2022-07-29 19:50:14,693 - INFO - Evaluating validation set
+2022-07-29 19:50:40,220 - INFO - Calculating mAP metric on validation set
+2022-07-29 19:50:51,006 - INFO - Metric results:
+                   AP
+photograph     0.6738
+illustration   0.2569
+map            0.0421
+cartoon        0.5297
+headline       0.9373
+advertisement  0.8208
+mean           0.3905
+2022-07-29 19:55:46,161 - INFO - [Epoch 6] Epoch train time: 295.15 sec. | train loss = 0.381
+2022-07-29 19:55:46,162 - INFO - Evaluating validation set
+2022-07-29 19:56:11,638 - INFO - Calculating mAP metric on validation set
+2022-07-29 19:56:21,622 - INFO - Metric results:
+                   AP
+photograph     0.6521
+illustration   0.2092
+map            0.0506
+cartoon        0.4612
+headline       0.9359
+advertisement  0.8237
+mean           0.3922
+2022-07-29 20:01:16,907 - INFO - [Epoch 7] Epoch train time: 295.28 sec. | train loss = 0.3614
+2022-07-29 20:01:16,908 - INFO - Evaluating validation set
+2022-07-29 20:01:42,516 - INFO - Calculating mAP metric on validation set
+2022-07-29 20:01:52,058 - INFO - Metric results:
+                   AP
+photograph     0.7177
+illustration   0.2224
+map            0.1085
+cartoon        0.4313
+headline       0.9400
+advertisement  0.8245
+mean           0.4020
+2022-07-29 20:06:47,753 - INFO - [Epoch 8] Epoch train time: 295.69 sec. | train loss = 0.3066
+2022-07-29 20:06:47,756 - INFO - Evaluating validation set
+2022-07-29 20:07:13,323 - INFO - Calculating mAP metric on validation set
+2022-07-29 20:07:21,228 - INFO - Metric results:
+                   AP
+photograph     0.7400
+illustration   0.3887
+map            0.0762
+cartoon        0.5844
+headline       0.9291
+advertisement  0.8188
+mean           0.4512
+2022-07-29 20:12:15,667 - INFO - [Epoch 9] Epoch train time: 294.44 sec. | train loss = 0.2774
+2022-07-29 20:12:15,668 - INFO - Evaluating validation set
+2022-07-29 20:12:41,170 - INFO - Calculating mAP metric on validation set
+2022-07-29 20:12:48,179 - INFO - Metric results:
+                   AP
+photograph     0.7025
+illustration   0.3558
+map            0.0606
+cartoon        0.5432
+headline       0.9302
+advertisement  0.8215
+mean           0.4379
+2022-07-29 20:17:43,943 - INFO - [Epoch 10] Epoch train time: 295.76 sec. | train loss = 0.2582
+2022-07-29 20:17:43,946 - INFO - Evaluating validation set
+2022-07-29 20:18:09,550 - INFO - Calculating mAP metric on validation set
+2022-07-29 20:18:16,172 - INFO - Metric results:
+                   AP
+photograph     0.7059
+illustration   0.3232
+map            0.0675
+cartoon        0.4799
+headline       0.9274
+advertisement  0.8110
+mean           0.4215
+2022-07-29 20:23:11,734 - INFO - [Epoch 11] Epoch train time: 295.56 sec. | train loss = 0.2449
+2022-07-29 20:23:11,735 - INFO - Evaluating validation set
+2022-07-29 20:23:37,277 - INFO - Calculating mAP metric on validation set
+2022-07-29 20:23:43,993 - INFO - Metric results:
+                   AP
+photograph     0.6997
+illustration   0.3021
+map            0.0913
+cartoon        0.5664
+headline       0.9192
+advertisement  0.8101
+mean           0.4241
+2022-07-29 20:28:39,023 - INFO - [Epoch 12] Epoch train time: 295.03 sec. | train loss = 0.2383
+2022-07-29 20:28:39,026 - INFO - Evaluating validation set
+2022-07-29 20:29:04,436 - INFO - Calculating mAP metric on validation set
+2022-07-29 20:29:10,817 - INFO - Metric results:
+                   AP
+photograph     0.7523
+illustration   0.3507
+map            0.0958
+cartoon        0.6003
+headline       0.9238
+advertisement  0.8294
+mean           0.4485
+2022-07-29 20:34:05,750 - INFO - [Epoch 13] Epoch train time: 294.93 sec. | train loss = 0.2307
+2022-07-29 20:34:05,751 - INFO - Evaluating validation set
+2022-07-29 20:34:31,204 - INFO - Calculating mAP metric on validation set
+2022-07-29 20:34:37,350 - INFO - Metric results:
+                   AP
+photograph     0.7532
+illustration   0.3370
+map            0.1454
+cartoon        0.5881
+headline       0.9182
+advertisement  0.8150
+mean           0.4587
+2022-07-29 20:39:34,187 - INFO - [Epoch 14] Epoch train time: 296.84 sec. | train loss = 0.2283
+2022-07-29 20:39:34,190 - INFO - Evaluating validation set
+2022-07-29 20:40:00,088 - INFO - Calculating mAP metric on validation set
+2022-07-29 20:40:06,268 - INFO - Metric results:
+                   AP
+photograph     0.7301
+illustration   0.3563
+map            0.2262
+cartoon        0.5206
+headline       0.9085
+advertisement  0.8057
+mean           0.4584
+2022-07-29 20:45:05,628 - INFO - [Epoch 15] Epoch train time: 299.36 sec. | train loss = 0.2107
+2022-07-29 20:45:05,631 - INFO - Evaluating validation set
+2022-07-29 20:45:31,320 - INFO - Calculating mAP metric on validation set
+2022-07-29 20:45:37,134 - INFO - Metric results:
+                   AP
+photograph     0.7125
+illustration   0.3741
+map            0.2713
+cartoon        0.5851
+headline       0.9308
+advertisement  0.8092
+mean           0.4830
+2022-07-29 20:50:34,705 - INFO - [Epoch 16] Epoch train time: 297.57 sec. | train loss = 0.193
+2022-07-29 20:50:34,708 - INFO - Evaluating validation set
+2022-07-29 20:51:00,178 - INFO - Calculating mAP metric on validation set
+2022-07-29 20:51:05,567 - INFO - Metric results:
+                   AP
+photograph     0.7581
+illustration   0.3303
+map            0.3160
+cartoon        0.6000
+headline       0.9297
+advertisement  0.8066
+mean           0.4964
+2022-07-29 20:56:03,967 - INFO - [Epoch 17] Epoch train time: 298.4 sec. | train loss = 0.1807
+2022-07-29 20:56:03,970 - INFO - Evaluating validation set
+2022-07-29 20:56:29,432 - INFO - Calculating mAP metric on validation set
+2022-07-29 20:56:34,573 - INFO - Metric results:
+                   AP
+photograph     0.7740
+illustration   0.3329
+map            0.4363
+cartoon        0.6703
+headline       0.9305
+advertisement  0.8205
+mean           0.5354
+2022-07-29 21:01:30,931 - INFO - [Epoch 18] Epoch train time: 296.36 sec. | train loss = 0.1697
+2022-07-29 21:01:30,934 - INFO - Evaluating validation set
+2022-07-29 21:01:56,390 - INFO - Calculating mAP metric on validation set
+2022-07-29 21:02:01,365 - INFO - Metric results:
+                   AP
+photograph     0.7662
+illustration   0.3266
+map            0.5080
+cartoon        0.6701
+headline       0.9277
+advertisement  0.8205
+mean           0.5401
+2022-07-29 21:06:56,735 - INFO - [Epoch 19] Epoch train time: 295.37 sec. | train loss = 0.1602
+2022-07-29 21:06:56,738 - INFO - Evaluating validation set
+2022-07-29 21:07:22,201 - INFO - Calculating mAP metric on validation set
+2022-07-29 21:07:27,248 - INFO - Metric results:
+                   AP
+photograph     0.7440
+illustration   0.3522
+map            0.4728
+cartoon        0.6785
+headline       0.9244
+advertisement  0.8134
+mean           0.5378
+2022-07-29 21:12:22,926 - INFO - [Epoch 20] Epoch train time: 295.68 sec. | train loss = 0.1515
+2022-07-29 21:12:22,929 - INFO - Evaluating validation set
+2022-07-29 21:12:48,409 - INFO - Calculating mAP metric on validation set
+2022-07-29 21:12:53,142 - INFO - Metric results:
+                   AP
+photograph     0.7302
+illustration   0.3219
+map            0.4934
+cartoon        0.6688
+headline       0.9136
+advertisement  0.8090
+mean           0.5314
+2022-07-29 21:17:49,734 - INFO - [Epoch 21] Epoch train time: 296.59 sec. | train loss = 0.1466
+2022-07-29 21:17:49,737 - INFO - Evaluating validation set
+2022-07-29 21:18:15,722 - INFO - Calculating mAP metric on validation set
+2022-07-29 21:18:20,542 - INFO - Metric results:
+                   AP
+photograph     0.7424
+illustration   0.2837
+map            0.6298
+cartoon        0.6921
+headline       0.9119
+advertisement  0.8222
+mean           0.5535
+2022-07-29 21:23:18,215 - INFO - [Epoch 22] Epoch train time: 297.67 sec. | train loss = 0.1434
+2022-07-29 21:23:18,218 - INFO - Evaluating validation set
+2022-07-29 21:23:43,724 - INFO - Calculating mAP metric on validation set
+2022-07-29 21:23:48,376 - INFO - Metric results:
+                   AP
+photograph     0.7380
+illustration   0.2866
+map            0.5669
+cartoon        0.6845
+headline       0.9210
+advertisement  0.8096
+mean           0.5462
+2022-07-29 21:28:44,525 - INFO - [Epoch 23] Epoch train time: 296.15 sec. | train loss = 0.1359
+2022-07-29 21:28:44,528 - INFO - Evaluating validation set
+2022-07-29 21:29:10,275 - INFO - Calculating mAP metric on validation set
+2022-07-29 21:29:14,690 - INFO - Metric results:
+                   AP
+photograph     0.7404
+illustration   0.3093
+map            0.6228
+cartoon        0.6697
+headline       0.9136
+advertisement  0.8054
+mean           0.5553
+2022-07-29 21:34:11,608 - INFO - [Epoch 24] Epoch train time: 296.92 sec. | train loss = 0.1282
+2022-07-29 21:34:11,611 - INFO - Evaluating validation set
+2022-07-29 21:34:37,374 - INFO - Calculating mAP metric on validation set
+2022-07-29 21:34:41,658 - INFO - Metric results:
+                   AP
+photograph     0.7436
+illustration   0.2743
+map            0.5586
+cartoon        0.6666
+headline       0.9134
+advertisement  0.7990
+mean           0.5384
+2022-07-29 21:39:38,788 - INFO - [Epoch 25] Epoch train time: 297.13 sec. | train loss = 0.1216
+2022-07-29 21:39:38,789 - INFO - Evaluating validation set
+2022-07-29 21:40:04,443 - INFO - Calculating mAP metric on validation set
+2022-07-29 21:40:08,665 - INFO - Metric results:
+                   AP
+photograph     0.7403
+illustration   0.2780
+map            0.5254
+cartoon        0.6591
+headline       0.9049
+advertisement  0.7966
+mean           0.5285
+2022-07-29 21:45:07,465 - INFO - [Epoch 26] Epoch train time: 298.8 sec. | train loss = 0.1167
+2022-07-29 21:45:07,468 - INFO - Evaluating validation set
+2022-07-29 21:45:32,942 - INFO - Calculating mAP metric on validation set
+2022-07-29 21:45:37,087 - INFO - Metric results:
+                   AP
+photograph     0.7424
+illustration   0.2775
+map            0.5505
+cartoon        0.6709
+headline       0.9041
+advertisement  0.8053
+mean           0.5388
+2022-07-29 21:50:38,242 - INFO - [Epoch 27] Epoch train time: 301.16 sec. | train loss = 0.1126
+2022-07-29 21:50:38,245 - INFO - Evaluating validation set
+2022-07-29 21:51:04,052 - INFO - Calculating mAP metric on validation set
+2022-07-29 21:51:08,199 - INFO - Metric results:
+                   AP
+photograph     0.7505
+illustration   0.2776
+map            0.5512
+cartoon        0.6835
+headline       0.9024
+advertisement  0.8039
+mean           0.5413
+2022-07-29 21:56:04,482 - INFO - [Epoch 28] Epoch train time: 296.28 sec. | train loss = 0.1078
+2022-07-29 21:56:04,485 - INFO - Evaluating validation set
+2022-07-29 21:56:30,082 - INFO - Calculating mAP metric on validation set
+2022-07-29 21:56:34,253 - INFO - Metric results:
+                   AP
+photograph     0.7445
+illustration   0.2743
+map            0.5408
+cartoon        0.6729
+headline       0.8931
+advertisement  0.8036
+mean           0.5348
+2022-07-29 22:01:35,140 - INFO - [Epoch 29] Epoch train time: 300.89 sec. | train loss = 0.1117
+2022-07-29 22:01:35,143 - INFO - Evaluating validation set
+2022-07-29 22:02:01,048 - INFO - Calculating mAP metric on validation set
+2022-07-29 22:02:05,224 - INFO - Metric results:
+                   AP
+photograph     0.7317
+illustration   0.2900
+map            0.5469
+cartoon        0.6712
+headline       0.9016
+advertisement  0.8165
+mean           0.5453
+2022-07-29 22:07:07,116 - INFO - [Epoch 30] Epoch train time: 301.89 sec. | train loss = 0.1068
+2022-07-29 22:07:07,119 - INFO - Evaluating validation set
+2022-07-29 22:07:33,004 - INFO - Calculating mAP metric on validation set
+2022-07-29 22:07:37,220 - INFO - Metric results:
+                   AP
+photograph     0.7372
+illustration   0.3049
+map            0.5358
+cartoon        0.6715
+headline       0.9008
+advertisement  0.8172
+mean           0.5454
+2022-07-29 22:07:37,220 - INFO - Model training completed, runtime: 9875.43 sec.
+2022-07-29 22:07:37,240 - INFO - Overriding previous model due to better performance of the new one or "--force_save_model" flag used.
+2022-07-29 22:07:37,240 - INFO - Model config json saved in "model_config/" directory
+2022-07-29 22:07:37,395 - INFO - Model saved in "model_config/" directory
+2022-07-29 22:07:37,399 - INFO - Model validation results saved in "model_config/" directory
+2022-07-29 22:07:37,399 - INFO - Model evaluation phase - started!
+2022-07-29 22:07:38,007 - INFO - Model loaded correctly
+2022-07-29 22:07:38,007 - INFO - Creating test dataloader
+2022-07-29 22:07:39,050 - INFO - Test set evaluation - started!
+2022-07-29 22:07:39,050 - INFO - Cuda available: True
+2022-07-29 22:07:39,050 - INFO - Current device: cuda:0
+2022-07-29 22:09:00,222 - INFO - Saving model output
+2022-07-29 22:09:00,769 - INFO - Calculating mAP metric
+2022-07-29 22:09:14,147 - INFO - Metric results:
+                   AP
+photograph     0.7297
+illustration   0.4107
+map            0.6765
+cartoon        0.6975
+headline       0.8889
+advertisement  0.8566
+mean           0.5663
+2022-07-29 22:09:14,147 - INFO - Model evaluation completed, runtime: 95.1 sec.
+2022-07-29 22:09:14,150 - INFO - Train set evaluation - started!
+2022-07-29 22:09:14,151 - INFO - Cuda available: True
+2022-07-29 22:09:14,151 - INFO - Current device: cuda:0
+2022-07-29 22:14:08,265 - INFO - Saving model output
+2022-07-29 22:14:10,897 - INFO - Calculating mAP metric
+2022-07-29 22:14:56,186 - INFO - Metric results:
+                   AP
+photograph     0.9682
+illustration   0.9777
+map            0.9881
+cartoon        0.9701
+headline       0.9850
+advertisement  0.9898
+mean           0.9057
+2022-07-29 22:14:56,186 - INFO - Model evaluation completed, runtime: 342.04 sec.
+2022-07-29 22:14:56,199 - INFO - Validation set evaluation - started!
+2022-07-29 22:14:56,200 - INFO - Cuda available: True
+2022-07-29 22:14:56,200 - INFO - Current device: cuda:0
+2022-07-29 22:15:21,601 - INFO - Saving model output
+2022-07-29 22:15:21,687 - INFO - Calculating mAP metric
+2022-07-29 22:15:25,898 - INFO - Metric results:
+                   AP
+photograph     0.7372
+illustration   0.3049
+map            0.5358
+cartoon        0.6715
+headline       0.9009
+advertisement  0.8249
+mean           0.5433
+2022-07-29 22:15:25,898 - INFO - Model evaluation completed, runtime: 29.7 sec.
+2022-07-29 22:15:25,903 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 10370.21 sec.
+
+############################
+
+2022-07-30 00:50:20,717 - INFO - MODEL_RUNNER - STARTED!
+2022-07-30 00:50:20,718 - WARNING - Argument "train" not passed, this phase will be skipped
+2022-07-30 00:50:20,718 - INFO - Creating validation dataloader
+2022-07-30 00:50:23,452 - INFO - Model evaluation phase - started!
+
+############################
+
+2022-07-30 00:52:12,821 - INFO - MODEL_RUNNER - STARTED!
+2022-07-30 00:52:12,822 - WARNING - Argument "train" not passed, this phase will be skipped
+2022-07-30 00:52:12,823 - INFO - Creating validation dataloader
+2022-07-30 00:52:15,399 - INFO - Model evaluation phase - started!
+2022-07-30 00:52:16,403 - INFO - Model loaded correctly
+2022-07-30 00:52:16,403 - INFO - Validation set evaluation - started!
+2022-07-30 00:52:16,404 - INFO - Cuda available: False
+2022-07-30 00:52:16,404 - INFO - Current device: cpu

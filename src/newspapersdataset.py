@@ -1,20 +1,11 @@
-import pathlib
-import sys
 import warnings
 from typing import List, Tuple, Union
-
 import numpy as np
 import pandas as pd
 import torch
 import torchvision
 from PIL import Image
-from functions_catalogue import target_encoder
-
-sys.path.append(
-    "/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-2])
-)
-from image_size import \
-    get_image_size  # source: https://github.com/scardine/image_size
+from functions_catalogue import target_encoder, get_image_size
 
 # warnings
 warnings.filterwarnings("ignore")

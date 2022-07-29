@@ -9,22 +9,26 @@ import torch
 import torchvision
 from tqdm import tqdm
 import pandas as pd
-from functions_catalogue import calculate_map, predict_eval_set, prepare_data_for_ap
+from functions_catalogue import calculate_map, predict_eval_set, prepare_eval_out_for_ap
 
 # warnings
 warnings.filterwarnings("ignore")
 
 
 def train_model(
-    pre_treined_model: torchvision.models.detection.FasterRCNN,
+    model: torchvision.models.detection.FasterRCNN,
     optimizer: torch.optim.Optimizer,
     train_dataloader: torch.utils.data.DataLoader,
     epochs: int,
+    num_classes: int,
+    model_path: str,
     val_dataloader: torch.utils.data.DataLoader = None,
     lr_scheduler: torch.optim.lr_scheduler.StepLR = None,
     gpu: bool = True,
 ) -> torchvision.models.detection.FasterRCNN:
+    
     training_start_time = time.time()
+    
     # switch to gpu if available
     cuda_statement = torch.cuda.is_available()
     logging.info(f"Cuda available: {cuda_statement}")
@@ -32,14 +36,14 @@ def train_model(
         device = torch.device(torch.cuda.current_device())
     else:
         device = torch.device("cpu")
-    logging.info(f"Current device: {device}\n")
+    logging.info(f"Current device: {device}")
     # move model to the right device
-    pre_treined_model.to(device)
-    for epoch in tqdm(range(epochs), desc='Training'):
+    model.to(device)
+    for epoch in range(epochs):
         epoch_start_time = time.time()
-        pre_treined_model.train()
+        model.train()
         train_loss = 0.0
-        for images, targets in tqdm(train_dataloader):
+        for images, targets in tqdm(train_dataloader, desc=f'[Epoch {epoch + 1}]'):
             if cuda_statement and gpu:
                 images = [image.to(device) for image in images]
                 targets = [
@@ -48,12 +52,12 @@ def train_model(
             # clear the gradients
             optimizer.zero_grad()
             # forward pass
-            loss_dict = pre_treined_model(images, targets)
+            loss_dict = model(images, targets)
             losses = sum(loss_dict.values())
             loss_value = losses.item()
             if not math.isfinite(loss_value):
                 logging.error(f"Loss is {loss_value}, stopping training", exc_info=True)
-                sys.exit(1)
+                raise ValueError()
             # calculate gradients
             losses.backward()
             # update weights
@@ -61,7 +65,7 @@ def train_model(
             # calculate loss
             train_loss += loss_value
 
-        logging.info(f"[epoch {epoch + 1}] Epoch train time: {round(time.time()-epoch_start_time,2)} sec. | train loss = {train_loss / len(train_dataloader)}")
+        logging.info(f"[Epoch {epoch + 1}] Epoch train time: {round(time.time()-epoch_start_time,2)} sec. | train loss = {round(train_loss / len(train_dataloader),4)}")
 
         # update the learning rate
         if lr_scheduler:
@@ -69,18 +73,21 @@ def train_model(
 
         # evaluate on the validation dataset
         if val_dataloader:
-            logging.info('Calculating mAP metric on validation set')
+            model.eval()
+            logging.info('Evaluating validation set')
             out, targ = predict_eval_set(
                 dataloader=val_dataloader,
-                model=pre_treined_model,
+                model=model,
                 device=device,
             )
-            prep_pred, prepr_gt = prepare_data_for_ap(out, targ)
-            eval_metrics = calculate_map(prep_pred, prepr_gt)
-            with redirect_stdout(logging):
-                print(json.dumps(eval_metrics, indent=4))
-                print(f'Metric results:\n{pd.DataFrame.from_dict(eval_metrics, orient="index", columns=["AP"]).to_string()}')
+            prep_pred, prepr_gt = prepare_eval_out_for_ap(out, targ)
+            logging.info('Calculating mAP metric on validation set')
+            eval_metrics = calculate_map(prep_pred, prepr_gt, num_classes=num_classes)
+            eval_df = pd.DataFrame.from_dict(eval_metrics, orient="index", columns=["AP"])
+            logging.info(f'Metric results:\n{eval_df.to_string()}')
+        else:
+            eval_df = None
 
     logging.info(f"Model training completed, runtime: {round(time.time()-training_start_time,2)} sec.")
 
-    return pre_treined_model
+    return model, eval_df

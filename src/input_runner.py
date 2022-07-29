@@ -2,33 +2,32 @@ import os
 import copy
 import pandas as pd
 import json
-from os import listdir
 import logging
-import pathlib
 import click
-from contextlib import redirect_stdout
 from logs import Log
-
 from functions_catalogue import save_list_to_tsv_file, rescale_annotations, calcMD5Hash, remove_coco_elem_if_in_list, remove_if_missed_annotations, input_transformer, get_input_statistics
+from constants import General_args
+
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.option(
     "--main_dir",
-    default="/".join(
-        str(pathlib.Path(__file__).parent.resolve()).split("/")[:-1]
-    ),
     type=str,
-    help="Path to the level where this repository is stored",
+    default=General_args.MAIN_DIR,
+    help="Path to the level where this repository is stored.",
     show_default=True,
 )
+
 def prepare_input(main_dir):
+    # check provided path
+    assert os.path.exists(main_dir) == True
+    
     # initialize logger
     logger = Log('input_runner')
     logger.log_start()
-    logging.write = lambda msg: logging.info(msg) if msg != "\n" else None
 
     # scraped images paths
-    scraped_images = [img for img in listdir(f'{main_dir}/scraped_photos') if img != '.DS_Store']
+    scraped_images = [img for img in os.listdir(f'{main_dir}/scraped_photos') if img != '.DS_Store']
 
     # read train and test annotation data
     with open(f"{main_dir}/source_annotations/train_80_percent.json") as jsonFile:
@@ -84,21 +83,20 @@ def prepare_input(main_dir):
     val_in, val_expected = input_transformer(coco_metadata_val, f'{main_dir}/scraped_photos/')
     test_in, test_expected = input_transformer(coco_metadata_test, f'{main_dir}/scraped_photos/')
     
-    with redirect_stdout(logging):
-        train_stats, train_sum = get_input_statistics(train_expected)
-        print(f'Number of images in train set = {len(train_in)}')
-        print(f'Number of annotations in train set = {train_sum}')
-        print(f'Labels statistics for train set:\n{train_stats}')
+    train_stats, train_sum = get_input_statistics(train_expected)
+    logging.info(f'Number of images in train set = {len(train_in)}')
+    logging.info(f'Number of annotations in train set = {train_sum}')
+    logging.info(f'Labels statistics for train set:\n{train_stats}')
         
-        val_stats, val_sum = get_input_statistics(val_expected)
-        print(f'Number of images in validation set = {len(val_in)}')
-        print(f'Number of annotations in validation set = {val_sum}')
-        print(f'Labels statistics for validation set:\n{val_stats}')
+    val_stats, val_sum = get_input_statistics(val_expected)
+    logging.info(f'Number of images in validation set = {len(val_in)}')
+    logging.info(f'Number of annotations in validation set = {val_sum}')
+    logging.info(f'Labels statistics for validation set:\n{val_stats}')
         
-        test_stats, test_sum = get_input_statistics(test_expected)
-        print(f'Number of images in test set = {len(test_in)}')
-        print(f'Number of annotations in test set = {test_sum}')
-        print(f'Labels statistics for test set:\n{test_stats}')
+    test_stats, test_sum = get_input_statistics(test_expected)
+    logging.info(f'Number of images in test set = {len(test_in)}')
+    logging.info(f'Number of annotations in test set = {test_sum}')
+    logging.info(f'Labels statistics for test set:\n{test_stats}')
     
     # save data
     train_path = f"{main_dir}/data/train/"

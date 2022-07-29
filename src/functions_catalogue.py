@@ -1,5 +1,6 @@
 import sys
 import csv
+import pathlib
 import json
 from typing import Dict, List, Tuple, Union
 import pandas as pd
@@ -10,16 +11,17 @@ import torchvision
 from mean_average_precision import MetricBuilder
 from tqdm import tqdm
 import random
-import matplotlib
+from matplotlib.patches import Rectangle
 import matplotlib.cbook as cbook
 import matplotlib.pyplot as plt
 
 try:
-    sys.path.append('../')
+    sys.path.append(
+        "/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-2])
+    )
     from image_size import get_image_size # source: https://github.com/scardine/image_size
 except:
-    sys.path.append('../../')
-    from image_size import get_image_size # source: https://github.com/scardine/image_size
+    raise ImportWarning('Repository "image_size" not found, code will crash if it is needed during execution')
 
 
 def target_encoder(label: int, reverse=False):
@@ -28,9 +30,8 @@ def target_encoder(label: int, reverse=False):
         'illustration': 2,
         'map': 3,
         'cartoon': 4,
-        'editorial_cartoon': 5,
-        'headline': 6,
-        'advertisement': 7,
+        'headline': 5,
+        'advertisement': 6,
     }
     if reverse:
         label_dict = {y: x for x, y in label_dict.items()}
@@ -78,7 +79,7 @@ def show_random_img_with_all_annotations(
                 x1, y1 = int(bbox[2]), int(bbox[3])
                 width, height = x1 - x0, y1 - y0
                 cat_name = f"{annotation[0]} {round(float(score)*100,2)}%"
-                rect = matplotlib.patches.Rectangle(
+                rect = Rectangle(
                     (x0, y0),
                     width,
                     height,
@@ -144,9 +145,7 @@ def predict_one_img(
                     [o.detach().numpy().tolist() for o in output["scores"]]
                 )
 
-        out_list = parse_model_outcome([image_name], path_to_image, new_sizes_list, predicted_labels_list, scores_list, predicted_bboxes_list)
-
-        return out_list
+        return parse_model_outcome([image_name], path_to_image, new_sizes_list, predicted_labels_list, scores_list, predicted_bboxes_list)
 
 
 def parse_model_outcome(img_names_list: List[str], image_directory: str, new_sizes_list: List, predicted_labels_list: List[int], scores_list: List[float], predicted_bboxes_list: List[int]) -> List[str]:
@@ -224,10 +223,8 @@ def input_transformer(coco_file: Dict, path_to_photos_dir: str) -> Tuple:
                     path_to_photos_dir + coco_file['images'][i]['file_name']
                 )
                 cat = coco_file['categories'][int(coco_file['annotations'][ii]['category_id'])]['name'].lower()
-                if cat == 'comics/cartoon':
+                if cat in ['comics/cartoon', 'editorial cartoon']:
                     cat = 'cartoon'
-                elif cat == 'editorial cartoon':
-                    cat = 'editorial_cartoon'
                 x0 = coco_file['annotations'][ii]['bbox'][0]
                 y0 = coco_file['annotations'][ii]['bbox'][1]
                 x1 = x0 + coco_file['annotations'][ii]['bbox'][2]
@@ -317,10 +314,12 @@ def predict_eval_set(
     # settings
     cuda_statement = torch.cuda.is_available()
     cpu_device = torch.device("cpu")
+    if cuda_statement:
+        torch.multiprocessing.set_sharing_strategy('file_system')
     # predict
     with torch.no_grad():
         f_out, f_tar = [], []
-        for images, targets in tqdm(dataloader, desc='Prediction'):
+        for images, targets in tqdm(dataloader, desc='Evaluation'):
             if cuda_statement:
                 images = [img.to(device) for img in images]
                 torch.cuda.synchronize()
@@ -341,6 +340,48 @@ def predict_eval_set(
     f_tar_flat = [x for xs in f_tar for x in xs]
 
     return f_out_flat, f_tar_flat
+
+
+def prepare_eval_out_for_ap(
+    output_list: List[Dict],
+    target_list: List[Dict],
+) -> Tuple[List[np.ndarray]]:
+    """
+    Prepare data into a format adequate for AP calculation
+    """
+    prep_pred_list, grnd_truth_list = [], []
+    for i in range(len(output_list)):
+        # prediction
+        temp_pred = []
+        for ii_pred in range(len(output_list[i]["boxes"].detach().numpy())):
+            obj_pred = [
+                int(el)
+                for el in output_list[i]["boxes"].detach().numpy()[ii_pred]
+            ]
+            obj_pred.append(
+                int(output_list[i]["labels"].detach().numpy()[ii_pred] - 1)
+            )
+            obj_pred.append(
+                float(output_list[i]["scores"].detach().numpy()[ii_pred])
+            )
+            temp_pred.append(obj_pred)
+        prep_pred_list.append(np.array(temp_pred))
+        # ground truth
+        temp_gt = []
+        for ii_gt in range(len(target_list[i]["boxes"].detach().numpy())):
+            obj_gt = [
+                int(el)
+                for el in target_list[i]["boxes"].detach().numpy()[ii_gt]
+            ]
+            obj_gt += [
+                int(target_list[i]["labels"].detach().numpy()[ii_gt] - 1),
+                0,
+                0,
+            ]
+            temp_gt.append(obj_gt)
+        grnd_truth_list.append(np.array(temp_gt))
+
+    return prep_pred_list, grnd_truth_list
 
 
 def prepare_data_for_ap(output_list: List, target_list: List) -> Tuple[List[np.ndarray]]:
@@ -375,6 +416,7 @@ def prepare_data_for_ap(output_list: List, target_list: List) -> Tuple[List[np.n
 def calculate_map(
     prepared_pred_list: List[np.array],
     prepared_ground_truth_list: List[np.array],
+    num_classes: int,
     confidence_level: Union[float, None] = None,
 ) -> Dict:
     """
@@ -394,7 +436,7 @@ def calculate_map(
         ]
 
     metric_fn = MetricBuilder.build_evaluation_metric(
-        "map_2d", async_mode=True, num_classes=7
+        "map_2d", async_mode=True, num_classes=6
     )
 
     for i in range(len(prepared_pred_list)):
@@ -411,9 +453,8 @@ def calculate_map(
         "illustration": round(metric[0.5][1]["ap"],4),
         "map": round(metric[0.5][2]["ap"],4),
         "cartoon": round(metric[0.5][3]["ap"],4),
-        "editorial_cartoon": round(metric[0.5][4]["ap"],4),
-        "headline": round(metric[0.5][5]["ap"],4),
-        "advertisement": round(metric[0.5][6]["ap"],4),
+        "headline": round(metric[0.5][4]["ap"],4),
+        "advertisement": round(metric[0.5][5]["ap"],4),
         "mean": round(metric["mAP"],4),
     }
 

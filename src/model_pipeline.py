@@ -7,12 +7,11 @@ import torchvision.transforms as T
 from torch import optim
 from torch.utils.data import DataLoader
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
-
+import pandas as pd
 from functions_catalogue import collate_fn, from_tsv_to_list, dump_json
 from evaluate_model import evaluate_model
 from newspapersdataset import NewspapersDataset, prepare_data_for_dataloader
 from train_model import train_model
-
 
 # warnings
 warnings.filterwarnings("ignore")
@@ -34,21 +33,32 @@ def model_pipeline(
     num_workers: int,
     main_dir: str,
     train: bool,
-    evalutaion: bool,
+    evaluate: bool,
     train_set: bool,
     test_set: bool,
     val_set: bool,
     gpu: bool,
     bbox_format: str,
+    force_save_model: str,
+    pretrained: bool,
 ) -> None:
-    scraped_photos_dir = f"{main_dir}scraped_photos/"
-    annotations_dir = f"{main_dir}data/"
+    # check provided path
+    scraped_photos_dir = f"{main_dir}/scraped_photos/"
+    assert os.path.exists(scraped_photos_dir) == True
+    annotations_dir = f"{main_dir}/data/"
+    assert os.path.exists(annotations_dir) == True
+
+    config_dir_name = 'model_config/'
 
     try:
-        rescale = float(rescale)
-    except BaseException:
-        rescale = rescale.split("/")
-        rescale = [int(rescale[0]), int(rescale[1])]
+        if '/' in rescale:
+            rescale = rescale.split('/')
+            rescale = [int(rescale[0]), int(rescale[1])]
+        else:
+            rescale = float(rescale)
+    except:
+        logging.error(f"Wrong 'rescale' argument value '{rescale}'")
+        raise ValueError()
 
     # read data and create dataloaders
     data_transform = T.Compose(
@@ -62,8 +72,19 @@ def model_pipeline(
     if val_set:
         # create validation dataloader
         logging.info('Creating validation dataloader')
-        expected_val = from_tsv_to_list(f"{annotations_dir}dev-0/expected.tsv")
-        in_val = from_tsv_to_list(f"{annotations_dir}dev-0/in.tsv")
+        try:
+            path = 'dev-0/expected.tsv'
+            expected_val = from_tsv_to_list(f"{annotations_dir}{path}")
+        except:
+            logging.exception(f"File '{path}' not found, code will be forced to quit")
+            raise FileNotFoundError()
+        try: 
+            path = 'dev-0/in.tsv'
+            in_val = from_tsv_to_list(f"{annotations_dir}{path}")
+        except:
+            logging.exception(f"File '{path}' not found, code will be forced to quit")
+            raise FileNotFoundError()
+                 
         val_paths = [scraped_photos_dir + path for path in in_val]
         data_val = prepare_data_for_dataloader(
             img_dir=scraped_photos_dir,
@@ -93,10 +114,19 @@ def model_pipeline(
     if train_set:
         # create train data loader
         logging.info('Creating train dataloader')
-        expected_train = from_tsv_to_list(
-            f"{annotations_dir}train/expected.tsv"
-        )
-        in_train = from_tsv_to_list(f"{annotations_dir}train/in.tsv")
+        try:
+            path = 'train/expected.tsv'
+            expected_train = from_tsv_to_list(f"{annotations_dir}{path}")
+        except:
+            logging.exception(f"File '{path}' not found, code will be forced to quit")
+            raise FileNotFoundError()
+        try: 
+            path = 'train/in.tsv'
+            in_train = from_tsv_to_list(f"{annotations_dir}{path}")
+        except:
+            logging.exception(f"File '{path}' not found, code will be forced to quit")
+            raise FileNotFoundError()
+
         train_paths = [scraped_photos_dir + path for path in in_train]
         data_train = prepare_data_for_dataloader(
             img_dir=scraped_photos_dir,
@@ -122,24 +152,35 @@ def model_pipeline(
         )
         # train phase
         if train:
-            model_path = f"{main_dir}model_config/"
+            logging.info('Model training phase - started!')
+            model_path = f"{main_dir}/{config_dir_name}"
             if not os.path.exists(model_path):
-                logging.info('Directory "model_config" doesn\'t exist, creating one')
+                logging.info(f'Directory {config_dir_name} doesn\'t exist, creating one')
                 os.makedirs(model_path)
             
-            # save rescale, bbox_format and channel arguments in config file for future predictions
+            # save model related arguments in config file for future predictions etc.
             model_config = {
-                'rescale': rescale,
-                'bbox_format': bbox_format,
                 'channel': channel,
                 'num_classes': num_classes,
-                'trainable_backbone_layers': trainable_backbone_layers
+                'learning_rate': learning_rate,
+                'batch_size': batch_size,
+                'num_epochs': num_epochs,
+                'rescale': rescale,
+                'shuffle': shuffle,
+                'weight_decay': weight_decay,
+                'lr_scheduler': lr_scheduler,
+                'lr_step_size': lr_step_size,
+                'lr_gamma': lr_gamma,
+                'trainable_backbone_layers': trainable_backbone_layers,
+                'num_workers': num_workers,
+                'gpu': gpu,
+                'bbox_format': bbox_format,
+                'pretrained': pretrained,
             }
-            dump_json(f'{model_path}model_config.json', model_config)
 
             # pre-trained resnet50 model
             model = torchvision.models.detection.fasterrcnn_resnet50_fpn(
-                pretrained=True,
+                pretrained=pretrained,
                 trainable_backbone_layers=trainable_backbone_layers,
             )
 
@@ -164,23 +205,53 @@ def model_pipeline(
                 lr_scheduler = None
 
             # train and save model
-            logging.info('Model training - started!')
-            trained_model = train_model(
-                pre_treined_model=model,
+            trained_model, eval_df = train_model(
+                model=model,
                 optimizer=optimizer,
                 train_dataloader=train_dataloader,
                 epochs=num_epochs,
                 gpu=gpu,
+                model_path=model_path,
                 val_dataloader=val_dataloader,
                 lr_scheduler=lr_scheduler,
+                num_classes=num_classes-1,
             )
-            torch.save(trained_model.state_dict(), f"{model_path}model.pth")
-            logging.info('Model weights saved in "model_config" directory')
 
-    # evalutaion phase
-    if evalutaion:
+            # check if model can be saved
+            model_metric_path = f'{model_path}model_eval_metric.csv'
+            if val_dataloader and not force_save_model:
+                if not os.path.exists(model_metric_path): 
+                    logging.info('Previous model validation results not found, model will be saved')
+                    force_save_model = True
+                else:
+                    prev_eval_df = pd.read_csv(model_metric_path, index_col = 0)
+                    prev_results_map, current_results_map = float(prev_eval_df['AP']['mean']), float(eval_df['AP']['mean'])
+                    if current_results_map >= prev_results_map:
+                        logging.info(f'Model validation results (mAP = {current_results_map}) are better than previous ones (mAP = {prev_results_map}), previous model will be overridden')
+                        force_save_model = True
+                    else:
+                        logging.info(f'Model validation results (mAP = {current_results_map}) are worse than previous ones (mAP = {prev_results_map}), model will not be saved and evaluation phase will be skipped')
+                        evaluate = False
+            
+            # save model state dict, config json and metric dataframe 
+            if force_save_model:                
+                dump_json(f'{model_path}model_config.json', model_config)
+                logging.info(f'Model config json saved in "{config_dir_name}" directory')
+                torch.save(trained_model.state_dict(), f"{model_path}model.pth")
+                logging.info(f'Model saved in "{config_dir_name}" directory')
+                
+                if val_dataloader:
+                    eval_df.to_csv(model_metric_path)
+                    logging.info(f'Model validation results saved in "{config_dir_name}" directory')
+                
+                if not val_dataloader and os.path.exists(model_metric_path):
+                    os.remove(model_metric_path)
+
+    # evaluation phase
+    if evaluate:
+        logging.info(f'Model evaluation phase - started!')
         # initialize model
-        model = torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=True, trainable_backbone_layers=trainable_backbone_layers)
+        model = torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=pretrained, trainable_backbone_layers=trainable_backbone_layers)
         in_features = model.roi_heads.box_predictor.cls_score.in_features
         model.roi_heads.box_predictor = FastRCNNPredictor(
             in_features, num_classes=num_classes
@@ -192,10 +263,10 @@ def model_pipeline(
             map_location=torch.device("cpu")
         
         try:
-            model.load_state_dict(torch.load(f"{main_dir}model_config/model.pth", map_location=map_location), strict=True)
+            model.load_state_dict(torch.load(f"{main_dir}/{config_dir_name}model.pth", map_location=map_location), strict=True)
         except:
-            logging.exception("No model found, code will be forced to quit")
-            raise Exception()
+            logging.exception(f"No model found in '{config_dir_name}' directory, code will be forced to quit")
+            raise FileNotFoundError()
 
         model.eval()
         logging.info(f'Model loaded correctly')
@@ -203,6 +274,13 @@ def model_pipeline(
         if test_set:
             # create test data loader
             logging.info('Creating test dataloader')
+            try: 
+                path = 'test-A/in.tsv'
+                in_test = from_tsv_to_list(f"{annotations_dir}{path}")
+            except:
+                logging.exception(f"File '{path}' not found, code will be forced to quit")
+                raise FileNotFoundError()
+
             in_test = from_tsv_to_list(f"{annotations_dir}test-A/in.tsv")
             test_paths = [scraped_photos_dir + path for path in in_test]
             data_test = prepare_data_for_dataloader(
@@ -235,7 +313,8 @@ def model_pipeline(
                 gpu=gpu,
                 main_dir=main_dir,
                 save_path="test-A",
-                test=False,
+                test=True,
+                num_classes=num_classes-1,
             )
 
         # evaluation on train set (to check under/overfitting)
@@ -248,6 +327,7 @@ def model_pipeline(
                 main_dir=main_dir,
                 save_path="train",
                 test=True,
+                num_classes=num_classes-1,
             )
 
         # evaluation on validation set
@@ -260,4 +340,5 @@ def model_pipeline(
                 main_dir=main_dir,
                 save_path="dev-0",
                 test=True,
+                num_classes=num_classes-1,
             )

@@ -1,50 +1,51 @@
 import pathlib
-
+import os
 import click
 import logging
-
 from model_pipeline import model_pipeline
 from logs import Log
+from constants import Model_args, General_args, Output_args, Data_args
+
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.option(
     "--channel",
-    default=1,
+    default=Data_args.CHANNEL,
     type=int,
     help="Image channels: 3 <= RGB, 1 <= greyscale.",
     show_default=True,
 )
 @click.option(
     "--num_classes",
-    default=8,
+    default=Data_args.NUM_CLASSES,
     type=int,
     help="Number of classes.",
     show_default=True,
 )
 @click.option(
     "--learning_rate",
-    default=3e-4,
+    default=Model_args.LEARNING_RATE,
     type=float,
     help="Learning rate value.",
     show_default=True,
 )
 @click.option(
     "--batch_size",
-    default=16,
+    default=Model_args.BATCH_SIZE,
     type=int,
     help="Number of batches.",
     show_default=True,
 )
 @click.option(
     "--num_epochs",
-    default=20,
+    default=Model_args.NUM_EPOCHS,
     type=int,
     help="Number of epochs.",
     show_default=True,
 )
 @click.option(
     "--rescale",
-    default="1000/1000",
+    default=Data_args.RESCALE,
     type=str,
     help=(
         "2 possible ways to rescale your images and also annotations. First"
@@ -60,21 +61,21 @@ from logs import Log
 )
 @click.option(
     "--shuffle",
-    default=False,
+    default=Data_args.SHUFFLE,
     type=bool,
     help="Shuffle data.",
     show_default=True,
 )
 @click.option(
     "--weight_decay",
-    default=0,
+    default=Model_args.WEIGHT_DECAY,
     type=float,
     help="Weight decay regularization value.",
     show_default=True,
 )
 @click.option(
     "--lr_scheduler",
-    default=True,
+    default=Model_args.LR_SCHEDULER,
     type=bool,
     help=(
         "Learning rate scheduler: if value=True learning rate scheduler will"
@@ -84,7 +85,7 @@ from logs import Log
 )
 @click.option(
     "--lr_step_size",
-    default=5,
+    default=Model_args.LR_STEP_SIZE,
     type=int,
     help=(
         "Step size of learning rate scheduler: valid only if learning rate"
@@ -94,7 +95,7 @@ from logs import Log
 )
 @click.option(
     "--lr_gamma",
-    default=0.4,
+    default=Model_args.LR_GAMMA,
     type=float,
     help=(
         "Valid only when learning rate scheduling is enabled, passed value "
@@ -104,14 +105,21 @@ from logs import Log
 )
 @click.option(
     "--trainable_backbone_layers",
-    default=5,
+    default=Model_args.TRAINABLE_BACKBONE_LAYER,
     type=int,
     help="Number of trainable layers in pretrained ResNet-50 network.",
     show_default=True,
 )
 @click.option(
+    "--pretrained",
+    default=Model_args.PRETRAINED,
+    type=bool,
+    help="Start training using pretrained ResNet-50 instead of training from scratch",
+    show_default=True,
+)
+@click.option(
     "--num_workers",
-    default=2,
+    default=Data_args.NUM_WORKERS,
     type=int,
     help=(
         "Setting the argument num_workers as a positive integer will turn on"
@@ -122,56 +130,42 @@ from logs import Log
 )
 @click.option(
     "--main_dir",
-    default=f'{"/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-1])}/',
+    default=General_args.MAIN_DIR,
     type=str,
     help="Working directory path.",
     show_default=True,
 )
 @click.option(
-    "--train",
-    default=True,
-    type=bool,
-    help="Train the model",
-    show_default=True,
-)
-@click.option(
-    "--evalutaion",
-    default=True,
-    type=bool,
-    help="Evaluation enabled",
-    show_default=True,
-)
-@click.option(
     "--train_set",
-    default=True,
+    default=General_args.TRAIN_SET,
     type=bool,
     help="Use training data set.",
     show_default=True,
 )
 @click.option(
     "--test_set",
-    default=True,
+    default=General_args.TEST_SET,
     type=bool,
     help="Use test data set.",
     show_default=True,
 )
 @click.option(
     "--val_set",
-    default=True,
+    default=General_args.VAL_SET,
     type=bool,
-    help="Use validation data set.",
+    help="Use validation data set. If value is equal to False, the evaluation during training will not be available, nor model will be saved afterwards. if you want to save it anyway use the '--force_save_model' flag.",
     show_default=True,
 )
 @click.option(
     "--gpu",
-    default=True,
+    default=General_args.GPU,
     type=bool,
     help="Enable training on GPU.",
     show_default=True,
 )
 @click.option(
     "--bbox_format",
-    default="x0y0x1y1",
+    default=Data_args.BBOX_FORMAT,
     type=str,
     help=(
         'Bounding boxes format. Other allowed format is "x0y0wh", where w -'
@@ -179,6 +173,26 @@ from logs import Log
     ),
     show_default=True,
 )
+@click.option(
+    "--force_save_model",
+    default=Output_args.FORCE_SAVE_MODEL,
+    type=bool,
+    help="Force save model despite of its performance.",
+    show_default=True,
+)
+@click.option(
+    "--train",
+    type=bool,
+    help="Model training enabled",
+    required=True,
+)
+@click.option(
+    "--evaluate",
+    type=bool,
+    help="Model evaluation enabled",
+    required=True,
+)
+
 def model_runner(
     channel,
     num_classes,
@@ -195,17 +209,35 @@ def model_runner(
     num_workers,
     main_dir,
     train,
-    evalutaion,
+    evaluate,
     train_set,
     test_set,
     val_set,
     gpu,
     bbox_format,
+    force_save_model,
+    pretrained,
 ):
+    # check provided path
+    assert os.path.exists(main_dir) == True
+
     # initialize logger
     logger = Log('model_runner')
     logger.log_start()
-    logging.write = lambda msg: logging.info(msg) if msg != "\n" else None
+
+    if not train:
+        logging.warning('Argument "train" not passed, this phase will be skipped')
+    
+    if not evaluate:
+        logging.warning('Argument "evaluate" not passed, this phase will be skipped')
+
+    if not train and not evaluate:
+        logging.error('Both arguments "train" and "evaluate" not passed, code will be forced to quit!')
+        raise ValueError()
+
+    if not train_set and not val_set and not test_set:
+        logging.error('None of the arguments: "train_set", "val_set" and "test_set" passed, code will be forced to quit!')
+        raise ValueError()
 
     model_pipeline(
         channel=channel,
@@ -223,12 +255,14 @@ def model_runner(
         num_workers=num_workers,
         main_dir=main_dir,
         train=train,
-        evalutaion=evalutaion,
+        evaluate=evaluate,
         train_set=train_set,
         test_set=test_set,
         val_set=val_set,
         gpu=gpu,
         bbox_format=bbox_format,
+        force_save_model=force_save_model,
+        pretrained=pretrained,
     )
 
     # end logger

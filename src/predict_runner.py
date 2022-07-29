@@ -1,4 +1,5 @@
 import json
+import os
 import torch
 import torchvision
 import click
@@ -9,40 +10,51 @@ from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 import torchvision.transforms as T
 from newspapersdataset import prepare_data_for_dataloader, NewspapersDataset
 from functions_catalogue import collate_fn, predict_one_img, show_random_img_with_all_annotations
+from constants import Output_args
+
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.option(
     "--path_to_image",
     type=str,
-    help="Path to the image on which you want to make prediciton",
+    help="Path to the image on which you want to make prediciton.",
     required=True
 )
 @click.option(
     "--model_config_path",
     type=str,
-    help="Path to directory containing model and json config file",
-    required=True
+    default=Output_args.MODEL_CONFIG_PATH,
+    help="Path to directory containing model and json config file.",
+    show_default=True,
 )
 @click.option(
     "--min_conf_level",
     type=float,
-    default=0.2,
-    help="Minimum confidence level for model predictions to show up",
+    default=Output_args.MIN_CONF_LEVEL,
+    help="Minimum confidence level for model predictions to show up.",
     show_default=True,
 )
+
 def predict(path_to_image, model_config_path, min_conf_level):
+    # check provided path
+    assert os.path.exists(path_to_image) == True
+    
     # extract path and file name
     image_path_split = path_to_image.split("/")
     image_dir = f'{"/".join(image_path_split[:-1])}/'
     image_name = image_path_split[-1]
-    
-    # read model config file
-    config = json.load(open(f'{model_config_path}/model_config.json'))
 
+    # read model config file
     try:
-        rescale = float(config['rescale'])
-    except BaseException:
-        rescale = [int(config['rescale'][0]), int(config['rescale'][1])]
+        path = 'model_config.json'
+        config = json.load(open(f'{model_config_path}/{path}'))
+    except:
+        raise FileNotFoundError(f"File '{path}' not found, code will be forced to quit")
+
+    if isinstance(config['rescale'], float):
+        rescale = config['rescale']
+    else:
+        rescale = [config['rescale'][0], config['rescale'][1]]
 
     data_transform = T.Compose(
         [
@@ -74,19 +86,20 @@ def predict(path_to_image, model_config_path, min_conf_level):
         collate_fn=collate_fn,
         num_workers=2,
     )
+    model = torchvision.models.detection.fasterrcnn_resnet50_fpn(
+        pretrained=config['pretrained'],
+        trainable_backbone_layers=config['trainable_backbone_layers']
+    )
+    in_features = model.roi_heads.box_predictor.cls_score.in_features
+    model.roi_heads.box_predictor = FastRCNNPredictor(
+        in_features, num_classes=config['num_classes']
+    )
     try:
-        model = torchvision.models.detection.fasterrcnn_resnet50_fpn(
-            pretrained=True,
-            trainable_backbone_layers=config['trainable_backbone_layers']
-        )
-        in_features = model.roi_heads.box_predictor.cls_score.in_features
-        model.roi_heads.box_predictor = FastRCNNPredictor(
-            in_features, num_classes=config['num_classes']
-        )
         model.load_state_dict(torch.load(f"{model_config_path}/model.pth", map_location=torch.device("cpu")), strict=True)
-        model.eval()
     except:
-        raise Exception("No model found, code will be forced to quit")
+        raise FileNotFoundError(f"No model found in '{config_dir_name}' directory, code will be forced to quit")
+
+    model.eval()
     
     pred = predict_one_img(
         model=model,
@@ -105,7 +118,6 @@ def predict(path_to_image, model_config_path, min_conf_level):
             'illustration': 'orangered', 
             'map': 'yellow', 
             'cartoon': 'deepskyblue', 
-            'editorial_cartoon': 'violet', 
             'headline': 'cyan', 
             'advertisement': 'deeppink'
         },

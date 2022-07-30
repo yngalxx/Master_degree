@@ -44,7 +44,7 @@ def image_scraper(main_dir):
     # read source annotations file
     try:
         annotations_source_file = 'trainval.json'
-        with open(f"{main_dir}/{source_annotations}/{annotations_source_file}") as jsonFile:
+        with open(f"{main_dir}/{source_annotations_dir}/{annotations_source_file}") as jsonFile:
             jsonObject = json.load(jsonFile)
             jsonFile.close()
     except:

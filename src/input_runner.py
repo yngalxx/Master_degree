@@ -48,7 +48,7 @@ def prepare_input(main_dir):
     try:
         train_80_percent = 'train_80_percent.json'
         with open(
-            f"{main_dir}/{source_annotations}/{train_80_percent}"
+            f"{main_dir}/{source_annotations_dir}/{train_80_percent}"
         ) as jsonFile:
             coco_metadata_train = json.load(jsonFile)
             jsonFile.close()
@@ -59,7 +59,7 @@ def prepare_input(main_dir):
     try:
         val_20_percent = 'val_20_percent.json'
         with open(
-            f"{main_dir}/{source_annotations}/{val_20_percent}"
+            f"{main_dir}/{source_annotations_dir}/{val_20_percent}"
         ) as jsonFile:
             coco_metadata_test = json.load(jsonFile)
             jsonFile.close()

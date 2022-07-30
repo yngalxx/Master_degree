@@ -1,4 +1,3 @@
-import json
 import os
 import click
 from constants import General, Output, Data
@@ -53,8 +52,6 @@ def visualizer(main_dir, examples, min_conf_level):
             f"File '{out_test_file}' not found, code will be forced to quit"
         )
 
-    # TODO: finish it (fix if crashes or output will be showing wrongly)
-    # some random images with annotations
     show_random_img_with_all_annotations(
         in_list=in_test,
         expected_list=out_list,

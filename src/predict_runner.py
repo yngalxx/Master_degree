@@ -1,7 +1,7 @@
 import json
 import os
 import contextlib
-
+import logging
 import click
 import torch
 import torchvision
@@ -9,7 +9,7 @@ import torchvision.transforms as T
 from torch.utils.data import DataLoader
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
-from constants import Output
+from constants import Output, Data
 from functions_catalogue import (collate_fn, predict_one_img,
                                  show_random_img_with_all_annotations)
 from newspapersdataset import NewspapersDataset, prepare_data_for_dataloader
@@ -100,18 +100,16 @@ def predict(path_to_image, model_config_path, min_conf_level):
         in_features, num_classes=config["num_classes"]
     )
     try:
+        model_name = 'model.pth'
         model.load_state_dict(
             torch.load(
-                f"{model_config_path}/model.pth",
+                f"{model_config_path}/{model_name}",
                 map_location=torch.device("cpu"),
             ),
             strict=True,
         )
     except:
-        raise FileNotFoundError(
-            f"No model found in '{config_dir_name}' directory, code will be"
-            " forced to quit"
-        )
+        raise FileNotFoundError(f"File '{model_name}' not found, code will be forced to quit")
 
     model.eval()
 
@@ -122,7 +120,6 @@ def predict(path_to_image, model_config_path, min_conf_level):
         path_to_image=image_dir,
     )
 
-    # TODO: fix showing annotations 
     show_random_img_with_all_annotations(
         in_list=[image_name],
         expected_list=pred,

@@ -16,6 +16,8 @@ from matplotlib.patches import Rectangle
 from mean_average_precision import MetricBuilder
 from tqdm import tqdm
 
+from constants import Data
+
 try:
     sys.path.append(
         "/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-2])
@@ -24,23 +26,16 @@ try:
         get_image_size  # source: https://github.com/scardine/image_size
 except:
     raise ImportWarning(
-        'Repository "image_size" not found, code will crash if it is needed'
+        'Repository "image_size" not found, code will crash if it will be needed'
         " during execution"
     )
 
 
 def target_encoder(label: int, reverse=False):
-    label_dict = {
-        "photograph": 1,
-        "illustration": 2,
-        "map": 3,
-        "cartoon": 4,
-        "headline": 5,
-        "advertisement": 6,
-    }
-    if reverse:
-        label_dict = {y: x for x, y in label_dict.items()}
-    return label_dict[label]
+    if not reverse:
+        return Data.CLASS_CODING[label]
+    class_coder_reversed = {y: x for x, y in Data.CLASS_CODING.items()}
+    return class_coder_reversed[label]
 
 
 def show_random_img_with_all_annotations(
@@ -50,10 +45,10 @@ def show_random_img_with_all_annotations(
     matplotlib_colours_dict: Dict,
     confidence_level: float = 0.2,
     pages: int = 5,
-    jupyter=True,
 ) -> None:
     """
-    Show the number (pages) of images with all the annotations in given confidence level of the prediction
+    Show the number (pages) of images with all the annotations in given confidence 
+    level of the prediction
     """
     prev = []
     for i in range(pages):
@@ -66,10 +61,7 @@ def show_random_img_with_all_annotations(
         with cbook.get_sample_data(path_to_photos + file_name) as image_file:
             image = plt.imread(image_file)
 
-        if jupyter:
-            fig, ax = plt.subplots(figsize=(15, 10))
-        else:
-            fig, ax = plt.subplots(figsize=(10, 7))
+        fig, ax = plt.subplots(figsize=(10, 7))
         ax.imshow(image, cmap="gray")
 
         if expected_list[random_img] != "":
@@ -95,9 +87,9 @@ def show_random_img_with_all_annotations(
                 ax.add_patch(rect)
                 t = ax.text(
                     x0,
-                    y0 - 50 if jupyter else y0 - 140,
+                    y0,
                     cat_name,
-                    fontsize=8 if jupyter else 5,
+                    fontsize=5,
                     color=matplotlib_colours_dict[annotation[0]],
                 )
                 t.set_bbox(
@@ -177,7 +169,8 @@ def parse_model_outcome(
     predicted_bboxes_list: List[int],
 ) -> List[str]:
     """
-    Parse model outcome to list (list of lists where 1 element contains all annotations for 1 image)
+    Parse model outcome to list (list of lists where 1 element contains all 
+    annotations for 1 image)
     """
     out_list = []
     for i in range(len(img_names_list)):
@@ -241,7 +234,8 @@ def get_input_statistics(expected_list: List[str]) -> Tuple:
 
 def remove_if_missed_annotations(coco_file: Dict) -> List[int]:
     """
-    Check that each image stored in coco-like dictionary has annotations and remove images without them.
+    Check that each image stored in coco-like dictionary has annotations and 
+    remove images without them.
     """
     image_ids_1 = [
         coco_file["images"][i]["id"] for i in range(len(coco_file["images"]))
@@ -327,7 +321,8 @@ def remove_coco_elem_if_in_list(
     id_key: str,
 ) -> Dict:
     """
-    Remove all names from the declared list in the coco-like annotation dictionary for a given key
+    Remove all names from the declared list in the coco-like annotation 
+    dictionary for a given key
     """
     indexes_to_remove = [
         i
@@ -402,7 +397,8 @@ def predict_eval_set(
     device: Union[torch.device, None],
 ) -> Tuple[List[Dict]]:
     """
-    Make prediction on dataloader and return tuple with two lists containing output dictionaries
+    Make prediction on dataloader and return tuple with two lists containing 
+    output dictionaries
     """
     # settings
     cuda_statement = torch.cuda.is_available()
@@ -481,7 +477,8 @@ def prepare_data_for_ap(
     output_list: List, target_list: List
 ) -> Tuple[List[np.ndarray]]:
     """
-    Prepare data into a format adequate for AP calculation supporting both: raw model output and model output stored in tsv files
+    Prepare data into a format adequate for AP calculation supporting both: 
+    raw model output and model output stored in tsv files
     """
     p_output_list = []
     for one_image_annotations in output_list:
@@ -537,7 +534,7 @@ def calculate_map(
         ]
 
     metric_fn = MetricBuilder.build_evaluation_metric(
-        "map_2d", async_mode=True, num_classes=6
+        "map_2d", async_mode=True, num_classes=num_classes
     )
 
     for i in range(len(prepared_pred_list)):

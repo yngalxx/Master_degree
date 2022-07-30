@@ -2,11 +2,12 @@ import copy
 import json
 import logging
 import os
+import contextlib
 
 import click
 import pandas as pd
 
-from constants import General_args
+from constants import General
 from functions_catalogue import (calcMD5Hash, get_input_statistics,
                                  input_transformer,
                                  remove_coco_elem_if_in_list,
@@ -19,13 +20,18 @@ from logs import Log
 @click.option(
     "--main_dir",
     type=str,
-    default=General_args.MAIN_DIR,
+    default=General.MAIN_DIR,
     help="Path to the level where this repository is stored.",
     show_default=True,
 )
 def prepare_input(main_dir):
     # check provided path
-    assert os.path.exists(main_dir) == True
+    with contextlib.redirect_stdout(logging):
+        assert os.path.exists(main_dir) == True
+        source_annotations_dir = 'source_annotations'
+        assert os.path.exists(f'{main_dir}/{source_annotations_dir}') == True
+        scraped_photos_dir = 'scraped_photos'
+        assert os.path.exists(f'{main_dir}/{scraped_photos_dir}') == True
 
     # initialize logger
     logger = Log("input_runner")
@@ -34,22 +40,32 @@ def prepare_input(main_dir):
     # scraped images paths
     scraped_images = [
         img
-        for img in os.listdir(f"{main_dir}/scraped_photos")
+        for img in os.listdir(f"{main_dir}/{scraped_photos_dir}")
         if img != ".DS_Store"
     ]
 
     # read train and test annotation data
-    with open(
-        f"{main_dir}/source_annotations/train_80_percent.json"
-    ) as jsonFile:
-        coco_metadata_train = json.load(jsonFile)
-        jsonFile.close()
+    try:
+        train_80_percent = 'train_80_percent.json'
+        with open(
+            f"{main_dir}/{source_annotations}/{train_80_percent}"
+        ) as jsonFile:
+            coco_metadata_train = json.load(jsonFile)
+            jsonFile.close()
+    except:
+        logging.error(f"File '{train_80_percent}' not found, code will be forced to quit")
+        raise FileNotFoundError()
 
-    with open(
-        f"{main_dir}/source_annotations/val_20_percent.json"
-    ) as jsonFile:
-        coco_metadata_test = json.load(jsonFile)
-        jsonFile.close()
+    try:
+        val_20_percent = 'val_20_percent.json'
+        with open(
+            f"{main_dir}/{source_annotations}/{val_20_percent}"
+        ) as jsonFile:
+            coco_metadata_test = json.load(jsonFile)
+            jsonFile.close()
+    except:
+        logging.error(f"File '{val_20_percent}' not found, code will be forced to quit")
+        raise FileNotFoundError()
 
     # find images without annoations and remove them
     train_img_names = [

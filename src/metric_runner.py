@@ -1,11 +1,12 @@
 import logging
 import os
 import warnings
+import contextlib
 
 import click
 import pandas as pd
 
-from constants import General_args, Output_args
+from constants import General, Output
 from functions_catalogue import (calculate_map, from_tsv_to_list,
                                  prepare_data_for_ap)
 from logs import Log
@@ -17,14 +18,14 @@ warnings.filterwarnings("ignore")
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.option(
     "--main_dir",
-    default=General_args.MAIN_DIR,
+    default=General.MAIN_DIR,
     type=str,
     help="Path to the level where this repository is stored.",
     show_default=True,
 )
 @click.option(
     "--min_conf_level",
-    default=Output_args.MIN_CONF_LEVEL,
+    default=Output.MIN_CONF_LEVEL,
     type=float,
     help=(
         "Minimum confidence level of the predictions considered in calculating"
@@ -34,28 +35,29 @@ warnings.filterwarnings("ignore")
 )
 @click.option(
     "--train_set",
-    default=General_args.TRAIN_SET,
+    default=General.TRAIN_SET,
     type=bool,
     help="Use training data set (if files exists).",
     show_default=True,
 )
 @click.option(
     "--test_set",
-    default=General_args.TEST_SET,
+    default=General.TEST_SET,
     type=bool,
     help="Use test data set (if files exists).",
     show_default=True,
 )
 @click.option(
     "--val_set",
-    default=General_args.VAL_SET,
+    default=General.VAL_SET,
     type=bool,
     help="Use validation data set (if files exists).",
     show_default=True,
 )
 def calculate_metric(main_dir, min_conf_level, train_set, test_set, val_set):
     # check provided path
-    assert os.path.exists(main_dir) == True
+    with contextlib.redirect_stdout(logging):
+        assert os.path.exists(main_dir) == True
 
     # initialize logger
     logger = Log("calculate_map_runer")

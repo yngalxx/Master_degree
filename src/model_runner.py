@@ -1,9 +1,10 @@
 import logging
 import os
+import contextlib
 
 import click
 
-from constants import Data_args, General_args, Model_args, Output_args
+from constants import Data, General, Model, Output
 from logs import Log
 from model_pipeline import model_pipeline
 
@@ -11,42 +12,42 @@ from model_pipeline import model_pipeline
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.option(
     "--channel",
-    default=Data_args.CHANNEL,
+    default=Data.CHANNEL,
     type=int,
     help="Image channels: 3 <= RGB, 1 <= greyscale.",
     show_default=True,
 )
 @click.option(
     "--num_classes",
-    default=Data_args.NUM_CLASSES,
+    default=Data.NUM_CLASSES,
     type=int,
-    help="Number of classes.",
+    help="Number of classes + 1 (background).",
     show_default=True,
 )
 @click.option(
     "--learning_rate",
-    default=Model_args.LEARNING_RATE,
+    default=Model.LEARNING_RATE,
     type=float,
     help="Learning rate value.",
     show_default=True,
 )
 @click.option(
     "--batch_size",
-    default=Model_args.BATCH_SIZE,
+    default=Model.BATCH_SIZE,
     type=int,
     help="Number of batches.",
     show_default=True,
 )
 @click.option(
     "--num_epochs",
-    default=Model_args.NUM_EPOCHS,
+    default=Model.NUM_EPOCHS,
     type=int,
     help="Number of epochs.",
     show_default=True,
 )
 @click.option(
     "--rescale",
-    default=Data_args.RESCALE,
+    default=Data.RESCALE,
     type=str,
     help=(
         "2 possible ways to rescale your images and also annotations. First"
@@ -62,21 +63,21 @@ from model_pipeline import model_pipeline
 )
 @click.option(
     "--shuffle",
-    default=Data_args.SHUFFLE,
+    default=Data.SHUFFLE,
     type=bool,
     help="Shuffle data.",
     show_default=True,
 )
 @click.option(
     "--weight_decay",
-    default=Model_args.WEIGHT_DECAY,
+    default=Model.WEIGHT_DECAY,
     type=float,
     help="Weight decay regularization value.",
     show_default=True,
 )
 @click.option(
     "--lr_scheduler",
-    default=Model_args.LR_SCHEDULER,
+    default=Model.LR_SCHEDULER,
     type=bool,
     help=(
         "Learning rate scheduler: if value=True learning rate scheduler will"
@@ -86,7 +87,7 @@ from model_pipeline import model_pipeline
 )
 @click.option(
     "--lr_step_size",
-    default=Model_args.LR_STEP_SIZE,
+    default=Model.LR_STEP_SIZE,
     type=int,
     help=(
         "Step size of learning rate scheduler: valid only if learning rate"
@@ -96,7 +97,7 @@ from model_pipeline import model_pipeline
 )
 @click.option(
     "--lr_gamma",
-    default=Model_args.LR_GAMMA,
+    default=Model.LR_GAMMA,
     type=float,
     help=(
         "Valid only when learning rate scheduling is enabled, passed value "
@@ -106,14 +107,14 @@ from model_pipeline import model_pipeline
 )
 @click.option(
     "--trainable_backbone_layers",
-    default=Model_args.TRAINABLE_BACKBONE_LAYER,
+    default=Model.TRAINABLE_BACKBONE_LAYER,
     type=int,
     help="Number of trainable layers in pretrained ResNet-50 network.",
     show_default=True,
 )
 @click.option(
     "--pretrained",
-    default=Model_args.PRETRAINED,
+    default=Model.PRETRAINED,
     type=bool,
     help=(
         "Start training using pretrained ResNet-50 instead of training from"
@@ -123,7 +124,7 @@ from model_pipeline import model_pipeline
 )
 @click.option(
     "--num_workers",
-    default=Data_args.NUM_WORKERS,
+    default=Data.NUM_WORKERS,
     type=int,
     help=(
         "Setting the argument num_workers as a positive integer will turn on"
@@ -134,28 +135,28 @@ from model_pipeline import model_pipeline
 )
 @click.option(
     "--main_dir",
-    default=General_args.MAIN_DIR,
+    default=General.MAIN_DIR,
     type=str,
     help="Working directory path.",
     show_default=True,
 )
 @click.option(
     "--train_set",
-    default=General_args.TRAIN_SET,
+    default=General.TRAIN_SET,
     type=bool,
     help="Use training data set.",
     show_default=True,
 )
 @click.option(
     "--test_set",
-    default=General_args.TEST_SET,
+    default=General.TEST_SET,
     type=bool,
     help="Use test data set.",
     show_default=True,
 )
 @click.option(
     "--val_set",
-    default=General_args.VAL_SET,
+    default=General.VAL_SET,
     type=bool,
     help=(
         "Use validation data set. If value is equal to False, the evaluation"
@@ -167,14 +168,14 @@ from model_pipeline import model_pipeline
 )
 @click.option(
     "--gpu",
-    default=General_args.GPU,
+    default=General.GPU,
     type=bool,
     help="Enable training on GPU.",
     show_default=True,
 )
 @click.option(
     "--bbox_format",
-    default=Data_args.BBOX_FORMAT,
+    default=Data.BBOX_FORMAT,
     type=str,
     help=(
         'Bounding boxes format. Other allowed format is "x0y0wh", where w -'
@@ -184,7 +185,7 @@ from model_pipeline import model_pipeline
 )
 @click.option(
     "--force_save_model",
-    default=Output_args.FORCE_SAVE_MODEL,
+    default=Output.FORCE_SAVE_MODEL,
     type=bool,
     help="Force save model despite of its performance.",
     show_default=True,
@@ -227,7 +228,8 @@ def model_runner(
     pretrained,
 ):
     # check provided path
-    assert os.path.exists(main_dir) == True
+    with contextlib.redirect_stdout(logging):
+        assert os.path.exists(main_dir) == True
 
     # initialize logger
     logger = Log("model_runner")
@@ -256,6 +258,8 @@ def model_runner(
             " passed, code will be forced to quit!"
         )
         raise ValueError()
+
+    # TODO: hypertune model to produce the best possible results
 
     model_pipeline(
         channel=channel,

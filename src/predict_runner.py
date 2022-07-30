@@ -1,5 +1,6 @@
 import json
 import os
+import contextlib
 
 import click
 import torch
@@ -8,7 +9,7 @@ import torchvision.transforms as T
 from torch.utils.data import DataLoader
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
-from constants import Output_args
+from constants import Output
 from functions_catalogue import (collate_fn, predict_one_img,
                                  show_random_img_with_all_annotations)
 from newspapersdataset import NewspapersDataset, prepare_data_for_dataloader
@@ -18,26 +19,28 @@ from newspapersdataset import NewspapersDataset, prepare_data_for_dataloader
 @click.option(
     "--path_to_image",
     type=str,
-    help="Path to the image on which you want to make prediciton.",
+    help="Path to the image on which you want to make prediciton. The image name must match the following pattern: 'number.(jpg, png or other)', e.g. '1.jpg'.",
     required=True,
 )
 @click.option(
     "--model_config_path",
+    default=Output.MODEL_CONFIG_PATH,
     type=str,
-    default=Output_args.MODEL_CONFIG_PATH,
     help="Path to directory containing model and json config file.",
     show_default=True,
 )
 @click.option(
     "--min_conf_level",
+    default=Output.MIN_CONF_LEVEL,
     type=float,
-    default=Output_args.MIN_CONF_LEVEL,
     help="Minimum confidence level for model predictions to show up.",
     show_default=True,
 )
 def predict(path_to_image, model_config_path, min_conf_level):
     # check provided path
-    assert os.path.exists(path_to_image) == True
+    with contextlib.redirect_stdout(logging):
+        assert os.path.exists(path_to_image) == True
+        assert os.path.exists(model_config_path) == True
 
     # extract path and file name
     image_path_split = path_to_image.split("/")
@@ -119,20 +122,13 @@ def predict(path_to_image, model_config_path, min_conf_level):
         path_to_image=image_dir,
     )
 
+    # TODO: fix showing annotations 
     show_random_img_with_all_annotations(
         in_list=[image_name],
         expected_list=pred,
         path_to_photos=image_dir,
         confidence_level=min_conf_level,
-        matplotlib_colours_dict={
-            "photograph": "lime",
-            "illustration": "orangered",
-            "map": "yellow",
-            "cartoon": "deepskyblue",
-            "headline": "cyan",
-            "advertisement": "deeppink",
-        },
-        jupyter=False,
+        matplotlib_colours_dict=Data.CLASS_COLORS_DICT,
         pages=1,
     )
 

@@ -1,18 +1,18 @@
 {
     "channel": 1,
     "num_classes": 7,
-    "learning_rate": 0.0005,
+    "learning_rate": 0.0003,
     "batch_size": 16,
     "num_epochs": 30,
     "rescale": [
-        1000,
-        1000
+        1024,
+        1024
     ],
     "shuffle": false,
     "weight_decay": 0.0,
     "lr_scheduler": true,
     "lr_step_size": 7,
-    "lr_gamma": 0.4,
+    "lr_gamma": 0.5,
     "trainable_backbone_layers": 5,
     "num_workers": 2,
     "gpu": true,

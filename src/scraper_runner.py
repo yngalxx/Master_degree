@@ -1,19 +1,20 @@
 import json
 import logging
 import os
+import contextlib
 
 import click
 import requests
 from tqdm import tqdm
 
-from constants import General_args
+from constants import General
 from logs import Log
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
 @click.option(
     "--main_dir",
-    default=General_args.MAIN_DIR,
+    default=General.MAIN_DIR,
     type=str,
     help="Path to the level where this repository is stored.",
     show_default=True,
@@ -24,7 +25,10 @@ def image_scraper(main_dir):
     formatted files with annotations obtained from source repository (newspaper-navigator-master)
     """
     # check provided path
-    assert os.path.exists(main_dir) == True
+    with contextlib.redirect_stdout(logging):
+        assert os.path.exists(main_dir) == True
+        source_annotations_dir = 'source_annotations'
+        assert os.path.exists(f'{main_dir}/{source_annotations_dir}') == True
 
     # initialize logger
     logger = Log("scraper_runner")
@@ -37,9 +41,15 @@ def image_scraper(main_dir):
         logging.info('Directory "scraped_photos" doesn\'t exist, creating one')
         os.makedirs(final_path)
 
-    with open(f"{main_dir}/source_annotations/trainval.json") as jsonFile:
-        jsonObject = json.load(jsonFile)
-        jsonFile.close()
+    # read source annotations file
+    try:
+        annotations_source_file = 'trainval.json'
+        with open(f"{main_dir}/{source_annotations}/{annotations_source_file}") as jsonFile:
+            jsonObject = json.load(jsonFile)
+            jsonFile.close()
+    except:
+        logging.error(f"File '{annotations_source_file}' not found, code will be forced to quit")
+        raise FileNotFoundError()
 
     images_num = len(jsonObject["images"])
     logging.info(f"Collecting {images_num} images")

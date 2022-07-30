@@ -1,6 +1,6 @@
+import contextlib
 import logging
 import os
-import contextlib
 
 import click
 

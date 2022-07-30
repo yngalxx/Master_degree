@@ -19,14 +19,14 @@ class Data:
     SHUFFLE = False
     CHANNEL = 1
     BBOX_FORMAT = "x0y0x1y1"
-    NUM_CLASSES = 7 # 1 for background
+    NUM_CLASSES = 7  # 1 for background
     CLASS_COLORS_DICT = {
-        'photograph': 'lime',
-        'illustration': 'orangered', 
-        'map': 'yellow', 
-        'cartoon': 'deepskyblue',  
-        'headline': 'cyan', 
-        'advertisement': 'deeppink'
+        "photograph": "lime",
+        "illustration": "orangered",
+        "map": "yellow",
+        "cartoon": "deepskyblue",
+        "headline": "cyan",
+        "advertisement": "deeppink",
     }
     CLASS_CODING = {
         "photograph": 1,
@@ -49,9 +49,7 @@ class General:
 
 
 class Output:
-    MODEL_CONFIG_PATH = (
-        f"{General.MAIN_DIR}/model_config"
-    )
+    MODEL_CONFIG_PATH = f"{General.MAIN_DIR}/model_config"
     FORCE_SAVE_MODEL = False
     MIN_CONF_LEVEL = 0
     EXAMPLES = 5

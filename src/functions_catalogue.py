@@ -26,8 +26,8 @@ try:
         get_image_size  # source: https://github.com/scardine/image_size
 except:
     raise ImportWarning(
-        'Repository "image_size" not found, code will crash if it will be needed'
-        " during execution"
+        'Repository "image_size" not found, code will crash if it will be'
+        " needed during execution"
     )
 
 
@@ -47,7 +47,7 @@ def show_random_img_with_all_annotations(
     pages: int = 5,
 ) -> None:
     """
-    Show the number (pages) of images with all the annotations in given confidence 
+    Show the number (pages) of images with all the annotations in given confidence
     level of the prediction
     """
     prev = []
@@ -169,7 +169,7 @@ def parse_model_outcome(
     predicted_bboxes_list: List[int],
 ) -> List[str]:
     """
-    Parse model outcome to list (list of lists where 1 element contains all 
+    Parse model outcome to list (list of lists where 1 element contains all
     annotations for 1 image)
     """
     out_list = []
@@ -234,7 +234,7 @@ def get_input_statistics(expected_list: List[str]) -> Tuple:
 
 def remove_if_missed_annotations(coco_file: Dict) -> List[int]:
     """
-    Check that each image stored in coco-like dictionary has annotations and 
+    Check that each image stored in coco-like dictionary has annotations and
     remove images without them.
     """
     image_ids_1 = [
@@ -321,7 +321,7 @@ def remove_coco_elem_if_in_list(
     id_key: str,
 ) -> Dict:
     """
-    Remove all names from the declared list in the coco-like annotation 
+    Remove all names from the declared list in the coco-like annotation
     dictionary for a given key
     """
     indexes_to_remove = [
@@ -397,7 +397,7 @@ def predict_eval_set(
     device: Union[torch.device, None],
 ) -> Tuple[List[Dict]]:
     """
-    Make prediction on dataloader and return tuple with two lists containing 
+    Make prediction on dataloader and return tuple with two lists containing
     output dictionaries
     """
     # settings
@@ -477,7 +477,7 @@ def prepare_data_for_ap(
     output_list: List, target_list: List
 ) -> Tuple[List[np.ndarray]]:
     """
-    Prepare data into a format adequate for AP calculation supporting both: 
+    Prepare data into a format adequate for AP calculation supporting both:
     raw model output and model output stored in tsv files
     """
     p_output_list = []

@@ -1,7 +1,7 @@
+import contextlib
 import logging
 import os
 import warnings
-import contextlib
 
 import click
 import pandas as pd

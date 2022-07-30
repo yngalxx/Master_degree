@@ -43,7 +43,7 @@ def model_pipeline(
     bbox_format: str,
     force_save_model: str,
     pretrained: bool,
-) -> None:  
+) -> None:
     # check provided path
     scraped_photos_dir = f"{main_dir}/scraped_photos/"
     assert os.path.exists(scraped_photos_dir) == True
@@ -242,22 +242,23 @@ def model_pipeline(
                     prev_eval_df = pd.read_csv(model_metric_path, index_col=0)
                     prev_results_map, current_results_map = (
                         prev_eval_df["AP"]["mean"],
-                        eval_df["AP"]["mean"]
+                        eval_df["AP"]["mean"],
                     )
                     if current_results_map >= prev_results_map:
                         logging.info(
                             "Model validation results (mAP ="
-                            f" {current_results_map:.4f}) are better than previous"
-                            f" ones (mAP = {prev_results_map:.4f}), previous model"
-                            " will be overridden"
+                            f" {current_results_map:.4f}) are better than"
+                            f" previous ones (mAP = {prev_results_map:.4f}),"
+                            " previous model will be overridden"
                         )
                         force_save_model = True
                     else:
                         logging.info(
                             "Model validation results (mAP ="
-                            f" {current_results_map:.4f}) are worse than previous"
-                            f" ones (mAP = {prev_results_map:.4f}), model will not"
-                            " be saved and evaluation phase will be skipped"
+                            f" {current_results_map:.4f}) are worse than"
+                            f" previous ones (mAP = {prev_results_map:.4f}),"
+                            " model will not be saved and evaluation phase"
+                            " will be skipped"
                         )
                         evaluate = False
 

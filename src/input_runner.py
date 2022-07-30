@@ -1,8 +1,8 @@
+import contextlib
 import copy
 import json
 import logging
 import os
-import contextlib
 
 import click
 import pandas as pd
@@ -28,10 +28,10 @@ def prepare_input(main_dir):
     # check provided path
     with contextlib.redirect_stdout(logging):
         assert os.path.exists(main_dir) == True
-        source_annotations_dir = 'source_annotations'
-        assert os.path.exists(f'{main_dir}/{source_annotations_dir}') == True
-        scraped_photos_dir = 'scraped_photos'
-        assert os.path.exists(f'{main_dir}/{scraped_photos_dir}') == True
+        source_annotations_dir = "source_annotations"
+        assert os.path.exists(f"{main_dir}/{source_annotations_dir}") == True
+        scraped_photos_dir = "scraped_photos"
+        assert os.path.exists(f"{main_dir}/{scraped_photos_dir}") == True
 
     # initialize logger
     logger = Log("input_runner")
@@ -46,25 +46,29 @@ def prepare_input(main_dir):
 
     # read train and test annotation data
     try:
-        train_80_percent = 'train_80_percent.json'
+        train_80_percent = "train_80_percent.json"
         with open(
             f"{main_dir}/{source_annotations_dir}/{train_80_percent}"
         ) as jsonFile:
             coco_metadata_train = json.load(jsonFile)
             jsonFile.close()
     except:
-        logging.error(f"File '{train_80_percent}' not found, code will be forced to quit")
+        logging.error(
+            f"File '{train_80_percent}' not found, code will be forced to quit"
+        )
         raise FileNotFoundError()
 
     try:
-        val_20_percent = 'val_20_percent.json'
+        val_20_percent = "val_20_percent.json"
         with open(
             f"{main_dir}/{source_annotations_dir}/{val_20_percent}"
         ) as jsonFile:
             coco_metadata_test = json.load(jsonFile)
             jsonFile.close()
     except:
-        logging.error(f"File '{val_20_percent}' not found, code will be forced to quit")
+        logging.error(
+            f"File '{val_20_percent}' not found, code will be forced to quit"
+        )
         raise FileNotFoundError()
 
     # find images without annoations and remove them

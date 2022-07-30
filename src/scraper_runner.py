@@ -1,7 +1,7 @@
+import contextlib
 import json
 import logging
 import os
-import contextlib
 
 import click
 import requests
@@ -27,8 +27,8 @@ def image_scraper(main_dir):
     # check provided path
     with contextlib.redirect_stdout(logging):
         assert os.path.exists(main_dir) == True
-        source_annotations_dir = 'source_annotations'
-        assert os.path.exists(f'{main_dir}/{source_annotations_dir}') == True
+        source_annotations_dir = "source_annotations"
+        assert os.path.exists(f"{main_dir}/{source_annotations_dir}") == True
 
     # initialize logger
     logger = Log("scraper_runner")
@@ -43,12 +43,17 @@ def image_scraper(main_dir):
 
     # read source annotations file
     try:
-        annotations_source_file = 'trainval.json'
-        with open(f"{main_dir}/{source_annotations_dir}/{annotations_source_file}") as jsonFile:
+        annotations_source_file = "trainval.json"
+        with open(
+            f"{main_dir}/{source_annotations_dir}/{annotations_source_file}"
+        ) as jsonFile:
             jsonObject = json.load(jsonFile)
             jsonFile.close()
     except:
-        logging.error(f"File '{annotations_source_file}' not found, code will be forced to quit")
+        logging.error(
+            f"File '{annotations_source_file}' not found, code will be forced"
+            " to quit"
+        )
         raise FileNotFoundError()
 
     images_num = len(jsonObject["images"])

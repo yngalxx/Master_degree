@@ -1,7 +1,8 @@
-import json
-import os
 import contextlib
+import json
 import logging
+import os
+
 import click
 import torch
 import torchvision
@@ -9,7 +10,7 @@ import torchvision.transforms as T
 from torch.utils.data import DataLoader
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
-from constants import Output, Data
+from constants import Data, Output
 from functions_catalogue import (collate_fn, predict_one_img,
                                  show_random_img_with_all_annotations)
 from newspapersdataset import NewspapersDataset, prepare_data_for_dataloader
@@ -19,7 +20,11 @@ from newspapersdataset import NewspapersDataset, prepare_data_for_dataloader
 @click.option(
     "--path_to_image",
     type=str,
-    help="Path to the image on which you want to make prediciton. The image name must match the following pattern: 'number.(jpg, png or other)', e.g. '1.jpg'.",
+    help=(
+        "Path to the image on which you want to make prediciton. The image"
+        " name must match the following pattern: 'number.(jpg, png or other)',"
+        " e.g. '1.jpg'."
+    ),
     required=True,
 )
 @click.option(
@@ -100,7 +105,7 @@ def predict(path_to_image, model_config_path, min_conf_level):
         in_features, num_classes=config["num_classes"]
     )
     try:
-        model_name = 'model.pth'
+        model_name = "model.pth"
         model.load_state_dict(
             torch.load(
                 f"{model_config_path}/{model_name}",
@@ -109,7 +114,9 @@ def predict(path_to_image, model_config_path, min_conf_level):
             strict=True,
         )
     except:
-        raise FileNotFoundError(f"File '{model_name}' not found, code will be forced to quit")
+        raise FileNotFoundError(
+            f"File '{model_name}' not found, code will be forced to quit"
+        )
 
     model.eval()
 

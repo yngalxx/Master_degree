@@ -4,9 +4,9 @@ import os
 
 import click
 
-from constants import Data, General, Model, Output
-from logs import Log
-from model_pipeline import model_pipeline
+from lib.constants import Data, General, Model, Output
+from lib.logs import Log
+from lib.model_pipeline import model_pipeline
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -202,6 +202,13 @@ from model_pipeline import model_pipeline
     help="Model evaluation enabled",
     required=True,
 )
+@click.option(
+    "--val_map_threshold",
+    default = Output.VAL_MAP_THRESHOLD,
+    type=float,
+    help="Value of the mAP evaluation metric, after which training will be stopped. If the model exceeds the set threshold, it will be saved without considering the previous model results as a comparison (in this situation, the force_save_model argument will automatically be set to True).",
+    required=True,
+)
 def model_runner(
     channel,
     num_classes,
@@ -226,6 +233,7 @@ def model_runner(
     bbox_format,
     force_save_model,
     pretrained,
+    val_map_threshold,
 ):
     # check provided path
     with contextlib.redirect_stdout(logging):
@@ -259,8 +267,6 @@ def model_runner(
         )
         raise ValueError()
 
-    # TODO: hypertune model to produce the best possible results
-
     model_pipeline(
         channel=channel,
         num_classes=num_classes,
@@ -285,6 +291,7 @@ def model_runner(
         bbox_format=bbox_format,
         force_save_model=force_save_model,
         pretrained=pretrained,
+        val_map_threshold=val_map_threshold,
     )
 
     # end logger

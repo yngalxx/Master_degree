@@ -1,4 +1,5 @@
 click==8.1.3
+imagesize==1.4.1
 ipywidgets==7.7.1
 matplotlib==3.5.2
 mean_average_precision==2021.4.26.0

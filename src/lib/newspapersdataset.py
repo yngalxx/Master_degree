@@ -7,7 +7,7 @@ import torch
 import torchvision
 from PIL import Image
 
-from functions_catalogue import get_image_size, target_encoder
+from lib.functions_catalogue import imagesize, target_encoder
 
 # warnings
 warnings.filterwarnings("ignore")
@@ -23,7 +23,7 @@ def prepare_data_for_dataloader(
 ) -> pd.DataFrame:
     df = pd.DataFrame()
     for i in range(len(in_list)):
-        img_width, img_height = get_image_size.get_image_size(
+        img_width, img_height = imagesize.get(
             img_dir + in_list[i]
         )
         if isinstance(scale, list):

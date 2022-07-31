@@ -7,8 +7,8 @@ import click
 import requests
 from tqdm import tqdm
 
-from constants import General
-from logs import Log
+from lib.constants import General
+from lib.logs import Log
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))

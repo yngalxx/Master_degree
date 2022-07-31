@@ -5,11 +5,13 @@ import pathlib
 import time
 from logging.handlers import WatchedFileHandler
 
+from lib.constants import General
+
 
 class Log:
     def __init__(self, script_name: str):
         self.script_name = script_name
-        self.log_path = f'{"/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-1])}/logs/'
+        self.log_path = f'{General.MAIN_DIR}/logs/'
         self.start_time = time.time()
         if not os.path.exists(self.log_path):
             os.makedirs(self.log_path)

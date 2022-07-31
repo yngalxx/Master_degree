@@ -4,6 +4,9 @@
 .idea
 .vscode
 __pycache__
-scraped_photos/
+scraped_photos
 model_config/model.pth
-venv/
+venv
+src/build
+src/lib.egg-info
+src/dist

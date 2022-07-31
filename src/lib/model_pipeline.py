@@ -10,10 +10,10 @@ from torch import optim
 from torch.utils.data import DataLoader
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
-from evaluate_model import evaluate_model
-from functions_catalogue import collate_fn, dump_json, from_tsv_to_list
-from newspapersdataset import NewspapersDataset, prepare_data_for_dataloader
-from train_model import train_model
+from lib.evaluate_model import evaluate_model
+from lib.functions_catalogue import collate_fn, dump_json, from_tsv_to_list
+from lib.newspapersdataset import NewspapersDataset, prepare_data_for_dataloader
+from lib.train_model import train_model
 
 # warnings
 warnings.filterwarnings("ignore")
@@ -43,6 +43,7 @@ def model_pipeline(
     bbox_format: str,
     force_save_model: str,
     pretrained: bool,
+    val_map_threshold: float,
 ) -> None:
     # check provided path
     scraped_photos_dir = f"{main_dir}/scraped_photos/"
@@ -217,16 +218,17 @@ def model_pipeline(
                 lr_scheduler = None
 
             # train and save model
-            trained_model, eval_df = train_model(
+            trained_model, eval_df, force_save_model = train_model(
                 model=model,
                 optimizer=optimizer,
                 train_dataloader=train_dataloader,
                 epochs=num_epochs,
                 gpu=gpu,
-                model_path=model_path,
                 val_dataloader=val_dataloader,
                 lr_scheduler=lr_scheduler,
                 num_classes=num_classes - 1,
+                val_map_threshold=val_map_threshold,
+                force_save_model=force_save_model
             )
 
             # check if model can be saved

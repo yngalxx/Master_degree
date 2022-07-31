@@ -8,8 +8,7 @@ import torch
 import torchvision
 from tqdm import tqdm
 
-from functions_catalogue import (calculate_map, predict_eval_set,
-                                 prepare_eval_out_for_ap)
+from lib.functions_catalogue import (calculate_map, predict_eval_set, prepare_eval_out_for_ap)
 
 # warnings
 warnings.filterwarnings("ignore")
@@ -21,7 +20,8 @@ def train_model(
     train_dataloader: torch.utils.data.DataLoader,
     epochs: int,
     num_classes: int,
-    model_path: str,
+    val_map_threshold: float,
+    force_save_model: bool,
     val_dataloader: torch.utils.data.DataLoader = None,
     lr_scheduler: torch.optim.lr_scheduler.StepLR = None,
     gpu: bool = True,
@@ -96,6 +96,11 @@ def train_model(
                 eval_metrics, orient="index", columns=["AP"]
             )
             logging.info(f"Metric results:\n{eval_df.to_string()}")
+
+            if eval_df["AP"]["mean"] >= val_map_threshold:
+                logging.info(f"Training was stopped after epoch number {epoch} due to exceeding threshold set for evaluation metric value ({eval_df['AP']['mean']:.4f}>={val_map_threshold:.4f}).")
+                force_save_model = True
+                break
         else:
             eval_df = None
 
@@ -104,4 +109,4 @@ def train_model(
         f" {round(time.time()-training_start_time,2)} sec."
     )
 
-    return model, eval_df
+    return model, eval_df, force_save_model

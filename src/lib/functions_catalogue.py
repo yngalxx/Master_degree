@@ -15,20 +15,9 @@ import torchvision
 from matplotlib.patches import Rectangle
 from mean_average_precision import MetricBuilder
 from tqdm import tqdm
+import imagesize
 
-from constants import Data
-
-try:
-    sys.path.append(
-        "/".join(str(pathlib.Path(__file__).parent.resolve()).split("/")[:-2])
-    )
-    from image_size import \
-        get_image_size  # source: https://github.com/scardine/image_size
-except:
-    raise ImportWarning(
-        'Repository "image_size" not found, code will crash if it will be'
-        " needed during execution"
-    )
+from lib.constants import Data
 
 
 def target_encoder(label: int, reverse=False):
@@ -174,7 +163,7 @@ def parse_model_outcome(
     """
     out_list = []
     for i in range(len(img_names_list)):
-        img_width, img_height = get_image_size.get_image_size(
+        img_width, img_height = imagesize.get(
             f"{image_directory}{img_names_list[i]}"
         )
         out_str = ""
@@ -275,7 +264,7 @@ def input_transformer(coco_file: Dict, path_to_photos_dir: str) -> Tuple:
             if int(coco_file["images"][i]["id"]) == int(
                 coco_file["annotations"][ii]["image_id"]
             ):
-                img_width, img_height = get_image_size.get_image_size(
+                img_width, img_height = imagesize.get(
                     path_to_photos_dir + coco_file["images"][i]["file_name"]
                 )
                 cat = coco_file["categories"][
@@ -353,7 +342,7 @@ def rescale_annotations(coco_metadata: Dict, directory: str) -> Dict:
         (
             scraped_photo_width,
             scraped_photo_height,
-        ) = get_image_size.get_image_size(
+        ) = imagesize.get(
             f"{directory}/scraped_photos/{file_name}"
         )
 
@@ -546,14 +535,24 @@ def calculate_map(
         mpolicy="soft",
     )
 
+    ap = [
+        float(metric[0.5][0]["ap"]),
+        float(metric[0.5][1]["ap"]),
+        float(metric[0.5][2]["ap"]),
+        float(metric[0.5][3]["ap"]),
+        float(metric[0.5][4]["ap"]),
+        float(metric[0.5][5]["ap"]),
+    ]
+    mean_ap = sum(ap)/len(ap)
+
     return {
-        "photograph": round(metric[0.5][0]["ap"], 4),
-        "illustration": round(metric[0.5][1]["ap"], 4),
-        "map": round(metric[0.5][2]["ap"], 4),
-        "cartoon": round(metric[0.5][3]["ap"], 4),
-        "headline": round(metric[0.5][4]["ap"], 4),
-        "advertisement": round(metric[0.5][5]["ap"], 4),
-        "mean": round(metric["mAP"], 4),
+        "photograph": round(ap[0], 4),
+        "illustration": round(ap[1], 4),
+        "map": round(ap[2], 4),
+        "cartoon": round(ap[3], 4),
+        "headline": round(ap[4], 4),
+        "advertisement": round(ap[5], 4),
+        "mean": round(mean_ap, 4)
     }
 
 

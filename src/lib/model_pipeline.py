@@ -12,7 +12,8 @@ from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
 from lib.evaluate_model import evaluate_model
 from lib.functions_catalogue import collate_fn, dump_json, from_tsv_to_list
-from lib.newspapersdataset import NewspapersDataset, prepare_data_for_dataloader
+from lib.newspapersdataset import (NewspapersDataset,
+                                   prepare_data_for_dataloader)
 from lib.train_model import train_model
 
 # warnings
@@ -228,7 +229,7 @@ def model_pipeline(
                 lr_scheduler=lr_scheduler,
                 num_classes=num_classes - 1,
                 val_map_threshold=val_map_threshold,
-                force_save_model=force_save_model
+                force_save_model=force_save_model,
             )
 
             # check if model can be saved

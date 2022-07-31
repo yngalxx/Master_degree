@@ -8,7 +8,12 @@ import click
 import pandas as pd
 
 from lib.constants import General
-from lib.functions_catalogue import (calcMD5Hash, get_input_statistics, input_transformer, remove_coco_elem_if_in_list, remove_if_missed_annotations, rescale_annotations, save_list_to_tsv_file)
+from lib.functions_catalogue import (calcMD5Hash, get_input_statistics,
+                                     input_transformer,
+                                     remove_coco_elem_if_in_list,
+                                     remove_if_missed_annotations,
+                                     rescale_annotations,
+                                     save_list_to_tsv_file)
 from lib.logs import Log
 
 

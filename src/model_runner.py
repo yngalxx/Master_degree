@@ -204,9 +204,15 @@ from lib.model_pipeline import model_pipeline
 )
 @click.option(
     "--val_map_threshold",
-    default = Output.VAL_MAP_THRESHOLD,
+    default=Output.VAL_MAP_THRESHOLD,
     type=float,
-    help="Value of the mAP evaluation metric, after which training will be stopped. If the model exceeds the set threshold, it will be saved without considering the previous model results as a comparison (in this situation, the force_save_model argument will automatically be set to True).",
+    help=(
+        "Value of the mAP evaluation metric, after which training will be"
+        " stopped. If the model exceeds the set threshold, it will be saved"
+        " without considering the previous model results as a comparison (in"
+        " this situation, the force_save_model argument will automatically be"
+        " set to True)."
+    ),
     required=True,
 )
 def model_runner(

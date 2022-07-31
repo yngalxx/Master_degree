@@ -8,7 +8,8 @@ import torch
 import torchvision
 from tqdm import tqdm
 
-from lib.functions_catalogue import (calculate_map, predict_eval_set, prepare_eval_out_for_ap)
+from lib.functions_catalogue import (calculate_map, predict_eval_set,
+                                     prepare_eval_out_for_ap)
 
 # warnings
 warnings.filterwarnings("ignore")
@@ -98,7 +99,11 @@ def train_model(
             logging.info(f"Metric results:\n{eval_df.to_string()}")
 
             if eval_df["AP"]["mean"] >= val_map_threshold:
-                logging.info(f"Training was stopped after epoch number {epoch} due to exceeding threshold set for evaluation metric value ({eval_df['AP']['mean']:.4f}>={val_map_threshold:.4f}).")
+                logging.info(
+                    f"Training was stopped after epoch number {epoch} due to"
+                    " exceeding threshold set for evaluation metric value"
+                    f" ({eval_df['AP']['mean']:.4f}>={val_map_threshold:.4f})."
+                )
                 force_save_model = True
                 break
         else:

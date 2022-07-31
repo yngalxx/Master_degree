@@ -7,7 +7,9 @@ import torch
 import torchvision
 from tqdm import tqdm
 
-from lib.functions_catalogue import (calculate_map, from_tsv_to_list, parse_model_outcome, prepare_data_for_ap, save_list_to_tsv_file)
+from lib.functions_catalogue import (calculate_map, from_tsv_to_list,
+                                     parse_model_outcome, prepare_data_for_ap,
+                                     save_list_to_tsv_file)
 
 # warnings
 warnings.filterwarnings("ignore")

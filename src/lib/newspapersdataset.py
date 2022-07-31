@@ -23,9 +23,7 @@ def prepare_data_for_dataloader(
 ) -> pd.DataFrame:
     df = pd.DataFrame()
     for i in range(len(in_list)):
-        img_width, img_height = imagesize.get(
-            img_dir + in_list[i]
-        )
+        img_width, img_height = imagesize.get(img_dir + in_list[i])
         if isinstance(scale, list):
             new_img_width, new_img_height = scale[0], scale[1]
         elif isinstance(scale, (int, float)):

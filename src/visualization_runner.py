@@ -3,7 +3,8 @@ import os
 import click
 
 from lib.constants import Data, General, Output
-from lib.functions_catalogue import (from_tsv_to_list, show_random_img_with_all_annotations)
+from lib.functions_catalogue import (from_tsv_to_list,
+                                     show_random_img_with_all_annotations)
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))

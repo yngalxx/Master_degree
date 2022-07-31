@@ -1,11 +1,10 @@
 import csv
 import hashlib
 import json
-import pathlib
 import random
-import sys
 from typing import Dict, List, Tuple, Union
 
+import imagesize
 import matplotlib.cbook as cbook
 import matplotlib.pyplot as plt
 import numpy as np
@@ -15,7 +14,6 @@ import torchvision
 from matplotlib.patches import Rectangle
 from mean_average_precision import MetricBuilder
 from tqdm import tqdm
-import imagesize
 
 from lib.constants import Data
 
@@ -342,9 +340,7 @@ def rescale_annotations(coco_metadata: Dict, directory: str) -> Dict:
         (
             scraped_photo_width,
             scraped_photo_height,
-        ) = imagesize.get(
-            f"{directory}/scraped_photos/{file_name}"
-        )
+        ) = imagesize.get(f"{directory}/scraped_photos/{file_name}")
 
         scaler_height = scraped_photo_height / iterable_path_i["height"]
         scaler_width = scraped_photo_width / iterable_path_i["width"]
@@ -543,7 +539,7 @@ def calculate_map(
         float(metric[0.5][4]["ap"]),
         float(metric[0.5][5]["ap"]),
     ]
-    mean_ap = sum(ap)/len(ap)
+    mean_ap = sum(ap) / len(ap)
 
     return {
         "photograph": round(ap[0], 4),
@@ -552,7 +548,7 @@ def calculate_map(
         "cartoon": round(ap[3], 4),
         "headline": round(ap[4], 4),
         "advertisement": round(ap[5], 4),
-        "mean": round(mean_ap, 4)
+        "mean": round(mean_ap, 4),
     }
 
 

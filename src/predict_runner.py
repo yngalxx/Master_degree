@@ -11,8 +11,10 @@ from torch.utils.data import DataLoader
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
 from lib.constants import Data, Output
-from lib.functions_catalogue import (collate_fn, predict_one_img, show_random_img_with_all_annotations)
-from lib.newspapersdataset import NewspapersDataset, prepare_data_for_dataloader
+from lib.functions_catalogue import (collate_fn, predict_one_img,
+                                     show_random_img_with_all_annotations)
+from lib.newspapersdataset import (NewspapersDataset,
+                                   prepare_data_for_dataloader)
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))

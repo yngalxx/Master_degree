@@ -7,7 +7,8 @@ import click
 import pandas as pd
 
 from lib.constants import General, Output
-from lib.functions_catalogue import (calculate_map, from_tsv_to_list, prepare_data_for_ap)
+from lib.functions_catalogue import (calculate_map, from_tsv_to_list,
+                                     prepare_data_for_ap)
 from lib.logs import Log
 
 # warnings

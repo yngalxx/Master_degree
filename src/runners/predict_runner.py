@@ -5,15 +5,15 @@ import click
 import torch
 import torchvision
 import torchvision.transforms as T
+from constants import Data, Output
 from torch.utils.data import DataLoader
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
 from lib.model_pipeline import collate_fn
-from lib.visualization import show_random_img_with_all_annotations
+from lib.newspapersdataset import (NewspapersDataset,
+                                   prepare_data_for_dataloader)
 from lib.predict import predict_one_img
-from lib.newspapersdataset import NewspapersDataset, prepare_data_for_dataloader
-
-from constants import Data, Output
+from lib.visualization import show_random_img_with_all_annotations
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -125,7 +125,7 @@ def predict(path_to_image, model_config_path, min_conf_level):
         dataloader=dataloader,
         image_name=image_name,
         path_to_image=image_dir,
-        class_coding_dict=Data.CLASS_CODING_DICT
+        class_coding_dict=Data.CLASS_CODING_DICT,
     )
 
     show_random_img_with_all_annotations(

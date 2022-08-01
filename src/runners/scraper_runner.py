@@ -4,11 +4,10 @@ import os
 
 import click
 import requests
+from constants import General
 from tqdm import tqdm
 
 from lib.logs import Log
-
-from constants import General
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))

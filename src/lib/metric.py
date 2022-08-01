@@ -61,7 +61,13 @@ def prepare_data_for_ap(
         for annotation in one_image_annotations.split(" "):
             boxes = [int(box) for box in annotation.split(":")[1].split(",")]
             label = (
-                int(target_encoder(annotation.split(":")[0], class_coding_dict, reverse=False))
+                int(
+                    target_encoder(
+                        annotation.split(":")[0],
+                        class_coding_dict,
+                        reverse=False,
+                    )
+                )
                 - 1
             )
             score = float(annotation.split(":")[2])
@@ -75,7 +81,13 @@ def prepare_data_for_ap(
         for annotation in one_image_annotations.split(" "):
             boxes = [int(box) for box in annotation.split(":")[1].split(",")]
             label = (
-                int(target_encoder(annotation.split(":")[0], class_coding_dict, reverse=False))
+                int(
+                    target_encoder(
+                        annotation.split(":")[0],
+                        class_coding_dict,
+                        reverse=False,
+                    )
+                )
                 - 1
             )
             difficult, crowd = 0, 0
@@ -125,7 +137,10 @@ def calculate_map(
     ap = [float(metric[0.5][i]["ap"]) for i in range(len(class_names))]
     mean_ap = sum(ap) / len(ap)
 
-    ap_dict = {class_name:round(ap[i], 4) for (i, class_name) in enumerate(class_names)}
+    ap_dict = {
+        class_name: round(ap[i], 4)
+        for (i, class_name) in enumerate(class_names)
+    }
     ap_dict["mean"] = round(mean_ap, 4)
 
     return ap_dict

@@ -1,4 +1,4 @@
-from typing import List, Dict
+from typing import Dict, List
 
 import imagesize
 import numpy as np
@@ -33,7 +33,9 @@ def parse_model_outcome(
                 new_sizes_list[i][0][1]
             )
             label = target_encoder(
-                int(predicted_labels_list[i][ii]), class_coding_dict, reverse=True
+                int(predicted_labels_list[i][ii]),
+                class_coding_dict,
+                reverse=True,
             )
             x0 = str(
                 int(round(predicted_bboxes_list[i][ii][0], 0) * scaler_width)

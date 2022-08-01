@@ -27,21 +27,26 @@ class Data:
         "map",
         "cartoon",
         "headline",
-        "advertisement"
+        "advertisement",
     ]
-    NUM_CLASSES = len(CLASS_NAMES)+1 # 1 for background
+    NUM_CLASSES = len(CLASS_NAMES) + 1  # 1 for background
     COLOR_NAMES = [
         "lime",
         "orangered",
         "yellow",
         "deepskyblue",
         "cyan",
-        "deeppink"
+        "deeppink",
     ]
     # uneditable
-    CLASS_CODING_DICT = {class_name:i+1 for (i, class_name) in enumerate(CLASS_NAMES)}
-    CLASS_COLORS_DICT = {class_name:color_name for (class_name, color_name) in zip(CLASS_NAMES, COLOR_NAMES)}
-    
+    CLASS_CODING_DICT = {
+        class_name: i + 1 for (i, class_name) in enumerate(CLASS_NAMES)
+    }
+    CLASS_COLORS_DICT = {
+        class_name: color_name
+        for (class_name, color_name) in zip(CLASS_NAMES, COLOR_NAMES)
+    }
+
 
 class General:
     # editable

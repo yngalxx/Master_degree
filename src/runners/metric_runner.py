@@ -3,12 +3,11 @@ import warnings
 
 import click
 import pandas as pd
+from constants import Data, General, Output
 
+from lib.logs import Log
 from lib.metric import calculate_map, prepare_data_for_ap
 from lib.save_load_data import from_tsv_to_list
-from lib.logs import Log
-
-from constants import General, Output, Data
 
 # warnings
 warnings.filterwarnings("ignore")
@@ -73,7 +72,9 @@ def calculate_metric(main_dir, min_conf_level, train_set, test_set, val_set):
             expected = from_tsv_to_list(f"{main_dir}/data/train/expected.tsv")
 
             pred_list, ground_truth_list = prepare_data_for_ap(
-                output_list=out, target_list=expected, class_coding_dict=Data.CLASS_CODING_DICT
+                output_list=out,
+                target_list=expected,
+                class_coding_dict=Data.CLASS_CODING_DICT,
             )
 
             map_dict = calculate_map(
@@ -101,7 +102,9 @@ def calculate_metric(main_dir, min_conf_level, train_set, test_set, val_set):
             expected = from_tsv_to_list(f"{main_dir}/data/dev-0/expected.tsv")
 
             pred_list, ground_truth_list = prepare_data_for_ap(
-                output_list=out, target_list=expected, class_coding_dict=Data.CLASS_CODING_DICT
+                output_list=out,
+                target_list=expected,
+                class_coding_dict=Data.CLASS_CODING_DICT,
             )
 
             map_dict = calculate_map(
@@ -129,7 +132,9 @@ def calculate_metric(main_dir, min_conf_level, train_set, test_set, val_set):
             expected = from_tsv_to_list(f"{main_dir}/data/test-A/expected.tsv")
 
             pred_list, ground_truth_list = prepare_data_for_ap(
-                output_list=out, target_list=expected, class_coding_dict=Data.CLASS_CODING_DICT
+                output_list=out,
+                target_list=expected,
+                class_coding_dict=Data.CLASS_CODING_DICT,
             )
 
             map_dict = calculate_map(

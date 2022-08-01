@@ -20,7 +20,7 @@ def get_statistics(expected_list: List[str], index: int = 0) -> Tuple:
         .reset_index(drop=True)
         .value_counts()
     )
-    count_df = pd.DataFrame(count_series, columns=['count'])
+    count_df = pd.DataFrame(count_series, columns=["count"])
 
     count_sum = sum(count_series)
 
@@ -54,7 +54,9 @@ def remove_if_missed_annotations(coco_file: Dict) -> List[int]:
     return coco_file
 
 
-def input_transformer(coco_file: Dict, path_to_photos_dir: str, train_val_set: bool) -> Tuple:
+def input_transformer(
+    coco_file: Dict, path_to_photos_dir: str, train_val_set: bool
+) -> Tuple:
     """
     Save preprocessed annotations and image names to lists.
 
@@ -73,7 +75,8 @@ def input_transformer(coco_file: Dict, path_to_photos_dir: str, train_val_set: b
                     coco_file["annotations"][ii]["image_id"]
                 ):
                     img_width, img_height = imagesize.get(
-                        path_to_photos_dir + coco_file["images"][i]["file_name"]
+                        path_to_photos_dir
+                        + coco_file["images"][i]["file_name"]
                     )
                     cat = coco_file["categories"][
                         int(coco_file["annotations"][ii]["category_id"])
@@ -100,7 +103,9 @@ def input_transformer(coco_file: Dict, path_to_photos_dir: str, train_val_set: b
                         x1 = img_width - 1
                     if y1 > img_height:
                         y1 = img_height - 1
-                    img_string = f"{img_string}{cat.lower()}:{x0},{y0},{x1},{y1} "
+                    img_string = (
+                        f"{img_string}{cat.lower()}:{x0},{y0},{x1},{y1} "
+                    )
 
             img_string = img_string.strip()
             if img_string == "":

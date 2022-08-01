@@ -1,12 +1,12 @@
 import warnings
-from typing import List, Tuple, Union, Dict
+from typing import Dict, List, Tuple, Union
 
+import imagesize
 import numpy as np
 import pandas as pd
 import torch
 import torchvision
 from PIL import Image
-import imagesize
 
 # warnings
 warnings.filterwarnings("ignore")
@@ -53,7 +53,9 @@ def prepare_data_for_dataloader(
                 file_num_name = in_list[i].split(".")[0]
                 expected_list_split_2 = expected_list_split[ii].split(":")
                 bbox = expected_list_split_2[1].split(",")
-                label = target_encoder(expected_list_split_2[0], class_coding_dict, reverse=False)
+                label = target_encoder(
+                    expected_list_split_2[0], class_coding_dict, reverse=False
+                )
                 x0, y0 = int(bbox[0]), int(bbox[1])
                 x1, y1 = int(bbox[2]), int(bbox[3])
                 if bbox_format == "x0y0wh":

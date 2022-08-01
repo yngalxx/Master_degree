@@ -1,7 +1,7 @@
 import logging
 import os
 import warnings
-from typing import Tuple, List, Dict
+from typing import Dict, List, Tuple
 
 import pandas as pd
 import torch
@@ -12,8 +12,9 @@ from torch.utils.data import DataLoader
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
 from lib.evaluate_model import evaluate_model
+from lib.newspapersdataset import (NewspapersDataset,
+                                   prepare_data_for_dataloader)
 from lib.save_load_data import dump_json, from_tsv_to_list
-from lib.newspapersdataset import NewspapersDataset, prepare_data_for_dataloader
 from lib.train_model import train_model
 
 # warnings
@@ -368,7 +369,7 @@ def model_pipeline(
                 expected_list_exists=evaluate_on_test,
                 num_classes=num_classes - 1,
                 class_names=class_names,
-                class_coding_dict=class_coding_dict
+                class_coding_dict=class_coding_dict,
             )
 
         # evaluation on train set (to check under/overfitting)
@@ -383,7 +384,7 @@ def model_pipeline(
                 expected_list_exists=True,
                 num_classes=num_classes - 1,
                 class_names=class_names,
-                class_coding_dict=class_coding_dict
+                class_coding_dict=class_coding_dict,
             )
 
         # evaluation on validation set
@@ -398,5 +399,5 @@ def model_pipeline(
                 expected_list_exists=True,
                 num_classes=num_classes - 1,
                 class_names=class_names,
-                class_coding_dict=class_coding_dict
+                class_coding_dict=class_coding_dict,
             )

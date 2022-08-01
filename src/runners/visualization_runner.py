@@ -1,11 +1,10 @@
 import os
 
 import click
+from constants import Data, General, Output
 
 from lib.save_load_data import from_tsv_to_list
 from lib.visualization import show_random_img_with_all_annotations
-
-from constants import Data, General, Output
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))

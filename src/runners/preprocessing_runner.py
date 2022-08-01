@@ -5,12 +5,14 @@ import os
 
 import click
 import pandas as pd
-
-from lib.save_load_data import save_list_to_tsv_file
-from lib.preprocessing import calcMD5Hash, get_statistics, input_transformer, remove_coco_elem_if_in_list, remove_if_missed_annotations, rescale_annotations
-from lib.logs import Log
-
 from constants import General, Output
+
+from lib.logs import Log
+from lib.preprocessing import (calcMD5Hash, get_statistics, input_transformer,
+                               remove_coco_elem_if_in_list,
+                               remove_if_missed_annotations,
+                               rescale_annotations)
+from lib.save_load_data import save_list_to_tsv_file
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -25,7 +27,10 @@ from constants import General, Output
     "--test_set_expected",
     type=bool,
     default=Output.TEST_SET_EXPECTED,
-    help="Create expected list with targets not only for train and validation but also for test set.",
+    help=(
+        "Create expected list with targets not only for train and validation"
+        " but also for test set."
+    ),
     show_default=True,
 )
 def prepare_input(main_dir, test_set_expected):
@@ -133,16 +138,15 @@ def prepare_input(main_dir, test_set_expected):
 
     # store preprocessed annotatiosn in final list
     train_in, train_expected = input_transformer(
-        coco_metadata_train, f"{main_dir}/scraped_photos/",
-        train_val_set=True
+        coco_metadata_train, f"{main_dir}/scraped_photos/", train_val_set=True
     )
     val_in, val_expected = input_transformer(
-        coco_metadata_val, f"{main_dir}/scraped_photos/",
-        train_val_set=True
+        coco_metadata_val, f"{main_dir}/scraped_photos/", train_val_set=True
     )
     test_in, test_expected = input_transformer(
-        coco_metadata_test, f"{main_dir}/scraped_photos/",
-        train_val_set=test_set_expected
+        coco_metadata_test,
+        f"{main_dir}/scraped_photos/",
+        train_val_set=test_set_expected,
     )
 
     train_stats, train_sum = get_statistics(train_expected, index=0)
@@ -161,7 +165,7 @@ def prepare_input(main_dir, test_set_expected):
         logging.info(f"Number of annotations in test set: {test_sum}")
         logging.info(f"Labels statistics for test set:\n{test_stats}")
 
-    # save train data 
+    # save train data
     train_path = f"{main_dir}/data/train/"
     if not os.path.exists(train_path):
         logging.info('Path "data/train" doesn\'t exist, creating one')
@@ -172,7 +176,7 @@ def prepare_input(main_dir, test_set_expected):
     )
     save_list_to_tsv_file(f"{main_dir}/data/train/in.tsv", train_in)
 
-    # save validation data 
+    # save validation data
     dev_path = f"{main_dir}/data/dev-0/"
     if not os.path.exists(dev_path):
         logging.info('Path "data/dev-0" doesn\'t exist, creating one')
@@ -181,7 +185,7 @@ def prepare_input(main_dir, test_set_expected):
     save_list_to_tsv_file(f"{main_dir}/data/dev-0/expected.tsv", val_expected)
     save_list_to_tsv_file(f"{main_dir}/data/dev-0/in.tsv", val_in)
 
-    # save test data 
+    # save test data
     test_path = f"{main_dir}/data/test-A/"
     if not os.path.exists(test_path):
         logging.info('Path "data/test-A" doesn\'t exist, creating one\n')

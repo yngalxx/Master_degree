@@ -1,11 +1,10 @@
 import logging
 
 import click
+from constants import Data, General, Model, Output
 
 from lib.logs import Log
 from lib.model_pipeline import model_pipeline
-
-from constants import Data, General, Model, Output
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))

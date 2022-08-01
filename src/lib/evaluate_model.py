@@ -1,18 +1,17 @@
 import logging
 import time
 import warnings
-from typing import List, Dict
+from typing import Dict, List
 
 import pandas as pd
 import torch
 import torchvision
 from tqdm import tqdm
 
-from lib.save_load_data import from_tsv_to_list, save_list_to_tsv_file
+from lib.metric import calculate_map, prepare_data_for_ap
 from lib.postprocessing import parse_model_outcome
-from lib.metric import prepare_data_for_ap, calculate_map
 from lib.preprocessing import get_statistics
-
+from lib.save_load_data import from_tsv_to_list, save_list_to_tsv_file
 
 # warnings
 warnings.filterwarnings("ignore")
@@ -102,7 +101,7 @@ def evaluate_model(
         predicted_labels_list,
         scores_list,
         predicted_bboxes_list,
-        class_coding_dict
+        class_coding_dict,
     )
 
     save_list_to_tsv_file(f"{main_dir}/data/{save_path}/out.tsv", out_list)
@@ -127,9 +126,16 @@ def evaluate_model(
             )
             raise FileNotFoundError()
 
-        model_output, ground_truth = prepare_data_for_ap(out, expected, class_coding_dict)
+        model_output, ground_truth = prepare_data_for_ap(
+            out, expected, class_coding_dict
+        )
         map_df = pd.DataFrame.from_dict(
-            calculate_map(model_output, ground_truth, num_classes=num_classes, class_names=class_names),
+            calculate_map(
+                model_output,
+                ground_truth,
+                num_classes=num_classes,
+                class_names=class_names,
+            ),
             orient="index",
             columns=["AP"],
         )

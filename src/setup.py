@@ -1,5 +1,6 @@
 from setuptools import find_packages, setup
 
+
 setup(
     name="lib",
     description="Backend of application",

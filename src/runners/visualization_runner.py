@@ -2,9 +2,10 @@ import os
 
 import click
 
-from lib.constants import Data, General, Output
-from lib.functions_catalogue import (from_tsv_to_list,
-                                     show_random_img_with_all_annotations)
+from lib.save_load_data import from_tsv_to_list
+from lib.visualization import show_random_img_with_all_annotations
+
+from constants import Data, General, Output
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -31,7 +32,6 @@ from lib.functions_catalogue import (from_tsv_to_list,
 )
 def visualizer(main_dir, examples, min_conf_level):
     # check provided path
-    assert os.path.exists(main_dir) == True
     path_to_photos = f"{main_dir}/scraped_photos/"
     assert os.path.exists(path_to_photos) == True
     data_path = f"{main_dir}/data/test-A/"

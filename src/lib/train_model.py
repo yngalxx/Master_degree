@@ -8,8 +8,8 @@ import torch
 import torchvision
 from tqdm import tqdm
 
-from lib.functions_catalogue import (calculate_map, predict_eval_set,
-                                     prepare_eval_out_for_ap)
+from lib.predict import predict_eval_set
+from lib.metric import prepare_eval_out_for_ap, calculate_map
 
 # warnings
 warnings.filterwarnings("ignore")

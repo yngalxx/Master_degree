@@ -16,7 +16,7 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
     - install Tesseract OCR using homebrew.
     - run "python setup.py install"
 1. Run "python scraper_runner.py" to obtain high-resolution images from the Newspaper Navigator project.
-2. Run "python input_runner.py" to create model input data from source annotations files.
+2. Run "python preprocessing_runner.py" to create model input data from source annotations files.
 3. Run "python model_runner.py" to start training, evaluation or both (feel free to try various argument values).
 4. Run "python metric_runner.py" to calculate the average precision (AP) for each class, as well as its mean value (mAP).
 5. Run "python visualization_runner.py" to visualize several random model predictions.
@@ -24,5 +24,5 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
 
 **IMPORTANT:**
 - Pytorch related packages are not included in requirements.txt, use the following commands to install them: "pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html" if you intend to use the GPU, or "pip3 install torch==1.10.2 torchvision==0.11.3" if you intend to use the CPU (not recommended for model training).</em>
-- Each src script with 'runner' in its name is a command line application. Run it with argument '--help' to see the description of the other arguments.
+- Each script in directory named 'runner' is a command line application (despite of 'constants.py', where you can edit default arguments). Run each with argument '--help' to see the description of the other arguments.
 - Valid paths are generated automatically, but you can provide specific ones using click arguments in the command line for each runner.

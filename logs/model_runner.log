@@ -5657,3 +5657,318 @@ advertisement  0.8236
 mean           0.6875
 2022-07-31 04:46:19,585 - INFO - Model evaluation completed, runtime: 30.44 sec.
 2022-07-31 04:46:19,590 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 12259.4 sec.
+
+############################
+
+2022-08-01 23:02:32,629 - INFO - MODEL_RUNNER - STARTED!
+2022-08-01 23:02:32,630 - INFO - Creating validation dataloader
+2022-08-01 23:02:35,061 - INFO - Creating train dataloader
+2022-08-01 23:03:07,792 - INFO - Model training phase - started!
+2022-08-01 23:03:08,519 - INFO - Cuda available: False
+2022-08-01 23:03:08,519 - INFO - Current device: cpu
+
+############################
+
+2022-08-01 23:06:58,809 - INFO - MODEL_RUNNER - STARTED!
+2022-08-01 23:06:58,810 - INFO - Creating validation dataloader
+2022-08-01 23:07:01,538 - INFO - Creating train dataloader
+2022-08-01 23:07:01,666 - INFO - Model training phase - started!
+2022-08-01 23:07:02,347 - INFO - Cuda available: False
+2022-08-01 23:07:02,347 - INFO - Current device: cpu
+2022-08-01 23:09:25,923 - INFO - [Epoch 1] Epoch train time: 143.57 sec. | train loss = 5.0242
+2022-08-01 23:09:25,925 - INFO - Evaluating validation set
+
+############################
+
+2022-08-01 23:12:50,777 - INFO - MODEL_RUNNER - STARTED!
+2022-08-01 23:12:50,778 - WARNING - Argument "train" not passed, this phase will be skipped
+2022-08-01 23:12:50,778 - INFO - Creating validation dataloader
+2022-08-01 23:12:53,157 - INFO - Creating train dataloader
+2022-08-01 23:12:53,274 - INFO - Model evaluation phase - started!
+2022-08-01 23:12:54,103 - INFO - Model loaded correctly
+2022-08-01 23:12:54,103 - INFO - Creating test dataloader
+2022-08-01 23:12:54,117 - INFO - Test set evaluation - started!
+
+############################
+
+2022-08-01 23:13:20,778 - INFO - MODEL_RUNNER - STARTED!
+2022-08-01 23:13:20,779 - WARNING - Argument "train" not passed, this phase will be skipped
+2022-08-01 23:13:20,780 - INFO - Creating validation dataloader
+2022-08-01 23:13:23,653 - INFO - Creating train dataloader
+2022-08-01 23:13:23,885 - INFO - Model evaluation phase - started!
+2022-08-01 23:13:24,936 - INFO - Model loaded correctly
+2022-08-01 23:13:24,936 - INFO - Creating test dataloader
+2022-08-01 23:13:24,953 - INFO - Test set evaluation - started!
+2022-08-01 23:13:24,953 - INFO - Cuda available: False
+2022-08-01 23:13:24,953 - INFO - Current device: cpu
+2022-08-01 23:14:18,082 - INFO - Saving model output
+
+############################
+
+2022-08-01 23:19:24,066 - INFO - MODEL_RUNNER - STARTED!
+2022-08-01 23:19:24,067 - WARNING - Argument "train" not passed, this phase will be skipped
+2022-08-01 23:19:24,068 - INFO - Creating validation dataloader
+2022-08-01 23:19:26,477 - INFO - Creating train dataloader
+2022-08-01 23:19:26,594 - INFO - Model evaluation phase - started!
+2022-08-01 23:19:27,332 - INFO - Model loaded correctly
+2022-08-01 23:19:27,332 - INFO - Creating test dataloader
+2022-08-01 23:19:27,341 - INFO - Test set evaluation - started!
+2022-08-01 23:19:27,341 - INFO - Cuda available: False
+2022-08-01 23:19:27,341 - INFO - Current device: cpu
+2022-08-01 23:20:19,857 - INFO - Saving model output
+
+############################
+
+2022-08-01 23:20:38,236 - INFO - MODEL_RUNNER - STARTED!
+2022-08-01 23:20:38,237 - WARNING - Argument "train" not passed, this phase will be skipped
+2022-08-01 23:20:38,238 - INFO - Creating validation dataloader
+2022-08-01 23:20:40,952 - INFO - Creating train dataloader
+2022-08-01 23:20:41,167 - INFO - Model evaluation phase - started!
+2022-08-01 23:20:42,005 - INFO - Model loaded correctly
+2022-08-01 23:20:42,005 - INFO - Creating test dataloader
+2022-08-01 23:20:42,017 - INFO - Test set evaluation - started!
+2022-08-01 23:20:42,017 - INFO - Cuda available: False
+2022-08-01 23:20:42,017 - INFO - Current device: cpu
+2022-08-01 23:21:37,873 - INFO - Saving model output
+2022-08-01 23:21:37,878 - INFO - Calculating mAP metric
+2022-08-01 23:21:41,016 - INFO - Metric results:
+                   AP
+photograph     0.9175
+illustration   0.6634
+map            0.0000
+cartoon        0.7360
+headline       0.9500
+advertisement  0.9843
+mean           0.7085
+2022-08-01 23:21:41,016 - INFO - Model evaluation completed, runtime: 59.0 sec.
+2022-08-01 23:21:41,019 - INFO - Train set evaluation - started!
+
+############################
+
+2022-08-01 23:29:11,068 - INFO - MODEL_RUNNER - STARTED!
+2022-08-01 23:29:11,069 - WARNING - Argument "train" not passed, this phase will be skipped
+2022-08-01 23:29:11,069 - INFO - Creating validation dataloader
+2022-08-01 23:29:13,776 - INFO - Creating train dataloader
+2022-08-01 23:29:13,907 - INFO - Model evaluation phase - started!
+2022-08-01 23:29:14,715 - INFO - Model loaded correctly
+2022-08-01 23:29:14,715 - INFO - Creating test dataloader
+2022-08-01 23:29:14,725 - INFO - Test set evaluation - started!
+2022-08-01 23:29:14,725 - INFO - Cuda available: False
+2022-08-01 23:29:14,725 - INFO - Current device: cpu
+2022-08-01 23:30:09,753 - INFO - Saving model output
+2022-08-01 23:30:09,757 - INFO - Calculating mAP metric
+2022-08-01 23:30:12,942 - INFO - Metric results:
+                   AP
+photograph     0.9175
+illustration   0.6634
+map            0.0000
+cartoon        0.7360
+headline       0.9500
+advertisement  0.9843
+mean           0.7085
+2022-08-01 23:30:12,943 - INFO - Model evaluation completed, runtime: 58.22 sec.
+2022-08-01 23:30:12,946 - INFO - Train set evaluation - started!
+2022-08-01 23:30:12,946 - INFO - Cuda available: False
+2022-08-01 23:30:12,946 - INFO - Current device: cpu
+2022-08-01 23:31:07,320 - INFO - Saving model output
+2022-08-01 23:31:07,326 - INFO - Calculating mAP metric
+2022-08-01 23:31:10,137 - INFO - Metric results:
+                   AP
+photograph     1.0000
+illustration   0.0000
+map            0.0000
+cartoon        1.0000
+headline       0.9885
+advertisement  0.9994
+mean           0.6647
+2022-08-01 23:31:10,138 - INFO - Model evaluation completed, runtime: 57.19 sec.
+2022-08-01 23:31:10,141 - INFO - Validation set evaluation - started!
+2022-08-01 23:31:10,141 - INFO - Cuda available: False
+2022-08-01 23:31:10,142 - INFO - Current device: cpu
+
+############################
+
+2022-08-01 23:41:41,555 - INFO - MODEL_RUNNER - STARTED!
+2022-08-01 23:41:41,556 - WARNING - Argument "train" not passed, this phase will be skipped
+2022-08-01 23:41:41,557 - INFO - Creating validation dataloader
+2022-08-01 23:41:41,645 - INFO - Creating train dataloader
+2022-08-01 23:41:41,770 - INFO - Model evaluation phase - started!
+2022-08-01 23:41:42,530 - INFO - Model loaded correctly
+2022-08-01 23:41:42,530 - INFO - Creating test dataloader
+2022-08-01 23:41:42,540 - INFO - Test set evaluation - started!
+2022-08-01 23:41:42,540 - INFO - Cuda available: False
+2022-08-01 23:41:42,540 - INFO - Current device: cpu
+
+############################
+
+2022-08-01 23:56:50,322 - INFO - MODEL_RUNNER - STARTED!
+2022-08-01 23:56:50,322 - WARNING - Argument "train" not passed, this phase will be skipped
+2022-08-01 23:56:50,322 - INFO - Creating validation dataloader
+2022-08-01 23:56:50,403 - INFO - Creating train dataloader
+2022-08-01 23:56:50,524 - INFO - Model evaluation phase - started!
+2022-08-01 23:56:51,300 - INFO - Model loaded correctly
+2022-08-01 23:56:51,300 - INFO - Creating test dataloader
+2022-08-01 23:56:51,309 - INFO - Test set evaluation - started!
+2022-08-01 23:56:51,309 - INFO - Cuda available: False
+2022-08-01 23:56:51,309 - INFO - Current device: cpu
+2022-08-01 23:57:46,814 - INFO - Saving model output
+
+############################
+
+2022-08-02 00:00:13,317 - INFO - MODEL_RUNNER - STARTED!
+2022-08-02 00:00:13,318 - WARNING - Argument "train" not passed, this phase will be skipped
+2022-08-02 00:00:13,319 - INFO - Creating validation dataloader
+2022-08-02 00:00:13,401 - INFO - Creating train dataloader
+2022-08-02 00:00:13,524 - INFO - Model evaluation phase - started!
+2022-08-02 00:00:14,300 - INFO - Model loaded correctly
+2022-08-02 00:00:14,300 - INFO - Creating test dataloader
+2022-08-02 00:00:14,309 - INFO - Test set evaluation - started!
+2022-08-02 00:00:14,309 - INFO - Cuda available: False
+2022-08-02 00:00:14,309 - INFO - Current device: cpu
+2022-08-02 00:01:12,254 - INFO - Saving model output
+2022-08-02 00:01:12,263 - INFO - Number of annotations predicted: 122
+2022-08-02 00:01:12,263 - INFO - Predicted labels statistics:
+headline         76
+advertisement    17
+photograph       12
+cartoon          10
+illustration      6
+map               1
+2022-08-02 00:01:12,263 - INFO - Calculating mAP metric
+2022-08-02 00:01:15,195 - INFO - Metric results:
+                   AP
+photograph     0.9175
+illustration   0.6634
+map            0.0000
+cartoon        0.7360
+headline       0.9500
+advertisement  0.9843
+mean           0.7085
+2022-08-02 00:01:15,195 - INFO - Model evaluation completed, runtime: 60.89 sec.
+2022-08-02 00:01:15,198 - INFO - Train set evaluation - started!
+2022-08-02 00:01:15,198 - INFO - Cuda available: False
+2022-08-02 00:01:15,199 - INFO - Current device: cpu
+2022-08-02 00:02:09,175 - INFO - Saving model output
+2022-08-02 00:02:09,184 - INFO - Number of annotations predicted: 166
+2022-08-02 00:02:09,184 - INFO - Predicted labels statistics:
+advertisement    74
+headline         74
+photograph       16
+illustration      1
+cartoon           1
+2022-08-02 00:02:09,184 - INFO - Calculating mAP metric
+2022-08-02 00:02:12,180 - INFO - Metric results:
+                   AP
+photograph     1.0000
+illustration   0.0000
+map            0.0000
+cartoon        1.0000
+headline       0.9885
+advertisement  0.9994
+mean           0.6647
+2022-08-02 00:02:12,180 - INFO - Model evaluation completed, runtime: 56.98 sec.
+2022-08-02 00:02:12,184 - INFO - Validation set evaluation - started!
+2022-08-02 00:02:12,184 - INFO - Cuda available: False
+2022-08-02 00:02:12,184 - INFO - Current device: cpu
+2022-08-02 00:03:08,106 - INFO - Saving model output
+2022-08-02 00:03:08,115 - INFO - Number of annotations predicted: 127
+2022-08-02 00:03:08,115 - INFO - Predicted labels statistics:
+headline         60
+advertisement    26
+photograph       20
+illustration      9
+cartoon           8
+map               4
+2022-08-02 00:03:08,115 - INFO - Calculating mAP metric
+2022-08-02 00:03:11,156 - INFO - Metric results:
+                   AP
+photograph     0.5995
+illustration   0.4455
+map            1.0000
+cartoon        0.8317
+headline       0.8599
+advertisement  0.8816
+mean           0.7697
+2022-08-02 00:03:11,157 - INFO - Model evaluation completed, runtime: 58.97 sec.
+2022-08-02 00:03:11,193 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 177.88 sec.
+
+############################
+
+2022-08-02 00:06:45,151 - INFO - MODEL_RUNNER - STARTED!
+2022-08-02 00:06:45,152 - WARNING - Argument "train" not passed, this phase will be skipped
+2022-08-02 00:06:45,153 - INFO - Creating validation dataloader
+2022-08-02 00:06:45,233 - INFO - Creating train dataloader
+2022-08-02 00:06:45,352 - INFO - Model evaluation phase - started!
+2022-08-02 00:06:46,131 - INFO - Model loaded correctly
+2022-08-02 00:06:46,131 - INFO - Creating test dataloader
+2022-08-02 00:06:46,141 - INFO - Test set evaluation - started!
+2022-08-02 00:06:46,142 - INFO - Cuda available: False
+2022-08-02 00:06:46,142 - INFO - Current device: cpu
+2022-08-02 00:07:40,139 - INFO - Saving model output
+2022-08-02 00:07:40,147 - INFO - Number of annotations predicted: 122
+2022-08-02 00:07:40,147 - INFO - Predicted labels statistics:
+                n
+headline       76
+advertisement  17
+photograph     12
+cartoon        10
+illustration    6
+map             1
+2022-08-02 00:07:40,147 - INFO - Calculating mAP metric
+2022-08-02 00:07:43,093 - INFO - Metric results:
+                   AP
+photograph     0.9175
+illustration   0.6634
+map            0.0000
+cartoon        0.7360
+headline       0.9500
+advertisement  0.9843
+mean           0.7085
+2022-08-02 00:07:43,094 - INFO - Model evaluation completed, runtime: 56.95 sec.
+2022-08-02 00:07:43,097 - INFO - Train set evaluation - started!
+2022-08-02 00:07:43,097 - INFO - Cuda available: False
+2022-08-02 00:07:43,098 - INFO - Current device: cpu
+
+############################
+
+2022-08-02 00:08:15,333 - INFO - MODEL_RUNNER - STARTED!
+2022-08-02 00:08:15,334 - WARNING - Argument "train" not passed, this phase will be skipped
+2022-08-02 00:08:15,334 - INFO - Creating validation dataloader
+2022-08-02 00:08:15,414 - INFO - Creating train dataloader
+
+############################
+
+2022-08-02 00:08:20,228 - INFO - MODEL_RUNNER - STARTED!
+2022-08-02 00:08:20,230 - WARNING - Argument "train" not passed, this phase will be skipped
+2022-08-02 00:08:20,230 - INFO - Creating validation dataloader
+2022-08-02 00:08:20,319 - INFO - Creating train dataloader
+2022-08-02 00:08:20,455 - INFO - Model evaluation phase - started!
+2022-08-02 00:08:21,357 - INFO - Model loaded correctly
+2022-08-02 00:08:21,357 - INFO - Creating test dataloader
+2022-08-02 00:08:21,369 - INFO - Test set evaluation - started!
+2022-08-02 00:08:21,369 - INFO - Cuda available: False
+2022-08-02 00:08:21,369 - INFO - Current device: cpu
+2022-08-02 00:09:17,690 - INFO - Saving model output
+2022-08-02 00:09:17,700 - INFO - Number of annotations predicted: 122
+2022-08-02 00:09:17,700 - INFO - Predicted labels statistics:
+               count
+headline          76
+advertisement     17
+photograph        12
+cartoon           10
+illustration       6
+map                1
+2022-08-02 00:09:17,700 - INFO - Calculating mAP metric
+2022-08-02 00:09:20,879 - INFO - Metric results:
+                   AP
+photograph     0.9175
+illustration   0.6634
+map            0.0000
+cartoon        0.7360
+headline       0.9500
+advertisement  0.9843
+mean           0.7085
+2022-08-02 00:09:20,880 - INFO - Model evaluation completed, runtime: 59.51 sec.
+2022-08-02 00:09:20,883 - INFO - Train set evaluation - started!
+2022-08-02 00:09:20,883 - INFO - Cuda available: False
+2022-08-02 00:09:20,883 - INFO - Current device: cpu

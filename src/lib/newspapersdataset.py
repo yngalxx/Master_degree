@@ -1,21 +1,28 @@
 import warnings
-from typing import List, Tuple, Union
+from typing import List, Tuple, Union, Dict
 
 import numpy as np
 import pandas as pd
 import torch
 import torchvision
 from PIL import Image
-
-from lib.functions_catalogue import imagesize, target_encoder
+import imagesize
 
 # warnings
 warnings.filterwarnings("ignore")
 
 
+def target_encoder(label: int, class_coding_dict: Dict, reverse: bool = False):
+    if not reverse:
+        return class_coding_dict[label]
+    class_coder_reversed = {y: x for x, y in class_coding_dict.items()}
+    return class_coder_reversed[label]
+
+
 def prepare_data_for_dataloader(
     img_dir: str,
     in_list: List[str],
+    class_coding_dict: Dict,
     expected_list: List[str] = None,
     bbox_format: str = "x0y0x1y1",
     scale: Union[List[int], float] = 1.0,
@@ -46,7 +53,7 @@ def prepare_data_for_dataloader(
                 file_num_name = in_list[i].split(".")[0]
                 expected_list_split_2 = expected_list_split[ii].split(":")
                 bbox = expected_list_split_2[1].split(",")
-                label = target_encoder(expected_list_split_2[0], reverse=False)
+                label = target_encoder(expected_list_split_2[0], class_coding_dict, reverse=False)
                 x0, y0 = int(bbox[0]), int(bbox[1])
                 x1, y1 = int(bbox[2]), int(bbox[3])
                 if bbox_format == "x0y0wh":

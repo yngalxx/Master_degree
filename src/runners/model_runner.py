@@ -1,12 +1,11 @@
-import contextlib
 import logging
-import os
 
 import click
 
-from lib.constants import Data, General, Model, Output
 from lib.logs import Log
 from lib.model_pipeline import model_pipeline
+
+from constants import Data, General, Model, Output
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -21,7 +20,7 @@ from lib.model_pipeline import model_pipeline
     "--num_classes",
     default=Data.NUM_CLASSES,
     type=int,
-    help="Number of classes + 1 (background).",
+    help="Number of classes.",
     show_default=True,
 )
 @click.option(
@@ -191,18 +190,6 @@ from lib.model_pipeline import model_pipeline
     show_default=True,
 )
 @click.option(
-    "--train",
-    type=bool,
-    help="Model training enabled",
-    required=True,
-)
-@click.option(
-    "--evaluate",
-    type=bool,
-    help="Model evaluation enabled",
-    required=True,
-)
-@click.option(
     "--val_map_threshold",
     default=Output.VAL_MAP_THRESHOLD,
     type=float,
@@ -213,6 +200,18 @@ from lib.model_pipeline import model_pipeline
         " this situation, the force_save_model argument will automatically be"
         " set to True)."
     ),
+    show_default=True,
+)
+@click.option(
+    "--train",
+    type=bool,
+    help="Model training enabled",
+    required=True,
+)
+@click.option(
+    "--evaluate",
+    type=bool,
+    help="Model evaluation enabled",
     required=True,
 )
 def model_runner(
@@ -241,12 +240,8 @@ def model_runner(
     pretrained,
     val_map_threshold,
 ):
-    # check provided path
-    with contextlib.redirect_stdout(logging):
-        assert os.path.exists(main_dir) == True
-
     # initialize logger
-    logger = Log("model_runner")
+    logger = Log("model_runner", main_dir)
     logger.log_start()
 
     if not train:
@@ -298,6 +293,9 @@ def model_runner(
         force_save_model=force_save_model,
         pretrained=pretrained,
         val_map_threshold=val_map_threshold,
+        class_names=Data.CLASS_NAMES,
+        class_coding_dict=Data.CLASS_CODING_DICT,
+        evaluate_on_test=Output.TEST_SET_EXPECTED,
     )
 
     # end logger

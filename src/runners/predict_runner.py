@@ -1,6 +1,4 @@
-import contextlib
 import json
-import logging
 import os
 
 import click
@@ -10,11 +8,12 @@ import torchvision.transforms as T
 from torch.utils.data import DataLoader
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
-from lib.constants import Data, Output
-from lib.functions_catalogue import (collate_fn, predict_one_img,
-                                     show_random_img_with_all_annotations)
-from lib.newspapersdataset import (NewspapersDataset,
-                                   prepare_data_for_dataloader)
+from lib.model_pipeline import collate_fn
+from lib.visualization import show_random_img_with_all_annotations
+from lib.predict import predict_one_img
+from lib.newspapersdataset import NewspapersDataset, prepare_data_for_dataloader
+
+from constants import Data, Output
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -44,9 +43,8 @@ from lib.newspapersdataset import (NewspapersDataset,
 )
 def predict(path_to_image, model_config_path, min_conf_level):
     # check provided path
-    with contextlib.redirect_stdout(logging):
-        assert os.path.exists(path_to_image) == True
-        assert os.path.exists(model_config_path) == True
+    assert os.path.exists(path_to_image) == True
+    assert os.path.exists(model_config_path) == True
 
     # extract path and file name
     image_path_split = path_to_image.split("/")
@@ -79,6 +77,7 @@ def predict(path_to_image, model_config_path, min_conf_level):
     data = prepare_data_for_dataloader(
         img_dir=image_dir,
         in_list=[image_name],
+        class_coding_dict=Data.CLASS_CODING_DICT,
         bbox_format=config["bbox_format"],
         scale=rescale,
         test=True,
@@ -126,6 +125,7 @@ def predict(path_to_image, model_config_path, min_conf_level):
         dataloader=dataloader,
         image_name=image_name,
         path_to_image=image_dir,
+        class_coding_dict=Data.CLASS_CODING_DICT
     )
 
     show_random_img_with_all_annotations(

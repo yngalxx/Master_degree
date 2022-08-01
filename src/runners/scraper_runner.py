@@ -1,4 +1,3 @@
-import contextlib
 import json
 import logging
 import os
@@ -7,8 +6,9 @@ import click
 import requests
 from tqdm import tqdm
 
-from lib.constants import General
 from lib.logs import Log
+
+from constants import General
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -24,15 +24,13 @@ def image_scraper(main_dir):
     Simple scraper to retriev full-resolution images from urls finded in COCO
     formatted files with annotations obtained from source repository (newspaper-navigator-master)
     """
-    # check provided path
-    with contextlib.redirect_stdout(logging):
-        assert os.path.exists(main_dir) == True
-        source_annotations_dir = "source_annotations"
-        assert os.path.exists(f"{main_dir}/{source_annotations_dir}") == True
-
     # initialize logger
-    logger = Log("scraper_runner")
+    logger = Log("scraper_runner", main_dir)
     logger.log_start()
+
+    # check provided path
+    source_annotations_dir = "source_annotations"
+    assert os.path.exists(f"{main_dir}/{source_annotations_dir}") == True
 
     # check whether the scraped_photos directory exists, and if not create it
     final_dir = "scraped_photos/"

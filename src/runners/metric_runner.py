@@ -1,15 +1,14 @@
-import contextlib
 import logging
-import os
 import warnings
 
 import click
 import pandas as pd
 
-from lib.constants import General, Output
-from lib.functions_catalogue import (calculate_map, from_tsv_to_list,
-                                     prepare_data_for_ap)
+from lib.metric import calculate_map, prepare_data_for_ap
+from lib.save_load_data import from_tsv_to_list
 from lib.logs import Log
+
+from constants import General, Output, Data
 
 # warnings
 warnings.filterwarnings("ignore")
@@ -55,13 +54,16 @@ warnings.filterwarnings("ignore")
     show_default=True,
 )
 def calculate_metric(main_dir, min_conf_level, train_set, test_set, val_set):
-    # check provided path
-    with contextlib.redirect_stdout(logging):
-        assert os.path.exists(main_dir) == True
-
     # initialize logger
-    logger = Log("calculate_map_runer")
+    logger = Log("metric_runner", main_dir)
     logger.log_start()
+
+    if not train_set and not val_set and not test_set:
+        logging.error(
+            'None of the arguments: "train_set", "val_set" and "test_set"'
+            " passed, aborted!"
+        )
+        raise ValueError()
 
     # calculate metric for train set if possible
     if train_set:
@@ -71,7 +73,7 @@ def calculate_metric(main_dir, min_conf_level, train_set, test_set, val_set):
             expected = from_tsv_to_list(f"{main_dir}/data/train/expected.tsv")
 
             pred_list, ground_truth_list = prepare_data_for_ap(
-                output_list=out, target_list=expected
+                output_list=out, target_list=expected, class_coding_dict=Data.CLASS_CODING_DICT
             )
 
             map_dict = calculate_map(
@@ -99,7 +101,7 @@ def calculate_metric(main_dir, min_conf_level, train_set, test_set, val_set):
             expected = from_tsv_to_list(f"{main_dir}/data/dev-0/expected.tsv")
 
             pred_list, ground_truth_list = prepare_data_for_ap(
-                output_list=out, target_list=expected
+                output_list=out, target_list=expected, class_coding_dict=Data.CLASS_CODING_DICT
             )
 
             map_dict = calculate_map(
@@ -127,7 +129,7 @@ def calculate_metric(main_dir, min_conf_level, train_set, test_set, val_set):
             expected = from_tsv_to_list(f"{main_dir}/data/test-A/expected.tsv")
 
             pred_list, ground_truth_list = prepare_data_for_ap(
-                output_list=out, target_list=expected
+                output_list=out, target_list=expected, class_coding_dict=Data.CLASS_CODING_DICT
             )
 
             map_dict = calculate_map(
@@ -146,13 +148,6 @@ def calculate_metric(main_dir, min_conf_level, train_set, test_set, val_set):
             'Argument "test_set" not passed, calculating metric for this set'
             " is skipped"
         )
-
-    if not train_set and not val_set and not test_set:
-        logging.error(
-            'None of the arguments: "train_set", "val_set" and "test_set"'
-            " passed, aborted!"
-        )
-        raise ValueError()
 
     # end logger
     logger.log_end()

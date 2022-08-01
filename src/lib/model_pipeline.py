@@ -1,6 +1,7 @@
 import logging
 import os
 import warnings
+from typing import Tuple, List, Dict
 
 import pandas as pd
 import torch
@@ -11,13 +12,16 @@ from torch.utils.data import DataLoader
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
 from lib.evaluate_model import evaluate_model
-from lib.functions_catalogue import collate_fn, dump_json, from_tsv_to_list
-from lib.newspapersdataset import (NewspapersDataset,
-                                   prepare_data_for_dataloader)
+from lib.save_load_data import dump_json, from_tsv_to_list
+from lib.newspapersdataset import NewspapersDataset, prepare_data_for_dataloader
 from lib.train_model import train_model
 
 # warnings
 warnings.filterwarnings("ignore")
+
+
+def collate_fn(batch) -> Tuple:
+    return tuple(zip(*batch))
 
 
 def model_pipeline(
@@ -45,6 +49,9 @@ def model_pipeline(
     force_save_model: str,
     pretrained: bool,
     val_map_threshold: float,
+    class_names: List[str],
+    class_coding_dict: Dict,
+    evaluate_on_test: bool,
 ) -> None:
     # check provided path
     scraped_photos_dir = f"{main_dir}/scraped_photos/"
@@ -79,12 +86,7 @@ def model_pipeline(
         try:
             path = "dev-0/expected.tsv"
             expected_val = from_tsv_to_list(f"{annotations_dir}{path}")
-        except:
-            logging.exception(
-                f"File '{path}' not found, code will be forced to quit"
-            )
-            raise FileNotFoundError()
-        try:
+
             path = "dev-0/in.tsv"
             in_val = from_tsv_to_list(f"{annotations_dir}{path}")
         except:
@@ -98,6 +100,7 @@ def model_pipeline(
             img_dir=scraped_photos_dir,
             in_list=in_val,
             expected_list=expected_val,
+            class_coding_dict=class_coding_dict,
             bbox_format=bbox_format,
             scale=rescale,
             test=False,
@@ -125,12 +128,7 @@ def model_pipeline(
         try:
             path = "train/expected.tsv"
             expected_train = from_tsv_to_list(f"{annotations_dir}{path}")
-        except:
-            logging.exception(
-                f"File '{path}' not found, code will be forced to quit"
-            )
-            raise FileNotFoundError()
-        try:
+
             path = "train/in.tsv"
             in_train = from_tsv_to_list(f"{annotations_dir}{path}")
         except:
@@ -144,6 +142,7 @@ def model_pipeline(
             img_dir=scraped_photos_dir,
             in_list=in_train,
             expected_list=expected_train,
+            class_coding_dict=class_coding_dict,
             bbox_format=bbox_format,
             scale=rescale,
             test=False,
@@ -334,12 +333,12 @@ def model_pipeline(
                 )
                 raise FileNotFoundError()
 
-            in_test = from_tsv_to_list(f"{annotations_dir}test-A/in.tsv")
             test_paths = [scraped_photos_dir + path for path in in_test]
             data_test = prepare_data_for_dataloader(
                 img_dir=scraped_photos_dir,
                 in_list=in_test,
                 expected_list=None,
+                class_coding_dict=class_coding_dict,
                 bbox_format=bbox_format,
                 scale=rescale,
                 test=True,
@@ -366,8 +365,10 @@ def model_pipeline(
                 gpu=gpu,
                 main_dir=main_dir,
                 save_path="test-A",
-                test=True,
+                expected_list_exists=evaluate_on_test,
                 num_classes=num_classes - 1,
+                class_names=class_names,
+                class_coding_dict=class_coding_dict
             )
 
         # evaluation on train set (to check under/overfitting)
@@ -379,8 +380,10 @@ def model_pipeline(
                 gpu=gpu,
                 main_dir=main_dir,
                 save_path="train",
-                test=True,
+                expected_list_exists=True,
                 num_classes=num_classes - 1,
+                class_names=class_names,
+                class_coding_dict=class_coding_dict
             )
 
         # evaluation on validation set
@@ -392,6 +395,8 @@ def model_pipeline(
                 gpu=gpu,
                 main_dir=main_dir,
                 save_path="dev-0",
-                test=True,
+                expected_list_exists=True,
                 num_classes=num_classes - 1,
+                class_names=class_names,
+                class_coding_dict=class_coding_dict
             )

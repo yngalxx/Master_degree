@@ -1,4 +1,4 @@
-2022-07-27 18:18:25,239 - INFO - INPUT_RUNNER - STARTED!
+2022-07-27 18:18:25,239 - INFO - PREPROCESSING_RUNNER - STARTED!
 2022-07-27 18:18:25,498 - INFO - Rescaling annotations
 2022-07-27 18:19:09,278 - INFO - Preparing final input files
 2022-07-27 18:19:52,539 - INFO - Class statistics for train set
@@ -31,7 +31,7 @@ SUM                  9931
 
 ############################
 
-2022-07-27 18:28:57,745 - INFO - INPUT_RUNNER - STARTED!
+2022-07-27 18:28:57,745 - INFO - PREPROCESSING_RUNNER - STARTED!
 2022-07-27 18:28:57,974 - INFO - Rescaling annotations
 2022-07-27 18:29:38,950 - INFO - Preparing final input files
 2022-07-27 18:30:21,998 - INFO - Class statistics for train set
@@ -61,14 +61,14 @@ illustration          206
 editorial_cartoon      54
 map                    34
 SUM                  9931
-2022-07-27 18:30:22,045 - INFO - INPUT_RUNNER - DONE! 
+2022-07-27 18:30:22,045 - INFO - PREPROCESSING_RUNNER - DONE! 
 EXECUTION TIME: 84.3 sec.
 
 ####### JOB FINISHED #######
 
 ############################
 
-2022-07-27 18:31:37,489 - INFO - INPUT_RUNNER - STARTED!
+2022-07-27 18:31:37,489 - INFO - PREPROCESSING_RUNNER - STARTED!
 2022-07-27 18:31:37,715 - INFO - Rescaling annotations
 2022-07-27 18:32:22,375 - INFO - Preparing final input files
 2022-07-27 18:33:05,704 - INFO - Class statistics for train set
@@ -98,11 +98,11 @@ illustration          206
 editorial_cartoon      54
 map                    34
 SUM                  9931
-2022-07-27 18:33:05,751 - INFO - INPUT_RUNNER - DONE! EXECUTION TIME: 88.26 sec.
+2022-07-27 18:33:05,751 - INFO - PREPROCESSING_RUNNER - DONE! EXECUTION TIME: 88.26 sec.
 
 ############################
 
-2022-07-27 18:35:46,156 - INFO - INPUT_RUNNER - STARTED!
+2022-07-27 18:35:46,156 - INFO - PREPROCESSING_RUNNER - STARTED!
 2022-07-27 18:35:46,392 - INFO - Rescaling annotations
 2022-07-27 18:36:29,492 - INFO - Preparing final input files
 2022-07-27 18:37:12,527 - INFO - Class statistics for train set
@@ -132,16 +132,16 @@ illustration          206
 editorial_cartoon      54
 map                    34
 SUM                  9931
-2022-07-27 18:37:12,576 - INFO - INPUT_RUNNER - COMPLETED! DURATION: 86.42 sec.
+2022-07-27 18:37:12,576 - INFO - PREPROCESSING_RUNNER - COMPLETED! DURATION: 86.42 sec.
 
 ############################
 
-2022-07-27 19:03:10,727 - INFO - INPUT_RUNNER - STARTED!
+2022-07-27 19:03:10,727 - INFO - PREPROCESSING_RUNNER - STARTED!
 2022-07-27 19:03:10,966 - INFO - Rescaling annotations
 
 ############################
 
-2022-07-27 19:05:47,757 - INFO - INPUT_RUNNER - STARTED!
+2022-07-27 19:05:47,757 - INFO - PREPROCESSING_RUNNER - STARTED!
 2022-07-27 19:05:47,976 - INFO - Rescaling source annotations to match with high resolution scraped images
 2022-07-27 19:07:20,411 - INFO - Number of images in train set = 2630
 2022-07-27 19:07:20,411 - INFO - Number of annotations in train set = 2630
@@ -173,11 +173,11 @@ cartoon               211
 illustration          206
 editorial_cartoon      54
 map                    34
-2022-07-27 19:07:20,487 - INFO - INPUT_RUNNER - COMPLETED! DURATION: 92.73 sec.
+2022-07-27 19:07:20,487 - INFO - PREPROCESSING_RUNNER - COMPLETED! DURATION: 92.73 sec.
 
 ############################
 
-2022-07-27 19:14:07,237 - INFO - INPUT_RUNNER - STARTED!
+2022-07-27 19:14:07,237 - INFO - PREPROCESSING_RUNNER - STARTED!
 2022-07-27 19:14:07,478 - INFO - Rescaling source annotations to match with high resolution scraped images
 2022-07-27 19:15:40,793 - INFO - Number of images in train set = 2630
 2022-07-27 19:15:40,793 - INFO - Labels statistics for train set
@@ -209,11 +209,11 @@ illustration          206
 editorial_cartoon      54
 map                    34
 2022-07-27 19:15:40,802 - INFO - Number of annotations in test set = 9931
-2022-07-27 19:15:40,837 - INFO - INPUT_RUNNER - COMPLETED! DURATION: 93.6 sec.
+2022-07-27 19:15:40,837 - INFO - PREPROCESSING_RUNNER - COMPLETED! DURATION: 93.6 sec.
 
 ############################
 
-2022-07-27 19:17:16,462 - INFO - INPUT_RUNNER - STARTED!
+2022-07-27 19:17:16,462 - INFO - PREPROCESSING_RUNNER - STARTED!
 2022-07-27 19:17:16,723 - INFO - Rescaling source annotations to match scraped high-resolution images
 2022-07-27 19:18:42,319 - INFO - Number of images in train set = 2630
 2022-07-27 19:18:42,319 - INFO - Number of annotations in train set = 35599
@@ -245,11 +245,11 @@ cartoon               211
 illustration          206
 editorial_cartoon      54
 map                    34
-2022-07-27 19:18:42,385 - INFO - INPUT_RUNNER - COMPLETED! DURATION: 85.92 sec.
+2022-07-27 19:18:42,385 - INFO - PREPROCESSING_RUNNER - COMPLETED! DURATION: 85.92 sec.
 
 ############################
 
-2022-07-28 14:14:50,584 - INFO - INPUT_RUNNER - STARTED!
+2022-07-28 14:14:50,584 - INFO - PREPROCESSING_RUNNER - STARTED!
 2022-07-28 14:14:50,739 - INFO - Rescaling source annotations to match scraped high-resolution images
 2022-07-28 14:16:11,558 - INFO - Number of images in train set = 2630
 2022-07-28 14:16:11,558 - INFO - Number of annotations in train set = 35599
@@ -281,11 +281,11 @@ cartoon               211
 illustration          206
 editorial_cartoon      54
 map                    34
-2022-07-28 14:16:11,578 - INFO - INPUT_RUNNER - COMPLETED! RUNTIME: 80.99 sec.
+2022-07-28 14:16:11,578 - INFO - PREPROCESSING_RUNNER - COMPLETED! RUNTIME: 80.99 sec.
 
 ############################
 
-2022-07-28 14:20:24,461 - INFO - INPUT_RUNNER - STARTED!
+2022-07-28 14:20:24,461 - INFO - PREPROCESSING_RUNNER - STARTED!
 2022-07-28 14:20:24,618 - INFO - Rescaling source annotations to match scraped high-resolution images
 2022-07-28 14:21:17,669 - INFO - Number of images in train set = 2630
 2022-07-28 14:21:17,669 - INFO - Number of annotations in train set = 35599
@@ -314,11 +314,11 @@ photograph        879
 cartoon           265
 illustration      206
 map                34
-2022-07-28 14:21:17,689 - INFO - INPUT_RUNNER - COMPLETED! RUNTIME: 53.23 sec.
+2022-07-28 14:21:17,689 - INFO - PREPROCESSING_RUNNER - COMPLETED! RUNTIME: 53.23 sec.
 
 ############################
 
-2022-07-30 00:59:44,331 - INFO - INPUT_RUNNER - STARTED!
+2022-07-30 00:59:44,331 - INFO - PREPROCESSING_RUNNER - STARTED!
 2022-07-30 00:59:44,558 - INFO - Rescaling source annotations to match scraped high-resolution images
 2022-07-30 01:01:13,373 - INFO - Number of images in train set = 2630
 2022-07-30 01:01:13,373 - INFO - Number of annotations in train set = 35599
@@ -347,11 +347,11 @@ photograph        879
 cartoon           265
 illustration      206
 map                34
-2022-07-30 01:01:13,437 - INFO - INPUT_RUNNER - COMPLETED! RUNTIME: 89.11 sec.
+2022-07-30 01:01:13,437 - INFO - PREPROCESSING_RUNNER - COMPLETED! RUNTIME: 89.11 sec.
 
 ############################
 
-2022-07-31 01:11:30,669 - INFO - INPUT_RUNNER - STARTED!
+2022-07-31 01:11:30,669 - INFO - PREPROCESSING_RUNNER - STARTED!
 2022-07-31 01:11:30,825 - INFO - Rescaling source annotations to match scraped high-resolution images
 2022-07-31 01:12:26,287 - INFO - Number of images in train set = 2630
 2022-07-31 01:12:26,287 - INFO - Number of annotations in train set = 35599
@@ -380,4 +380,62 @@ photograph        879
 cartoon           265
 illustration      206
 map                34
-2022-07-31 01:12:26,308 - INFO - INPUT_RUNNER - COMPLETED! RUNTIME: 55.64 sec.
+2022-07-31 01:12:26,308 - INFO - PREPROCESSING_RUNNER - COMPLETED! RUNTIME: 55.64 sec.
+
+############################
+
+2022-08-01 21:57:35,878 - INFO - PREPROCESSING_RUNNER - STARTED!
+2022-08-01 21:57:36,096 - INFO - Rescaling source annotations to match scraped high-resolution images
+
+############################
+
+2022-08-01 22:02:49,540 - INFO - PREPROCESSING_RUNNER - STARTED!
+2022-08-01 22:02:49,766 - INFO - Rescaling source annotations to match scraped high-resolution images
+
+############################
+
+2022-08-01 22:05:40,971 - INFO - PREPROCESSING_RUNNER - STARTED!
+2022-08-01 22:05:41,190 - INFO - Rescaling source annotations to match scraped high-resolution images
+
+############################
+
+2022-08-01 22:11:19,985 - INFO - PREPROCESSING_RUNNER - STARTED!
+2022-08-01 22:11:20,199 - INFO - Rescaling source annotations to match scraped high-resolution images
+
+############################
+
+2022-08-01 22:14:50,609 - INFO - PREPROCESSING_RUNNER - STARTED!
+2022-08-01 22:14:50,834 - INFO - Rescaling source annotations to match scraped high-resolution images
+
+############################
+
+2022-08-01 22:39:34,129 - INFO - PREPROCESSING_RUNNER - STARTED!
+2022-08-01 22:39:34,361 - INFO - Rescaling source annotations to match scraped high-resolution images
+2022-08-01 22:41:06,562 - INFO - Number of images in train set = 2630
+2022-08-01 22:41:06,562 - INFO - Number of annotations in train set = 35599
+2022-08-01 22:41:06,562 - INFO - Labels statistics for train set:
+headline         20528
+advertisement     9910
+photograph        3135
+cartoon           1070
+illustration       786
+map                170
+2022-08-01 22:41:06,565 - INFO - Number of images in validation set = 215
+2022-08-01 22:41:06,565 - INFO - Number of annotations in validation set = 2879
+2022-08-01 22:41:06,565 - INFO - Labels statistics for validation set:
+headline         1651
+advertisement     813
+photograph        240
+cartoon           108
+illustration       56
+map                11
+2022-08-01 22:41:06,571 - INFO - Number of images in test set = 712
+2022-08-01 22:41:06,572 - INFO - Number of annotations in test set = 9931
+2022-08-01 22:41:06,572 - INFO - Labels statistics for test set:
+headline         5689
+advertisement    2858
+photograph        879
+cartoon           265
+illustration      206
+map                34
+2022-08-01 22:41:06,612 - INFO - PREPROCESSING_RUNNER - COMPLETED! RUNTIME: 92.48 sec.

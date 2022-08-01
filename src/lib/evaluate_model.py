@@ -1,15 +1,18 @@
 import logging
 import time
 import warnings
+from typing import List, Dict
 
 import pandas as pd
 import torch
 import torchvision
 from tqdm import tqdm
 
-from lib.functions_catalogue import (calculate_map, from_tsv_to_list,
-                                     parse_model_outcome, prepare_data_for_ap,
-                                     save_list_to_tsv_file)
+from lib.save_load_data import from_tsv_to_list, save_list_to_tsv_file
+from lib.postprocessing import parse_model_outcome
+from lib.metric import prepare_data_for_ap, calculate_map
+from lib.preprocessing import get_statistics
+
 
 # warnings
 warnings.filterwarnings("ignore")
@@ -20,8 +23,10 @@ def evaluate_model(
     dataloader: torch.utils.data.DataLoader,
     main_dir: str,
     save_path: str,
-    test: bool,
+    expected_list_exists: bool,
     num_classes: int,
+    class_names: List[str],
+    class_coding_dict: Dict,
     gpu: bool = False,
 ) -> None:
     evaluation_start_time = time.time()
@@ -47,7 +52,7 @@ def evaluate_model(
             scores_list,
             new_sizes_list,
         ) = ([], [], [], [], [])
-        if test:
+        if expected_list_exists:
             model_output, ground_truth = [], []
         for images, targets in tqdm(dataloader, desc="Evaluation"):
             if cuda_statement and gpu:
@@ -58,7 +63,7 @@ def evaluate_model(
             targets = [
                 {k: v.to(cpu_device) for k, v in t.items()} for t in targets
             ]
-            if test:
+            if expected_list_exists:
                 ground_truth.append(targets)
             for target in list(targets):
                 img_names_list.append(
@@ -74,7 +79,7 @@ def evaluate_model(
             outputs = [
                 {k: v.to(cpu_device) for k, v in t.items()} for t in outputs
             ]
-            if test:
+            if expected_list_exists:
                 model_output.append(outputs)
             for output in outputs:
                 predicted_labels_list.append(
@@ -97,15 +102,19 @@ def evaluate_model(
         predicted_labels_list,
         scores_list,
         predicted_bboxes_list,
+        class_coding_dict
     )
 
     save_list_to_tsv_file(f"{main_dir}/data/{save_path}/out.tsv", out_list)
     save_list_to_tsv_file(f"{main_dir}/data/{save_path}/in.tsv", new_in_list)
 
-    # mAP metric calculations
-    if test:
-        logging.info("Calculating mAP metric")
+    stats, sum = get_statistics(out_list, index=0)
+    logging.info(f"Number of annotations predicted: {sum}")
+    logging.info(f"Predicted labels statistics:\n{stats}")
 
+    # mAP metric calculations
+    if expected_list_exists:
+        logging.info("Calculating mAP metric")
         out = from_tsv_to_list(f"{main_dir}/data/{save_path}/out.tsv")
         try:
             expected = from_tsv_to_list(
@@ -118,9 +127,9 @@ def evaluate_model(
             )
             raise FileNotFoundError()
 
-        model_output, ground_truth = prepare_data_for_ap(out, expected)
+        model_output, ground_truth = prepare_data_for_ap(out, expected, class_coding_dict)
         map_df = pd.DataFrame.from_dict(
-            calculate_map(model_output, ground_truth, num_classes=num_classes),
+            calculate_map(model_output, ground_truth, num_classes=num_classes, class_names=class_names),
             orient="index",
             columns=["AP"],
         )

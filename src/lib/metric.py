@@ -3,7 +3,7 @@ from typing import Dict, List, Tuple, Union
 import numpy as np
 from mean_average_precision import MetricBuilder
 
-from lib.newspapersdataset import target_encoder
+from lib.newspapers_dataset import target_encoder
 
 
 def prepare_eval_out_for_ap(

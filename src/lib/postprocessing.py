@@ -3,7 +3,7 @@ from typing import Dict, List
 import imagesize
 import numpy as np
 
-from lib.newspapersdataset import target_encoder
+from lib.newspapers_dataset import target_encoder
 
 
 def parse_model_outcome(

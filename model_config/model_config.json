@@ -17,5 +17,6 @@
     "num_workers": 2,
     "gpu": true,
     "bbox_format": "x0y0x1y1",
-    "pretrained": true
+    "pretrained": true,
+    "val_map_threshold": 0.8
 }

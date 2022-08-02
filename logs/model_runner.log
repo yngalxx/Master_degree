@@ -5972,3 +5972,74 @@ mean           0.7085
 2022-08-02 00:09:20,883 - INFO - Train set evaluation - started!
 2022-08-02 00:09:20,883 - INFO - Cuda available: False
 2022-08-02 00:09:20,883 - INFO - Current device: cpu
+
+############################
+
+2022-08-02 21:56:03,667 - INFO - MODEL_RUNNER - STARTED!
+2022-08-02 21:56:03,668 - INFO - Creating validation dataloader
+
+############################
+
+2022-08-02 22:28:46,441 - INFO - MODEL_RUNNER - STARTED!
+2022-08-02 22:28:46,441 - INFO - Creating validation dataloader
+2022-08-02 22:28:46,539 - INFO - Creating train dataloader
+2022-08-02 22:28:46,702 - INFO - Model training phase - started!
+2022-08-02 22:28:47,778 - INFO - Cuda available: False
+2022-08-02 22:28:47,778 - INFO - Current device: cpu
+2022-08-02 22:30:57,733 - INFO - [Epoch 1] Epoch train time: 129.95 sec. | train loss = 4.7108
+2022-08-02 22:30:57,735 - INFO - Evaluating validation set
+2022-08-02 22:31:45,500 - INFO - Calculating mAP metric on validation set
+
+############################
+
+2022-08-02 22:34:48,549 - INFO - MODEL_RUNNER - STARTED!
+2022-08-02 22:34:48,549 - INFO - Creating validation dataloader
+2022-08-02 22:34:48,696 - INFO - Creating train dataloader
+2022-08-02 22:34:48,988 - INFO - Model training phase - started!
+2022-08-02 22:34:49,767 - INFO - Cuda available: False
+2022-08-02 22:34:49,767 - INFO - Current device: cpu
+2022-08-02 22:36:57,161 - INFO - [Epoch 1] Epoch train time: 127.39 sec. | train loss = 4.6219
+2022-08-02 22:36:57,165 - INFO - Evaluating validation set
+2022-08-02 22:37:45,300 - INFO - Calculating mAP metric on validation set
+2022-08-02 22:37:48,815 - INFO - Metric results:
+                   AP
+photograph     0.0000
+illustration   0.0000
+map            0.0000
+cartoon        0.0000
+headline       0.0000
+advertisement  0.0030
+mean           0.0005
+
+############################
+
+2022-08-02 22:39:50,567 - INFO - MODEL_RUNNER - STARTED!
+2022-08-02 22:39:50,568 - WARNING - Argument "train" not passed, this phase will be skipped
+2022-08-02 22:39:50,569 - INFO - Creating validation dataloader
+2022-08-02 22:39:50,646 - INFO - Model evaluation phase - started!
+2022-08-02 22:39:51,526 - INFO - Model loaded correctly
+2022-08-02 22:39:51,526 - INFO - Validation set evaluation - started!
+2022-08-02 22:39:51,526 - INFO - Cuda available: False
+2022-08-02 22:39:51,526 - INFO - Current device: cpu
+2022-08-02 22:40:38,986 - INFO - Saving model output
+2022-08-02 22:40:38,999 - INFO - Number of annotations predicted: 119
+2022-08-02 22:40:38,999 - INFO - Predicted labels statistics:
+               count
+headline          55
+advertisement     26
+photograph        20
+illustration       8
+cartoon            7
+map                3
+2022-08-02 22:40:39,000 - INFO - Calculating mAP metric
+2022-08-02 22:40:41,732 - INFO - Metric results:
+                   AP
+photograph     0.5995
+illustration   0.4455
+map            1.0000
+cartoon        1.0000
+headline       0.8786
+advertisement  0.8816
+mean           0.8009
+2022-08-02 22:40:41,732 - INFO - Model evaluation completed, runtime: 50.21 sec.
+2022-08-02 22:40:41,735 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 51.17 sec.

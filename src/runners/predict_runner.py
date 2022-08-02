@@ -2,17 +2,11 @@ import json
 import os
 
 import click
-import torch
-import torchvision
-import torchvision.transforms as T
-from constants import Data, Output
-from torch.utils.data import DataLoader
-from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 
-from lib.model_pipeline import collate_fn
-from lib.newspapersdataset import (NewspapersDataset,
-                                   prepare_data_for_dataloader)
-from lib.predict import predict_one_img
+from constants import Data, Output
+
+from lib.newspapers_dataset import create_dataloader
+from lib.model import initalize_model, load_model_state_dict, predict_one_img
 from lib.visualization import show_random_img_with_all_annotations
 
 
@@ -65,60 +59,15 @@ def predict(path_to_image, model_config_path, min_conf_level):
     else:
         rescale = [config["rescale"][0], config["rescale"][1]]
 
-    data_transform = T.Compose(
-        [
-            T.Grayscale(num_output_channels=config["channel"]),
-            T.ToTensor(),
-            T.Normalize((0.5,), (0.5,)),
-        ]
-    )
-
     # create torch dataloader
-    data = prepare_data_for_dataloader(
-        img_dir=image_dir,
-        in_list=[image_name],
-        class_coding_dict=Data.CLASS_CODING_DICT,
-        bbox_format=config["bbox_format"],
-        scale=rescale,
-        test=True,
-    )
-    dataset = NewspapersDataset(
-        df=data,
-        images_path=[path_to_image],
-        scale=rescale,
-        transforms=data_transform,
-        test=True,
-    )
-    dataloader = DataLoader(
-        dataset,
-        batch_size=1,
-        shuffle=False,
-        collate_fn=collate_fn,
-        num_workers=2,
-    )
-    model = torchvision.models.detection.fasterrcnn_resnet50_fpn(
-        pretrained=config["pretrained"],
-        trainable_backbone_layers=config["trainable_backbone_layers"],
-    )
-    in_features = model.roi_heads.box_predictor.cls_score.in_features
-    model.roi_heads.box_predictor = FastRCNNPredictor(
-        in_features, num_classes=config["num_classes"]
-    )
-    try:
-        model_name = "model.pth"
-        model.load_state_dict(
-            torch.load(
-                f"{model_config_path}/{model_name}",
-                map_location=torch.device("cpu"),
-            ),
-            strict=True,
-        )
-    except:
-        raise FileNotFoundError(
-            f"File '{model_name}' not found, code will be forced to quit"
-        )
+    dataloader=create_dataloader(image_dir=image_dir, in_list=[image_name], expected_list=None, class_coding_dict=Data.CLASS_CODING_DICT, bbox_format=config["bbox_format"], rescale=rescale, test=True, channel=config["channel"], batch_size=1, shuffle=False, num_workers=2)
+    
+    model = initalize_model(pretrained=config["pretrained"], trainable_backbone_layers=config["trainable_backbone_layers"], num_classes=config["num_classes"])
 
-    model.eval()
+    try:
+        model = load_model_state_dict(gpu=config["gpu"], init_model=model, config_dir_path=f'{model_config_path}/')
+    except:
+            raise FileNotFoundError(f"No model found in '{model_config_path.split('/')[-1]}' directory, code will be forced to quit")
 
     pred = predict_one_img(
         model=model,

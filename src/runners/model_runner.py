@@ -1,10 +1,13 @@
 import logging
+import os
 
 import click
 from constants import Data, General, Model, Output
 
 from lib.logs import Log
-from lib.model_pipeline import model_pipeline
+from lib.model import initalize_model, train_model, evaluate_model, initialize_optimizer, check_model_and_save, create_model_config, load_model_state_dict
+from lib.newspapers_dataset import create_dataloader
+from lib.save_load_data import from_tsv_to_list
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -267,35 +270,172 @@ def model_runner(
         )
         raise ValueError()
 
-    model_pipeline(
-        channel=channel,
-        num_classes=num_classes,
-        learning_rate=learning_rate,
-        batch_size=batch_size,
-        num_epochs=num_epochs,
-        rescale=rescale,
-        shuffle=shuffle,
-        weight_decay=weight_decay,
-        lr_scheduler=lr_scheduler,
-        lr_step_size=lr_step_size,
-        lr_gamma=lr_gamma,
-        trainable_backbone_layers=trainable_backbone_layers,
-        num_workers=num_workers,
-        main_dir=main_dir,
-        train=train,
-        evaluate=evaluate,
-        train_set=train_set,
-        test_set=test_set,
-        val_set=val_set,
-        gpu=gpu,
-        bbox_format=bbox_format,
-        force_save_model=force_save_model,
-        pretrained=pretrained,
-        val_map_threshold=val_map_threshold,
-        class_names=Data.CLASS_NAMES,
-        class_coding_dict=Data.CLASS_CODING_DICT,
-        evaluate_on_test=Output.TEST_SET_EXPECTED,
-    )
+    # check provided path
+    scraped_photos_dir = f"{main_dir}/scraped_photos/"
+    assert os.path.exists(scraped_photos_dir) == True
+    annotations_dir = f"{main_dir}/data/"
+    assert os.path.exists(annotations_dir) == True
+
+    try:
+        if "/" in rescale:
+            rescale = rescale.split("/")
+            rescale = [int(rescale[0]), int(rescale[1])]
+        else:
+            rescale = float(rescale)
+    except:
+        logging.error(f"Wrong 'rescale' argument value '{rescale}'")
+        raise ValueError()
+
+    if val_set:
+        # create validation dataloader
+        logging.info("Creating validation dataloader")
+        try:
+            path = "dev-0/expected.tsv"
+            expected_val = from_tsv_to_list(f"{annotations_dir}{path}")
+
+            path = "dev-0/in.tsv"
+            in_val = from_tsv_to_list(f"{annotations_dir}{path}")
+        except:
+            logging.exception(
+                f"File '{path}' not found, code will be forced to quit"
+            )
+            raise FileNotFoundError()
+
+        val_dataloader = create_dataloader(image_dir=scraped_photos_dir, in_list=in_val, expected_list=expected_val, class_coding_dict=Data.CLASS_CODING_DICT, bbox_format=bbox_format, rescale=rescale, test=False, channel=channel, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers)   
+    else:
+        val_dataloader = None
+
+    config_dir_name = "model_config/"
+
+    if train_set:
+        # create train data loader
+        logging.info("Creating train dataloader")
+        try:
+            path = "train/expected.tsv"
+            expected_train = from_tsv_to_list(f"{annotations_dir}{path}")
+
+            path = "train/in.tsv"
+            in_train = from_tsv_to_list(f"{annotations_dir}{path}")
+        except:
+            logging.exception(
+                f"File '{path}' not found, code will be forced to quit"
+            )
+            raise FileNotFoundError()
+
+        train_dataloader=create_dataloader(image_dir=scraped_photos_dir, in_list=in_train, expected_list=expected_train, class_coding_dict=Data.CLASS_CODING_DICT, bbox_format=bbox_format, rescale=rescale, test=False, channel=channel, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers)
+
+        # train phase
+        if train:
+            logging.info("Model training phase - started!")
+            model_path = f"{main_dir}/{config_dir_name}"
+            if not os.path.exists(model_path):
+                logging.info(
+                    f"Directory {config_dir_name} doesn't exist, creating one"
+                )
+                os.makedirs(model_path)
+
+            # store model related arguments in config file for future predictions etc.
+            model_config = create_model_config(channel=channel, num_classes=num_classes, learning_rate=learning_rate, batch_size=batch_size, num_epochs=num_epochs, rescale=rescale, shuffle=shuffle, weight_decay=weight_decay, lr_scheduler=lr_scheduler, lr_step_size=lr_step_size, lr_gamma=lr_gamma, trainable_backbone_layers=trainable_backbone_layers, num_workers=num_workers, gpu=gpu, bbox_format=bbox_format, pretrained=pretrained)
+
+            # model initialization
+            model = initalize_model(pretrained=pretrained, trainable_backbone_layers=trainable_backbone_layers, num_classes=num_classes)
+
+            # optimizer and learning rate scheduler (if enabled)
+            optimizer, lrs = initialize_optimizer(torch_model_parameters=model.parameters(), learning_rate=learning_rate, weight_decay=weight_decay, lr_scheduler=lr_scheduler, lr_step_size=lr_step_size, lr_gamma=lr_gamma)
+
+            # train and save model
+            trained_model, eval_df, force_save_model = train_model(
+                model=model,
+                optimizer=optimizer,
+                train_dataloader=train_dataloader,
+                epochs=num_epochs,
+                gpu=gpu,
+                val_dataloader=val_dataloader,
+                lr_scheduler=lrs,
+                num_classes=num_classes-1,
+                class_names=Data.CLASS_NAMES,
+                val_map_threshold=val_map_threshold,
+                force_save_model=force_save_model,
+            )
+
+            # check if model can be saved and save it
+            evaluate = check_model_and_save(model_path=model_path, evaluation_df=eval_df, val_dataloader=val_dataloader, force_save_model=force_save_model, model_config=model_config, trained_model_state_dict=trained_model.state_dict())
+
+    # evaluation phase
+    if evaluate:
+        logging.info("Model evaluation phase - started!")
+        # initialize model
+        model = initalize_model(pretrained=pretrained, trainable_backbone_layers=trainable_backbone_layers, num_classes=num_classes)
+
+        # load model state dict
+        try:
+            model = load_model_state_dict(gpu=gpu, init_model=model, config_dir_path=f"{main_dir}/{config_dir_name}/")
+        except:
+            logging.exception(
+                f"No model found in '{config_dir_name}' directory, code will"
+                " be forced to quit"
+            )
+            raise FileNotFoundError()
+
+        logging.info("Model loaded correctly")
+
+        if test_set:
+            # create test data loader
+            logging.info("Creating test dataloader")
+            try:
+                path = "test-A/in.tsv"
+                in_test = from_tsv_to_list(f"{annotations_dir}{path}")
+            except:
+                logging.exception(
+                    f"File '{path}' not found, code will be forced to quit"
+                )
+                raise FileNotFoundError()
+
+            test_dataloader = create_dataloader(image_dir=scraped_photos_dir, in_list=in_test, expected_list=None, class_coding_dict=Data.CLASS_CODING_DICT, bbox_format=bbox_format, rescale=rescale, test=True, channel=channel, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers)
+
+            # evaluation on test set
+            logging.info("Test set evaluation - started!")
+            evaluate_model(
+                model=model,
+                dataloader=test_dataloader,
+                gpu=gpu,
+                main_dir=main_dir,
+                save_path="test-A",
+                expected_list_exists=Output.TEST_SET_EXPECTED,
+                num_classes=num_classes - 1,
+                class_names=Data.CLASS_NAMES,
+                class_coding_dict=Data.CLASS_CODING_DICT,
+            )
+
+        # evaluation on train set (to check under/overfitting)
+        if train_set:
+            logging.info("Train set evaluation - started!")
+            evaluate_model(
+                model=model,
+                dataloader=train_dataloader,
+                gpu=gpu,
+                main_dir=main_dir,
+                save_path="train",
+                expected_list_exists=True,
+                num_classes=num_classes - 1,
+                class_names=Data.CLASS_NAMES,
+                class_coding_dict=Data.CLASS_CODING_DICT,
+            )
+
+        # evaluation on validation set
+        if val_set:
+            logging.info("Validation set evaluation - started!")
+            evaluate_model(
+                model=model,
+                dataloader=val_dataloader,
+                gpu=gpu,
+                main_dir=main_dir,
+                save_path="dev-0",
+                expected_list_exists=True,
+                num_classes=num_classes - 1,
+                class_names=Data.CLASS_NAMES,
+                class_coding_dict=Data.CLASS_CODING_DICT,
+            )
 
     # end logger
     logger.log_end()

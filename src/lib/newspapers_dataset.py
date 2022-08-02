@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 import torch
 import torchvision
+from torch.utils.data import DataLoader
 from PIL import Image
 
 # warnings
@@ -155,3 +156,45 @@ class NewspapersDataset(torch.utils.data.Dataset):
             img = self.transforms(img)
 
         return img, target
+
+
+def collate_fn(batch) -> Tuple:
+    return tuple(zip(*batch))
+
+
+def data_transform(channel: int) -> torchvision.transforms.Compose:
+    transform = torchvision.transforms.Compose([
+        torchvision.transforms.Grayscale(num_output_channels=channel),
+         torchvision.transforms.ToTensor(), 
+        torchvision.transforms.Normalize((0.5,), (0.5,))
+    ])
+    return transform
+
+
+def create_dataloader(image_dir: str, in_list: List, expected_list: Union[List, None], class_coding_dict: Dict, bbox_format: str, rescale: str, test: bool, channel: int, batch_size: int, shuffle: bool, num_workers: int):
+        img_paths = [image_dir + path for path in in_list]
+        data = prepare_data_for_dataloader(
+            img_dir=image_dir,
+            in_list=in_list,
+            expected_list=expected_list,
+            class_coding_dict=class_coding_dict,
+            bbox_format=bbox_format,
+            scale=rescale,
+            test=test,
+        )
+        dataset = NewspapersDataset(
+            df=data,
+            images_path=img_paths,
+            scale=rescale,
+            transforms=data_transform(channel),
+            test=test,
+        )
+        dataloader = DataLoader(
+            dataset,
+            batch_size=batch_size,
+            shuffle=shuffle,
+            collate_fn=collate_fn,
+            num_workers=num_workers,
+        )
+
+        return dataloader

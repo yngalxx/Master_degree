@@ -2,11 +2,10 @@ import json
 import os
 
 import click
-
 from constants import Data, Output
 
-from lib.newspapers_dataset import create_dataloader
 from lib.model import initalize_model, load_model_state_dict, predict_one_img
+from lib.newspapers_dataset import create_dataloader
 from lib.visualization import show_random_img_with_all_annotations
 
 
@@ -60,14 +59,37 @@ def predict(path_to_image, model_config_path, min_conf_level):
         rescale = [config["rescale"][0], config["rescale"][1]]
 
     # create torch dataloader
-    dataloader=create_dataloader(image_dir=image_dir, in_list=[image_name], expected_list=None, class_coding_dict=Data.CLASS_CODING_DICT, bbox_format=config["bbox_format"], rescale=rescale, test=True, channel=config["channel"], batch_size=1, shuffle=False, num_workers=2)
-    
-    model = initalize_model(pretrained=config["pretrained"], trainable_backbone_layers=config["trainable_backbone_layers"], num_classes=config["num_classes"])
+    dataloader = create_dataloader(
+        image_dir=image_dir,
+        in_list=[image_name],
+        expected_list=None,
+        class_coding_dict=Data.CLASS_CODING_DICT,
+        bbox_format=config["bbox_format"],
+        rescale=rescale,
+        test=True,
+        channel=config["channel"],
+        batch_size=1,
+        shuffle=False,
+        num_workers=2,
+    )
+
+    model = initalize_model(
+        pretrained=config["pretrained"],
+        trainable_backbone_layers=config["trainable_backbone_layers"],
+        num_classes=config["num_classes"],
+    )
 
     try:
-        model = load_model_state_dict(gpu=config["gpu"], init_model=model, config_dir_path=f'{model_config_path}/')
+        model = load_model_state_dict(
+            gpu=config["gpu"],
+            init_model=model,
+            config_dir_path=f"{model_config_path}/",
+        )
     except:
-            raise FileNotFoundError(f"No model found in '{model_config_path.split('/')[-1]}' directory, code will be forced to quit")
+        raise FileNotFoundError(
+            f"No model found in '{model_config_path.split('/')[-1]}'"
+            " directory, code will be forced to quit"
+        )
 
     pred = predict_one_img(
         model=model,

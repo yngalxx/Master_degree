@@ -5,7 +5,9 @@ import click
 from constants import Data, General, Model, Output
 
 from lib.logs import Log
-from lib.model import initalize_model, train_model, evaluate_model, initialize_optimizer, check_model_and_save, create_model_config, load_model_state_dict
+from lib.model import (check_model_and_save, create_model_config,
+                       evaluate_model, initalize_model, initialize_optimizer,
+                       load_model_state_dict, train_model)
 from lib.newspapers_dataset import create_dataloader
 from lib.save_load_data import from_tsv_to_list
 
@@ -301,7 +303,19 @@ def model_runner(
             )
             raise FileNotFoundError()
 
-        val_dataloader = create_dataloader(image_dir=scraped_photos_dir, in_list=in_val, expected_list=expected_val, class_coding_dict=Data.CLASS_CODING_DICT, bbox_format=bbox_format, rescale=rescale, test=False, channel=channel, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers)   
+        val_dataloader = create_dataloader(
+            image_dir=scraped_photos_dir,
+            in_list=in_val,
+            expected_list=expected_val,
+            class_coding_dict=Data.CLASS_CODING_DICT,
+            bbox_format=bbox_format,
+            rescale=rescale,
+            test=False,
+            channel=channel,
+            batch_size=batch_size,
+            shuffle=shuffle,
+            num_workers=num_workers,
+        )
     else:
         val_dataloader = None
 
@@ -322,7 +336,19 @@ def model_runner(
             )
             raise FileNotFoundError()
 
-        train_dataloader=create_dataloader(image_dir=scraped_photos_dir, in_list=in_train, expected_list=expected_train, class_coding_dict=Data.CLASS_CODING_DICT, bbox_format=bbox_format, rescale=rescale, test=False, channel=channel, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers)
+        train_dataloader = create_dataloader(
+            image_dir=scraped_photos_dir,
+            in_list=in_train,
+            expected_list=expected_train,
+            class_coding_dict=Data.CLASS_CODING_DICT,
+            bbox_format=bbox_format,
+            rescale=rescale,
+            test=False,
+            channel=channel,
+            batch_size=batch_size,
+            shuffle=shuffle,
+            num_workers=num_workers,
+        )
 
         # train phase
         if train:
@@ -335,13 +361,41 @@ def model_runner(
                 os.makedirs(model_path)
 
             # store model related arguments in config file for future predictions etc.
-            model_config = create_model_config(channel=channel, num_classes=num_classes, learning_rate=learning_rate, batch_size=batch_size, num_epochs=num_epochs, rescale=rescale, shuffle=shuffle, weight_decay=weight_decay, lr_scheduler=lr_scheduler, lr_step_size=lr_step_size, lr_gamma=lr_gamma, trainable_backbone_layers=trainable_backbone_layers, num_workers=num_workers, gpu=gpu, bbox_format=bbox_format, pretrained=pretrained)
+            model_config = create_model_config(
+                channel=channel,
+                num_classes=num_classes,
+                learning_rate=learning_rate,
+                batch_size=batch_size,
+                num_epochs=num_epochs,
+                rescale=rescale,
+                shuffle=shuffle,
+                weight_decay=weight_decay,
+                lr_scheduler=lr_scheduler,
+                lr_step_size=lr_step_size,
+                lr_gamma=lr_gamma,
+                trainable_backbone_layers=trainable_backbone_layers,
+                num_workers=num_workers,
+                gpu=gpu,
+                bbox_format=bbox_format,
+                pretrained=pretrained,
+            )
 
             # model initialization
-            model = initalize_model(pretrained=pretrained, trainable_backbone_layers=trainable_backbone_layers, num_classes=num_classes)
+            model = initalize_model(
+                pretrained=pretrained,
+                trainable_backbone_layers=trainable_backbone_layers,
+                num_classes=num_classes,
+            )
 
             # optimizer and learning rate scheduler (if enabled)
-            optimizer, lrs = initialize_optimizer(torch_model_parameters=model.parameters(), learning_rate=learning_rate, weight_decay=weight_decay, lr_scheduler=lr_scheduler, lr_step_size=lr_step_size, lr_gamma=lr_gamma)
+            optimizer, lrs = initialize_optimizer(
+                torch_model_parameters=model.parameters(),
+                learning_rate=learning_rate,
+                weight_decay=weight_decay,
+                lr_scheduler=lr_scheduler,
+                lr_step_size=lr_step_size,
+                lr_gamma=lr_gamma,
+            )
 
             # train and save model
             trained_model, eval_df, force_save_model = train_model(
@@ -352,24 +406,39 @@ def model_runner(
                 gpu=gpu,
                 val_dataloader=val_dataloader,
                 lr_scheduler=lrs,
-                num_classes=num_classes-1,
+                num_classes=num_classes - 1,
                 class_names=Data.CLASS_NAMES,
                 val_map_threshold=val_map_threshold,
                 force_save_model=force_save_model,
             )
 
             # check if model can be saved and save it
-            evaluate = check_model_and_save(model_path=model_path, evaluation_df=eval_df, val_dataloader=val_dataloader, force_save_model=force_save_model, model_config=model_config, trained_model_state_dict=trained_model.state_dict())
+            evaluate = check_model_and_save(
+                model_path=model_path,
+                evaluation_df=eval_df,
+                val_dataloader=val_dataloader,
+                force_save_model=force_save_model,
+                model_config=model_config,
+                trained_model_state_dict=trained_model.state_dict(),
+            )
 
     # evaluation phase
     if evaluate:
         logging.info("Model evaluation phase - started!")
         # initialize model
-        model = initalize_model(pretrained=pretrained, trainable_backbone_layers=trainable_backbone_layers, num_classes=num_classes)
+        model = initalize_model(
+            pretrained=pretrained,
+            trainable_backbone_layers=trainable_backbone_layers,
+            num_classes=num_classes,
+        )
 
         # load model state dict
         try:
-            model = load_model_state_dict(gpu=gpu, init_model=model, config_dir_path=f"{main_dir}/{config_dir_name}/")
+            model = load_model_state_dict(
+                gpu=gpu,
+                init_model=model,
+                config_dir_path=f"{main_dir}/{config_dir_name}/",
+            )
         except:
             logging.exception(
                 f"No model found in '{config_dir_name}' directory, code will"
@@ -391,7 +460,19 @@ def model_runner(
                 )
                 raise FileNotFoundError()
 
-            test_dataloader = create_dataloader(image_dir=scraped_photos_dir, in_list=in_test, expected_list=None, class_coding_dict=Data.CLASS_CODING_DICT, bbox_format=bbox_format, rescale=rescale, test=True, channel=channel, batch_size=batch_size, shuffle=shuffle, num_workers=num_workers)
+            test_dataloader = create_dataloader(
+                image_dir=scraped_photos_dir,
+                in_list=in_test,
+                expected_list=None,
+                class_coding_dict=Data.CLASS_CODING_DICT,
+                bbox_format=bbox_format,
+                rescale=rescale,
+                test=True,
+                channel=channel,
+                batch_size=batch_size,
+                shuffle=shuffle,
+                num_workers=num_workers,
+            )
 
             # evaluation on test set
             logging.info("Test set evaluation - started!")

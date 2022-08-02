@@ -1,27 +1,31 @@
-import os
 import logging
 import math
+import os
 import time
-from typing import Dict, List, Tuple, Iterator, Union
 import warnings
+from typing import Dict, Iterator, List, Tuple, Union
 
 import pandas as pd
 import torch
-from tqdm import tqdm
 import torchvision
 from torch import optim
 from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
+from tqdm import tqdm
 
-from lib.metric import calculate_map, prepare_eval_out_for_ap, prepare_data_for_ap
+from lib.metric import (calculate_map, prepare_data_for_ap,
+                        prepare_eval_out_for_ap)
 from lib.postprocessing import parse_model_outcome
 from lib.preprocessing import get_statistics
-from lib.save_load_data import from_tsv_to_list, save_list_to_tsv_file, dump_json
+from lib.save_load_data import (dump_json, from_tsv_to_list,
+                                save_list_to_tsv_file)
 
 # warnings
 warnings.filterwarnings("ignore")
 
 
-def initalize_model(pretrained: bool, trainable_backbone_layers: int, num_classes: int) -> torchvision.models.detection.FasterRCNN:
+def initalize_model(
+    pretrained: bool, trainable_backbone_layers: int, num_classes: int
+) -> torchvision.models.detection.FasterRCNN:
     # pre-trained resnet50 model
     model = torchvision.models.detection.fasterrcnn_resnet50_fpn(
         pretrained=pretrained,
@@ -37,7 +41,14 @@ def initalize_model(pretrained: bool, trainable_backbone_layers: int, num_classe
     return model
 
 
-def initialize_optimizer(torch_model_parameters: Iterator, learning_rate: float, weight_decay: float, lr_scheduler: bool, lr_step_size: int, lr_gamma: float) -> Tuple:
+def initialize_optimizer(
+    torch_model_parameters: Iterator,
+    learning_rate: float,
+    weight_decay: float,
+    lr_scheduler: bool,
+    lr_step_size: int,
+    lr_gamma: float,
+) -> Tuple:
     # optimizer
     optimizer = optim.Adam(
         filter(lambda p: p.requires_grad, torch_model_parameters),
@@ -131,7 +142,10 @@ def train_model(
             prep_pred, prepr_gt = prepare_eval_out_for_ap(out, targ)
             logging.info("Calculating mAP metric on validation set")
             eval_metrics = calculate_map(
-                prep_pred, prepr_gt, num_classes=num_classes, class_names=class_names
+                prep_pred,
+                prepr_gt,
+                num_classes=num_classes,
+                class_names=class_names,
             )
             eval_df = pd.DataFrame.from_dict(
                 eval_metrics, orient="index", columns=["AP"]
@@ -182,7 +196,7 @@ def evaluate_model(
     # move model to the right device
     model.to(device)
     cpu_device = torch.device("cpu")
-    # switch model stage to evaluation 
+    # switch model stage to evaluation
     model.eval()
     # evaluation
     with torch.no_grad():
@@ -289,7 +303,24 @@ def evaluate_model(
     )
 
 
-def create_model_config(channel: int, num_classes: int, learning_rate: float, batch_size: int, num_epochs: int, rescale: bool, shuffle: bool, weight_decay: float, lr_scheduler: float, lr_step_size: int, lr_gamma: float, trainable_backbone_layers: int, num_workers: int, gpu: bool, bbox_format: str, pretrained: bool) -> Dict:
+def create_model_config(
+    channel: int,
+    num_classes: int,
+    learning_rate: float,
+    batch_size: int,
+    num_epochs: int,
+    rescale: bool,
+    shuffle: bool,
+    weight_decay: float,
+    lr_scheduler: float,
+    lr_step_size: int,
+    lr_gamma: float,
+    trainable_backbone_layers: int,
+    num_workers: int,
+    gpu: bool,
+    bbox_format: str,
+    pretrained: bool,
+) -> Dict:
     return {
         "channel": channel,
         "num_classes": num_classes,
@@ -310,7 +341,14 @@ def create_model_config(channel: int, num_classes: int, learning_rate: float, ba
     }
 
 
-def check_model_and_save(model_path: str, evaluation_df: pd.DataFrame, val_dataloader: torch.utils.data.DataLoader, force_save_model: bool, model_config: Dict, trained_model_state_dict: Dict) -> bool:
+def check_model_and_save(
+    model_path: str,
+    evaluation_df: pd.DataFrame,
+    val_dataloader: torch.utils.data.DataLoader,
+    force_save_model: bool,
+    model_config: Dict,
+    trained_model_state_dict: Dict,
+) -> bool:
     model_metric_path = f"{model_path}model_eval_metric.csv"
     if val_dataloader and not force_save_model:
         if not os.path.exists(model_metric_path):
@@ -320,7 +358,7 @@ def check_model_and_save(model_path: str, evaluation_df: pd.DataFrame, val_datal
             )
             force_save_model = True
         else:
-            prev_evaluation_df= pd.read_csv(model_metric_path, index_col=0)
+            prev_evaluation_df = pd.read_csv(model_metric_path, index_col=0)
             prev_results_map, current_results_map = (
                 prev_evaluation_df["AP"]["mean"],
                 evaluation_df["AP"]["mean"],
@@ -349,9 +387,7 @@ def check_model_and_save(model_path: str, evaluation_df: pd.DataFrame, val_datal
         logging.info(
             f'Model config json saved in "{config_dir_name}" directory'
         )
-        torch.save(
-            trained_model_state_dict, f"{model_path}model.pth"
-        )
+        torch.save(trained_model_state_dict, f"{model_path}model.pth")
         logging.info(f'Model saved in "{config_dir_name}" directory')
 
         if val_dataloader:
@@ -371,12 +407,16 @@ def check_model_and_save(model_path: str, evaluation_df: pd.DataFrame, val_datal
     return evaluate
 
 
-def load_model_state_dict(gpu: bool, init_model: torchvision.models.detection.FasterRCNN, config_dir_path: str) -> torchvision.models.detection.FasterRCNN:
+def load_model_state_dict(
+    gpu: bool,
+    init_model: torchvision.models.detection.FasterRCNN,
+    config_dir_path: str,
+) -> torchvision.models.detection.FasterRCNN:
     if torch.cuda.is_available() and gpu:
         map_location = torch.device(torch.cuda.current_device())
     else:
         map_location = torch.device("cpu")
-        
+
     init_model.load_state_dict(
         torch.load(
             f"{config_dir_path}model.pth",
@@ -439,7 +479,7 @@ def predict_one_img(
     """
     device = torch.device("cpu")
     model.to(device)
-    # switch model stage to evaluation 
+    # switch model stage to evaluation
     model.eval()
     # evaluation
     with torch.no_grad():

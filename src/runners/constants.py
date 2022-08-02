@@ -29,7 +29,7 @@ class Data:
         "headline",
         "advertisement",
     ]
-    NUM_CLASSES = len(CLASS_NAMES)+1  # 1 for background
+    NUM_CLASSES = len(CLASS_NAMES) + 1  # 1 for background
     COLOR_NAMES = [
         "lime",
         "orangered",

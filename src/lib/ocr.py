@@ -107,7 +107,12 @@ def ocr_text_clean(
 
 
 def get_keywords(
-    ocr_text: str, keybert_model: keybert.KeyBERT, top_n: int = 20, ngram: int = 1, only_this_ngram: bool = True, language: str = 'english'
+    ocr_text: str,
+    keybert_model: keybert.KeyBERT,
+    top_n: int = 20,
+    ngram: int = 1,
+    only_this_ngram: bool = True,
+    language: str = "english",
 ) -> List:
     keywords = keybert_model.extract_keywords(
         ocr_text,
@@ -117,7 +122,12 @@ def get_keywords(
         top_n=top_n,
     )
     if only_this_ngram:
-        keywords = [keyword for keyword in keywords if len(keyword[0].split(' '))==ngram]
+        keywords = [
+            keyword
+            for keyword in keywords
+            if len(keyword[0].split(" ")) == ngram
+        ]
 
-    return [{'keyword': keyword[0], 'score': keyword[1]} for keyword in keywords]
-
+    return [
+        {"keyword": keyword[0], "score": keyword[1]} for keyword in keywords
+    ]

@@ -171,9 +171,7 @@ def prepare_input(main_dir, test_set_expected):
         logging.info('Directory "train" doesn\'t exist, creating one')
         os.makedirs(train_path)
 
-    save_list_to_tsv_file(
-        f"{train_path}/expected.tsv", train_expected
-    )
+    save_list_to_tsv_file(f"{train_path}/expected.tsv", train_expected)
     save_list_to_tsv_file(f"{train_path}/in.tsv", train_in)
 
     # save validation data
@@ -193,9 +191,7 @@ def prepare_input(main_dir, test_set_expected):
 
     save_list_to_tsv_file(f"{test_path}in.tsv", test_in)
     if test_set_expected:
-        save_list_to_tsv_file(
-            f"{test_path}expected.tsv", test_expected
-        )
+        save_list_to_tsv_file(f"{test_path}expected.tsv", test_expected)
 
     # end logger
     logger.log_end()

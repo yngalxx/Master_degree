@@ -356,7 +356,8 @@ def model_runner(
             model_path = f"{main_dir}/{config_dir_name}"
             if not os.path.exists(model_path):
                 logging.info(
-                    f"Directory '{config_dir_name}' doesn't exist, creating one"
+                    f"Directory '{config_dir_name}' doesn't exist,"
+                    " creating one"
                 )
                 os.makedirs(model_path)
 

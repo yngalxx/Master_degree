@@ -10,3 +10,4 @@ venv
 src/build
 src/lib.egg-info
 src/dist
+visual_content

@@ -19,10 +19,6 @@ from lib.logs import Log
     show_default=True,
 )
 def image_scraper(main_dir):
-    """
-    Simple scraper to retriev full-resolution images from urls finded in COCO
-    formatted files with annotations obtained from source repository (newspaper-navigator-master)
-    """
     # initialize logger
     logger = Log("scraper_runner", main_dir)
     logger.log_start()
@@ -35,7 +31,7 @@ def image_scraper(main_dir):
     final_dir = "scraped_photos/"
     final_path = f"{main_dir}/{final_dir}"
     if not os.path.exists(final_path):
-        logging.info('Directory "scraped_photos" doesn\'t exist, creating one')
+        logging.info(f'Directory "{final_dir}" doesn\'t exist, creating one')
         os.makedirs(final_path)
 
     # read source annotations file

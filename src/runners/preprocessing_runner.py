@@ -168,33 +168,33 @@ def prepare_input(main_dir, test_set_expected):
     # save train data
     train_path = f"{main_dir}/data/train/"
     if not os.path.exists(train_path):
-        logging.info('Path "data/train" doesn\'t exist, creating one')
+        logging.info('Directory "train" doesn\'t exist, creating one')
         os.makedirs(train_path)
 
     save_list_to_tsv_file(
-        f"{main_dir}/data/train/expected.tsv", train_expected
+        f"{train_path}/expected.tsv", train_expected
     )
-    save_list_to_tsv_file(f"{main_dir}/data/train/in.tsv", train_in)
+    save_list_to_tsv_file(f"{train_path}/in.tsv", train_in)
 
     # save validation data
     dev_path = f"{main_dir}/data/dev-0/"
     if not os.path.exists(dev_path):
-        logging.info('Path "data/dev-0" doesn\'t exist, creating one')
+        logging.info('Directory "dev-0" doesn\'t exist, creating one')
         os.makedirs(dev_path)
 
-    save_list_to_tsv_file(f"{main_dir}/data/dev-0/expected.tsv", val_expected)
-    save_list_to_tsv_file(f"{main_dir}/data/dev-0/in.tsv", val_in)
+    save_list_to_tsv_file(f"{dev_path}expected.tsv", val_expected)
+    save_list_to_tsv_file(f"{dev_path}in.tsv", val_in)
 
     # save test data
     test_path = f"{main_dir}/data/test-A/"
     if not os.path.exists(test_path):
-        logging.info('Path "data/test-A" doesn\'t exist, creating one\n')
+        logging.info('Directory "test-A" doesn\'t exist, creating one\n')
         os.makedirs(test_path)
 
-    save_list_to_tsv_file(f"{main_dir}/data/test-A/in.tsv", test_in)
+    save_list_to_tsv_file(f"{test_path}in.tsv", test_in)
     if test_set_expected:
         save_list_to_tsv_file(
-            f"{main_dir}/data/test-A/expected.tsv", test_expected
+            f"{test_path}expected.tsv", test_expected
         )
 
     # end logger

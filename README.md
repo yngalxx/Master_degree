@@ -13,7 +13,8 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
 0. Before use:   
     - clone the repository,
     - install requirements,
-    - install Tesseract OCR using homebrew.
+    - install Tesseract OCR using homebrew,
+    - install spacy language core for english (run "python -m spaCy download en_core_web_sm"),
     - run "python setup.py install"
 1. Run "python scraper_runner.py" to obtain high-resolution images from the Newspaper Navigator project.
 2. Run "python preprocessing_runner.py" to create model input data from source annotations files.
@@ -23,6 +24,6 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
 6. Run "python predict_runner.py" if you want to make prediction on your own single newspaper image.
 
 **IMPORTANT:**
-- Pytorch related packages are not included in requirements.txt, use the following commands to install them: "pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html" if you intend to use the GPU, or "pip3 install torch==1.10.2 torchvision==0.11.3" if you intend to use the CPU (not recommended for model training).</em>
+- Pytorch related packages are not included in requirements.txt, use the following commands to install them: "pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html" if you intend to use the GPU, or "pip3 install torch==1.10.2 torchvision==0.11.3" if you intend to use the CPU (not recommended for model training).
 - Each script in directory named 'runner' is a command line application (despite of 'constants.py', where you can edit default arguments). Run each with argument '--help' to see the description of the other arguments.
 - Valid paths are generated automatically, but you can provide specific ones using click arguments in the command line for each runner.

@@ -1,0 +1,52 @@
+2022-08-07 04:14:45,400 - INFO - OCR_RUNNER - STARTED!
+2022-08-07 04:14:45,413 - INFO - Preparing data for OCR
+2022-08-07 04:14:47,955 - INFO - Directory 'visual_content' doesn't exist, creating one
+2022-08-07 04:14:47,956 - INFO - Loading Spacy language core
+2022-08-07 04:14:49,013 - INFO - Loading KeyBERT pretrained model
+2022-08-07 04:14:49,014 - INFO - Load pretrained SentenceTransformer: all-mpnet-base-v2
+2022-08-07 04:14:50,993 - INFO - Use pytorch device: cpu
+2022-08-07 04:14:50,998 - INFO - Cropping visual contents, transforming, using OCR, cleaning results and saving
+
+############################
+
+2022-08-07 04:20:06,328 - INFO - OCR_RUNNER - STARTED!
+2022-08-07 04:20:06,339 - INFO - Combining in and out test files for OCR
+2022-08-07 04:20:06,366 - INFO - Initializing Tesseract OCR
+2022-08-07 04:20:07,799 - INFO - Loading Spacy language core
+2022-08-07 04:20:08,504 - INFO - Loading KeyBERT pretrained model
+2022-08-07 04:20:08,504 - INFO - Load pretrained SentenceTransformer: all-mpnet-base-v2
+2022-08-07 04:20:09,709 - INFO - Use pytorch device: cpu
+2022-08-07 04:20:09,710 - INFO - Cropping visual contents, transforming, using OCR, cleaning results and saving
+
+############################
+
+2022-08-07 04:22:40,440 - INFO - OCR_RUNNER - STARTED!
+2022-08-07 04:22:40,449 - INFO - Combining in and out test files for OCR
+2022-08-07 04:22:40,474 - INFO - Initializing Tesseract OCR
+2022-08-07 04:22:41,973 - INFO - Loading Spacy language core
+2022-08-07 04:22:42,995 - INFO - Loading KeyBERT pretrained model
+2022-08-07 04:22:42,995 - INFO - Load pretrained SentenceTransformer: all-mpnet-base-v2
+2022-08-07 04:22:45,486 - INFO - Use pytorch device: cpu
+2022-08-07 04:22:45,487 - INFO - Cropping visual contents, transforming, using OCR, cleaning results and saving
+
+############################
+
+2022-08-07 04:23:14,966 - INFO - OCR_RUNNER - STARTED!
+2022-08-07 04:23:14,980 - INFO - Combining in and out test files for OCR
+2022-08-07 04:23:15,008 - INFO - Initializing Tesseract OCR
+2022-08-07 04:23:16,195 - INFO - Loading Spacy language core
+2022-08-07 04:23:16,883 - INFO - Loading KeyBERT pretrained model
+2022-08-07 04:23:16,883 - INFO - Load pretrained SentenceTransformer: all-mpnet-base-v2
+2022-08-07 04:23:18,067 - INFO - Use pytorch device: cpu
+2022-08-07 04:23:18,067 - INFO - Cropping visual contents, transforming, using OCR, cleaning results and saving
+
+############################
+
+2022-08-07 04:24:54,551 - INFO - OCR_RUNNER - STARTED!
+2022-08-07 04:24:54,565 - INFO - Combining in and out test files for OCR
+2022-08-07 04:24:54,592 - INFO - Initializing Tesseract OCR
+2022-08-07 04:24:55,811 - INFO - Loading Spacy language core
+2022-08-07 04:24:56,518 - INFO - Loading KeyBERT pretrained model
+2022-08-07 04:24:56,519 - INFO - Load pretrained SentenceTransformer: all-mpnet-base-v2
+2022-08-07 04:24:57,707 - INFO - Use pytorch device: cpu
+2022-08-07 04:24:57,708 - INFO - Cropping visual contents, transforming, using OCR, cleaning results and saving

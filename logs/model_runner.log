@@ -6043,3 +6043,47 @@ advertisement  0.8816
 mean           0.8009
 2022-08-02 22:40:41,732 - INFO - Model evaluation completed, runtime: 50.21 sec.
 2022-08-02 22:40:41,735 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 51.17 sec.
+
+############################
+
+2022-08-03 21:30:01,472 - INFO - MODEL_RUNNER - STARTED!
+2022-08-03 21:30:01,472 - WARNING - Argument "train" not passed, this phase will be skipped
+2022-08-03 21:30:01,472 - INFO - Creating validation dataloader
+2022-08-03 21:30:04,147 - INFO - Model evaluation phase - started!
+2022-08-03 21:30:05,025 - INFO - Model loaded correctly
+2022-08-03 21:30:05,026 - INFO - Validation set evaluation - started!
+2022-08-03 21:30:05,026 - INFO - Cuda available: False
+2022-08-03 21:30:05,026 - INFO - Current device: cpu
+2022-08-03 21:48:18,708 - INFO - Saving model output
+2022-08-03 21:48:18,858 - INFO - Number of annotations predicted: 3613
+2022-08-03 21:48:18,858 - INFO - Predicted labels statistics:
+               count
+headline        1908
+advertisement    986
+photograph       352
+illustration     191
+cartoon          131
+map               45
+2022-08-03 21:48:18,858 - INFO - Calculating mAP metric
+2022-08-03 21:48:29,179 - INFO - Metric results:
+                   AP
+photograph     0.7312
+illustration   0.2858
+map            0.7332
+cartoon        0.6550
+headline       0.9023
+advertisement  0.8236
+mean           0.6885
+2022-08-03 21:48:29,180 - INFO - Model evaluation completed, runtime: 1104.15 sec.
+2022-08-03 21:48:29,187 - INFO - MODEL_RUNNER - COMPLETED! RUNTIME: 1107.72 sec.
+
+############################
+
+2022-08-03 21:57:44,984 - INFO - MODEL_RUNNER - STARTED!
+2022-08-03 21:57:44,985 - WARNING - Argument "train" not passed, this phase will be skipped
+2022-08-03 21:57:44,986 - INFO - Model evaluation phase - started!
+2022-08-03 21:57:45,871 - INFO - Model loaded correctly
+2022-08-03 21:57:45,871 - INFO - Creating test dataloader
+2022-08-03 21:57:46,925 - INFO - Test set evaluation - started!
+2022-08-03 21:57:46,925 - INFO - Cuda available: False
+2022-08-03 21:57:46,925 - INFO - Current device: cpu

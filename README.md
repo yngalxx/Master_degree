@@ -21,7 +21,8 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
 3. Run "python model_runner.py" to start training, evaluation or both (feel free to try various argument values).
 4. Run "python metric_runner.py" to calculate the average precision (AP) for each class, as well as its mean value (mAP).
 5. Run "python visualization_runner.py" to visualize several random model predictions.
-6. Run "python predict_runner.py" if you want to make prediction on your own single newspaper image.
+6. Run "python predict_runner.py" to make prediction on your own single newspaper image.
+7. Run "python ocr_runner.py" to crop test set visual content from original images using bbox predictions and run ocr on them.
 
 **IMPORTANT:**
 - Pytorch related packages are not included in requirements.txt, use the following commands to install them: "pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html" if you intend to use the GPU, or "pip3 install torch==1.10.2 torchvision==0.11.3" if you intend to use the CPU (not recommended for model training).

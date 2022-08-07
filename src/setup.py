@@ -5,6 +5,6 @@ setup(
     description="Backend of application",
     author="Alex Drozdz",
     author_email="alexdrozdz@gmail.com",
-    version=1.0,
+    version=1.1,
     packages=find_packages(),
 )

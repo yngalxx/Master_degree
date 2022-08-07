@@ -72,12 +72,13 @@ def ocr_runner(main_dir, min_conf_level):
         )
         raise ModuleNotFoundError()
 
-    vs_content_dir = "visual_content"
-    if not os.path.exists(f"{main_dir}/{vs_content_dir}"):
+    ocr_dir = "ocr_results"
+    vc_content_dir = f"{ocr_dir}/cropped_visual_content"
+    if not os.path.exists(f"{main_dir}/{vc_content_dir}"):
         logging.info(
-            f"Directory '{vs_content_dir}' doesn't exist, creating one"
+            f"Directory '{vc_content_dir}' doesn't exist, creating one"
         )
-        os.makedirs(f"{main_dir}/{vs_content_dir}")
+        os.makedirs(f"{main_dir}/{vc_content_dir}")
 
     # spacy language core
     logging.info("Loading Spacy language core")
@@ -108,15 +109,18 @@ def ocr_runner(main_dir, min_conf_level):
         cropped_img = crop_image(img, elem[2], elem[4], elem[3], elem[5])
         # transform visual content
         transformed_cropped_img = image_transform(cropped_img)
-        # ocr
+        # ocr 
         cropped_img_str = ocr_predict(transformed_cropped_img)
         # clean text
-        clean_txt, search_txt = ocr_text_clean(
+        clean_txt, normalized_txt = ocr_text_clean(
             cropped_img_str, spacy_language_core=nlp
         )
         # keywords
-        keywords_list = get_keywords(
-            search_txt, top_n=10, keybert_model=kw_model
+        unigram_keywords_list = get_keywords(
+            clean_txt, top_n=10, keybert_model=kw_model, ngram=1, only_this_ngram=True, language='english'
+        )
+        bigram_keywords_list = get_keywords(
+            clean_txt, top_n=15, keybert_model=kw_model, ngram=2, only_this_ngram=True, language='english'
         )
         # save results
         in_dict = {
@@ -124,18 +128,15 @@ def ocr_runner(main_dir, min_conf_level):
             "predicted_label": elem[1],
             "ocr_raw_text": cropped_img_str,
             "cleaned_text": clean_txt.strip(),
-            "search_text": search_txt.strip(),
-            "keywords": keywords_list,
+            "normalized_text": normalized_txt,
+            "unigram_keywords": unigram_keywords_list,
+            "bigram_keywords": bigram_keywords_list,
         }
-        cv2.imwrite(f"{main_dir}/visual_content/vs_{i}.png", cropped_img)
-        final_dict[f"vs_{i}.png"] = in_dict
+        cropped_img_name = f'vc_{i}.png'
+        cv2.imwrite(f"{main_dir}/{ocr_dir}/cropped_visual_content/{cropped_img_name}", cropped_img)
+        final_dict[cropped_img_name] = in_dict
 
-    ocr_dir = "ocr_results"
-    if not os.path.exists(f"{main_dir}/ocr_results"):
-        logging.info(f"Directory '{ocr_dir}' doesn't exist, creating one")
-        os.makedirs(f"{main_dir}/ocr_results")
-
-    dump_json(path=f"{ocr_dir}/vs_ocr_data.json", dict_to_save=final_dict)
+    dump_json(path=f"{main_dir}/{ocr_dir}/vc_ocr_data.json", dict_to_save=final_dict)
     logging.info(f"OCR output json saved in '{ocr_dir}' directory")
 
     # end logger

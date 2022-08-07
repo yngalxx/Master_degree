@@ -94,28 +94,30 @@ def ocr_text_clean(
     # clean text
     clean_txt = re_clean.sub("", fixed_text)
     clean_txt = re.sub(" +", " ", clean_txt)
-    # prepare text for search engine
-    search_txt = re_search.sub("", fixed_text)
-    search_txt = re.sub("-", " ", search_txt)
-    search_txt = " ".join(
-        [
-            token.lemma_.lower()
-            for token in spacy_language_core(search_txt)
-            if not token.is_stop and not token.is_punct
-        ]
-    )
-    search_txt = re.sub(" +", " ", search_txt)
-    return clean_txt, search_txt
+    # normalized text
+    normalized_txt = re_search.sub("", fixed_text)
+    normalized_txt = re.sub("-", " ", normalized_txt)
+    normalized_txt = [
+        token.lemma_.lower()
+        for token in spacy_language_core(normalized_txt)
+        if not token.is_stop and not token.is_punct
+    ]
+    normalized_txt = [word for word in normalized_txt if len(word) > 1]
+    return clean_txt, normalized_txt
 
 
 def get_keywords(
-    ocr_text: str, keybert_model: keybert.KeyBERT, top_n: int = 10
+    ocr_text: str, keybert_model: keybert.KeyBERT, top_n: int = 20, ngram: int = 1, only_this_ngram: bool = True, language: str = 'english'
 ) -> List:
     keywords = keybert_model.extract_keywords(
         ocr_text,
-        keyphrase_ngram_range=(1, 1),
-        stop_words="english",
+        keyphrase_ngram_range=(1, ngram),
+        stop_words=language,
         highlight=False,
         top_n=top_n,
     )
-    return list(dict(keywords).keys())
+    if only_this_ngram:
+        keywords = [keyword for keyword in keywords if len(keyword[0].split(' '))==ngram]
+
+    return [{'keyword': keyword[0], 'score': keyword[1]} for keyword in keywords]
+

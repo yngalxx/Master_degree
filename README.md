@@ -14,7 +14,7 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
     - clone the repository,
     - install requirements,
     - install Tesseract OCR using homebrew,
-    - install spacy language core for english (run "python -m spaCy download en_core_web_sm"),
+    - install spaCy language core for english (run "python -m spacy download en_core_web_sm"),
     - run "python setup.py install"
 1. Run "python scraper_runner.py" to obtain high-resolution images from the Newspaper Navigator project.
 2. Run "python preprocessing_runner.py" to create model input data from source annotations files.

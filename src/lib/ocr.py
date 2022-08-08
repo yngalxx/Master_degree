@@ -88,14 +88,14 @@ def ocr_text_clean(
 ) -> Tuple:
     # regex to clean and prepare text for search
     re_clean = re.compile("[^a-zA-Z1-9\s,.!?$%-']")
-    re_search = re.compile("[^a-zA-Z1-9\s-]")
+    re_norm = re.compile("[^a-zA-Z1-9\s-]")
     # line-breaks fix
     fixed_text = re.sub("\n", " ", re.sub("-\n", "", text))
     # clean text
     clean_txt = re_clean.sub("", fixed_text)
     clean_txt = re.sub(" +", " ", clean_txt)
     # normalized text
-    normalized_txt = re_search.sub("", fixed_text)
+    normalized_txt = re_norm.sub("", fixed_text)
     normalized_txt = re.sub("-", " ", normalized_txt)
     normalized_txt = [
         token.lemma_.lower()
@@ -107,7 +107,12 @@ def ocr_text_clean(
 
 
 def get_keywords(
-    ocr_text: str, keybert_model: keybert.KeyBERT, top_n: int = 20, ngram: int = 1, only_this_ngram: bool = True, language: str = 'english'
+    ocr_text: str,
+    keybert_model: keybert.KeyBERT,
+    top_n: int = 20,
+    ngram: int = 1,
+    only_this_ngram: bool = True,
+    language: str = "english",
 ) -> List:
     keywords = keybert_model.extract_keywords(
         ocr_text,
@@ -117,7 +122,12 @@ def get_keywords(
         top_n=top_n,
     )
     if only_this_ngram:
-        keywords = [keyword for keyword in keywords if len(keyword[0].split(' '))==ngram]
+        keywords = [
+            keyword
+            for keyword in keywords
+            if len(keyword[0].split(" ")) == ngram
+        ]
 
-    return [{'keyword': keyword[0], 'score': keyword[1]} for keyword in keywords]
-
+    return [
+        {"keyword": keyword[0], "score": keyword[1]} for keyword in keywords
+    ]

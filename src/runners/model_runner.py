@@ -285,7 +285,7 @@ def model_runner(
         else:
             rescale = float(rescale)
     except:
-        logging.error(f"Wrong 'rescale' argument value '{rescale}'")
+        logging.error(f"Wrong 'rescale' argument value: '{rescale}'")
         raise ValueError()
 
     if val_set:

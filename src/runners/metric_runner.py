@@ -18,7 +18,7 @@ warnings.filterwarnings("ignore")
     "--main_dir",
     default=General.MAIN_DIR,
     type=str,
-    help="Path to the level where this repository is stored.",
+    help="Path to the level where the repository is stored.",
     show_default=True,
 )
 @click.option(

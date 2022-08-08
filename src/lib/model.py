@@ -8,8 +8,6 @@ from typing import Dict, Iterator, List, Tuple, Union
 import pandas as pd
 import torch
 import torchvision
-from torch import optim
-from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 from tqdm import tqdm
 
 from lib.metric import (calculate_map, prepare_data_for_ap,
@@ -34,7 +32,7 @@ def initalize_model(
 
     # replace the pre-trained head with a new one
     in_features = model.roi_heads.box_predictor.cls_score.in_features
-    model.roi_heads.box_predictor = FastRCNNPredictor(
+    model.roi_heads.box_predictor = torchvision.models.detection.faster_rcnn.FastRCNNPredictor(
         in_features, num_classes=num_classes
     )
 
@@ -50,7 +48,7 @@ def initialize_optimizer(
     lr_gamma: float,
 ) -> Tuple:
     # optimizer
-    optimizer = optim.Adam(
+    optimizer = torch.optim.Adam(
         filter(lambda p: p.requires_grad, torch_model_parameters),
         lr=learning_rate,
         weight_decay=weight_decay,

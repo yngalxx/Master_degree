@@ -20,7 +20,7 @@ from lib.save_load_data import save_list_to_tsv_file
     "--main_dir",
     type=str,
     default=General.MAIN_DIR,
-    help="Path to the level where this repository is stored.",
+    help="Path to the level where the repository is stored.",
     show_default=True,
 )
 @click.option(

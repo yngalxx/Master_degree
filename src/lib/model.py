@@ -32,8 +32,10 @@ def initalize_model(
 
     # replace the pre-trained head with a new one
     in_features = model.roi_heads.box_predictor.cls_score.in_features
-    model.roi_heads.box_predictor = torchvision.models.detection.faster_rcnn.FastRCNNPredictor(
-        in_features, num_classes=num_classes
+    model.roi_heads.box_predictor = (
+        torchvision.models.detection.faster_rcnn.FastRCNNPredictor(
+            in_features, num_classes=num_classes
+        )
     )
 
     return model

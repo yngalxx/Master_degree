@@ -62,15 +62,16 @@ def ocr_runner(main_dir, min_conf_level):
 
     logging.info("Combining in and out test files for OCR")
     innout = combine_data_for_ocr(in_list, out_list, min_conf_level)
-    logging.info(f"OCR input size: {len(innout)}, declared minimum confidence level: {min_conf_level}")
+    logging.info(
+        f"OCR input size: {len(innout)}, declared minimum confidence level:"
+        f" {min_conf_level}"
+    )
 
     logging.info("Initializing Tesseract OCR")
     try:
         pytesseract.pytesseract.tesseract_cmd = ocr_init()
     except:
-        logging.error(
-            "Tesseract OCR not found, try: 'brew install tesseract'"
-        )
+        logging.error("Tesseract OCR not found, try: 'brew install tesseract'")
         raise ModuleNotFoundError()
 
     ocr_dir = "ocr_results"
@@ -87,7 +88,8 @@ def ocr_runner(main_dir, min_conf_level):
         nlp = spacy.load("en_core_web_sm")
     except:
         logging.error(
-            "Language core not found, try: 'python -m spacy download en_core_web_sm'"
+            "Language core not found, try: 'python -m spacy download"
+            " en_core_web_sm'"
         )
         raise ModuleNotFoundError()
 
@@ -98,7 +100,8 @@ def ocr_runner(main_dir, min_conf_level):
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
     logging.info(
-        "Cropping predicted visual contents from images, transforming them, applying OCR, cleaning results and saving"
+        "Cropping predicted visual contents from images, transforming them,"
+        " applying OCR, cleaning results and saving"
     )
     final_dict = {}
     for i, elem in enumerate(tqdm(innout, desc="OCR running")):

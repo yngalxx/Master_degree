@@ -43,7 +43,7 @@ def visualizer(main_dir, examples, min_conf_level):
         in_test = from_tsv_to_list(in_test_full_path)
     except:
         raise FileNotFoundError(
-            f"File '{in_test_file}' not found, code will be forced to quit"
+            f"File '{in_test_file}' not found, code will be forced to quit..."
         )
     try:
         out_test_file = "out.tsv"
@@ -51,7 +51,7 @@ def visualizer(main_dir, examples, min_conf_level):
         out_list = from_tsv_to_list(test_out_full_path, skip_empty_lines=False)
     except:
         raise FileNotFoundError(
-            f"File '{out_test_file}' not found, code will be forced to quit"
+            f"File '{out_test_file}' not found, code will be forced to quit..."
         )
 
     show_random_img_with_all_annotations(

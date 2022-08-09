@@ -1,5 +1,6 @@
 import logging
 import os
+import sys
 
 import click
 from constants import Data, General, Model, Output
@@ -268,7 +269,7 @@ def model_runner(
     if not train_set and not val_set and not test_set:
         logging.error(
             'None of the arguments: "train_set", "val_set" and "test_set"'
-            " passed, code will be forced to quit!"
+            " passed, code will be forced to quit...!"
         )
         raise ValueError()
 
@@ -284,9 +285,9 @@ def model_runner(
             rescale = [int(rescale[0]), int(rescale[1])]
         else:
             rescale = float(rescale)
-    except:
-        logging.error(f"Wrong 'rescale' argument value: '{rescale}'")
-        raise ValueError()
+    except ValueError as err:
+        logging.error(f"Wrong 'rescale' argument value: '{rescale}'\nError: {err}")
+        sys.exit(1)
 
     if val_set:
         # create validation dataloader
@@ -297,11 +298,10 @@ def model_runner(
 
             path = "dev-0/in.tsv"
             in_val = from_tsv_to_list(f"{annotations_dir}{path}")
-        except:
+        except FileNotFoundError as err:
             logging.exception(
-                f"File '{path}' not found, code will be forced to quit"
-            )
-            raise FileNotFoundError()
+                f"File '{path}' not found, code will be forced to quit...\nError: {err}")
+            sys.exit(1)
 
         val_dataloader = create_dataloader(
             image_dir=scraped_photos_dir,
@@ -330,11 +330,9 @@ def model_runner(
 
             path = "train/in.tsv"
             in_train = from_tsv_to_list(f"{annotations_dir}{path}")
-        except:
-            logging.exception(
-                f"File '{path}' not found, code will be forced to quit"
-            )
-            raise FileNotFoundError()
+        except FileNotFoundError as err:
+            logging.exception(f"File '{path}' not found, code will be forced to quit...\nError: {err}")
+            sys.exit(1)
 
         train_dataloader = create_dataloader(
             image_dir=scraped_photos_dir,
@@ -440,12 +438,10 @@ def model_runner(
                 init_model=model,
                 config_dir_path=f"{main_dir}/{config_dir_name}/",
             )
-        except:
+        except FileNotFoundError as err:
             logging.exception(
-                f"No model found in '{config_dir_name}' directory, code will"
-                " be forced to quit"
-            )
-            raise FileNotFoundError()
+                f"No model found in '{config_dir_name}' directory, code will be forced to quit...\nError: {err}")
+            sys.exit(1)
 
         logging.info("Model loaded correctly")
 
@@ -455,11 +451,9 @@ def model_runner(
             try:
                 path = "test-A/in.tsv"
                 in_test = from_tsv_to_list(f"{annotations_dir}{path}")
-            except:
-                logging.exception(
-                    f"File '{path}' not found, code will be forced to quit"
-                )
-                raise FileNotFoundError()
+            except FileNotFoundError as err:
+                logging.exception(f"File '{path}' not found, code will be forced to quit...\nError: {err}")
+                sys.exit(1)
 
             test_dataloader = create_dataloader(
                 image_dir=scraped_photos_dir,

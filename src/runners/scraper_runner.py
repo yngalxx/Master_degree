@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+import sys
 
 import click
 import requests
@@ -42,12 +43,9 @@ def image_scraper(main_dir):
         ) as jsonFile:
             jsonObject = json.load(jsonFile)
             jsonFile.close()
-    except:
-        logging.error(
-            f"File '{annotations_source_file}' not found, code will be forced"
-            " to quit"
-        )
-        raise FileNotFoundError()
+    except FileNotFoundError as err:
+        logging.error(f"File '{annotations_source_file}' not found, code will be forced to quit...\nError: {err}")
+        sys.exit(1)
 
     images_num = len(jsonObject["images"])
     logging.info(f"Collecting {images_num} images")

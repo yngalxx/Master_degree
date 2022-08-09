@@ -2,6 +2,7 @@ import copy
 import json
 import logging
 import os
+import sys
 
 import click
 import pandas as pd
@@ -59,11 +60,9 @@ def prepare_input(main_dir, test_set_expected):
         ) as jsonFile:
             coco_metadata_train = json.load(jsonFile)
             jsonFile.close()
-    except:
-        logging.error(
-            f"File '{train_80_percent}' not found, code will be forced to quit"
-        )
-        raise FileNotFoundError()
+    except FileNotFoundError as err:
+        logging.error(f"File '{train_80_percent}' not found, code will be forced to quit...\nError: {err}")
+        sys.exit(1)
 
     try:
         val_20_percent = "val_20_percent.json"
@@ -72,11 +71,9 @@ def prepare_input(main_dir, test_set_expected):
         ) as jsonFile:
             coco_metadata_test = json.load(jsonFile)
             jsonFile.close()
-    except:
-        logging.error(
-            f"File '{val_20_percent}' not found, code will be forced to quit"
-        )
-        raise FileNotFoundError()
+    except FileNotFoundError as err:
+        logging.error(f"File '{val_20_percent}' not found, code will be forced to quit...\nError: {err}")
+        sys.exit(1)
 
     # find images without annoations and remove them
     train_img_names = [

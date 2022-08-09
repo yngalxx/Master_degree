@@ -10,4 +10,5 @@ venv
 src/build
 src/lib.egg-info
 src/dist
-ocr_results/cropped_visual_content
+cropped_visual_content
+database

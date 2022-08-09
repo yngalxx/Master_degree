@@ -22,7 +22,7 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
 4. Run "python metric_runner.py" to calculate the average precision (AP) for each class, as well as its mean value (mAP).
 5. Run "python visualization_runner.py" to visualize several random model predictions.
 6. Run "python predict_runner.py" to make prediction on your own single newspaper image.
-7. Run "python ocr_runner.py" to crop visual content from test set of original images using resulting bbox predictions and apply OCR on them.
+7. Run "python ocr_runner.py" to crop visual content from test set of original images using resulting bbox predictions, apply OCR on them and store results in SQLite database.
 
 **IMPORTANT:**
 - If you intend to use GPU install Pytorch using following command: "pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html".

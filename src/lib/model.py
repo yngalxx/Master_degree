@@ -1,6 +1,7 @@
 import logging
 import math
 import os
+import sys
 import time
 import warnings
 from typing import Dict, Iterator, List, Tuple, Union
@@ -275,12 +276,10 @@ def evaluate_model(
             expected = from_tsv_to_list(
                 f"{main_dir}/data/{save_path}/expected.tsv"
             )
-        except:
+        except FileNotFoundError as err:
             logging.exception(
-                "File 'expected.tsv' not found, value of metric cannot be"
-                " calculated."
-            )
-            raise FileNotFoundError()
+                f"File 'expected.tsv' not found, value of metric cannot be calculated\nError: {err}")
+            sys.exit(1)
 
         model_output, ground_truth = prepare_data_for_ap(
             out, expected, class_coding_dict

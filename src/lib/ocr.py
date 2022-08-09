@@ -60,9 +60,10 @@ def image_transform(image: np.ndarray) -> np.ndarray:
     grey_img = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     # dilate the image to get background (text removal)
     dilated_img = cv2.dilate(grey_img, np.ones((7, 7), np.uint8))
-    # use median blur on dilated image to get better background image containing all the shadows and discoloration
+    # use median blur on dilated image to get better background image 
+    # containing all the shadows and discoloration
     bg_img = cv2.medianBlur(dilated_img, 21)
-    # combine new backgorund with old image
+    # combine new background image with old one
     diff_img = 255 - cv2.absdiff(grey_img, bg_img)
     # normalize the image to get full dynamic range
     norm_img = cv2.normalize(

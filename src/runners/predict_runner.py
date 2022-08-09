@@ -50,7 +50,7 @@ def predict(path_to_image, model_config_path, min_conf_level):
         config = json.load(open(f"{model_config_path}/{path}"))
     except:
         raise FileNotFoundError(
-            f"File '{path}' not found, code will be forced to quit"
+            f"File '{path}' not found, code will be forced to quit..."
         )
 
     if isinstance(config["rescale"], float):
@@ -88,7 +88,7 @@ def predict(path_to_image, model_config_path, min_conf_level):
     except:
         raise FileNotFoundError(
             f"No model found in '{model_config_path.split('/')[-1]}'"
-            " directory, code will be forced to quit"
+            " directory, code will be forced to quit..."
         )
 
     pred = predict_one_img(

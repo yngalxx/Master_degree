@@ -1,5 +1,7 @@
 import logging
 import os
+import sqlite3
+import sys
 
 import click
 import cv2
@@ -10,9 +12,10 @@ from constants import General, Output
 from tqdm import tqdm
 
 from lib.logs import Log
+from lib.database import create_tables, create_connection, db_count, db_insert
 from lib.ocr import (combine_data_for_ocr, crop_image, get_keywords,
                      image_transform, ocr_init, ocr_predict, ocr_text_clean)
-from lib.save_load_data import dump_json, from_tsv_to_list
+from lib.save_load_data import from_tsv_to_list
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -44,21 +47,17 @@ def ocr_runner(main_dir, min_conf_level):
         in_list = from_tsv_to_list(
             path=f"{main_dir}/{test_dir}/{in_file_name}"
         )
-    except:
-        logging.error(
-            f"File '{in_file_name}' not found, code will be forced to quit"
-        )
-        raise FileNotFoundError()
+    except FileNotFoundError as err:
+        logging.error(f"File '{in_file_name}' not found, code will be forced to quit...\nError: {err}")
+        sys.exit(1)
     try:
         out_file_name = "out.tsv"
         out_list = from_tsv_to_list(
             path=f"{main_dir}/{test_dir}/{out_file_name}"
         )
-    except:
-        logging.error(
-            f"File '{out_file_name}' not found, code will be forced to quit"
-        )
-        raise FileNotFoundError()
+    except FileNotFoundError as err:
+        logging.error(f"File '{out_file_name}' not found, code will be forced to quit...\nError: {err}")
+        sys.exit(1)
 
     logging.info("Combining in and out test files for OCR")
     innout = combine_data_for_ocr(in_list, out_list, min_conf_level)
@@ -70,12 +69,11 @@ def ocr_runner(main_dir, min_conf_level):
     logging.info("Initializing Tesseract OCR")
     try:
         pytesseract.pytesseract.tesseract_cmd = ocr_init()
-    except:
-        logging.error("Tesseract OCR not found, try: 'brew install tesseract'")
-        raise ModuleNotFoundError()
+    except ModuleNotFoundError as err:
+        logging.error(f"Tesseract OCR not found, try: 'brew install tesseract'\nError: {err}")
+        sys.exit(1)
 
-    ocr_dir = "ocr_results"
-    vc_content_dir = f"{ocr_dir}/cropped_visual_content"
+    vc_content_dir = "cropped_visual_content"
     if not os.path.exists(f"{main_dir}/{vc_content_dir}"):
         logging.info(
             f"Directory '{vc_content_dir}' doesn't exist, creating one"
@@ -86,12 +84,9 @@ def ocr_runner(main_dir, min_conf_level):
     logging.info("Loading spaCy language core")
     try:
         nlp = spacy.load("en_core_web_sm")
-    except:
-        logging.error(
-            "Language core not found, try: 'python -m spacy download"
-            " en_core_web_sm'"
-        )
-        raise ModuleNotFoundError()
+    except ModuleNotFoundError as err:
+        logging.error(f"Language core not found, try: 'python -m spacy download en_core_web_sm'\nError: {err}")
+        sys.exit(1)
 
     # keybert model to extract keywords
     logging.info("Loading KeyBERT pretrained model")
@@ -99,11 +94,30 @@ def ocr_runner(main_dir, min_conf_level):
 
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-    logging.info(
-        "Cropping predicted visual contents from images, transforming them,"
-        " applying OCR, cleaning results and saving"
-    )
-    final_dict = {}
+    database_dir = 'database'
+    if not os.path.exists(f"{main_dir}/{database_dir}"):
+        logging.info(
+            f"Directory '{database_dir}' doesn't exist, creating one"
+        )
+        os.makedirs(f"{main_dir}/{database_dir}")
+
+    logging.info("Creating database instance")
+    try:
+        conn = create_connection(f'{main_dir}/{database_dir}/newspapers_ocr.db')
+    except sqlite3.Error as err:
+        logging.error(f'Cannot create database instance, code will be forced to quit...\nError: {err}')
+        sys.exit(1)
+
+    # create appropriate tables
+    logging.info("Creating database tables")
+    try:
+        create_tables(conn)
+    except sqlite3.Error as err:
+        logging.error(f'Cannot create tables, code will be forced to quit...\nError: {err}')
+        sys.exit(1)
+
+    logging.info("Cropping predicted visual contents from source images, transforming them, applying OCR, cleaning results and saving to database")
+    keyword_iterator = 1
     for i, elem in enumerate(tqdm(innout, desc="OCR running")):
         # read image
         img = cv2.imread(f"{main_dir}/scraped_photos/{elem[0]}")
@@ -118,7 +132,7 @@ def ocr_runner(main_dir, min_conf_level):
             cropped_img_str, spacy_language_core=nlp
         )
         # keywords
-        unigram_keywords_list = get_keywords(
+        keywords_list = get_keywords(
             clean_txt,
             top_n=10,
             keybert_model=kw_model,
@@ -126,35 +140,21 @@ def ocr_runner(main_dir, min_conf_level):
             only_this_ngram=True,
             language="english",
         )
-        bigram_keywords_list = get_keywords(
-            clean_txt,
-            top_n=15,
-            keybert_model=kw_model,
-            ngram=2,
-            only_this_ngram=True,
-            language="english",
-        )
         # save results
-        in_dict = {
-            "origin_file": elem[0],
-            "predicted_label": elem[1],
-            "ocr_raw_text": cropped_img_str,
-            "cleaned_text": clean_txt.strip(),
-            "normalized_text": normalized_txt,
-            "unigram_keywords": unigram_keywords_list,
-            "bigram_keywords": bigram_keywords_list,
-        }
-        cropped_img_name = f"vc_{i}.png"
+        cropped_img_name = f"vc_{i+1}.png"
         cv2.imwrite(
-            f"{main_dir}/{ocr_dir}/cropped_visual_content/{cropped_img_name}",
+            f"{main_dir}/{vc_content_dir}/{cropped_img_name}",
             cropped_img,
         )
-        final_dict[cropped_img_name] = in_dict
+        db_insert(conn, 'OCR_RESULTS', (i+1, elem[0], cropped_img_name, elem[1], cropped_img_str, clean_txt.strip(), " ".join(normalized_txt)))
 
-    dump_json(
-        path=f"{main_dir}/{ocr_dir}/vc_ocr_data.json", dict_to_save=final_dict
-    )
-    logging.info(f"OCR output json saved in '{ocr_dir}' directory")
+        for keyword in keywords_list:
+            db_insert(conn, 'KEYWORDS', (keyword_iterator, keyword['keyword'], keyword['score'], elem[1]))
+            keyword_iterator += 1
+
+    logging.info(f"All {len(innout)} images were successfully stored in '{vc_content_dir}'")
+    logging.info(f"Table OCR_RESULTS count: {db_count(conn, 'OCR_RESULTS')}")
+    logging.info(f"Table KEYWORDS count: {db_count(conn, 'KEYWORDS')}")
 
     # end logger
     logger.log_end()

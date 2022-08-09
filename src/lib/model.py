@@ -278,7 +278,9 @@ def evaluate_model(
             )
         except FileNotFoundError as err:
             logging.exception(
-                f"File 'expected.tsv' not found, value of metric cannot be calculated\nError: {err}")
+                "File 'expected.tsv' not found, value of metric cannot be"
+                f" calculated\nError: {err}"
+            )
             sys.exit(1)
 
         model_output, ground_truth = prepare_data_for_ap(

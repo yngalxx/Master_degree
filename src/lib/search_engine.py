@@ -28,5 +28,3 @@
 # for doc in tqdm(nlp.pipe(text_list, disable=["tagger", "parser","ner"])):
 #    tok = [t.text for t in doc if t.is_alpha]
 #    tok_text.append(tok)
-
-

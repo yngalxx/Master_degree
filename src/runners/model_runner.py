@@ -286,7 +286,9 @@ def model_runner(
         else:
             rescale = float(rescale)
     except ValueError as err:
-        logging.error(f"Wrong 'rescale' argument value: '{rescale}'\nError: {err}")
+        logging.error(
+            f"Wrong 'rescale' argument value: '{rescale}'\nError: {err}"
+        )
         sys.exit(1)
 
     if val_set:
@@ -300,7 +302,9 @@ def model_runner(
             in_val = from_tsv_to_list(f"{annotations_dir}{path}")
         except FileNotFoundError as err:
             logging.exception(
-                f"File '{path}' not found, code will be forced to quit...\nError: {err}")
+                f"File '{path}' not found, code will be forced to"
+                f" quit...\nError: {err}"
+            )
             sys.exit(1)
 
         val_dataloader = create_dataloader(
@@ -331,7 +335,10 @@ def model_runner(
             path = "train/in.tsv"
             in_train = from_tsv_to_list(f"{annotations_dir}{path}")
         except FileNotFoundError as err:
-            logging.exception(f"File '{path}' not found, code will be forced to quit...\nError: {err}")
+            logging.exception(
+                f"File '{path}' not found, code will be forced to"
+                f" quit...\nError: {err}"
+            )
             sys.exit(1)
 
         train_dataloader = create_dataloader(
@@ -440,7 +447,9 @@ def model_runner(
             )
         except FileNotFoundError as err:
             logging.exception(
-                f"No model found in '{config_dir_name}' directory, code will be forced to quit...\nError: {err}")
+                f"No model found in '{config_dir_name}' directory, code will"
+                f" be forced to quit...\nError: {err}"
+            )
             sys.exit(1)
 
         logging.info("Model loaded correctly")
@@ -452,7 +461,10 @@ def model_runner(
                 path = "test-A/in.tsv"
                 in_test = from_tsv_to_list(f"{annotations_dir}{path}")
             except FileNotFoundError as err:
-                logging.exception(f"File '{path}' not found, code will be forced to quit...\nError: {err}")
+                logging.exception(
+                    f"File '{path}' not found, code will be forced to"
+                    f" quit...\nError: {err}"
+                )
                 sys.exit(1)
 
             test_dataloader = create_dataloader(

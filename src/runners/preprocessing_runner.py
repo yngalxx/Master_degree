@@ -61,7 +61,10 @@ def prepare_input(main_dir, test_set_expected):
             coco_metadata_train = json.load(jsonFile)
             jsonFile.close()
     except FileNotFoundError as err:
-        logging.error(f"File '{train_80_percent}' not found, code will be forced to quit...\nError: {err}")
+        logging.error(
+            f"File '{train_80_percent}' not found, code will be forced to"
+            f" quit...\nError: {err}"
+        )
         sys.exit(1)
 
     try:
@@ -72,7 +75,10 @@ def prepare_input(main_dir, test_set_expected):
             coco_metadata_test = json.load(jsonFile)
             jsonFile.close()
     except FileNotFoundError as err:
-        logging.error(f"File '{val_20_percent}' not found, code will be forced to quit...\nError: {err}")
+        logging.error(
+            f"File '{val_20_percent}' not found, code will be forced to"
+            f" quit...\nError: {err}"
+        )
         sys.exit(1)
 
     # find images without annoations and remove them

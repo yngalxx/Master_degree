@@ -3,15 +3,15 @@ from typing import Tuple
 
 
 def create_connection(db_file_path: str) -> sqlite3.Connection:
-    """ 
-    Create a database connection to the SQLite database specified by db_file 
+    """
+    Create a database connection to the SQLite database specified by db_file
     """
     return sqlite3.connect(db_file_path)
 
 
 def create_tables(db_connection: sqlite3.Connection) -> None:
     """
-    Create database tables to store OCR data 
+    Create database tables to store OCR data
     """
     db_connection.execute(
         """
@@ -39,11 +39,15 @@ def create_tables(db_connection: sqlite3.Connection) -> None:
     )
 
 
-def db_insert(db_connection: sqlite3.Connection, table: str, values: Tuple) -> None:
+def db_insert(
+    db_connection: sqlite3.Connection, table: str, values: Tuple
+) -> None:
     """
     Insert row into database table
     """
-    quot_marks = " ".join(['?,' if i+1!=len(values) else '?' for i in range(len(values))])
+    quot_marks = " ".join(
+        ["?," if i + 1 != len(values) else "?" for i in range(len(values))]
+    )
     query = f"""
         INSERT INTO {table}
         VALUES({quot_marks})

@@ -68,7 +68,7 @@ def db_count(db_connection: sqlite3.Connection, table: str) -> int:
 
 def db_drop(db_connection: sqlite3.Connection, table: str) -> None:
     """
-    Drop table from database 
+    Drop table from database
     """
     query = f"""DROP TABLE IF EXISTS {table}"""
     cursor = db_connection.cursor()

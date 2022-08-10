@@ -11,7 +11,8 @@ import spacy
 from constants import General, Output
 from tqdm import tqdm
 
-from lib.database import create_db_connection, create_db_tables, db_count, db_insert, db_drop
+from lib.database import (create_db_connection, create_db_tables, db_count,
+                          db_drop, db_insert)
 from lib.logs import Log
 from lib.ocr import (combine_data_for_ocr, crop_image, get_keywords,
                      image_transform, ocr_init, ocr_predict, ocr_text_clean)
@@ -37,7 +38,10 @@ from lib.save_load_data import from_tsv_to_list
     "--update_existing",
     default=Output.UPDATE_EXISTING_OCR,
     type=bool,
-    help="If False: crop visual content from origin files, else: read already collected visual content.",
+    help=(
+        "If False: crop visual content from origin files, else: read already"
+        " collected visual content."
+    ),
     show_default=True,
 )
 def ocr_runner(main_dir, min_conf_level, update_existing):
@@ -133,9 +137,12 @@ def ocr_runner(main_dir, min_conf_level, update_existing):
         sys.exit(1)
 
     if update_existing:
-        logging.info(f'Deleting existing tables, caused by setting update_existing argument to {update_existing}')
-        db_drop(conn, 'OCR_RESULTS')
-        db_drop(conn, 'KEYWORDS')
+        logging.info(
+            "Deleting existing tables, caused by setting update_existing"
+            f" argument to {update_existing}"
+        )
+        db_drop(conn, "OCR_RESULTS")
+        db_drop(conn, "KEYWORDS")
 
     logging.info("Creating tables OCR_RESULTS and KEYWORDS")
     try:
@@ -148,18 +155,23 @@ def ocr_runner(main_dir, min_conf_level, update_existing):
         sys.exit(1)
 
     logging.info(
-        "Processing images, applying OCR, cleaning text, extracting keywords and saving metadata"
+        "Processing images, applying OCR, cleaning text, extracting keywords"
+        " and saving metadata"
     )
     keyword_iterator = 1
     for i, elem in enumerate(tqdm(innout, desc="OCR running")):
-        cropped_img_name = f'vc_{i+1}.png'
+        cropped_img_name = f"vc_{i+1}.png"
         if not update_existing:
             # read image
             img = cv2.imread(f"{main_dir}/scraped_photos/{elem[0]}")
             # crop visual content
-            cropped_img = crop_image(image=img, x0=elem[2], x1=elem[4], y0=elem[3], y1=elem[5])
+            cropped_img = crop_image(
+                image=img, x0=elem[2], x1=elem[4], y0=elem[3], y1=elem[5]
+            )
         else:
-            cropped_img = cv2.imread(f"{main_dir}/{vc_content_dir}/{cropped_img_name}")
+            cropped_img = cv2.imread(
+                f"{main_dir}/{vc_content_dir}/{cropped_img_name}"
+            )
         # transform visual content
         transformed_cropped_img = image_transform(cropped_img)
         # ocr
@@ -211,7 +223,8 @@ def ocr_runner(main_dir, min_conf_level, update_existing):
             keyword_iterator += 1
 
     logging.info(
-        f"All {i+1} visual content images were successfully stored in '{vc_content_dir}' directory"
+        f"All {i+1} visual content images were successfully stored in"
+        f" '{vc_content_dir}' directory"
     )
     logging.info(f"Table OCR_RESULTS count: {db_count(conn, 'OCR_RESULTS')}")
     logging.info(f"Table KEYWORDS count: {db_count(conn, 'KEYWORDS')}")

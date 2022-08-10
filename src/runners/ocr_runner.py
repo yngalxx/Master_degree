@@ -11,7 +11,7 @@ import spacy
 from constants import General, Output
 from tqdm import tqdm
 
-from lib.database import create_connection, create_tables, db_count, db_insert
+from lib.database import create_db_connection, create_db_tables, db_count, db_insert, db_drop
 from lib.logs import Log
 from lib.ocr import (combine_data_for_ocr, crop_image, get_keywords,
                      image_transform, ocr_init, ocr_predict, ocr_text_clean)
@@ -33,7 +33,14 @@ from lib.save_load_data import from_tsv_to_list
     help="Minimum confidence level for model predictions to show up.",
     show_default=True,
 )
-def ocr_runner(main_dir, min_conf_level):
+@click.option(
+    "--update_existing",
+    default=Output.UPDATE_EXISTING_OCR,
+    type=bool,
+    help="If False: crop visual content from origin files, else: read already collected visual content.",
+    show_default=True,
+)
+def ocr_runner(main_dir, min_conf_level, update_existing):
     # initialize logger
     logger = Log("ocr_runner", main_dir)
     logger.log_start()
@@ -88,6 +95,7 @@ def ocr_runner(main_dir, min_conf_level):
             f"Directory '{vc_content_dir}' doesn't exist, creating one"
         )
         os.makedirs(f"{main_dir}/{vc_content_dir}")
+        update_existing = False
 
     # spacy language core
     logging.info("Loading spaCy language core")
@@ -106,14 +114,15 @@ def ocr_runner(main_dir, min_conf_level):
 
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-    database_dir = "database"
+    # database for ocr results
+    database_dir = "ocr_database"
     if not os.path.exists(f"{main_dir}/{database_dir}"):
         logging.info(f"Directory '{database_dir}' doesn't exist, creating one")
         os.makedirs(f"{main_dir}/{database_dir}")
 
     logging.info("Creating database instance")
     try:
-        conn = create_connection(
+        conn = create_db_connection(
             f"{main_dir}/{database_dir}/newspapers_ocr.db"
         )
     except sqlite3.Error as err:
@@ -123,10 +132,14 @@ def ocr_runner(main_dir, min_conf_level):
         )
         sys.exit(1)
 
-    # create appropriate tables
-    logging.info("Creating database tables")
+    if update_existing:
+        logging.info(f'Deleting existing tables, caused by setting update_existing argument to {update_existing}')
+        db_drop(conn, 'OCR_RESULTS')
+        db_drop(conn, 'KEYWORDS')
+
+    logging.info("Creating tables OCR_RESULTS and KEYWORDS")
     try:
-        create_tables(conn)
+        create_db_tables(conn)
     except sqlite3.Error as err:
         logging.error(
             "Cannot create tables, code will be forced to quit...\nError:"
@@ -135,15 +148,18 @@ def ocr_runner(main_dir, min_conf_level):
         sys.exit(1)
 
     logging.info(
-        "Cropping predicted visual contents from source images, transforming"
-        " them, applying OCR, cleaning results and saving to database"
+        "Processing images, applying OCR, cleaning text, extracting keywords and saving metadata"
     )
     keyword_iterator = 1
     for i, elem in enumerate(tqdm(innout, desc="OCR running")):
-        # read image
-        img = cv2.imread(f"{main_dir}/scraped_photos/{elem[0]}")
-        # crop visual content
-        cropped_img = crop_image(img, elem[2], elem[4], elem[3], elem[5])
+        cropped_img_name = f'vc_{i+1}.png'
+        if not update_existing:
+            # read image
+            img = cv2.imread(f"{main_dir}/scraped_photos/{elem[0]}")
+            # crop visual content
+            cropped_img = crop_image(image=img, x0=elem[2], x1=elem[4], y0=elem[3], y1=elem[5])
+        else:
+            cropped_img = cv2.imread(f"{main_dir}/{vc_content_dir}/{cropped_img_name}")
         # transform visual content
         transformed_cropped_img = image_transform(cropped_img)
         # ocr
@@ -162,11 +178,11 @@ def ocr_runner(main_dir, min_conf_level):
             language="english",
         )
         # save results
-        cropped_img_name = f"vc_{i+1}.png"
-        cv2.imwrite(
-            f"{main_dir}/{vc_content_dir}/{cropped_img_name}",
-            cropped_img,
-        )
+        if not update_existing:
+            cv2.imwrite(
+                f"{main_dir}/{vc_content_dir}/{cropped_img_name}",
+                cropped_img,
+            )
         db_insert(
             conn,
             "OCR_RESULTS",
@@ -189,14 +205,13 @@ def ocr_runner(main_dir, min_conf_level):
                     keyword_iterator,
                     keyword["keyword"],
                     keyword["score"],
-                    elem[1],
+                    cropped_img_name,
                 ),
             )
             keyword_iterator += 1
 
     logging.info(
-        f"All {len(innout)} images were successfully stored in"
-        f" '{vc_content_dir}'"
+        f"All {i+1} visual content images were successfully stored in '{vc_content_dir}' directory"
     )
     logging.info(f"Table OCR_RESULTS count: {db_count(conn, 'OCR_RESULTS')}")
     logging.info(f"Table KEYWORDS count: {db_count(conn, 'KEYWORDS')}")

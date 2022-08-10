@@ -2,14 +2,14 @@ import sqlite3
 from typing import Tuple
 
 
-def create_connection(db_file_path: str) -> sqlite3.Connection:
+def create_db_connection(db_file_path: str) -> sqlite3.Connection:
     """
     Create a database connection to the SQLite database specified by db_file
     """
     return sqlite3.connect(db_file_path)
 
 
-def create_tables(db_connection: sqlite3.Connection) -> None:
+def create_db_tables(db_connection: sqlite3.Connection) -> None:
     """
     Create database tables to store OCR data
     """
@@ -64,3 +64,13 @@ def db_count(db_connection: sqlite3.Connection, table: str) -> int:
     cursor = db_connection.cursor()
     count = cursor.execute(f"SELECT COUNT(*) FROM {table}").fetchone()[0]
     return count
+
+
+def db_drop(db_connection: sqlite3.Connection, table: str) -> None:
+    """
+    Drop table from database 
+    """
+    query = f"""DROP TABLE IF EXISTS {table}"""
+    cursor = db_connection.cursor()
+    cursor.execute(query)
+    db_connection.commit()

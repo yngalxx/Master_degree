@@ -67,5 +67,6 @@ class Output:
     EXAMPLES = 5
     VAL_MAP_THRESHOLD = 0.8
     TEST_SET_EXPECTED = True
+    UPDATE_EXISTING_OCR = False
     # uneditable
     MODEL_CONFIG_PATH = f"{General.MAIN_DIR}/model_config"

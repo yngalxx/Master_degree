@@ -311,3 +311,95 @@ Error: table OCR_RESULTS already exists
 2022-08-10 00:17:48,554 - INFO - Table OCR_RESULTS count: 1
 2022-08-10 00:17:48,555 - INFO - Table KEYWORDS count: 10
 2022-08-10 00:17:48,555 - INFO - OCR_RUNNER - COMPLETED! RUNTIME: 8.69 sec.
+
+############################
+
+2022-08-10 01:05:26,428 - INFO - OCR_RUNNER - STARTED!
+2022-08-10 01:05:26,438 - INFO - Combining in and out test files for OCR
+2022-08-10 01:05:26,462 - INFO - OCR input size: 10595, declared minimum confidence level: 0.5
+2022-08-10 01:05:26,463 - INFO - Initializing Tesseract OCR
+2022-08-10 01:05:28,195 - INFO - Directory 'cropped_visual_content' doesn't exist, creating one
+2022-08-10 01:05:28,196 - INFO - Loading spaCy language core
+2022-08-10 01:05:28,982 - INFO - Loading KeyBERT pretrained model
+2022-08-10 01:05:28,982 - INFO - Load pretrained SentenceTransformer: all-mpnet-base-v2
+2022-08-10 01:05:30,403 - INFO - Use pytorch device: cpu
+2022-08-10 01:05:30,404 - INFO - Directory 'database' doesn't exist, creating one
+2022-08-10 01:05:30,404 - INFO - Creating database instance
+2022-08-10 01:05:30,408 - INFO - Creating database tables
+2022-08-10 01:05:30,418 - INFO - Cropping predicted visual contents from source images, transforming them, applying OCR, cleaning results and saving to database
+2022-08-10 07:05:44,468 - INFO - All 10595 images were successfully stored in 'cropped_visual_content'
+2022-08-10 07:05:44,471 - INFO - Table OCR_RESULTS count: 10595
+2022-08-10 07:05:44,472 - INFO - Table KEYWORDS count: 82875
+2022-08-10 07:05:44,472 - INFO - OCR_RUNNER - COMPLETED! RUNTIME: 21618.05 sec.
+
+############################
+
+2022-08-10 10:30:25,949 - INFO - OCR_RUNNER - STARTED!
+2022-08-10 10:30:25,958 - INFO - Combining in and out test files for OCR
+2022-08-10 10:30:25,984 - INFO - OCR input size: 10595, declared minimum confidence level: 0.5
+2022-08-10 10:30:25,985 - INFO - Initializing Tesseract OCR
+2022-08-10 10:30:27,908 - INFO - Loading spaCy language core
+2022-08-10 10:30:28,683 - INFO - Loading KeyBERT pretrained model
+2022-08-10 10:30:28,683 - INFO - Load pretrained SentenceTransformer: all-mpnet-base-v2
+2022-08-10 10:30:30,068 - INFO - Use pytorch device: cpu
+2022-08-10 10:30:30,069 - INFO - Creating database instance
+2022-08-10 10:30:30,069 - INFO - Deleting existing tables
+2022-08-10 10:30:30,403 - INFO - Creating tables OCR_RESULTS and KEYWORDS
+2022-08-10 10:30:30,405 - INFO - Cropping predicted visual contents from source images, transforming them, applying OCR, cleaning results and saving to database
+2022-08-10 10:30:31,260 - INFO - All 1 images were successfully stored in 'cropped_visual_content'
+2022-08-10 10:30:31,260 - INFO - Table OCR_RESULTS count: 1
+2022-08-10 10:30:31,261 - INFO - Table KEYWORDS count: 10
+2022-08-10 10:30:31,261 - INFO - OCR_RUNNER - COMPLETED! RUNTIME: 5.31 sec.
+
+############################
+
+2022-08-10 10:32:38,498 - INFO - OCR_RUNNER - STARTED!
+2022-08-10 10:32:38,507 - INFO - Combining in and out test files for OCR
+2022-08-10 10:32:38,530 - INFO - OCR input size: 10595, declared minimum confidence level: 0.5
+2022-08-10 10:32:38,530 - INFO - Initializing Tesseract OCR
+2022-08-10 10:32:39,726 - INFO - Loading spaCy language core
+2022-08-10 10:32:40,427 - INFO - Loading KeyBERT pretrained model
+2022-08-10 10:32:40,428 - INFO - Load pretrained SentenceTransformer: all-mpnet-base-v2
+2022-08-10 10:32:41,625 - INFO - Use pytorch device: cpu
+2022-08-10 10:32:41,625 - INFO - Creating database instance
+2022-08-10 10:32:41,625 - INFO - Deleting existing tables
+2022-08-10 10:32:41,629 - INFO - Creating tables OCR_RESULTS and KEYWORDS
+2022-08-10 10:32:41,631 - INFO - Cropping predicted visual contents from source images, transforming them, applying OCR, cleaning results and saving to database
+2022-08-10 10:32:42,407 - INFO - All 1 images were successfully stored in 'cropped_visual_content'
+2022-08-10 10:32:42,407 - INFO - Table OCR_RESULTS count: 1
+2022-08-10 10:32:42,407 - INFO - Table KEYWORDS count: 10
+2022-08-10 10:32:42,407 - INFO - OCR_RUNNER - COMPLETED! RUNTIME: 3.91 sec.
+
+############################
+
+2022-08-10 10:36:10,830 - INFO - OCR_RUNNER - STARTED!
+2022-08-10 10:36:10,839 - INFO - Combining in and out test files for OCR
+2022-08-10 10:36:10,862 - INFO - OCR input size: 10595, declared minimum confidence level: 0.5
+2022-08-10 10:36:10,862 - INFO - Initializing Tesseract OCR
+2022-08-10 10:36:12,053 - INFO - Loading spaCy language core
+2022-08-10 10:36:12,764 - INFO - Loading KeyBERT pretrained model
+2022-08-10 10:36:12,764 - INFO - Load pretrained SentenceTransformer: all-mpnet-base-v2
+2022-08-10 10:36:13,978 - INFO - Use pytorch device: cpu
+2022-08-10 10:36:13,979 - INFO - Creating database instance
+2022-08-10 10:36:13,979 - INFO - Deleting existing tables
+2022-08-10 10:36:13,982 - INFO - Creating tables OCR_RESULTS and KEYWORDS
+2022-08-10 10:36:13,985 - INFO - Cropping predicted visual contents from source images, transforming them, applying OCR, cleaning results and saving to database
+
+############################
+
+2022-08-10 10:40:25,673 - INFO - OCR_RUNNER - STARTED!
+2022-08-10 10:40:25,682 - INFO - Combining in and out test files for OCR
+2022-08-10 10:40:25,707 - INFO - OCR input size: 10595, declared minimum confidence level: 0.5
+2022-08-10 10:40:25,708 - INFO - Initializing Tesseract OCR
+2022-08-10 10:40:26,961 - INFO - Loading spaCy language core
+2022-08-10 10:40:27,811 - INFO - Loading KeyBERT pretrained model
+2022-08-10 10:40:27,811 - INFO - Load pretrained SentenceTransformer: all-mpnet-base-v2
+2022-08-10 10:40:29,166 - INFO - Use pytorch device: cpu
+2022-08-10 10:40:29,166 - INFO - Creating database instance
+2022-08-10 10:40:29,167 - INFO - Deleting existing tables, caused by setting the update_existing argument to True
+2022-08-10 10:40:29,171 - INFO - Creating tables OCR_RESULTS and KEYWORDS
+2022-08-10 10:40:29,174 - INFO - Processing images, applying OCR and saving metadata to a database
+2022-08-10 15:11:50,057 - INFO - All 10595 images were successfully stored in 'cropped_visual_content'
+2022-08-10 15:11:50,059 - INFO - Table OCR_RESULTS count: 10595
+2022-08-10 15:11:50,060 - INFO - Table KEYWORDS count: 82875
+2022-08-10 15:11:50,060 - INFO - OCR_RUNNER - COMPLETED! RUNTIME: 16284.39 sec.

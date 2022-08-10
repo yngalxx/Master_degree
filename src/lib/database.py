@@ -4,7 +4,7 @@ from typing import Tuple
 
 def create_db_connection(db_file_path: str) -> sqlite3.Connection:
     """
-    Create a database connection to the SQLite database specified by db_file
+    Create a connection to the SQLite database
     """
     return sqlite3.connect(db_file_path)
 

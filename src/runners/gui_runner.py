@@ -1,5 +1,4 @@
 import click
-
 from constants import General
 
 
@@ -12,7 +11,7 @@ from constants import General
     show_default=True,
 )
 def gui_runner(main_dir):
-    pass 
+    pass
 
 
 if __name__ == "__main__":

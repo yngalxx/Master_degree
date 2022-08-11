@@ -2,8 +2,7 @@ import os
 import shutil
 
 import pandas as pd
-from tqdm import tqdm
-import whoosh 
+import whoosh
 
 from lib.database import create_db_connection
 
@@ -18,8 +17,10 @@ def prepare_data(main_dir: str) -> pd.DataFrame:
         "SELECT CLEANED_TEXT, PRED_LABEL, FILE_NAME FROM OCR_RESULTS", conn
     )
     df_ocr["SEARCH_TEXT"] = (
-        df_ocr["PRED_LABEL"].str.lower() + " " + df_ocr["CLEANED_TEXT"].str.lower()
-    )       
+        df_ocr["PRED_LABEL"].str.lower()
+        + " "
+        + df_ocr["CLEANED_TEXT"].str.lower()
+    )
 
     return df_ocr
 
@@ -33,7 +34,7 @@ def create_temp_dir(main_dir: str) -> None:
 
 def index_documents(main_dir: str, df_ocr: pd.DataFrame) -> None:
     """
-    Prepare input data for full text searching by indexing documents 
+    Prepare input data for full text searching by indexing documents
     """
     schema = whoosh.fields.Schema(
         filename=whoosh.fields.TEXT(stored=True),
@@ -65,11 +66,11 @@ def full_text_search(ix: whoosh.FileIndex, query: str) -> pd.DataFrame:
         for r in results:
             file_name_list.append(r["filename"])
 
-    return file_name_list 
+    return file_name_list
 
 
 def remove_temp_dir(main_dir: str) -> None:
     """
-    Remove temporary directory 
+    Remove temporary directory
     """
     shutil.rmtree(f"{main_dir}/.temp")

@@ -23,6 +23,7 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
 5. Run "python visualization_runner.py" to visualize several random model predictions.
 6. Run "python predict_runner.py" to make prediction on your own single newspaper image.
 7. Run "python ocr_runner.py" to crop visual content from test set of original images using resulting bbox predictions, apply OCR on them and store results in SQLite database.
+8. Run "python gui_runner.py" to launch GUI for full-text search through OCR results on predicted visual content.
 
 **IMPORTANT:**
 - If you intend to use GPU install Pytorch using following command: "pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html".

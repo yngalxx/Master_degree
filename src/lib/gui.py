@@ -10,7 +10,7 @@ class WelcomeWindow(QtWidgets.QMainWindow):
         super().__init__()
         self.main_dir = main_dir
         self.label = QtWidgets.QLabel()
-        self.logo = QtGui.QPixmap(f"{self.main_dir}/graphics/WelcomeScreen.png")
+        self.logo = QtGui.QPixmap(f"{self.main_dir}/gui_graphics/WelcomeScreen.png")
         self.label.setPixmap(self.logo)
         
         self.setWindowTitle('News Finder')
@@ -31,7 +31,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.ix = ix
         
         self.label = QtWidgets.QLabel()
-        self.logo = QtGui.QPixmap(f"{'/'.join(self.img_dir.split('/')[:-2])}/graphics/logo.png")
+        self.logo = QtGui.QPixmap(f"{'/'.join(self.img_dir.split('/')[:-2])}/gui_graphics/Logo.png")
         self.label.setPixmap(self.logo)
         self.label.resize(self.logo.width(), self.logo.height())
         

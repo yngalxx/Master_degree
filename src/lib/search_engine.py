@@ -1,15 +1,16 @@
 import os
 import shutil
+from typing import List
 
 import pandas as pd
-import whoosh
+from whoosh import index, fields, qparser
 
 from lib.database import create_db_connection
 
 
-def prepare_data(main_dir: str) -> pd.DataFrame:
+def prepare_data(main_dir: str) -> index.FileIndex:
     """
-    Prepare input data for indexing before using search engine
+    Prepare input data and index documents
     """
     conn = create_db_connection(f"{main_dir}/ocr_database/newspapers_ocr.db")
 
@@ -22,26 +23,14 @@ def prepare_data(main_dir: str) -> pd.DataFrame:
         + df_ocr["CLEANED_TEXT"].str.lower()
     )
 
-    return df_ocr
-
-
-def create_temp_dir(main_dir: str) -> None:
-    """
-    Create temporary directory for search engine purposes
-    """
     os.mkdir(f"{main_dir}/.temp")
 
-
-def index_documents(main_dir: str, df_ocr: pd.DataFrame) -> None:
-    """
-    Prepare input data for full text searching by indexing documents
-    """
-    schema = whoosh.fields.Schema(
-        filename=whoosh.fields.TEXT(stored=True),
-        cleantext=whoosh.fields.TEXT(stored=True),
-        keywords=whoosh.fields.TEXT(stored=True),
+    schema = fields.Schema(
+        filename=fields.TEXT(stored=True),
+        cleantext=fields.TEXT(stored=True),
+        keywords=fields.TEXT(stored=True),
     )
-    ix = whoosh.index.create_in(f"{main_dir}/.temp", schema)
+    ix = index.create_in(f"{main_dir}/.temp", schema)
     writer = ix.writer()
     for i in range(len(df_ocr)):
         writer.add_document(
@@ -53,13 +42,13 @@ def index_documents(main_dir: str, df_ocr: pd.DataFrame) -> None:
     return ix
 
 
-def full_text_search(ix: whoosh.FileIndex, query: str) -> pd.DataFrame:
+def full_text_search(ix: index.FileIndex, query: str) -> List:
     """
     Full text search through indexed documents
     """
     file_name_list = []
     with ix.searcher() as searcher:
-        query = whoosh.qparser.QueryParser("cleantext", ix.schema).parse(
+        query = qparser.QueryParser("cleantext", ix.schema).parse(
             query.lower()
         )
         results = searcher.search(query, terms=True)
@@ -73,4 +62,6 @@ def remove_temp_dir(main_dir: str) -> None:
     """
     Remove temporary directory
     """
-    shutil.rmtree(f"{main_dir}/.temp")
+    tmp_path = f"{main_dir}/.temp"
+    if os.path.exists(tmp_path):
+        shutil.rmtree(tmp_path)

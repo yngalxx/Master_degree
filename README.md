@@ -32,4 +32,4 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
 
 
 ### Gallery: 
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/graphics/results.png?raw=true)
+![Alt text](graphics/results.png?raw=true "Application GUI")

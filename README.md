@@ -29,3 +29,7 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
 - If you intend to use GPU install Pytorch using following command: "pip3 install torch==1.10.2+cu113 torchvision==0.11.3+cu113 -f https://download.pytorch.org/whl/cu113/torch_stable.html".
 - Each script in directory named 'runner' is a command line application (despite of 'constants.py', where you can edit default arguments). Run each with argument '--help' to see the description of the other arguments.
 - Valid paths are generated automatically, but you can provide specific ones using click arguments in the command line for each runner.
+
+
+### Gallery: 
+![alt text](https://github.com/[username]/[reponame]/blob/[branch]/graphics/results.png?raw=true)

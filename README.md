@@ -36,5 +36,5 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
 ![Alt text](gui_graphics/WelcomingWindow.png?raw=true "Application GUI #1")
 #### Search results window:
 ![Alt text](gui_graphics/SearchWindow.png?raw=true "Application GUI #2")
-#### Detailed search single result window:
+#### Detailed single result window:
 ![Alt text](gui_graphics/DetailedResultsWindow.png?raw=true "Application GUI #3")

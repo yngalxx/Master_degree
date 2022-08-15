@@ -8,6 +8,27 @@ from whoosh import index, fields, qparser
 from lib.database import create_db_connection
 
 
+def get_image_details(main_dir: str, image_name: str) -> pd.DataFrame:
+    """
+    Get details of one image
+    """
+    conn = create_db_connection(f"{main_dir}/ocr_database/newspapers_ocr.db")
+    df_ocr = pd.read_sql_query(
+        f"""
+            SELECT ORIGIN_FILE_NAME, OCR_RAW_TEXT, PRED_LABEL, FILE_NAME
+            FROM OCR_RESULTS 
+            WHERE FILE_NAME='{image_name}'
+        """, 
+        conn
+    )
+    df_keywords = pd.read_sql_query(
+        f"SELECT KEYWORD FROM KEYWORDS WHERE FILE_NAME='{image_name}'", conn
+    )
+    df_ocr['KEYWORDS'] = [", ".join(df_keywords["KEYWORD"].values)]
+
+    return df_ocr 
+    
+
 def prepare_data(main_dir: str) -> index.FileIndex:
     """
     Prepare input data and index documents
@@ -23,14 +44,14 @@ def prepare_data(main_dir: str) -> index.FileIndex:
         + df_ocr["CLEANED_TEXT"].str.lower()
     )
 
-    os.mkdir(f"{main_dir}/.temp")
+    os.mkdir(f"{main_dir}/.tmp")
 
     schema = fields.Schema(
         filename=fields.TEXT(stored=True),
         cleantext=fields.TEXT(stored=True),
         keywords=fields.TEXT(stored=True),
     )
-    ix = index.create_in(f"{main_dir}/.temp", schema)
+    ix = index.create_in(f"{main_dir}/.tmp", schema)
     writer = ix.writer()
     for i in range(len(df_ocr)):
         writer.add_document(
@@ -62,6 +83,6 @@ def remove_temp_dir(main_dir: str) -> None:
     """
     Remove temporary directory
     """
-    tmp_path = f"{main_dir}/.temp"
+    tmp_path = f"{main_dir}/.tmp"
     if os.path.exists(tmp_path):
         shutil.rmtree(tmp_path)

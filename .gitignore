@@ -3,7 +3,7 @@
 .Rhistory
 .idea
 .vscode
-.temp
+.tmp
 __pycache__
 scraped_photos
 model_config/model.pth

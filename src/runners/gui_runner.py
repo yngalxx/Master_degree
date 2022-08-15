@@ -1,5 +1,11 @@
+import os
 import click
 from constants import General
+import sys
+from PyQt5 import QtCore, QtWidgets
+
+from lib.gui import WelcomeWindow, MainWindow
+from lib.search_engine import prepare_data, remove_temp_dir
 
 
 @click.command(context_settings=dict(help_option_names=["-h", "--help"]))
@@ -11,7 +17,35 @@ from constants import General
     show_default=True,
 )
 def gui_runner(main_dir):
-    pass
+    # check provided path
+    assert os.path.exists(main_dir) == True
+    img_dir = main_dir + '/cropped_visual_content/'
+    assert os.path.exists(img_dir) == True
+    tmp_dir = main_dir + '/.tmp/'
+    assert os.path.exists(tmp_dir) == False
+    grph_dir = main_dir + '/gui_graphics/'
+    assert os.path.exists(grph_dir) == True
+    db_dir = main_dir + '/ocr_database/'
+    assert os.path.exists(db_dir) == True
+
+    # app instance
+    app = QtWidgets.QApplication(sys.argv)
+    
+    # welcoming window
+    w = WelcomeWindow(main_dir=main_dir)
+    QtWidgets.qApp.processEvents()
+    
+    # prepare search engine input
+    ix = prepare_data(main_dir)
+    QtCore.QCoreApplication.instance().quit
+    
+    # app main window
+    w = MainWindow(img_dir=img_dir, ix=ix)
+    
+    # terminate after closing main window
+    status = app.exec_()
+    remove_temp_dir(main_dir)
+    sys.exit(status)
 
 
 if __name__ == "__main__":

@@ -5,5 +5,5 @@ repos:
     rev: v4.3.0
     hooks:
       - id: check-added-large-files
-        args: ['--maxkb=40000']
+        args: ['--maxkb=20000']
       - id: requirements-txt-fixer

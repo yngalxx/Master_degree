@@ -31,5 +31,10 @@ I am using dataset described here: https://news-navigator.labs.loc.gov
 - Valid paths are generated automatically, but you can provide specific ones using click arguments in the command line for each runner.
 
 
-### Video: 
-![Alt text](gui_graphics/gui_showcase_720p.mov?raw=true "Application GUI")
+### Gallery: 
+#### Welcoming window:
+![Alt text](gui_graphics/WelcomingWindow.png?raw=true "Application GUI #1")
+#### Search results window:
+![Alt text](gui_graphics/SearchWindow.png?raw=true "Application GUI #2")
+#### Detailed search single result window:
+![Alt text](gui_graphics/DetailedResultsWindow.png?raw=true "Application GUI #3")

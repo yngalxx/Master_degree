@@ -3,7 +3,7 @@ import shutil
 from typing import List
 
 import pandas as pd
-from whoosh import index, fields, qparser
+from whoosh import fields, index, qparser
 
 from lib.database import create_db_connection
 
@@ -18,16 +18,16 @@ def get_image_details(main_dir: str, image_name: str) -> pd.DataFrame:
             SELECT ORIGIN_FILE_NAME, OCR_RAW_TEXT, PRED_LABEL, FILE_NAME
             FROM OCR_RESULTS 
             WHERE FILE_NAME='{image_name}'
-        """, 
-        conn
+        """,
+        conn,
     )
     df_keywords = pd.read_sql_query(
         f"SELECT KEYWORD FROM KEYWORDS WHERE FILE_NAME='{image_name}'", conn
     )
-    df_ocr['KEYWORDS'] = [", ".join(df_keywords["KEYWORD"].values)]
+    df_ocr["KEYWORDS"] = [", ".join(df_keywords["KEYWORD"].values)]
 
-    return df_ocr 
-    
+    return df_ocr
+
 
 def prepare_data(main_dir: str) -> index.FileIndex:
     """

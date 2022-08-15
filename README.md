@@ -11,7 +11,7 @@ This masters thesis is aimed at creating an application to search for visual con
  - Data preprocessing.
  - Training and evaluations of the object detection model. 
  - Prediction and visualization of results.
- - Cropping visual content from test set of original images using resulting bounding boxes predictions, apply OCR on them and store results in SQLite database
+ - Cropping visual content from test set of original images using resulting bounding boxes predictions, apply OCR on them and store results in SQLite database.
  - Implementation of full-text search engine. 
  - Creating GUI that selects appropriate visual content according to the user's text query based on predictions and OCR results.
 

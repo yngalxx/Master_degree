@@ -5,8 +5,8 @@ import click
 from constants import General
 from PyQt5 import QtCore, QtWidgets
 
-from lib.logs import Log
 from lib.gui import MainWindow, WelcomeWindow
+from lib.logs import Log
 from lib.search_engine import prepare_data, remove_temp_dir
 
 

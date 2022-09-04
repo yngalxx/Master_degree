@@ -1,7 +1,6 @@
-import imp
+import logging
 import os
 import shutil
-import logging
 from typing import List
 
 import pandas as pd

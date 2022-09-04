@@ -1,5 +1,7 @@
+import imp
 import os
 import shutil
+import logging
 from typing import List
 
 import pandas as pd
@@ -67,14 +69,16 @@ def full_text_search(ix: index.FileIndex, query: str) -> List:
     """
     Full text search through indexed documents
     """
-    file_name_list = []
     with ix.searcher() as searcher:
         query = qparser.QueryParser("cleantext", ix.schema).parse(
             query.lower()
         )
-        results = searcher.search(query, terms=True)
-        for r in results:
-            file_name_list.append(r["filename"])
+        results = searcher.search(query, terms=True, limit=None)
+        logging.info(results)
+        if not results.is_empty():
+            file_name_list = [r["filename"] for r in results]
+        else:
+            file_name_list = []
 
     return file_name_list
 

@@ -177,7 +177,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def on_search_btn_clicked(self):
         self.setWindowTitle(f"News Finder - {self.query.text()}")
         self.file_names = full_text_search(ix=self.ix, query=self.query.text())
-        self.start_loading()
+        if self.file_names:
+            self.start_loading()
 
     @QtCore.pyqtSlot()
     def start_loading(self):

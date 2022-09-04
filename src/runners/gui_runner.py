@@ -5,6 +5,7 @@ import click
 from constants import General
 from PyQt5 import QtCore, QtWidgets
 
+from lib.logs import Log
 from lib.gui import MainWindow, WelcomeWindow
 from lib.search_engine import prepare_data, remove_temp_dir
 
@@ -18,6 +19,10 @@ from lib.search_engine import prepare_data, remove_temp_dir
     show_default=True,
 )
 def gui_runner(main_dir):
+    # initialize logger
+    logger = Log("gui_runner", main_dir)
+    logger.log_start()
+
     # check provided path
     assert os.path.exists(main_dir) == True
     img_dir = main_dir + "/cropped_visual_content/"
@@ -33,7 +38,7 @@ def gui_runner(main_dir):
     app = QtWidgets.QApplication(sys.argv)
 
     # welcoming window
-    w = WelcomeWindow(main_dir=main_dir)
+    _ = WelcomeWindow(main_dir=main_dir)
     QtWidgets.qApp.processEvents()
 
     # prepare search engine input
@@ -41,10 +46,11 @@ def gui_runner(main_dir):
     QtCore.QCoreApplication.instance().quit
 
     # app main window
-    w = MainWindow(img_dir=img_dir, ix=ix)
+    _ = MainWindow(img_dir=img_dir, ix=ix)
 
     # terminate after closing main window
     status = app.exec_()
+    logger.log_end()
     remove_temp_dir(main_dir)
     sys.exit(status)
 

@@ -18,12 +18,10 @@ def show_random_img_with_all_annotations(
     Show the number (pages) of images with all the annotations in given confidence
     level of the prediction
     """
-    prev = []
-    for i in range(pages):
-        random_img = random.randint(0, len(in_list) - 1)
-        if random_img in prev:
-            i -= 1
-        prev.append(random_img)
+    in_list_ix = [i for i in range(len(in_list))]
+    for _ in range(pages):
+        random_img = random.choice(in_list_ix)
+        in_list_ix.remove(random_img)
         file_name = in_list[random_img]
 
         with cbook.get_sample_data(path_to_photos + file_name) as image_file:

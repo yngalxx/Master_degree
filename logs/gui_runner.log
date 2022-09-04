@@ -1,0 +1,88 @@
+2022-09-04 11:55:18,314 - INFO - GUI_RUNNER - STARTED!
+2022-09-04 11:55:32,700 - INFO - <Top 63 Results for Term('cleantext', 'map') runtime=0.0009827300000004868>
+2022-09-04 11:55:43,378 - INFO - <Top 0 Results for And([Term('cleantext', 'woman'), Term('cleantext', 'horse')]) runtime=0.0008513759999999593>
+2022-09-04 11:56:25,722 - INFO - GUI_RUNNER - COMPLETED! RUNTIME: 67.41 sec.
+
+############################
+
+2022-09-04 11:58:13,690 - INFO - GUI_RUNNER - STARTED!
+2022-09-04 11:58:38,790 - INFO - <Top 0 Results for And([Term('cleantext', 'woman'), Term('cleantext', 'horse')]) runtime=0.0008941069999970352>
+2022-09-04 11:58:44,865 - INFO - GUI_RUNNER - COMPLETED! RUNTIME: 31.17 sec.
+
+############################
+
+2022-09-04 11:59:23,005 - INFO - GUI_RUNNER - STARTED!
+2022-09-04 11:59:42,933 - INFO - <Top 0 Results for And([Term('cleantext', 'woman'), Term('cleantext', 'horse')]) runtime=0.0009131829999979857>
+2022-09-04 11:59:53,789 - INFO - GUI_RUNNER - COMPLETED! RUNTIME: 30.78 sec.
+
+############################
+
+2022-09-04 12:00:15,742 - INFO - GUI_RUNNER - STARTED!
+2022-09-04 12:01:15,050 - INFO - <Top 0 Results for And([Term('cleantext', 'woman'), Term('cleantext', 'horse')]) runtime=0.0009068540000001235>
+2022-09-04 12:01:23,441 - INFO - GUI_RUNNER - COMPLETED! RUNTIME: 67.7 sec.
+
+############################
+
+2022-09-04 12:02:15,496 - INFO - GUI_RUNNER - STARTED!
+2022-09-04 12:02:32,332 - INFO - <Top 0 Results for And([Term('cleantext', 'woman'), Term('cleantext', 'horse')]) runtime=0.0009235059999994633>
+2022-09-04 12:02:34,679 - INFO - GUI_RUNNER - COMPLETED! RUNTIME: 19.18 sec.
+
+############################
+
+2022-09-04 12:08:31,609 - INFO - GUI_RUNNER - STARTED!
+2022-09-04 12:08:47,961 - INFO - <Top 0 Results for And([Term('cleantext', 'woman'), Term('cleantext', 'horse')]) runtime=0.0011840420000019947>
+2022-09-04 12:08:50,858 - INFO - GUI_RUNNER - COMPLETED! RUNTIME: 19.25 sec.
+
+############################
+
+2022-09-04 12:09:31,254 - INFO - GUI_RUNNER - STARTED!
+2022-09-04 12:09:50,411 - INFO - <Top 0 Results for And([Term('cleantext', 'woman'), Term('cleantext', 'horse')]) runtime=0.0009000959999987401>
+2022-09-04 12:09:56,959 - INFO - GUI_RUNNER - COMPLETED! RUNTIME: 25.71 sec.
+
+############################
+
+2022-09-04 12:10:34,001 - INFO - GUI_RUNNER - STARTED!
+2022-09-04 12:10:50,187 - INFO - <Top 0 Results for And([Term('cleantext', 'woman'), Term('cleantext', 'horse')]) runtime=0.0009005420000001152>
+2022-09-04 12:10:55,163 - INFO - GUI_RUNNER - COMPLETED! RUNTIME: 21.16 sec.
+
+############################
+
+2022-09-04 12:13:05,001 - INFO - GUI_RUNNER - STARTED!
+2022-09-04 12:13:21,547 - INFO - <Top 0 Results for And([Term('cleantext', 'woman'), Term('cleantext', 'horse')]) runtime=0.0009396350000017151>
+2022-09-04 12:13:28,142 - INFO - GUI_RUNNER - COMPLETED! RUNTIME: 23.14 sec.
+
+############################
+
+2022-09-04 12:14:37,529 - INFO - GUI_RUNNER - STARTED!
+2022-09-04 12:14:53,116 - INFO - <Top 0 Results for And([Term('cleantext', 'woman'), Term('cleantext', 'horse')]) runtime=0.00091519799999773>
+
+############################
+
+2022-09-04 12:15:25,113 - INFO - GUI_RUNNER - STARTED!
+
+############################
+
+2022-09-04 12:15:44,305 - INFO - GUI_RUNNER - STARTED!
+2022-09-04 12:16:12,469 - INFO - <Top 0 Results for And([Term('cleantext', 'woman'), Term('cleantext', 'horse')]) runtime=0.0008977319999985411>
+2022-09-04 12:16:20,275 - INFO - GUI_RUNNER - COMPLETED! RUNTIME: 35.97 sec.
+
+############################
+
+2022-09-04 12:17:30,245 - INFO - GUI_RUNNER - STARTED!
+2022-09-04 12:17:49,023 - INFO - <Top 0 Results for And([Term('cleantext', 'woman'), Term('cleantext', 'horse')]) runtime=0.0009019529999996223>
+2022-09-04 12:17:55,172 - INFO - GUI_RUNNER - COMPLETED! RUNTIME: 24.93 sec.
+
+############################
+
+2022-09-04 12:18:27,793 - INFO - GUI_RUNNER - STARTED!
+2022-09-04 12:18:45,779 - INFO - <Top 0 Results for And([Term('cleantext', 'woman'), Term('cleantext', 'horse')]) runtime=0.0009340990000019644>
+2022-09-04 12:18:53,523 - INFO - GUI_RUNNER - COMPLETED! RUNTIME: 25.73 sec.
+
+############################
+
+2022-09-04 12:19:36,979 - INFO - GUI_RUNNER - STARTED!
+2022-09-04 12:19:53,026 - INFO - <Top 0 Results for And([Term('cleantext', 'woman'), Term('cleantext', 'horse')]) runtime=0.0008945500000017148>
+2022-09-04 12:20:00,178 - INFO - <Top 0 Results for And([Term('cleantext', 'woman'), Term('cleantext', 'two'), Term('cleantext', 'horses')]) runtime=0.001847693999998512>
+2022-09-04 12:20:06,961 - INFO - <Top 0 Results for Term('cleantext', 'bitch') runtime=6.180699999802641e-05>
+2022-09-04 12:20:14,704 - INFO - <Top 2873 Results for Term('cleantext', 'advertisement') runtime=0.02530226700000071>
+2022-09-04 12:27:55,126 - INFO - GUI_RUNNER - COMPLETED! RUNTIME: 498.12 sec.
